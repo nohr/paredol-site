@@ -1,10 +1,15 @@
 import { useRef } from "react";
 
-export const Form = () => {
-  const nameRef = useRef<HTMLInputElement>(null);
+const Form = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleFormSubmit = (values: any) => {
+    console.log(values);
+  };
   return (
     <div>
-      <h1>Form</h1>
+      <input ref={inputRef} />
+      <button type="submit">Save</button>
     </div>
   );
 };
