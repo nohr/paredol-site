@@ -1,26 +1,17 @@
-export const dynamic = "auto",
-  dynamicParams = true,
-  revalidate = 0,
-  fetchCache = "auto",
-  runtime = "nodejs",
-  preferredRegion = "auto";
-
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import app from "../../../firebase/config";
-
+"use client";
 function signInWithGoogle() {
-  signInWithPopup(getAuth(app), new GoogleAuthProvider());
+  console.log("Signing in with Google...");
 }
 
-export function LoginButton() {
-  return (
-    <div className="container">
-      <h1>Be excused</h1>
-      <button onClick={signInWithGoogle}>Sign in with Google</button>
-    </div>
-  );
+function LoginButton() {
+  return <button onClick={signInWithGoogle}>Sign in with Google</button>;
 }
 
 export default function LoginPage() {
-  return <LoginButton />;
+  return (
+    <div className="container">
+      <h1>Be excused</h1>
+      return <LoginButton />
+    </div>
+  );
 }
