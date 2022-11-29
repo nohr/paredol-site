@@ -1,3 +1,5 @@
+import PWATags from "../PWATags";
+
 async function getPost(slug: string) {
   // const res = await fetch("...");
   // return res.json();
@@ -9,6 +11,7 @@ export default async function Head({ params }: { params: { slug: string } }) {
 
   return (
     <>
+      <PWATags />
       <title>{post.title}</title>
     </>
   );

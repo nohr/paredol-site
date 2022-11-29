@@ -1,7 +1,10 @@
+import PWATags from "./PWATags";
+
 export default async function Head() {
   return (
     <>
-      <title>Nabla</title>
+      <PWATags />
+      <title>Paredol</title>
     </>
   );
 }

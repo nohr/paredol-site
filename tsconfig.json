@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-"types" : ["node", "estree"],
     "target": "ES2021",
     "watch":true,
     "lib": [

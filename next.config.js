@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+const withPWA = require('next-pwa')({
+  dest: 'public'
+})
+
+module.exports = withPWA({
   experimental: {
     appDir: true,
   },
@@ -8,6 +13,4 @@ const nextConfig = {
   env: {
     port: 1027,
   },
-}
-
-module.exports = nextConfig
+})
