@@ -8,15 +8,14 @@ export default function PWATags() {
       <meta name="description" content="Paredol homepage and portfolio." />
       <meta name="format-detection" content="telephone=no" />
       <meta name="mobile-web-app-capable" content="yes" />
-      <meta name="msapplication-config" content="/icons/browserconfig.xml" />
+      {/* <meta name="msapplication-config" content="/icons/browserconfig.xml" />
       <meta name="msapplication-TileColor" content="#2B5797" />
-      <meta name="msapplication-tap-highlight" content="no" />
+      <meta name="msapplication-tap-highlight" content="no" /> */}
       <meta name="theme-color" content="#79BDBC" />
       <meta
         name="viewport"
         content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
       />
-
       <link rel="apple-touch-icon" href="/icons/touch-icon-iphone.png" />
       <link
         rel="apple-touch-icon"
@@ -65,7 +64,7 @@ export default function PWATags() {
         name="twitter:image"
         content="https://paredol.com/icons/android-chrome-192x192.png"
       />
-      <meta name="twitter:creator" content="@DavidWShadow" />
+      {/* <meta name="twitter:creator" content="@DavidWShadow" /> */}
       <meta property="og:type" content="website" />
       <meta property="og:title" content="Paredol" />
       <meta
