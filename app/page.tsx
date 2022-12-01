@@ -1,8 +1,11 @@
-// import styles from "./home.module.scss";
+import React from "react";
+import { FirestoreCollection } from "./Collection";
+
 export default function HomePage() {
   return (
     <div>
-      <h1>Home</h1>
+      <h1>Paredol</h1>
+      <FirestoreCollection />
     </div>
   );
 }

@@ -1,14 +1,19 @@
+import { FirestoreDocument } from "./Document";
+
 export default function Page({
   params,
   searchParams,
 }: {
-  params?: { slug: string };
-  searchParams?: { id: string };
+  params: { slug: string };
+  searchParams: { id: string };
 }) {
+  const { slug } = params;
+  const { id } = searchParams;
+  console.log(slug, id);
   return (
     <>
-      {params && <p>{params.slug}</p>}
-      {searchParams && <p>{searchParams.id}</p>}
+      <FirestoreDocument slug={slug} />
+      {/* {searchParams && <p>{searchParams.id}</p>} */}
     </>
   );
 }

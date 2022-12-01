@@ -1,4 +1,4 @@
-import PWATags from "../../PWATags";
+import PWATags from "../../(misc)/PWATags";
 
 export default async function Head() {
   return (

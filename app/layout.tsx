@@ -1,7 +1,9 @@
-// These styles apply to every route in the application
+"use client";
 import "../styles/globals.css";
 import React from "react";
+import styles from "../styles/ui.module.scss";
 import { Navigator } from "./(panels)/navigator";
+import { Composition } from "./(comp)/Composition";
 
 export default function RootLayout({
   children,
@@ -11,8 +13,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navigator />
-        {children}
+        <div className={styles.Interface}>
+          <Navigator />
+          {children}
+        </div>
+        <Composition />
       </body>
     </html>
   );

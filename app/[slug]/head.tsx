@@ -1,4 +1,4 @@
-import PWATags from "../PWATags";
+import PWATags from "../(misc)/PWATags";
 
 async function getPost(slug: string) {
   // const res = await fetch("...");
