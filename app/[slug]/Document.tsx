@@ -5,12 +5,12 @@ import { useDocument } from "react-firebase-hooks/firestore";
 import { app } from "../../firebase/config";
 
 type Props = {
-  slug: string;
+  page: string;
 };
 
-export const FirestoreDocument: React.FC<Props> = ({ slug }) => {
+export const FirestoreDocument: React.FC<Props> = ({ page }) => {
   const [value, loading, error] = useDocument(
-    doc(getFirestore(app), `projects`, slug),
+    doc(getFirestore(app), `projects`, page),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
     }
