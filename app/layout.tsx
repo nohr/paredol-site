@@ -15,9 +15,11 @@ export default function RootLayout({
 }) {
   const { canvas, theme } = useSnapshot(state);
 
-  window.addEventListener("color-scheme-changed", (e) => {
-    console.log(e);
-  });
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (event) => {
+      state.theme = event.matches ? "dark" : "light";
+    });
 
   return (
     <html lang="en">
