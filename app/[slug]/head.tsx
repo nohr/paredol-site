@@ -12,7 +12,7 @@ export default async function Head({ params }: { params: { slug: string } }) {
   return (
     <>
       <PWATags />
-      <title>{post.title}</title>
+      <title>{post.title} @ Paredol</title>
     </>
   );
 }

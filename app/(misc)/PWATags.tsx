@@ -11,7 +11,17 @@ export default function PWATags() {
       {/* <meta name="msapplication-config" content="/icons/browserconfig.xml" />
       <meta name="msapplication-TileColor" content="#2B5797" />
       <meta name="msapplication-tap-highlight" content="no" /> */}
-      <meta name="theme-color" content="#79BDBC" />
+      <meta
+        name="theme-color"
+        media="(prefers-color-scheme: light)"
+        content="#ffffff"
+      />
+      <meta
+        name="theme-color"
+        media="(prefers-color-scheme: dark)"
+        content="#000000"
+      />
+
       <meta
         name="viewport"
         content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"

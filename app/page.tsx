@@ -1,11 +1,11 @@
 import React from "react";
-import { FirestoreCollection } from "./Collection";
+import { ProjectsCollection } from "./Collection";
 
 export default function HomePage() {
   return (
     <div>
-      <h1>Paredol</h1>
-      <FirestoreCollection />
+      {/* <h1>Paredol</h1>
+      <ProjectsCollection /> */}
     </div>
   );
 }

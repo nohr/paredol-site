@@ -4,7 +4,7 @@ export default async function Head() {
   return (
     <>
       <PWATags />
-      <title>Info</title>
+      <title>Paredol Info</title>
     </>
   );
 }
