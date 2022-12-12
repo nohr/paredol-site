@@ -37,7 +37,9 @@ const ProjectsCollection = () => {
       {loading && <p>Loading...</p>}
       {value && (
         <>
-          <p>Website</p>
+          <p id="audiohead" style={{ width: "65%" }}>
+            Website
+          </p>
           {value.docs.map((doc, index) => (
             <Path
               key={index}

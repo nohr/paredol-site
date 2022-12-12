@@ -110,11 +110,11 @@ export function usePanelStyle(panel: string) {
     justify-content: flex-start;
     align-items: center;
     ${!isPro ? "opacity: 0; pointer-events: none;" : ""}
-    padding-left: 75px;
-    padding-right: 20px;
+    padding-left: 60px;
+    padding-right: 25px;
     & a{
         text-indent: 10px;
-        width: 75%;
+        width: 60%;
     }
     `
         : panel === "opt"
