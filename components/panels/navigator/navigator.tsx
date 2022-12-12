@@ -15,7 +15,6 @@ import { useSpring, animated } from "react-spring";
 import { useDrag } from "@use-gesture/react";
 import { cloud } from "../../../common/state";
 
-let quote = cloud.quote;
 const Navigator = () => {
   const snap = useSnapshot(statePanel);
   const clip = useSnapshot(cloudPanel);
@@ -83,10 +82,15 @@ const Navigator = () => {
 
 export default memo(Navigator);
 
+let quote = cloud.quote;
+let hoverTick = 0;
 function useTooltip(mouseover: boolean, quote?: string) {
-  if (mouseover) {
-    cloud.quote = "Click and drag this area to move the Navigator.";
-  } else if (!mouseover && quote) {
-    cloud.quote = quote;
+  if (hoverTick < 3) {
+    if (mouseover) {
+      cloud.quote = "Click and drag this area to move the Navigator.";
+    } else if (!mouseover && quote) {
+      cloud.quote = quote;
+      hoverTick++;
+    }
   }
 }
