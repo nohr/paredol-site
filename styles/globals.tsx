@@ -20,6 +20,7 @@ export const GlobalStyles = createGlobalStyle`
         line-height: 1.5;
         color: ${({ theme }) => theme.colors.secondary};
         background-color: ${({ theme }) => theme.colors.background};
+        pointer-events: none;
     }
 
     a {

@@ -50,7 +50,7 @@ const Options = () => {
   const firstStyle = !direction ? { height: "75px" } : { height: "87px" };
   const secondStyle = !direction ? { height: "133px" } : { height: "161px" };
   const firstHeader = !direction
-    ? { width: "62%" }
+    ? { width: "70%" }
     : {
         width: "64%",
         gridColumnStart: 1,
@@ -59,7 +59,7 @@ const Options = () => {
         gridRowEnd: 1,
       };
   const secondHeader = !direction
-    ? { width: "115%" }
+    ? { width: "70%" }
     : {
         width: "64%",
         gridColumnStart: 2,

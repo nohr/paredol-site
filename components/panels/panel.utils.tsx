@@ -83,7 +83,7 @@ export function useLayout(panel: string) {
     return;
   } else if (panel === "opt") {
     return !direction
-      ? "grid-template-columns: 100%; grid-template-rows: 10% 1fr 10% 1fr; padding-left: 45px;padding-right: 40px;"
+      ? "grid-template-columns: 100%; grid-template-rows: 10% 1fr 10% 1fr; padding-left: 60px;padding-right: 25px;"
       : "grid-template-columns: 1fr 1fr; grid-template-rows: 15% 1fr; padding: 80px 12px 26px;";
   }
 }
@@ -110,6 +110,12 @@ export function usePanelStyle(panel: string) {
     justify-content: flex-start;
     align-items: center;
     ${!isPro ? "opacity: 0; pointer-events: none;" : ""}
+    padding-left: 75px;
+    padding-right: 20px;
+    & a{
+        text-indent: 10px;
+        width: 75%;
+    }
     `
         : panel === "opt"
         ? `

@@ -15,9 +15,7 @@ interface stateTypes {
 export const state = proxy<stateTypes>({
   // Firebase
   // UI
-  theme: window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light",
+  theme: "dark",
   // Mobile
   mobile: false,
   gyro: false,
@@ -66,7 +64,7 @@ export const cloud = proxy<cloudTypes>({
   resetRate: Math.random() * (1.15 - 0.3) + 0.3,
   selectRate: Math.random() * (1.15 - 0.85) + 0.85,
   // Mobile
-  mobile: window.matchMedia("(max-width: 768px)").matches,
+  mobile: false,
   orientation: true,
   mobileOptions: false,
   mobileSearch: false,

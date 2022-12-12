@@ -69,7 +69,7 @@ export function Quote() {
   //     //   </Draggable>
   //   );
   // } else {
-  return <div className={styles.quote}>{text}</div>;
+  return <div className={styles.quote}>{clip.quote}</div>;
   // }
 }
 

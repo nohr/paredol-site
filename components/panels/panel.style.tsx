@@ -145,7 +145,7 @@ export const Path = styled(Link)<IProps>`
   font-weight: 800;
   border-radius: 250px 250px 500px 500px;
   height: min-content;
-  margin: 3px 0;
+  margin: 4px 0;
   padding: 2px 0;
   backdrop-filter: blur(20px) !important;
   user-select: none;
@@ -386,8 +386,8 @@ export const Folder = styled.div<IProps>`
     flex-direction: column;
     align-items: flex-end;
     margin: 0 0 4px 15px !important;
-    width: 100% !important;
-    height: 50px !important;
+    width: 90% !important;
+    height: 35px !important;
 
     & textarea {
       padding: 0 !important;

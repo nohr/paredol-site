@@ -2,13 +2,20 @@
 
 import React from "react";
 import { useSnapshot } from "valtio";
-import ProjectsCollection from "../../../app/Collection";
-import { cloudPanel } from "../panel.state";
+import ProjectsCollection from "../../../firebase/Collection";
+import { cloudPanel, statePanel } from "../panel.state";
 import { Panel } from "../panel.style";
-import { useOffset, usePadding, usePanelStyle } from "../panel.utils";
+import {
+  useLayout,
+  useOffset,
+  usePadding,
+  usePanelStyle,
+} from "../panel.utils";
 
 const Projects = () => {
+  const snap = useSnapshot(statePanel);
   const clip = useSnapshot(cloudPanel);
+  const { isPro } = snap;
   const { dragging } = clip;
 
   return (
@@ -18,8 +25,9 @@ const Projects = () => {
       left={useOffset("pro", "left")}
       top={useOffset("pro", "top")}
       padding={usePadding("pro")}
+      // layout={useLayout("pro")}
     >
-      <ProjectsCollection />
+      {isPro ? <ProjectsCollection /> : null}
     </Panel>
   );
 };

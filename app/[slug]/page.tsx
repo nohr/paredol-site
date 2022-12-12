@@ -1,4 +1,4 @@
-import { FirestoreDocument } from "./Document";
+import { FirestoreDocument } from "../../firebase/Document";
 
 export interface PageProps {
   params?: { slug: string };

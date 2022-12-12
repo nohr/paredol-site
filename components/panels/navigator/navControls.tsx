@@ -13,7 +13,6 @@ import { statePanel } from "../panel.state";
 let i: number = 0;
 function NavControls() {
   const pathname = usePathname();
-  console.log(i++, "renders");
   const theme = useTheme();
 
   const active = `background-color: ${theme.colors.active};

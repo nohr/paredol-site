@@ -6,7 +6,7 @@ import {
   useCollection,
   useCollectionOnce,
 } from "react-firebase-hooks/firestore";
-import { app } from "../firebase/config";
+import { app } from "./config";
 import { Path } from "../components/panels/panel.style";
 import { usePathname } from "next/navigation";
 import { useTheme } from "styled-components";
@@ -24,7 +24,8 @@ const ProjectsCollection = () => {
   -webkit-box-shadow: 0px 2px 10px 1px ${theme.colors.active};
   -moz-box-shadow: 0px 2px 10px 1px ${theme.colors.active};
   box-shadow: 0px 2px 10px 1px ${theme.colors.active};
-  text-shadow: 1px 1px 3px #ebebeb;`;
+  // text-shadow: 1px 1px 3px #ebebeb;
+  `;
 
   return (
     <>
@@ -36,10 +37,10 @@ const ProjectsCollection = () => {
       {loading && <p>Loading...</p>}
       {value && (
         <>
+          <p>Website</p>
           {value.docs.map((doc, index) => (
             <Path
               key={index}
-              width="80%"
               href={doc.id}
               active={pathname?.substring(1) === doc.id ? active : undefined}
             >

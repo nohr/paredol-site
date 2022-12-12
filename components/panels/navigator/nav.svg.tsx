@@ -21,6 +21,8 @@ export default function HomeSVG({ nodeRef }: { nodeRef: Ref<any> }) {
 
 export const Caret = styled.svg`
   fill: ${({ theme }) => theme.colors.secondary};
+  stroke: ${({ theme }) => theme.colors.secondary} !important;
+  stroke-width: 8px !important;
   height: clamp(8px, 12px, 12px);
   float: right;
 
@@ -48,7 +50,7 @@ export function FFIcon() {
 
 export function ResetIcon() {
   return (
-    <svg
+    <Caret
       className="nextIcon"
       xmlns="http://www.w3.org/2000/svg"
       data-name="Layer 1"
@@ -58,7 +60,7 @@ export function ResetIcon() {
         vectorEffect="non-scaling-stroke"
         d="M334.145 161.458l-.004-.004L166.653 4.488c-9.19-8.636-16.83-2.717-17.905 13.014-.075 1.256-.15 2.553-.15 3.933v93.588L30.653 4.488c-9.19-8.637-16.831-2.718-17.905 13.013-.075 1.256-.15 2.553-.15 3.933V335.41c0 18.607 8.116 26.227 18.055 16.905l117.945-110.558v93.653c0 18.607 8.116 26.227 18.055 16.905L330.948 198.31l3.196-3c9.938-9.286 9.938-24.528 0-33.852z"
       ></path>
-    </svg>
+    </Caret>
   );
 }
 

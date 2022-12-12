@@ -1,8 +1,8 @@
 import React, { CSSProperties } from "react";
-import styles from "../styles/ui.module.scss";
-import Navigator from "../components/panels/navigator/navigator";
-import { HoverConsumer, HoverProvider } from "../common/hoverContext";
-import { cloudPanel } from "../components/panels/panel.state";
+import styles from "./ui.module.scss";
+import Navigator from "../panels/navigator/navigator";
+import { HoverConsumer, HoverProvider } from "../../common/hoverContext";
+import { cloudPanel } from "../panels/panel.state";
 import { useSnapshot } from "valtio";
 
 function Interface({ children }: { children: React.ReactNode }) {
@@ -14,7 +14,7 @@ function Interface({ children }: { children: React.ReactNode }) {
   return (
     <HoverProvider>
       <div className={styles.Interface}>
-        <Navigator />
+        {typeof document !== "undefined" ? <Navigator /> : null}
         <HoverConsumer>
           {({ hover }: { hover: boolean }) => (
             <div style={hover ? (dragging ? hide : fade) : { opacity: 1 }}>

@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Composition from "../canvas/Composition";
-import Interface from "./Interface";
+import Interface from "../components/interface/Interface";
 import { ThemeProvider } from "styled-components";
 import { useSnapshot } from "valtio";
 import { state } from "../common/state";
@@ -13,13 +13,27 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { canvas, theme } = useSnapshot(state);
+  const { theme } = useSnapshot(state);
 
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", (event) => {
-      state.theme = event.matches ? "dark" : "light";
-    });
+  // Check for dark mode preference
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      state.theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    }
+  }, []);
+
+  if (typeof window !== "undefined") {
+    // Client-side-only code
+    state.mobile = window.matchMedia("(max-width: 768px)").matches;
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        state.theme = event.matches ? "dark" : "light";
+      });
+  }
 
   return (
     <html lang="en">
@@ -27,7 +41,7 @@ export default function RootLayout({
         <ThemeProvider theme={theme === "light" ? light : dark}>
           <GlobalStyles />
           <Interface children={children} />
-          {canvas ? <Composition /> : null}
+          <Composition />
         </ThemeProvider>
       </body>
     </html>

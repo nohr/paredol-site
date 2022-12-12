@@ -1,3 +1,5 @@
+"use client";
+
 import { ChangeEvent, useRef, useState } from "react";
 import { useSnapshot } from "valtio";
 import { cloud } from "../../../../common/state";
