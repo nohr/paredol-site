@@ -98,10 +98,40 @@ export const SearchBar = styled.input<Props>`
   &:focus ~ #searchIcon,
   &:hover ~ #searchIcon,
   &:focus ~ #clearIcon svg,
-  &:hover ~ #clearIcon svg,
+  &:hover ~ #clearIcon svg {
+    fill: #ebebeb !important;
+    transition: 0.1s;
+  }
+
   &:focus ~ #cdIcon,
   &:hover ~ #cdIcon {
-    fill: #ebebeb !important;
-    transition: 0.3s;
+    stroke: #ebebeb !important;
+    fill: transparent !important;
+  }
+`;
+
+export const BarIcon = styled.svg`
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  transform: translateY(-57%);
+  height: 16px;
+  fill: ${({ theme }) => theme.colors.secondary};
+  cursor: pointer;
+  stroke-width: 1px;
+  transition: 0s !important;
+
+  g {
+    height: 12px;
+  }
+  &:hover {
+    opacity: 50%;
+    pointer-events: painted;
+  }
+
+  &#cdIcon {
+    stroke: ${({ theme }) => theme.colors.secondary} !important;
+    stroke-width: 1px !important;
+    fill: transparent !important;
   }
 `;
