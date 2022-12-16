@@ -14,13 +14,19 @@ declare module "styled-components" {
     };
     canvas: {
       env: string;
-      cd: string;
-      CDRough: number;
-      fog: string;
-      fogFar: number;
-      surface: string;
-      mirror: number;
-      rough: number;
+      cd: {
+        color: string;
+        roughness: number;
+      }
+      fog: {
+        color: string;
+        far: number;
+      }
+      surface: {
+        color: string;
+        roughness: number;
+        mirror: number;
+      };
       spotlight: string;
       rectIntensity: number;
       spotIntensity: number;
@@ -40,14 +46,20 @@ export const light: DefaultTheme = {
     background: `#ffffff`,
   },
   canvas: {
-    env:"https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/belfast_sunset_puresky_1k.hdr",
-    cd: `hsla(14, 31%, 84%, 1)`,
-    CDRough: 0.3, 
-    fog: `#ffffff`,
-    fogFar: 45,
-    surface: `hsla(209, 100%, 80%, 1)`,
-    mirror: 0.15,
-    rough: 0,
+    env:"/hdri/puresky.hdr",
+    cd: {
+      color: `hsla(14, 31%, 84%, 1)`,
+      roughness: 0.3,
+  },
+    fog: {
+      color: `#ffffff`,
+      far: 25,
+  },
+    surface: {
+      color: `hsla(209, 100%, 80%, 1)`,
+      roughness: 0,
+      mirror: 0.15,
+  },
     spotlight: `#ffffff`,
     rectIntensity: 2,
     spotIntensity: 0.6,
@@ -66,14 +78,20 @@ export const dark: DefaultTheme = {
     background: `#000000`,
   },
   canvas: {
-    env:"https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/moonless_golf_1k.hdr",
-    cd: `hsla(0, 0%, 14%, 1)`,
-    CDRough: 0.1389,
-    fog: `#000000`,
-    fogFar: 50,
-    surface: `hsla(209, 31%, 40%, 1)`,
-    mirror: 0.28,
-    rough: 30,
+    env: "/hdri/moonless.hdr",
+    cd: {
+      color: `hsla(0, 0%, 14%, 1)`,
+      roughness: 0.1389,
+  },
+    fog: {
+      color: `#000000`,
+      far: 20,
+  },
+    surface: {
+      color: `hsla(209, 31%, 40%, 1)`,
+      roughness: 30,
+      mirror: 0.28,
+  },
     spotlight: `hsla(209, 31%, 70%, 1)`,
     rectIntensity: 0.5,
     spotIntensity: 0.5,
