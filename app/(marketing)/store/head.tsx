@@ -1,10 +1,10 @@
-import PWATags from "../../(misc)/PWATags";
+import PWATags from "../../components/interface/PWATags";
 
 export default async function Head() {
   return (
     <>
       <PWATags />
-      <title>Store</title>
+      <title>Paredol Store</title>
     </>
   );
 }

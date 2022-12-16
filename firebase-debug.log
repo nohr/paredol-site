@@ -1,0 +1,122 @@
+[debug] [2022-12-14T02:33:01.700Z] ----------------------------------------------------------------------
+[debug] [2022-12-14T02:33:01.702Z] Command:       /usr/local/bin/firebase /Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase deploy --only hosting
+[debug] [2022-12-14T02:33:01.703Z] CLI Version:   11.16.1
+[debug] [2022-12-14T02:33:01.703Z] Platform:      darwin
+[debug] [2022-12-14T02:33:01.703Z] Node Version:  v16.16.0
+[debug] [2022-12-14T02:33:01.704Z] Time:          Wed Dec 14 2022 03:33:01 GMT+0100 (West Africa Standard Time)
+[debug] [2022-12-14T02:33:01.705Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-12-14T02:33:01.833Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-12-14T02:33:01.834Z] > authorizing via signed-in user (aite@paredol.com)
+[debug] [2022-12-14T02:33:01.835Z] [iam] checking project paredol for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-12-14T02:33:01.837Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions [none]
+[debug] [2022-12-14T02:33:01.838Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions x-goog-quota-user=projects/paredol
+[debug] [2022-12-14T02:33:01.839Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-14T02:33:02.829Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions 200
+[debug] [2022-12-14T02:33:02.833Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-14T02:33:02.835Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/paredol [none]
+[debug] [2022-12-14T02:33:03.788Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/paredol 200
+[debug] [2022-12-14T02:33:03.792Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/paredol {"projectId":"paredol","projectNumber":"232949701918","displayName":"paredol","name":"projects/paredol","resources":{"hostingSite":"paredol","storageBucket":"paredol.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_590dda58-e70d-40c3-9fb8-cb21924caf63"}
+[debug] [2022-12-14T02:33:10.786Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/paredol/sites pageToken=&pageSize=10
+[debug] [2022-12-14T02:33:12.259Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/paredol/sites 200
+[debug] [2022-12-14T02:33:12.264Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/paredol/sites {"sites":[{"name":"projects/paredol/sites/paredol","defaultUrl":"https://paredol.web.app","appId":"1:232949701918:web:504e5bf6bc7a2c1b89bd0f","type":"DEFAULT_SITE"}]}
+[debug] [2022-12-14T02:33:12.266Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:232949701918:web:504e5bf6bc7a2c1b89bd0f/config [none]
+[debug] [2022-12-14T02:33:13.895Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:232949701918:web:504e5bf6bc7a2c1b89bd0f/config 200
+[debug] [2022-12-14T02:33:13.897Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:232949701918:web:504e5bf6bc7a2c1b89bd0f/config {"projectId":"paredol","appId":"1:232949701918:web:504e5bf6bc7a2c1b89bd0f","storageBucket":"paredol.appspot.com","locationId":"us-central","apiKey":"AIzaSyDgSHtESXZQfCChJe5oDM1tf9LclH5mdQA","authDomain":"paredol.firebaseapp.com","messagingSenderId":"232949701918","measurementId":"G-QP0KYD06TM"}
+[debug] [2022-12-14T02:34:03.267Z] Error: The package "esbuild-darwin-64" could not be found, and is needed by esbuild.
+
+If you are installing esbuild with npm, make sure that you don't specify the
+"--no-optional" flag. The "optionalDependencies" package.json feature is used
+by esbuild to install the correct binary executable for your current platform.
+    at generateBinPath (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/node_modules/esbuild/lib/main.js:1786:15)
+    at esbuildCommandAndArgs (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/node_modules/esbuild/lib/main.js:1850:33)
+    at ensureServiceIsRunning (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/node_modules/esbuild/lib/main.js:2015:25)
+    at Object.build (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/node_modules/esbuild/lib/main.js:1906:26)
+    at ɵcodegenFunctionsDirectory (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/frameworks/next/index.js:190:23)
+    at async prepareFrameworks (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/frameworks/index.js:302:84)
+    at async deploy (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/deploy/index.js:53:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2022-12-14T04:36:56.126Z] ----------------------------------------------------------------------
+[debug] [2022-12-14T04:36:56.128Z] Command:       /usr/local/bin/firebase /Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase deploy --only hosting
+[debug] [2022-12-14T04:36:56.129Z] CLI Version:   11.18.0
+[debug] [2022-12-14T04:36:56.129Z] Platform:      darwin
+[debug] [2022-12-14T04:36:56.129Z] Node Version:  v16.16.0
+[debug] [2022-12-14T04:36:56.131Z] Time:          Wed Dec 14 2022 05:36:56 GMT+0100 (West Africa Standard Time)
+[debug] [2022-12-14T04:36:56.132Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-12-14T04:36:56.252Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-12-14T04:36:56.253Z] > authorizing via signed-in user (aite@paredol.com)
+[debug] [2022-12-14T04:36:56.254Z] [iam] checking project paredol for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-12-14T04:36:56.256Z] > refreshing access token with scopes: []
+[debug] [2022-12-14T04:36:56.258Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-12-14T04:36:56.259Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-12-14T04:36:57.243Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2022-12-14T04:36:57.245Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-12-14T04:36:57.262Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions [none]
+[debug] [2022-12-14T04:36:57.265Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions x-goog-quota-user=projects/paredol
+[debug] [2022-12-14T04:36:57.266Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-14T04:36:59.520Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions 200
+[debug] [2022-12-14T04:36:59.523Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-14T04:36:59.525Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/paredol [none]
+[debug] [2022-12-14T04:37:00.864Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/paredol 200
+[debug] [2022-12-14T04:37:00.868Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/paredol {"projectId":"paredol","projectNumber":"232949701918","displayName":"paredol","name":"projects/paredol","resources":{"hostingSite":"paredol","storageBucket":"paredol.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_590dda58-e70d-40c3-9fb8-cb21924caf63"}
+[debug] [2022-12-14T04:37:07.757Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/paredol/sites pageToken=&pageSize=10
+[debug] [2022-12-14T04:37:09.153Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/paredol/sites 200
+[debug] [2022-12-14T04:37:09.157Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/paredol/sites {"sites":[{"name":"projects/paredol/sites/paredol","defaultUrl":"https://paredol.web.app","appId":"1:232949701918:web:504e5bf6bc7a2c1b89bd0f","type":"DEFAULT_SITE"}]}
+[debug] [2022-12-14T04:37:09.158Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:232949701918:web:504e5bf6bc7a2c1b89bd0f/config [none]
+[debug] [2022-12-14T04:37:10.386Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:232949701918:web:504e5bf6bc7a2c1b89bd0f/config 200
+[debug] [2022-12-14T04:37:10.389Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:232949701918:web:504e5bf6bc7a2c1b89bd0f/config {"projectId":"paredol","appId":"1:232949701918:web:504e5bf6bc7a2c1b89bd0f","storageBucket":"paredol.appspot.com","locationId":"us-central","apiKey":"AIzaSyDgSHtESXZQfCChJe5oDM1tf9LclH5mdQA","authDomain":"paredol.firebaseapp.com","messagingSenderId":"232949701918","measurementId":"G-QP0KYD06TM"}
+[debug] [2022-12-14T04:37:49.091Z] Error: The package "esbuild-darwin-64" could not be found, and is needed by esbuild.
+
+If you are installing esbuild with npm, make sure that you don't specify the
+"--no-optional" flag. The "optionalDependencies" package.json feature is used
+by esbuild to install the correct binary executable for your current platform.
+    at generateBinPath (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/node_modules/esbuild/lib/main.js:1786:15)
+    at esbuildCommandAndArgs (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/node_modules/esbuild/lib/main.js:1850:33)
+    at ensureServiceIsRunning (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/node_modules/esbuild/lib/main.js:2015:25)
+    at Object.build (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/node_modules/esbuild/lib/main.js:1906:26)
+    at ɵcodegenFunctionsDirectory (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/frameworks/next/index.js:233:23)
+    at async prepareFrameworks (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/frameworks/index.js:302:84)
+    at async deploy (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/deploy/index.js:53:13)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2022-12-14T04:38:03.652Z] ----------------------------------------------------------------------
+[debug] [2022-12-14T04:38:03.654Z] Command:       /usr/local/bin/firebase /Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase deploy --only hosting --debug
+[debug] [2022-12-14T04:38:03.655Z] CLI Version:   11.18.0
+[debug] [2022-12-14T04:38:03.655Z] Platform:      darwin
+[debug] [2022-12-14T04:38:03.655Z] Node Version:  v16.16.0
+[debug] [2022-12-14T04:38:03.656Z] Time:          Wed Dec 14 2022 05:38:03 GMT+0100 (West Africa Standard Time)
+[debug] [2022-12-14T04:38:03.656Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-12-14T04:38:03.783Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-12-14T04:38:03.785Z] > authorizing via signed-in user (aite@paredol.com)
+[debug] [2022-12-14T04:38:03.786Z] [iam] checking project paredol for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-12-14T04:38:03.789Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions [none]
+[debug] [2022-12-14T04:38:03.791Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions x-goog-quota-user=projects/paredol
+[debug] [2022-12-14T04:38:03.792Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-14T04:38:04.849Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions 200
+[debug] [2022-12-14T04:38:04.852Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/paredol:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-14T04:38:04.854Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/paredol [none]
+[debug] [2022-12-14T04:38:05.970Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/paredol 200
+[debug] [2022-12-14T04:38:05.973Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/paredol {"projectId":"paredol","projectNumber":"232949701918","displayName":"paredol","name":"projects/paredol","resources":{"hostingSite":"paredol","storageBucket":"paredol.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_590dda58-e70d-40c3-9fb8-cb21924caf63"}
+[debug] [2022-12-14T04:38:12.861Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/paredol/sites pageToken=&pageSize=10
+[debug] [2022-12-14T04:38:14.089Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/paredol/sites 200
+[debug] [2022-12-14T04:38:14.093Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/paredol/sites {"sites":[{"name":"projects/paredol/sites/paredol","defaultUrl":"https://paredol.web.app","appId":"1:232949701918:web:504e5bf6bc7a2c1b89bd0f","type":"DEFAULT_SITE"}]}
+[debug] [2022-12-14T04:38:14.095Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:232949701918:web:504e5bf6bc7a2c1b89bd0f/config [none]
+[debug] [2022-12-14T04:38:15.309Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:232949701918:web:504e5bf6bc7a2c1b89bd0f/config 200
+[debug] [2022-12-14T04:38:15.313Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:232949701918:web:504e5bf6bc7a2c1b89bd0f/config {"projectId":"paredol","appId":"1:232949701918:web:504e5bf6bc7a2c1b89bd0f","storageBucket":"paredol.appspot.com","locationId":"us-central","apiKey":"AIzaSyDgSHtESXZQfCChJe5oDM1tf9LclH5mdQA","authDomain":"paredol.firebaseapp.com","messagingSenderId":"232949701918","measurementId":"G-QP0KYD06TM"}
+[debug] [2022-12-14T04:38:53.017Z] Error: The package "esbuild-darwin-64" could not be found, and is needed by esbuild.
+
+If you are installing esbuild with npm, make sure that you don't specify the
+"--no-optional" flag. The "optionalDependencies" package.json feature is used
+by esbuild to install the correct binary executable for your current platform.
+    at generateBinPath (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/node_modules/esbuild/lib/main.js:1786:15)
+    at esbuildCommandAndArgs (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/node_modules/esbuild/lib/main.js:1850:33)
+    at ensureServiceIsRunning (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/node_modules/esbuild/lib/main.js:2015:25)
+    at Object.build (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/node_modules/esbuild/lib/main.js:1906:26)
+    at ɵcodegenFunctionsDirectory (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/frameworks/next/index.js:233:23)
+    at async prepareFrameworks (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/frameworks/index.js:302:84)
+    at async deploy (/Users/aitenoria/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/deploy/index.js:53:13)
+[error] 
+[error] Error: An unexpected error has occurred.

@@ -1,0 +1,42 @@
+.quote {
+  text-align: center;
+  white-space: nowrap;
+  text-indent: 0 !important;
+  padding: 4px 0 4px;
+  font-size: 10px;
+  height: 20.5px !important;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.grid {
+  width: 100%;
+  position: relative;
+  padding: 0 15px;
+  display: grid;
+  justify-items: center;
+  margin: 2px 0 10px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 3px;
+
+  & a,
+  & .toggle {
+    width: 75%;
+  }
+}
+
+// a.active:not(.nablaWrapper) {
+// background-color: ${(props) => props.theme.LiActiveBackground};
+// color: #ebebeb;
+// -webkit-box-shadow: 0px 2px 10px 1px  ${(props) =>
+//   props.theme.LiActiveBackground};
+// -moz-box-shadow: 0px 2px 10px 1px  ${(props) =>
+//   props.theme.LiActiveBackground};
+// box-shadow: 0px 2px 10px 1px  ${(props) => props.theme.LiActiveBackground};
+// text-shadow: 1px 1px 3px  #ebebeb;
+// /* font-style: italic; */
+// }
