@@ -8,20 +8,9 @@ import {
   MeshReflectorMaterial,
   useTexture,
   Environment,
+  useSelect,
 } from "@react-three/drei";
 import { DoubleSide, RepeatWrapping } from "three";
-
-export const Comp = styled(Canvas)`
-  position: fixed !important;
-  z-index: -100;
-  height: 100vh;
-  width: 100vw;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-  overflow: hidden;
-`;
 
 // Spinner
 export const Spinner = () => {
@@ -102,7 +91,10 @@ export function Wall() {
 // Physics bounds
 export function Bounds() {
   function Bound({ ...props }) {
-    const [ref] = usePlane(() => ({ ...props })) as any;
+    const [ref] = usePlane(() => ({
+      type: "Static",
+      ...props,
+    })) as any;
     return (
       <mesh ref={ref}>
         <planeGeometry args={[10, 10]} />
@@ -164,17 +156,22 @@ const Reflector = memo(function Reflector() {
   );
 });
 
-export function Floor() {
-  const [ref] = usePlane(() => ({
+export function Floor({ selected }: { selected: Array<any> }) {
+  const [ref]: any = usePlane(() => ({
     rotation: [-Math.PI / 2, 0, 0],
     position: [0, -1, 0],
-  })) as any;
+    type: "Static",
+  }));
 
   return (
     <Suspense fallback={<Spinner />}>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]} ref={ref}>
         <planeGeometry args={[70, 70]} />
-        <Reflector />
+        {!selected[0] ? (
+          <Reflector />
+        ) : (
+          <meshBasicMaterial transparent opacity={0} />
+        )}
       </mesh>
     </Suspense>
   );
@@ -187,7 +184,7 @@ export function Sky() {
       <Environment
         blur={100}
         files={canvas.env}
-        ground={{ height: -1, radius: 40, scale: 20 }}
+        ground={{ height: 1, radius: 70, scale: 20 }}
       />
     </Suspense>
   );

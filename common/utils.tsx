@@ -38,7 +38,7 @@ export const useSearch = (projects: any, query: any) => {
   if (query === "") return projects;
   return projects.filter((item: { [x: string]: { toString: () => string } }) =>
     Object.keys(item).some((key) =>
-      key === "cover"
+      key === "cover" || key === "published"
         ? false
         : item[key].toString().toLowerCase().includes(query.toLowerCase())
     )

@@ -21,12 +21,7 @@ export default function RootLayout({
   const [value, loading, error] = useCollectionOnce(
     query(collectionRef, where("published", "==", true))
   );
-  cloud.projects = value?.docs.map((doc) => {
-    return {
-      id: doc.id,
-      ...doc.data(),
-    };
-  });
+  cloud.projects = value?.docs.map((doc) => doc.data());
   const { projects } = useSnapshot(cloud);
   console.log(projects);
 

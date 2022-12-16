@@ -12,11 +12,12 @@ import { cloudSearch } from "../components/panels/navigator/search/search.state"
 import { cloudComp } from "./comp.state";
 
 const Camera = () => {
+  const { mobile } = useSnapshot(cloud);
   return (
     <>
       <PerspectiveCamera
         makeDefault
-        position={[0, 2, -7]}
+        position={!mobile ? [0, 2, -7] : [0, 2, -10]}
         // far={30}
         near={0.1}
         fov={90}
@@ -35,10 +36,10 @@ const Controls = ({ selected }: { selected: Array<Mesh> }) => {
       <OrbitControls
         target={target}
         touches={{
-          ONE: selected[0] ? TOUCH.ROTATE : TOUCH.PAN,
+          ONE: TOUCH.ROTATE,
           TWO: TOUCH.DOLLY_ROTATE,
         }}
-        enablePan={mobile}
+        // enablePan={mobile}
         // enableDamping
         // dampingFactor={1.8}
         minPolarAngle={Math.PI / 3}
@@ -67,7 +68,7 @@ export const Composition = () => {
   const { projects } = useSnapshot(cloud);
   const { query } = useSnapshot(cloudSearch);
   const { leftright, frontback } = useSnapshot(cloudComp);
-  const [selected, setSelected] = useState<any>([]);
+  const [selected, setSelected] = useState<Array<any>>([]);
   const hits = useSearch(projects, query);
   const Nodes = useMemo(() => makeNodes({ hits }), [hits, query, projects]);
 
@@ -93,7 +94,7 @@ export const Composition = () => {
           <Bounds />
           <Select onChange={setSelected}>{Nodes}</Select>
         </Suspense>
-        <Floor />
+        <Floor selected={selected} />
         {selected[0] ? <Sky /> : <Fog />}
         {/* </Debug> */}
       </Physics>

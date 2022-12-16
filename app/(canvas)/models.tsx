@@ -1,23 +1,34 @@
 import React, { useRef } from "react";
 // import { cloud } from "../../common/state";
 import { useTheme } from "styled-components";
-import { MeshPhysicalMaterial } from "three";
+import { Mesh, MeshPhysicalMaterial, Object3D } from "three";
 import { useFrame } from "@react-three/fiber";
-import { useSphere } from "@react-three/cannon";
+import { CollideEvent, useSphere } from "@react-three/cannon";
 import { useSelect, useTexture } from "@react-three/drei";
 import { useSnapshot } from "valtio";
 import { cloudComp } from "./comp.state";
+
+function handleCollision(e: CollideEvent) {
+  const { impactVelocity } = e.contact;
+  // console.log(name, impactVelocity);
+  if (impactVelocity > 1) {
+    console.log("collided");
+  }
+}
 
 export function Node({ ...props }) {
   const { hit, index } = props;
   // console.log(hit);
   let radius: [radius: number] = [1.5];
-  // const cover = useTexture(hit.cover);
-  const { target } = useSnapshot(cloudComp);
+  const cover = useTexture(hit.cover);
+  console.log(cover);
+
   const selected = useSelect();
   const pos = useRef<[number, number, number]>([0, 0, 0]);
   const [Ref, api] = useSphere(() => ({
-    mass: 10,
+    mass: 0.01,
+    allowSleep: false,
+    onCollide: handleCollision,
     position: [
       Math.floor(Math.random() * -2),
       index + 5,
@@ -62,6 +73,7 @@ export function Node({ ...props }) {
   //   cloud.preview = [];
   // }
 
+  const { canvas } = useTheme();
   return (
     <mesh
       {...props}
@@ -89,6 +101,8 @@ export function Node({ ...props }) {
       />
       <meshPhysicalMaterial
         // map={cover}
+        color={canvas.cd.color}
+        // roughness={canvas.cd.roughness}
         reflectivity={1}
         clearcoat={0.8}
         metalness={0.2}
