@@ -47,7 +47,7 @@ const Clear = styled.svg`
   right: 15px;
   transform: translate(50%, -57%);
   height: 14px;
-  fill: ${({ theme }) => theme.colors.secondary};
+  fill: ${({ theme }) => theme.ui.secondary};
   cursor: pointer;
 
   &:hover {
@@ -67,7 +67,7 @@ export function ClearIcon() {
 }
 
 const Caret = styled.svg`
-  fill: ${({ theme }) => theme.colors.secondary};
+  fill: ${({ theme }) => theme.ui.secondary};
   height: clamp(8px, 12px, 12px);
   float: right;
 

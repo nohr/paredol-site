@@ -23,16 +23,16 @@ export const SearchBar = styled.input<Props>`
   display: flex;
   background-color: transparent;
   box-shadow: 0 0 0 1px
-    ${(props: { theme: { colors: { secondary: string } } }) =>
-      props.theme.colors.secondary};
+    ${(props: { theme: { ui: { secondary: string } } }) =>
+      props.theme.ui.secondary};
   -webkit-box-shadow: 0 0 0 1px
-    ${(props: { theme: { colors: { secondary: string } } }) =>
-      props.theme.colors.secondary};
+    ${(props: { theme: { ui: { secondary: string } } }) =>
+      props.theme.ui.secondary};
   -moz-box-shadow: 0 0 0 1px
-    ${(props: { theme: { colors: { secondary: string } } }) =>
-      props.theme.colors.secondary};
-  color: ${(props: { theme: { colors: { secondary: string } } }) =>
-    props.theme.colors.secondary};
+    ${(props: { theme: { ui: { secondary: string } } }) =>
+      props.theme.ui.secondary};
+  color: ${(props: { theme: { ui: { secondary: string } } }) =>
+    props.theme.ui.secondary};
   user-select: text;
   -moz-user-select: text;
   -webkit-user-select: text;
@@ -47,8 +47,8 @@ export const SearchBar = styled.input<Props>`
 
   &::placeholder {
     text-align: start;
-    color: ${(props: { theme: { colors: { secondary: string } } }) =>
-      props.theme.colors.secondary};
+    color: ${(props: { theme: { ui: { secondary: string } } }) =>
+      props.theme.ui.secondary};
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
@@ -61,18 +61,18 @@ export const SearchBar = styled.input<Props>`
   }
   &:hover {
     color: #ebebeb;
-    background-color: ${(props: { theme: { colors: { hover: string } } }) =>
-      props.theme.colors.hover};
+    background-color: ${(props: { theme: { ui: { hover: string } } }) =>
+      props.theme.ui.hover};
     outline: 1px solid #ebebeb;
     box-shadow: 0 0 0 1px
-      ${(props: { theme: { colors: { secondary: string } } }) =>
-        props.theme.colors.secondary};
+      ${(props: { theme: { ui: { secondary: string } } }) =>
+        props.theme.ui.secondary};
     -webkit-box-shadow: 0 0 0 1px
-      ${(props: { theme: { colors: { secondary: string } } }) =>
-        props.theme.colors.secondary};
+      ${(props: { theme: { ui: { secondary: string } } }) =>
+        props.theme.ui.secondary};
     -moz-box-shadow: 0 0 0 1px
-      ${(props: { theme: { colors: { secondary: string } } }) =>
-        props.theme.colors.secondary};
+      ${(props: { theme: { ui: { secondary: string } } }) =>
+        props.theme.ui.secondary};
     transition: 0.3s;
   }
   &:focus::placeholder {
@@ -81,18 +81,15 @@ export const SearchBar = styled.input<Props>`
   }
   &:focus {
     color: #ebebeb;
-    background-color: ${(props: { theme: { colors: { hover: string } } }) =>
-      props.theme.colors.hover};
+    background-color: ${(props: { theme: { ui: { hover: string } } }) =>
+      props.theme.ui.hover};
     outline: 1px solid #ebebeb;
     box-shadow: 0 0 50px 50px
-      ${(props: { theme: { colors: { hover: string } } }) =>
-        props.theme.colors.hover};
+      ${(props: { theme: { ui: { hover: string } } }) => props.theme.ui.hover};
     -webkit-box-shadow: 0 0 50px 50px
-      ${(props: { theme: { colors: { hover: string } } }) =>
-        props.theme.colors.hover};
+      ${(props: { theme: { ui: { hover: string } } }) => props.theme.ui.hover};
     -moz-box-shadow: 0 0 50px 50px
-      ${(props: { theme: { colors: { hover: string } } }) =>
-        props.theme.colors.hover};
+      ${(props: { theme: { ui: { hover: string } } }) => props.theme.ui.hover};
     transition: 0.3s;
   }
   &:focus ~ #searchIcon,
@@ -116,7 +113,7 @@ export const BarIcon = styled.svg`
   left: 6px;
   transform: translateY(-57%);
   height: 16px;
-  fill: ${({ theme }) => theme.colors.secondary};
+  fill: ${({ theme }) => theme.ui.secondary};
   cursor: pointer;
   stroke-width: 1px;
   transition: 0s !important;
@@ -130,7 +127,7 @@ export const BarIcon = styled.svg`
   }
 
   &#cdIcon {
-    stroke: ${({ theme }) => theme.colors.secondary} !important;
+    stroke: ${({ theme }) => theme.ui.secondary} !important;
     stroke-width: 1px !important;
     fill: transparent !important;
   }

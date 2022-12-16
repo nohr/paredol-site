@@ -19,8 +19,8 @@ export default function HomeSVG({ nodeRef }: { nodeRef: Ref<any> }) {
 }
 
 export const Caret = styled.svg`
-  fill: ${({ theme }) => theme.colors.secondary};
-  stroke: ${({ theme }) => theme.colors.secondary} !important;
+  fill: ${({ theme }) => theme.ui.secondary};
+  stroke: ${({ theme }) => theme.ui.secondary} !important;
   stroke-width: 8px !important;
   height: clamp(8px, 12px, 12px);
   float: right;

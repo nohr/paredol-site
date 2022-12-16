@@ -24,11 +24,11 @@ const Projects = () => {
   const pathname = usePathname();
   const theme = useTheme();
 
-  const active = `background-color: ${theme.colors.active};
+  const active = `background-color: ${theme.ui.active};
   color: #ebebeb;
-  -webkit-box-shadow: 0px 2px 10px 1px ${theme.colors.active};
-  -moz-box-shadow: 0px 2px 10px 1px ${theme.colors.active};
-  box-shadow: 0px 2px 10px 1px ${theme.colors.active};
+  -webkit-box-shadow: 0px 2px 10px 1px ${theme.ui.active};
+  -moz-box-shadow: 0px 2px 10px 1px ${theme.ui.active};
+  box-shadow: 0px 2px 10px 1px ${theme.ui.active};
   // text-shadow: 1px 1px 3px #ebebeb;
   `;
 

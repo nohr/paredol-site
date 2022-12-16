@@ -18,8 +18,8 @@ export const GlobalStyles = createGlobalStyle`
         font-family: 'Inter', sans-serif;
         font-size: 16px;
         line-height: 1.5;
-        color: ${({ theme }) => theme.colors.secondary};
-        background-color: ${({ theme }) => theme.colors.background};
+        color: ${({ theme }) => theme.ui.secondary};
+        background-color: ${({ theme }) => theme.ui.background};
         pointer-events: none;
     }
 
@@ -30,7 +30,7 @@ export const GlobalStyles = createGlobalStyle`
     
         *::selection{
             color:  #EBEBEB;
-            background-color:  ${({ theme }) => theme.colors.hover};
+            background-color:  ${({ theme }) => theme.ui.hover};
         }
     *{
         box-sizing: border-box;
@@ -52,16 +52,15 @@ export const GlobalStyles = createGlobalStyle`
             display: flex;
         }
         ::-webkit-scrollbar-thumb {
-            background-color: ${({ theme }) => theme.colors.secondary};
+            background-color: ${({ theme }) => theme.ui.secondary};
             border-radius: 4px;
             /* transition: 0.3s; */
         }
         ::-webkit-scrollbar-thumb:hover {
-            background-color: ${({ theme }) => theme.colors.secondary};
-            box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.secondary};
-            -webkit-box-shadow: 0 0 0 1px ${({ theme }) =>
-              theme.colors.secondary};
-            -moz-box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.secondary};
+            background-color: ${({ theme }) => theme.ui.secondary};
+            box-shadow: 0 0 0 1px ${({ theme }) => theme.ui.secondary};
+            -webkit-box-shadow: 0 0 0 1px ${({ theme }) => theme.ui.secondary};
+            -moz-box-shadow: 0 0 0 1px ${({ theme }) => theme.ui.secondary};
             /* transition: 0.3s; */
         }
     }
@@ -88,7 +87,7 @@ export const GlobalStyles = createGlobalStyle`
   top: 80px;
   left: 80px;
   border-radius: 50%;
-  box-shadow: 0 1.8px 0 0 ${({ theme }) => theme.colors.secondary};
+  box-shadow: 0 1.8px 0 0 ${({ theme }) => theme.ui.secondary};
   transform-origin: 20px 20.9px;
 }
 
@@ -117,8 +116,8 @@ export const GlobalStyles = createGlobalStyle`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -55%);
-  color: ${({ theme }) => theme.colors.secondary};
-  text-shadow: 0 1px 1 1 ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.ui.secondary};
+  text-shadow: 0 1px 1 1 ${({ theme }) => theme.ui.secondary};
   font-size: 18px;
 }
 

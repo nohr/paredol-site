@@ -24,7 +24,7 @@ export function Bowl(props: JSX.IntrinsicElements["group"]) {
         material={nodes.bowl1.material}
         userData={{ name: "bowl.1" }}
       >
-        <meshStandardMaterial color={theme.colors.secondary} />
+        <meshStandardMaterial color={theme.ui.secondary} />
       </mesh>
     </group>
   );

@@ -4,7 +4,7 @@ import "styled-components";
 declare module "styled-components" {
   export interface DefaultTheme {
     borderRadius: string;
-    colors: {
+    ui: {
       main: string;
       secondary: string;
       hover: string;
@@ -37,7 +37,7 @@ declare module "styled-components" {
 
 export const light: DefaultTheme = {
   borderRadius: "5px",
-  colors: {
+  ui: {
     main: `#151515`,
     secondary: `hsl(209, 100%, 20%)`,
     hover: `hsla(209, 100%, 20%, 0.67)`,
@@ -69,7 +69,7 @@ export const light: DefaultTheme = {
 
 export const dark: DefaultTheme = {
   borderRadius: "5px",
-  colors: {
+  ui: {
     main: `#C1C2C2`,
     secondary: `hsl(209, 31%, 80%)`,
     hover: `hsla(209, 31%, 80%, 0.67)`,

@@ -45,7 +45,7 @@ export const Spinner = () => {
 };
 
 export function Lights() {
-  const { canvas, colors } = useTheme();
+  const { canvas, ui } = useTheme();
   return (
     <>
       {/* SPOTLIGHT */}
@@ -76,24 +76,24 @@ export function Fog() {
 
 // Scene walls for use with Effect Composer
 export function Wall() {
-  const { colors } = useTheme();
+  const { ui } = useTheme();
   return (
     <>
       <mesh rotation={[0, -Math.PI / 2, 0]} position={[30, 17, 0]}>
         <planeGeometry args={[70, 35]} />
-        <meshPhongMaterial color={colors.secondary} opacity={0} />
+        <meshPhongMaterial color={ui.secondary} opacity={0} />
       </mesh>
       <mesh rotation={[0, Math.PI / 2, 0]} position={[-30, 17, 0]}>
         <planeGeometry args={[70, 35]} />
-        <meshPhongMaterial color={colors.secondary} opacity={0} />
+        <meshPhongMaterial color={ui.secondary} opacity={0} />
       </mesh>
       <mesh rotation={[0, -Math.PI, 0]} position={[0, 17, 30]}>
         <planeGeometry args={[70, 35]} />
-        <meshPhongMaterial color={colors.secondary} opacity={0} />
+        <meshPhongMaterial color={ui.secondary} opacity={0} />
       </mesh>
       <mesh rotation={[0, 0, 0]} position={[0, 17, -30]}>
         <planeGeometry args={[70, 35]} />
-        <meshPhongMaterial color={colors.secondary} opacity={0} />
+        <meshPhongMaterial color={ui.secondary} opacity={0} />
       </mesh>
     </>
   );

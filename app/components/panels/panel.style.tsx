@@ -40,8 +40,8 @@ export const Panel = styled.div<IProps>`
   scroll-snap-type: none;
   background-color: transparent;
   backdrop-filter: blur(20px) !important;
-  border: 1px solid ${({ theme }) => theme.colors?.secondary};
-  color: ${({ theme }) => theme.colors?.secondary};
+  border: 1px solid ${({ theme }) => theme.ui?.secondary};
+  color: ${({ theme }) => theme.ui?.secondary};
   border-radius: 185px;
   overflow: hidden;
 
@@ -53,11 +53,11 @@ export const Panel = styled.div<IProps>`
     & * {
       opacity: 0;
     }
-    fill: ${({ theme }) => theme.colors?.hover} !important;
-    background-color: ${({ theme }) => theme.colors?.hover} !important;
-    box-shadow: 0 8px 32px 0 ${({ theme }) => theme.colors?.hover};
-    -webkit-box-shadow: 0 8px 32px 0 ${({ theme }) => theme.colors?.hover};
-    -moz-box-shadow: 0 8px 32px 0 ${({ theme }) => theme.colors?.hover};
+    fill: ${({ theme }) => theme.ui?.hover} !important;
+    background-color: ${({ theme }) => theme.ui?.hover} !important;
+    box-shadow: 0 8px 32px 0 ${({ theme }) => theme.ui?.hover};
+    -webkit-box-shadow: 0 8px 32px 0 ${({ theme }) => theme.ui?.hover};
+    -moz-box-shadow: 0 8px 32px 0 ${({ theme }) => theme.ui?.hover};
   }
 
   .audio,
@@ -79,8 +79,8 @@ export const Panel = styled.div<IProps>`
     padding-bottom: 6px;
     text-align: center;
     border: 1px solid;
-    border-color: transparent transparent
-      ${({ theme }) => theme.colors.secondary} transparent;
+    border-color: transparent transparent ${({ theme }) => theme.ui.secondary}
+      transparent;
     transition: 0.9s;
     stroke-width: 1px !important;
 
@@ -105,7 +105,7 @@ export const LogoWrapper = styled.div<IProps>`
   padding-top: 5px;
   padding-bottom: 3px;
   border-radius: 75% 75% 50px 50px;
-  border: 1px solid ${({ theme }) => theme.colors?.secondary};
+  border: 1px solid ${({ theme }) => theme.ui?.secondary};
   overflow: visible;
   background-color: transparent !important;
   -webkit-box-shadow: none !important;
@@ -121,16 +121,16 @@ export const LogoWrapper = styled.div<IProps>`
   & svg {
     ${(props) => props.fill}
     align-self:center;
-    fill: ${({ theme }) => theme.colors?.secondary};
-    color: ${({ theme }) => theme.colors?.secondary};
+    fill: ${({ theme }) => theme.ui?.secondary};
+    color: ${({ theme }) => theme.ui?.secondary};
     pointer-events: none;
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors?.hover} !important;
-    -webkit-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.colors?.hover} !important;
-    -moz-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.colors?.hover} !important;
-    box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.colors?.hover} !important;
+    background-color: ${({ theme }) => theme.ui?.hover} !important;
+    -webkit-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
+    -moz-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
+    box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
     transition: 0.6s;
   }
   &:hover > svg {
@@ -156,10 +156,10 @@ export const Path = styled(Link)<IProps>`
 
   &:hover {
     color: #ebebeb;
-    background-color: ${({ theme }) => theme.colors?.hover} !important;
-    -webkit-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.colors?.hover} !important;
-    -moz-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.colors?.hover} !important;
-    box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.colors?.hover} !important;
+    background-color: ${({ theme }) => theme.ui?.hover} !important;
+    -webkit-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
+    -moz-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
+    box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
     /* transition: 0.6s; */
   }
 `;
@@ -182,10 +182,10 @@ export const Toggle = styled.div<IProps>`
 
   &:hover {
     color: #ebebeb;
-    background-color: ${({ theme }) => theme.colors?.hover} !important;
-    -webkit-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.colors?.hover} !important;
-    -moz-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.colors?.hover} !important;
-    box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.colors?.hover} !important;
+    background-color: ${({ theme }) => theme.ui?.hover} !important;
+    -webkit-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
+    -moz-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
+    box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
     /* transition: 0.6s; */
 
     & svg {
@@ -196,7 +196,7 @@ export const Toggle = styled.div<IProps>`
     }
   }
 
-  fill: ${({ theme }) => theme.colors.secondary};
+  fill: ${({ theme }) => theme.ui.secondary};
 
   .nextIcon,
   .modeIcon,
@@ -205,7 +205,7 @@ export const Toggle = styled.div<IProps>`
     position: absolute;
     right: 10px;
     width: 10px;
-    stroke: ${({ theme }) => theme.colors.secondary};
+    stroke: ${({ theme }) => theme.ui.secondary};
     stroke-width: 1px !important;
     overflow: visible;
     align-self: left;
@@ -226,7 +226,7 @@ export const Toggle = styled.div<IProps>`
 
   .DirectionIcon {
     /* stroke: transparent !important; */
-    fill: ${({ theme }) => theme.colors.secondary} !important;
+    fill: ${({ theme }) => theme.ui.secondary} !important;
     stroke-width: 1px !important;
     position: absolute;
     right: 10px;
@@ -246,15 +246,15 @@ export const Folder = styled.div<IProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  fill: ${({ theme }) => theme.colors.secondary};
+  fill: ${({ theme }) => theme.ui.secondary};
   ${({ border }) => border};
   backdrop-filter: blur(20px) !important;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors?.hover} !important;
-    -webkit-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.colors?.hover} !important;
-    -moz-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.colors?.hover} !important;
-    box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.colors?.hover} !important;
+    background-color: ${({ theme }) => theme.ui?.hover} !important;
+    -webkit-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
+    -moz-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
+    box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
   }
 
   &.trayIcon {
@@ -277,8 +277,8 @@ export const Folder = styled.div<IProps>`
     width: 60% !important;
     grid-area: 3/ 1 / span 1 / span 2;
     text-align: center;
-    color: ${({ theme }) => theme.colors.main};
-    border: 1px solid ${({ theme }) => theme.colors.main};
+    color: ${({ theme }) => theme.ui.main};
+    border: 1px solid ${({ theme }) => theme.ui.main};
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
@@ -291,7 +291,7 @@ export const Folder = styled.div<IProps>`
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
-    /* border: 1px solid #${({ theme }) => theme.colors.secondary}; */
+    /* border: 1px solid #${({ theme }) => theme.ui.secondary}; */
     border-radius: 50%;
     justify-content: center;
     display: flex;
@@ -301,7 +301,7 @@ export const Folder = styled.div<IProps>`
     /* padding: 2px; */
 
     & svg {
-      stroke: #${({ theme }) => theme.colors.secondary};
+      stroke: #${({ theme }) => theme.ui.secondary};
       width: 28px !important;
       stroke-width: 3px;
     }
@@ -318,12 +318,10 @@ export const Folder = styled.div<IProps>`
 
   &.color {
     border-color: #ebebeb !important;
-    fill: ${({ theme }) => theme.colors.hover};
-    background-color: ${({ theme }) => theme.colors.hover};
-    -webkit-filter: drop-shadow(
-      1px 1px 6px ${({ theme }) => theme.colors.hover}
-    );
-    filter: drop-shadow(1px 1px 6px ${({ theme }) => theme.colors.hover});
+    fill: ${({ theme }) => theme.ui.hover};
+    background-color: ${({ theme }) => theme.ui.hover};
+    -webkit-filter: drop-shadow(1px 1px 6px ${({ theme }) => theme.ui.hover});
+    filter: drop-shadow(1px 1px 6px ${({ theme }) => theme.ui.hover});
     text-align: center;
 
     & svg {
@@ -339,11 +337,9 @@ export const Folder = styled.div<IProps>`
   &.reset {
     border-color: #ebebeb !important;
     color: #ebebeb;
-    background-color: ${({ theme }) => theme.colors.active};
-    -webkit-filter: drop-shadow(
-      1px 1px 6px ${({ theme }) => theme.colors.active}
-    );
-    filter: drop-shadow(1px 1px 6px ${({ theme }) => theme.colors.active});
+    background-color: ${({ theme }) => theme.ui.active};
+    -webkit-filter: drop-shadow(1px 1px 6px ${({ theme }) => theme.ui.active});
+    filter: drop-shadow(1px 1px 6px ${({ theme }) => theme.ui.active});
     text-align: center;
     transition: 0.3s;
   }
@@ -356,7 +352,7 @@ export const Folder = styled.div<IProps>`
   .muteIcon,
   .ShowHideIcon,
   .ColorIcon {
-    fill: ${({ theme }) => theme.colors.secondary} !important;
+    fill: ${({ theme }) => theme.ui.secondary} !important;
     overflow: visible;
   }
 
@@ -369,7 +365,7 @@ export const Folder = styled.div<IProps>`
   }
 
   .PlayPauseIcon {
-    fill: ${({ theme }) => theme.colors.secondary} !important;
+    fill: ${({ theme }) => theme.ui.secondary} !important;
     overflow: visible;
   }
 
@@ -398,16 +394,16 @@ export const Folder = styled.div<IProps>`
       height: inherit;
       /* height: fit-content !important; */
       resize: none;
-      color: ${({ theme }) => theme.colors.secondary} !important;
+      color: ${({ theme }) => theme.ui.secondary} !important;
       ::-webkit-scrollbar {
         display: none !important;
       }
       &:active {
-        border: 1px solid ${({ theme }) => theme.colors.secondary} !important;
+        border: 1px solid ${({ theme }) => theme.ui.secondary} !important;
       }
     }
     &:hover {
-      background-color: ${({ theme }) => theme.colors.tertiary} !important;
+      background-color: ${({ theme }) => theme.ui.tertiary} !important;
       box-shadow: inherit !important;
       color: inherit !important;
     }
@@ -435,12 +431,12 @@ export const Header = styled.div`
   flex-direction: column;
   flex-wrap: nowrap;
   border-bottom: 1px solid;
-  border-color: ${({ theme }) => theme.colors?.secondary} !important;
+  border-color: ${({ theme }) => theme.ui?.secondary} !important;
   /* backdrop-filter: blur(20px) !important; */
 
   &:hover {
     cursor: grab;
-    background-color: ${({ theme }) => theme.colors?.hover} !important;
+    background-color: ${({ theme }) => theme.ui?.hover} !important;
     color: #ebebeb !important;
 
     & svg {
