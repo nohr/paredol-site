@@ -11,7 +11,7 @@ export default function Page({ params, searchParams }: PageProps) {
   console.log(slug, id);
   return (
     <>
-      {slug && <FirestoreDocument page={slug} />}
+      {slug && <FirestoreDocument path={slug} />}
       {searchParams && <p>{searchParams.id}</p>}
     </>
   );

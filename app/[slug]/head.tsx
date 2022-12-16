@@ -1,13 +1,7 @@
-import PWATags from "../../components/interface/PWATags";
-
-async function getPost(slug: string) {
-  // const res = await fetch("...");
-  // return res.json();
-  return slug;
-}
+import PWATags from "../components/interface/PWATags";
 
 export default async function Head({ params }: { params: { slug: string } }) {
-  const title = `${await getPost(params.slug)} @ Paredol`;
+  const title = `${params.slug} @ Paredol`;
 
   return (
     <>

@@ -1,21 +1,37 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Composition from "../canvas/Composition";
-import Interface from "../components/interface/Interface";
+import Interface from "./components/interface/Interface";
 import { ThemeProvider } from "styled-components";
 import { useSnapshot } from "valtio";
-import { state } from "../common/state";
+import { cloud, state } from "../common/state";
 import { GlobalStyles } from "../styles/globals";
 import { dark, light } from "../styles/themes";
+import { Composition } from "./(canvas)/comp";
+import { getFirestore, collection, query, where } from "firebase/firestore";
+import { useCollectionOnce } from "react-firebase-hooks/firestore";
+import { app } from "../firebase/config";
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { theme } = useSnapshot(state);
+  const collectionRef = collection(getFirestore(app), "projects");
+  const [value, loading, error] = useCollectionOnce(
+    query(collectionRef, where("published", "==", true))
+  );
+  cloud.projects = value?.docs.map((doc) => {
+    return {
+      id: doc.id,
+      ...doc.data(),
+    };
+  });
+  const { projects } = useSnapshot(cloud);
+  console.log(projects);
 
   // Check for dark mode preference
+  const { theme } = useSnapshot(state);
   useEffect(() => {
     if (typeof window !== "undefined") {
       state.theme = window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -26,7 +42,7 @@ export default function RootLayout({
 
   if (typeof window !== "undefined") {
     // Client-side-only code
-    state.mobile = window.matchMedia("(max-width: 768px)").matches;
+    cloud.mobile = window.matchMedia("(max-width: 768px)").matches;
 
     window
       .matchMedia("(prefers-color-scheme: dark)")

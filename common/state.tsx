@@ -26,7 +26,9 @@ export const state = proxy<stateTypes>({
 // temporary state
 interface cloudTypes {
   // Firebase
-  projects: Array<Object>;
+  projects: any;
+  loading: boolean;
+  error: null;
   project: Array<Object>;
   quote: string;
   // UI
@@ -50,6 +52,8 @@ interface cloudTypes {
 export const cloud = proxy<cloudTypes>({
   // Firebase
   projects: [],
+  loading: true,
+  error: null,
   project: [],
   quote: "Come in, you must be freezing.",
   //UI
