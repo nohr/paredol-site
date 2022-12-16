@@ -43,7 +43,7 @@ export function usePadding(panel: string) {
       : "padding-top: 80px;";
   } else if (panel === "opt") {
     return !direction
-      ? "padding-top: 7px;"
+      ? "padding-top: 10px;"
       : optSwitched
       ? "padding-top: 50px !important;"
       : "padding-top: 80px;";
@@ -80,7 +80,7 @@ export function useLayout(panel: string) {
   const { direction } = useSnapshot(statePanel);
 
   if (panel === "pro") {
-    return !direction ? "    padding-left: 60px; padding-right: 25px;" : "";
+    return !direction ? "padding-left: 60px; padding-right: 25px;" : "";
   } else if (panel === "opt") {
     return !direction
       ? "grid-template-columns: 100%; grid-template-rows: 10% 1fr 10% 1fr; padding-left: 60px;padding-right: 25px;"
@@ -104,15 +104,18 @@ export function usePanelStyle(panel: string) {
     `
         : panel === "pro"
         ? `
+        overflow: auto !important;
         z-index: 4500 !important;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    padding-bottom: 20px;
     ${!isPro ? "opacity: 0; pointer-events: none;" : ""}
     & a{
-        text-indent: 10px;
-        width: 60%;
+      backdrop-filter: none !important;
+        text-align: center;
+        width: 75%;
     }
     `
         : panel === "opt"

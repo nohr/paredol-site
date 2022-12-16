@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 // import { cloud } from "../../common/state";
 import { useTheme } from "styled-components";
-import { Mesh, MeshPhysicalMaterial, Object3D } from "three";
+import { MeshPhysicalMaterial } from "three";
 import { useFrame } from "@react-three/fiber";
 import { CollideEvent, useSphere } from "@react-three/cannon";
 import { useSelect, useTexture } from "@react-three/drei";
@@ -21,7 +21,7 @@ export function Node({ ...props }) {
   // console.log(hit);
   let radius: [radius: number] = [1.5];
   const cover = useTexture(hit.cover);
-  console.log(cover);
+  // console.log(cover);
 
   const selected = useSelect();
   const pos = useRef<[number, number, number]>([0, 0, 0]);

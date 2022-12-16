@@ -60,15 +60,13 @@ const Projects = () => {
           </p>
           {projects.map(
             (
-              doc: { name: string; id: string },
+              doc: { name: string; lot: string },
               index: React.Key | null | undefined
             ) => (
               <Path
                 key={index}
-                href={doc.id}
-                active={
-                  pathname?.substring(1) === doc.name ? active : undefined
-                }
+                href={doc.lot}
+                active={pathname?.substring(1) === doc.lot ? active : undefined}
               >
                 {doc.name}
               </Path>
