@@ -1,5 +1,5 @@
 import React, { Suspense, useMemo, useState } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Select } from "@react-three/drei";
 import { useSnapshot } from "valtio";
 import { cloud } from "../../common/state";
@@ -10,18 +10,22 @@ import { Mesh, TOUCH } from "three";
 import { useSearch } from "../../common/utils";
 import { cloudSearch } from "../components/panels/navigator/search/search.state";
 import { cloudComp } from "./comp.state";
+import { useTheme } from "styled-components";
 
 const Camera = () => {
   const { mobile } = useSnapshot(cloud);
+  // get the width and height of the canvas
+  const { width, height } = useThree((state) => state.size);
+  console.log(width, height);
   return (
     <>
       <PerspectiveCamera
         makeDefault
-        position={!mobile ? [0, 2, -7] : [0, 2, -10]}
+        position={!mobile ? [-2, 10, 0] : [0, 2, -10]}
         // far={30}
         near={0.1}
         fov={90}
-        // aspect={width / height}
+        aspect={width / height}
       ></PerspectiveCamera>
     </>
   );
@@ -42,7 +46,7 @@ const Controls = ({ selected }: { selected: Array<Mesh> }) => {
         // enablePan={mobile}
         // enableDamping
         // dampingFactor={1.8}
-        minPolarAngle={Math.PI / 3}
+        minPolarAngle={Math.PI / 4}
         maxPolarAngle={Math.PI / 2}
         // autoRotate={true}
         // autoRotateSpeed={clip.UILoading ? -50 : 0}
@@ -71,7 +75,7 @@ export const Composition = () => {
   const [selected, setSelected] = useState<Array<any>>([]);
   const hits = useSearch(projects, query);
   const Nodes = useMemo(() => makeNodes({ hits }), [hits, query, projects]);
-
+  const { ui } = useTheme();
   return (
     <Canvas
       // dpr={[1, 1.5]}
@@ -89,14 +93,14 @@ export const Composition = () => {
         size={100}
         gravity={[leftright, -9.8, frontback]}
       >
-        {/* <Debug color="white" scale={1.1}> */}
-        <Suspense fallback={null}>
-          <Bounds />
-          <Select onChange={setSelected}>{Nodes}</Select>
-        </Suspense>
-        <Floor selected={selected} />
-        {selected[0] ? <Sky /> : <Fog />}
-        {/* </Debug> */}
+        <Debug color={ui.secondary} scale={1.01}>
+          <Suspense fallback={null}>
+            <Bounds />
+            <Select onChange={setSelected}>{Nodes}</Select>
+          </Suspense>
+          <Floor selected={selected} />
+          {selected[0] ? <Sky /> : <Fog />}
+        </Debug>
       </Physics>
       <Controls selected={selected} />
     </Canvas>

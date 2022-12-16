@@ -1,6 +1,5 @@
 import { memo, Suspense, useLayoutEffect } from "react";
-import styled, { useTheme } from "styled-components";
-import { Canvas } from "@react-three/fiber";
+import { useTheme } from "styled-components";
 import { usePlane } from "@react-three/cannon";
 import {
   Html,
@@ -104,9 +103,9 @@ export function Bounds() {
   }
 
   return (
-    <group rotation={[Math.PI / 4, 0, 0]}>
-      <Bound rotation={[Math.PI, 0, 0]} position={[0, 0, 7]} />
-      <Bound rotation={[Math.PI, Math.PI, 0]} position={[0, 0, -7]} />
+    <group>
+      <Bound rotation={[Math.PI, 0, 0]} position={[0, 0, 10]} />
+      <Bound rotation={[Math.PI, Math.PI, 0]} position={[0, 0, -10]} />
       <Bound rotation={[Math.PI, -Math.PI / 2, 0]} position={[4, 0, 0]} />
       <Bound rotation={[Math.PI, Math.PI / 2, 0]} position={[-4, 0, 0]} />
     </group>

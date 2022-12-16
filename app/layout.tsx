@@ -22,8 +22,6 @@ export default function RootLayout({
     query(collectionRef, where("published", "==", true))
   );
   cloud.projects = value?.docs.map((doc) => doc.data());
-  const { projects } = useSnapshot(cloud);
-  console.log(projects);
 
   // Check for dark mode preference
   const { theme } = useSnapshot(state);

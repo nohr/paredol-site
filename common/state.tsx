@@ -29,7 +29,7 @@ interface cloudTypes {
   projects: any;
   loading: boolean;
   error: null;
-  project: Array<Object>;
+  project: any;
   quote: string;
   // UI
   UILoading: boolean;

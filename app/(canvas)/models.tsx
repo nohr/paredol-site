@@ -1,33 +1,31 @@
 import React, { useRef } from "react";
 // import { cloud } from "../../common/state";
 import { useTheme } from "styled-components";
-import { MeshPhysicalMaterial } from "three";
+import { MeshPhysicalMaterial, Texture } from "three";
 import { useFrame } from "@react-three/fiber";
 import { CollideEvent, useSphere } from "@react-three/cannon";
 import { useSelect, useTexture } from "@react-three/drei";
-import { useSnapshot } from "valtio";
+// import { useSnapshot } from "valtio";
 import { cloudComp } from "./comp.state";
+import { useRouter } from "next/navigation";
+import { cloud } from "../../common/state";
 
 function handleCollision(e: CollideEvent) {
   const { impactVelocity } = e.contact;
   // console.log(name, impactVelocity);
-  if (impactVelocity > 1) {
+  if (impactVelocity > 4) {
     console.log("collided");
   }
 }
 
 export function Node({ ...props }) {
   const { hit, index } = props;
-  // console.log(hit);
   let radius: [radius: number] = [1.5];
-  const cover = useTexture(hit.cover);
-  // console.log(cover);
-
+  const cover: Texture = useTexture<string>(hit.cover);
   const selected = useSelect();
   const pos = useRef<[number, number, number]>([0, 0, 0]);
   const [Ref, api] = useSphere(() => ({
-    mass: 0.01,
-    allowSleep: false,
+    mass: 0.001,
     onCollide: handleCollision,
     position: [
       Math.floor(Math.random() * -2),
@@ -73,7 +71,7 @@ export function Node({ ...props }) {
   //   cloud.preview = [];
   // }
 
-  const { canvas } = useTheme();
+  const router = useRouter();
   return (
     <mesh
       {...props}
@@ -83,10 +81,11 @@ export function Node({ ...props }) {
       onClick={() => {
         if (Ref.current && selected[0] && selected[0].id === Ref.current.id) {
           // setLocation(`${hit.lot}`);
+          router.push(`/${hit.lot}`);
           // cloud.query = "";
           // confirm();
         } else {
-          // cloud.preview = [hit];
+          cloud.project = [hit];
           // Ref.current.scale.set([1, 1, 1]);
           // select();
         }
@@ -100,9 +99,7 @@ export function Node({ ...props }) {
         ]}
       />
       <meshPhysicalMaterial
-        // map={cover}
-        color={canvas.cd.color}
-        // roughness={canvas.cd.roughness}
+        map={cover}
         reflectivity={1}
         clearcoat={0.8}
         metalness={0.2}
