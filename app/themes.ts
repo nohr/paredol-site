@@ -3,7 +3,6 @@ import "styled-components";
 
 declare module "styled-components" {
   export interface DefaultTheme {
-    borderRadius: string;
     ui: {
       main: string;
       secondary: string;
@@ -36,7 +35,6 @@ declare module "styled-components" {
 }
 
 export const light: DefaultTheme = {
-  borderRadius: "5px",
   ui: {
     main: `#151515`,
     secondary: `hsl(209, 100%, 20%)`,
@@ -68,7 +66,6 @@ export const light: DefaultTheme = {
 };
 
 export const dark: DefaultTheme = {
-  borderRadius: "5px",
   ui: {
     main: `#C1C2C2`,
     secondary: `hsl(209, 31%, 80%)`,

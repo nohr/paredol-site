@@ -1,5 +1,5 @@
-import React, { Suspense, useMemo, useRef, useState } from "react";
-import { Canvas, useThree } from "@react-three/fiber";
+import React, { Suspense, useMemo, useState } from "react";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Select } from "@react-three/drei";
 import { useSnapshot } from "valtio";
 import { cloud } from "../../common/state";
@@ -90,10 +90,8 @@ export const Composition = () => {
       >
         {/* <Debug color="white" scale={1.1}> */}
         <Suspense fallback={null}>
-          <Select onChange={setSelected}>
-            <Bounds />
-            {Nodes}
-          </Select>
+          <Bounds />
+          <Select onChange={setSelected}>{Nodes}</Select>
         </Suspense>
         <Floor />
         {selected[0] ? <Sky /> : <Fog />}
