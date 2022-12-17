@@ -3,12 +3,12 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Select } from "@react-three/drei";
 import { useSnapshot } from "valtio";
 import { cloud } from "../../common/state";
-import { Bounds, Floor, Fog, Lights, Sky } from "./comp.utils";
+import { Floor, Fog, Lights, Sky } from "./comp.utils";
 import { Debug, Physics } from "@react-three/cannon";
 import { CD, Node } from "./models";
 import { Mesh, TOUCH } from "three";
 import { useSearch } from "../../common/utils";
-import { cloudSearch } from "../components/panels/navigator/search/search.state";
+import { cloudSearch } from "../components/desktop/navigator/search/search.state";
 import { cloudComp } from "./comp.state";
 import { useTheme } from "styled-components";
 
@@ -58,23 +58,11 @@ const Controls = ({ selected }: { selected: Array<Mesh> }) => {
   );
 };
 
-const makeNodes = ({ hits }: { hits: Array<Object> }) => {
-  return (
-    <>
-      {hits?.map((hit: any, index: React.Key | null | undefined) => (
-        <Node hit={hit} key={index} index={index} />
-      ))}
-    </>
-  );
-};
-
 export const Composition = () => {
   const { projects } = useSnapshot(cloud);
   const { query } = useSnapshot(cloudSearch);
   const { leftright, frontback } = useSnapshot(cloudComp);
   const [selected, setSelected] = useState<Array<any>>([]);
-  const hits = useSearch(projects, query);
-  const Nodes = useMemo(() => makeNodes({ hits }), [hits, query, projects]);
   const { ui } = useTheme();
   return (
     <Canvas
@@ -88,20 +76,8 @@ export const Composition = () => {
     >
       <Camera />
       <Lights />
-      <Physics
-        allowSleep={false}
-        size={100}
-        gravity={[leftright, -9.8, frontback]}
-      >
-        <Debug color={ui.secondary} scale={1.01}>
-          <Suspense fallback={null}>
-            <Bounds />
-            <Select onChange={setSelected}>{Nodes}</Select>
-          </Suspense>
-          <Floor selected={selected} />
-          {selected[0] ? <Sky /> : <Fog />}
-        </Debug>
-      </Physics>
+      <CD />
+      <Floor />
       <Controls selected={selected} />
     </Canvas>
   );

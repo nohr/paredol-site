@@ -10,7 +10,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-three/cannon": "^6.5.0",
     "@react-three/drei": "^9.46.0",
     "@react-three/fiber": "^8.9.1",
     "@types/estree": "^1.0.0",
@@ -19,6 +18,7 @@
     "@types/react-dom": "18.0.9",
     "@types/three": "^0.146.0",
     "@use-gesture/react": "^10.2.23",
+    "d3": "^7.7.0",
     "encoding": "^0.1.13",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
@@ -38,6 +38,7 @@
     "valtio": "^1.7.6"
   },
   "devDependencies": {
+    "@types/d3": "^7.4.0",
     "@types/styled-components": "^5.1.26",
     "sass": "^1.56.1",
     "turbo": "^1.6.3"

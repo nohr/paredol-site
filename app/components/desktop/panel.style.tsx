@@ -94,6 +94,9 @@ export const Panel = styled.div<IProps>`
   .display {
     padding-bottom: 10px !important;
   }
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 export const LogoWrapper = styled.div<IProps>`
   height: 70px;
@@ -415,8 +418,8 @@ export const Skew = styled.div<SkewProps>`
   transition: 0.1s;
   position: absolute;
   z-index: 5000;
-  left: var(--edge);
   top: var(--edge);
+  left: 40%;
 `;
 export const Header = styled.div`
   touch-action: none;

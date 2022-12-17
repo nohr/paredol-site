@@ -1,13 +1,11 @@
 import { memo, Suspense, useLayoutEffect } from "react";
 import { useTheme } from "styled-components";
-import { usePlane } from "@react-three/cannon";
 import {
   Html,
   useProgress,
   MeshReflectorMaterial,
   useTexture,
   Environment,
-  useSelect,
 } from "@react-three/drei";
 import { DoubleSide, RepeatWrapping } from "three";
 
@@ -63,54 +61,29 @@ export function Fog() {
 }
 
 // Scene walls for use with Effect Composer
-export function Wall() {
-  const { ui } = useTheme();
-  return (
-    <>
-      <mesh rotation={[0, -Math.PI / 2, 0]} position={[30, 17, 0]}>
-        <planeGeometry args={[70, 35]} />
-        <meshPhongMaterial color={ui.secondary} opacity={0} />
-      </mesh>
-      <mesh rotation={[0, Math.PI / 2, 0]} position={[-30, 17, 0]}>
-        <planeGeometry args={[70, 35]} />
-        <meshPhongMaterial color={ui.secondary} opacity={0} />
-      </mesh>
-      <mesh rotation={[0, -Math.PI, 0]} position={[0, 17, 30]}>
-        <planeGeometry args={[70, 35]} />
-        <meshPhongMaterial color={ui.secondary} opacity={0} />
-      </mesh>
-      <mesh rotation={[0, 0, 0]} position={[0, 17, -30]}>
-        <planeGeometry args={[70, 35]} />
-        <meshPhongMaterial color={ui.secondary} opacity={0} />
-      </mesh>
-    </>
-  );
-}
-
-// Physics bounds
-export function Bounds() {
-  function Bound({ ...props }) {
-    const [ref] = usePlane(() => ({
-      type: "Static",
-      ...props,
-    })) as any;
-    return (
-      <mesh ref={ref}>
-        <planeGeometry args={[10, 10]} />
-        <meshBasicMaterial transparent opacity={0} />
-      </mesh>
-    );
-  }
-
-  return (
-    <group>
-      <Bound rotation={[Math.PI, 0, 0]} position={[0, 0, 10]} />
-      <Bound rotation={[Math.PI, Math.PI, 0]} position={[0, 0, -10]} />
-      <Bound rotation={[Math.PI, -Math.PI / 2, 0]} position={[4, 0, 0]} />
-      <Bound rotation={[Math.PI, Math.PI / 2, 0]} position={[-4, 0, 0]} />
-    </group>
-  );
-}
+// export function Wall() {
+//   const { ui } = useTheme();
+//   return (
+//     <>
+//       <mesh rotation={[0, -Math.PI / 2, 0]} position={[30, 17, 0]}>
+//         <planeGeometry args={[70, 35]} />
+//         <meshPhongMaterial color={ui.secondary} opacity={0} />
+//       </mesh>
+//       <mesh rotation={[0, Math.PI / 2, 0]} position={[-30, 17, 0]}>
+//         <planeGeometry args={[70, 35]} />
+//         <meshPhongMaterial color={ui.secondary} opacity={0} />
+//       </mesh>
+//       <mesh rotation={[0, -Math.PI, 0]} position={[0, 17, 30]}>
+//         <planeGeometry args={[70, 35]} />
+//         <meshPhongMaterial color={ui.secondary} opacity={0} />
+//       </mesh>
+//       <mesh rotation={[0, 0, 0]} position={[0, 17, -30]}>
+//         <planeGeometry args={[70, 35]} />
+//         <meshPhongMaterial color={ui.secondary} opacity={0} />
+//       </mesh>
+//     </>
+//   );
+// }
 
 const Reflector = memo(function Reflector() {
   const textures = useTexture([
@@ -155,22 +128,17 @@ const Reflector = memo(function Reflector() {
   );
 });
 
-export function Floor({ selected }: { selected: Array<any> }) {
-  const [ref]: any = usePlane(() => ({
-    rotation: [-Math.PI / 2, 0, 0],
-    position: [0, -1, 0],
-    type: "Static",
-  }));
-
+export function Floor() {
   return (
     <Suspense fallback={<Spinner />}>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]} ref={ref}>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]}>
         <planeGeometry args={[70, 70]} />
-        {!selected[0] ? (
+        <Reflector />
+        {/* {!selected[0] ? (
           <Reflector />
         ) : (
           <meshBasicMaterial transparent opacity={0} />
-        )}
+        )} */}
       </mesh>
     </Suspense>
   );

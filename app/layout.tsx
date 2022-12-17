@@ -50,7 +50,6 @@ export default function RootLayout({
         <ThemeProvider theme={theme === "light" ? light : dark}>
           <GlobalStyles />
           <Interface children={children} />
-          <Composition />
         </ThemeProvider>
       </body>
     </html>

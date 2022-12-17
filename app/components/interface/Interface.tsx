@@ -1,8 +1,8 @@
 import React, { CSSProperties } from "react";
 import styles from "./ui.module.scss";
-import Navigator from "../panels/navigator/navigator";
+import Navigator from "../desktop/navigator/navigator";
 import { HoverConsumer, HoverProvider } from "../../../common/hoverContext";
-import { cloudPanel } from "../panels/panel.state";
+import { cloudPanel } from "../desktop/panel.state";
 import { useSnapshot } from "valtio";
 import { cloud } from "../../../common/state";
 

@@ -6,6 +6,8 @@ import { useTheme } from "styled-components";
 import { UrlObject } from "url";
 import { useSnapshot } from "valtio";
 import { cloud } from "../../../../common/state";
+import { useSearch } from "../../../../common/utils";
+import { cloudSearch } from "../navigator/search/search.state";
 import { cloudPanel, statePanel } from "../panel.state";
 import { Panel, Path } from "../panel.style";
 import {
@@ -19,6 +21,8 @@ const Projects = () => {
   const snap = useSnapshot(statePanel);
   const clip = useSnapshot(cloudPanel);
   const { projects } = useSnapshot(cloud);
+  const { query } = useSnapshot(cloudSearch);
+  const hits = useSearch(projects, query);
   const { isPro } = snap;
   const { dragging } = clip;
   const pathname = usePathname();
@@ -53,12 +57,12 @@ const Projects = () => {
               </div>
             </div>
           )} */}
-      {projects && (
+      {hits && (
         <>
           <p id="audiohead" style={{ width: "65%" }}>
             Website
           </p>
-          {projects.map(
+          {hits.map(
             (
               doc: { name: string; lot: string },
               index: React.Key | null | undefined
