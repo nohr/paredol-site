@@ -1,14 +1,14 @@
 import React, { useRef } from "react";
-// import { cloud } from "../../common/state";
 import { useTheme } from "styled-components";
 import { MeshPhysicalMaterial, Texture } from "three";
 import { useFrame } from "@react-three/fiber";
 import { CollideEvent, useSphere } from "@react-three/cannon";
 import { useSelect, useTexture } from "@react-three/drei";
-// import { useSnapshot } from "valtio";
 import { cloudComp } from "./comp.state";
 import { useRouter } from "next/navigation";
 import { cloud } from "../../common/state";
+import { cloudSearch } from "../components/panels/navigator/search/search.state";
+import { useSnapshot } from "valtio";
 
 function handleCollision(e: CollideEvent) {
   const { impactVelocity } = e.contact;
@@ -20,10 +20,11 @@ function handleCollision(e: CollideEvent) {
 
 export function Node({ ...props }) {
   const { hit, index } = props;
-  let radius: [radius: number] = [1.5];
+  const { target } = useSnapshot(cloudComp);
   const cover: Texture = useTexture<string>(hit.cover);
   const selected = useSelect();
   const pos = useRef<[number, number, number]>([0, 0, 0]);
+  const rad = useRef<[radius: number]>([1.5]);
   const [Ref, api] = useSphere(() => ({
     mass: 0.001,
     onCollide: handleCollision,
@@ -32,28 +33,29 @@ export function Node({ ...props }) {
       index + 5,
       Math.floor(Math.random() * -3),
     ],
-    args: radius,
+    args: rad.current,
   })) as any;
 
-  useFrame((state) => {
+  useFrame((_state) => {
     if (Ref.current && selected[0] && selected[0].id === Ref.current.id) {
-      cloudComp.target = pos.current;
-      // console.log(target, selected[0].id, Ref.current.id);
-      radius = [3];
+      // console.log(target);
+      console.log(Ref.current);
+      rad.current = [1];
       // console.log(api);
-      api.wakeUp();
-      // state.camera.position.lerp(vec.set(xPosition, Position, Position), .01);
-      // state.camera.updateProjectionMatrix();
+      // console.log(state);
+      api.scaleOverride([2, 2, 2]);
       // state.camera.zoom = 1 - snap.grabberPosition.x / 300;
       const unsubscribe = api.position.subscribe(
         (v: [number, number, number]) => {
           pos.current = v;
         }
       );
+      cloudComp.target = pos.current;
       return unsubscribe;
     } else {
+      api.scaleOverride([1, 1, 1]);
       cloudComp.target = [0, 0, 0];
-      radius = [1.5];
+      rad.current = [1.5];
     }
     return null;
   });
@@ -80,24 +82,16 @@ export function Node({ ...props }) {
       ref={Ref}
       onClick={() => {
         if (Ref.current && selected[0] && selected[0].id === Ref.current.id) {
-          // setLocation(`${hit.lot}`);
           router.push(`/${hit.lot}`);
-          // cloud.query = "";
+          cloudSearch.query = "";
           // confirm();
         } else {
           cloud.project = [hit];
-          // Ref.current.scale.set([1, 1, 1]);
           // select();
         }
       }}
     >
-      <sphereGeometry
-        args={[
-          Ref && selected[0] && selected[0].id === Ref.current?.id ? 3 : 1.5,
-          40,
-          40,
-        ]}
-      />
+      <sphereGeometry args={[rad.current[0], 40, 40]} />
       <meshPhysicalMaterial
         map={cover}
         reflectivity={1}

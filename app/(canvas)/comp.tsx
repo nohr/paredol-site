@@ -3,7 +3,7 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Select } from "@react-three/drei";
 import { useSnapshot } from "valtio";
 import { cloud } from "../../common/state";
-import { Bounds, Floor, Fog, Lights, Sky } from "./comp.utils";
+import { Bounds, Floor, Fog, Lights, Sky, Spinner } from "./comp.utils";
 import { Debug, Physics } from "@react-three/cannon";
 import { CD, Node } from "./models";
 import { Mesh, TOUCH } from "three";
@@ -14,9 +14,7 @@ import { useTheme } from "styled-components";
 
 const Camera = () => {
   const { mobile } = useSnapshot(cloud);
-  // get the width and height of the canvas
   const { width, height } = useThree((state) => state.size);
-  console.log(width, height);
   return (
     <>
       <PerspectiveCamera
@@ -58,7 +56,7 @@ const Controls = ({ selected }: { selected: Array<Mesh> }) => {
   );
 };
 
-const makeNodes = ({ hits }: { hits: Array<Object> }) => {
+const makeNodes = (hits: Array<Object>) => {
   return (
     <>
       {hits?.map((hit: any, index: React.Key | null | undefined) => (
@@ -74,7 +72,7 @@ export const Composition = () => {
   const { leftright, frontback } = useSnapshot(cloudComp);
   const [selected, setSelected] = useState<Array<any>>([]);
   const hits = useSearch(projects, query);
-  const Nodes = useMemo(() => makeNodes({ hits }), [hits, query, projects]);
+  const Nodes = useMemo(() => makeNodes(hits), [hits, query]);
   const { ui } = useTheme();
   return (
     <Canvas
@@ -94,8 +92,8 @@ export const Composition = () => {
         gravity={[leftright, -9.8, frontback]}
       >
         <Debug color={ui.secondary} scale={1.01}>
-          <Suspense fallback={null}>
-            <Bounds />
+          <Bounds />
+          <Suspense fallback={<Spinner />}>
             <Select onChange={setSelected}>{Nodes}</Select>
           </Suspense>
           <Floor selected={selected} />

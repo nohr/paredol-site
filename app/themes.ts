@@ -1,6 +1,5 @@
 import { DefaultTheme } from "styled-components";
 import "styled-components";
-import { cloud } from "../common/state";
 
 declare module "styled-components" {
   export interface DefaultTheme {
