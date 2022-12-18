@@ -1,7 +1,7 @@
 export default function EditPostsPage() {
   return (
     <div>
-      <h1>edit posts</h1>
+      <h3>edit posts</h3>
     </div>
   );
 }

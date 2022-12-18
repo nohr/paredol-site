@@ -9,7 +9,7 @@ import { GlobalStyles } from "../common/globals";
 import { dark, light } from "../common/themes";
 import Navbar from "../components/navbar/navbar";
 import { Theme, useMobile, useMotion } from "../common/utils";
-import { Container } from "../components/pages/page.style";
+import { Container } from "../components/container/page.style";
 
 export default function RootLayout({
   children,

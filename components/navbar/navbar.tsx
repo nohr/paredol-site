@@ -22,6 +22,14 @@ export default function Navbar() {
         </div>
         <Search />
         <Links>
+          {user && (
+            <Path
+              active={path?.substring(1) === "editor" ? active : undefined}
+              href="/editor"
+            >
+              Editor
+            </Path>
+          )}
           <Path
             active={path?.substring(1) === "info" ? active : undefined}
             href="/info"
@@ -34,14 +42,6 @@ export default function Navbar() {
           >
             Store
           </Path>
-          {user && (
-            <Path
-              active={path?.substring(1) === "login" ? active : undefined}
-              href="/login"
-            >
-              Editor
-            </Path>
-          )}
           <Toggle
             className="toggle"
             active={options ? active : undefined}

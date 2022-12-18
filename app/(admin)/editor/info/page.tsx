@@ -1,8 +1,8 @@
 export default function EditProfilePage() {
   return (
     <div>
-      <h1>edit About</h1>
-      <h1>edit Profile</h1>
+      <h3>edit About</h3>
+      <h3>edit Profile</h3>
     </div>
   );
 }

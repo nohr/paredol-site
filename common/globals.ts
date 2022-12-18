@@ -7,7 +7,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     html, body {
-        height: 100vh;
+        height: 100%;
         padding: 0;
         margin: 0;
         font-family: 'Inter', sans-serif;

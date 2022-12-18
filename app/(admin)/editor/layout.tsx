@@ -1,14 +1,14 @@
-// import { CurrentUser } from "../login/page";
+import { CurrentUser } from "../user";
 
-export default function StoreLayout({
+export default function EditorLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      {/* <CurrentUser /> */}
+    <>
+      <CurrentUser />
       {children}
-    </div>
+    </>
   );
 }
