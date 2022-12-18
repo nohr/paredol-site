@@ -13,11 +13,13 @@ import { useSnapshot } from "valtio";
 import { state } from "../../../common/state";
 
 export function LogoCanvas({ ...props }) {
+  const { motion } = useSnapshot(state);
   return (
     <Canvas
       className="r3fCanvas"
       gl={{ antialias: true, physicallyCorrectLights: false }}
       // dpr={[1, 1.5]}
+      frameloop={motion ? "demand" : "always"}
     >
       <orthographicCamera zoom={1} />
       <ambientLight intensity={1} />

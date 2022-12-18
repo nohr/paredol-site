@@ -135,9 +135,9 @@ import styled from "styled-components";
 
 export const MusicWrapper = styled.div`
   padding: 0 5px;
-  height: 32px;
-  width: 80% !important;
-  margin: 5px 0 7px 0;
+  height: 30px;
+  width: 80%;
+  margin: 3px 0;
   position: relative;
   display: flex;
   align-self: center;
@@ -166,29 +166,49 @@ export const SongBox = styled.div`
   align-items: flex-end;
   width: 80% !important;
   height: 35px !important;
+  margin: 3px 0;
   backdrop-filter: var(--blur);
 
-  & textarea {
-    display: block;
-    overflow-y: scroll;
-    padding: 0 !important;
+  & div {
+    /* white-space: nowrap; */
+    display: flex;
+    flex-direction: row;
+    width: fit-content !important;
     border: none !important;
-    background-color: transparent !important;
-    width: 95% !important;
-    height: inherit;
-    /* height: fit-content !important; */
-    resize: none;
-    color: ${({ theme }) => theme.ui.secondary} !important;
+    overflow-x: scroll !important;
     ::-webkit-scrollbar {
       display: none !important;
     }
+  }
+  & div p {
+    font-size: 14px !important;
+    text-transform: unset !important;
+    display: block;
+    padding: 0 !important;
+    border: none !important;
+    background-color: transparent !important;
+    width: unset !important;
+    height: 100% !important;
+    /* height: fit-content !important; */
+    color: ${({ theme }) => theme.ui.secondary} !important;
+    animation: autoscroll 7s linear infinite;
     &:active {
       border: 1px solid ${({ theme }) => theme.ui.secondary} !important;
     }
   }
+
   &:hover {
     background-color: ${({ theme }) => theme.ui.tertiary} !important;
     box-shadow: inherit !important;
     color: inherit !important;
+  }
+
+  @keyframes autoscroll {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(0, -90%, 0);
+    }
   }
 `;

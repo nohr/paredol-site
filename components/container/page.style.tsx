@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding-top: 68px !important;
   padding: 0 10px;
   display: flex;
   width: 100%;
   height: 100%;
+  @media screen and (min-width: 768px) {
+    padding-top: 68px !important;
+  }
 
   & * {
     display: block;

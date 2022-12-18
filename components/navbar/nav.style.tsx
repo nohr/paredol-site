@@ -24,7 +24,7 @@ export const Nav = styled.nav<IProps>`
   z-index: 100;
   display: grid;
   column-gap: 10px;
-  grid-template-columns: 0.25fr 0.5fr 0.25fr;
+  grid-template-columns: 20% 60% 20%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -59,9 +59,23 @@ export const Nav = styled.nav<IProps>`
   & * {
     transition: var(--transition);
   }
+
+  @media screen and (max-width: 768px) {
+    /* height: 2px !important; */
+    justify-items: center;
+    grid-template-columns: 0.2fr 0.6fr 0.2fr;
+    grid-template-rows: 100%;
+    top: unset;
+    bottom: 0px;
+
+    & .logo-area {
+      justify-content: center;
+      /* height: 0px !important; */
+    }
+  }
 `;
 export const LogoWrapper = styled(Link)<IProps>`
-  height: max-content;
+  height: 100%;
   width: fit-content;
   display: flex;
   align-items: center;
@@ -83,8 +97,28 @@ export const LogoWrapper = styled(Link)<IProps>`
   border-radius: 15px;
   font-weight: 100;
 
-  &:hover {
-    border-color: ${({ theme }) => theme.ui?.secondary} !important;
+  @media screen and (min-width: 768px) {
+    &:hover {
+      border-color: ${({ theme }) => theme.ui?.secondary} !important;
+
+      & .r3fCanvas {
+        user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -webkit-user-drag: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    column-gap: 0 !important;
+    flex-direction: column;
+    padding: 0 !important;
+    align-self: center;
   }
 
   & .r3fCanvas {
@@ -101,6 +135,7 @@ export const Links = styled.div<IProps>`
   height: 100%;
   padding: 0 10px;
   margin: 0;
+  column-gap: 5px;
 `;
 export const Path = styled(Link)<IProps>`
   display: flex;
@@ -117,7 +152,13 @@ export const Path = styled(Link)<IProps>`
   border-radius: 10px;
   font-weight: 100;
 
-  &:hover {
+  @media screen and (min-width: 768px) {
+    &:hover {
+      border-color: ${({ theme }) => theme.ui?.secondary} !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
     border-color: ${({ theme }) => theme.ui?.secondary} !important;
   }
 `;
@@ -145,14 +186,16 @@ export const Toggle = styled.div<IProps>`
     display: block;
   }
 
-  &:hover {
-    border-color: ${({ theme }) => theme.ui?.secondary} !important;
+  @media screen and (min-width: 768px) {
+    &:hover {
+      border-color: ${({ theme }) => theme.ui?.secondary} !important;
 
-    & svg {
-      -webkit-filter: drop-shadow(
-        1px 1px 3px ${({ theme }) => theme.ui?.secondary}
-      );
-      filter: drop-shadow(1px 1px 3px ${({ theme }) => theme.ui?.secondary});
+      & svg {
+        -webkit-filter: drop-shadow(
+          1px 1px 3px ${({ theme }) => theme.ui?.secondary}
+        );
+        filter: drop-shadow(1px 1px 3px ${({ theme }) => theme.ui?.secondary});
+      }
     }
   }
 
@@ -205,7 +248,7 @@ export const Panel = styled.div<IProps>`
   backdrop-filter: var(--blur);
   width: fit-content;
   border: 1px solid ${({ theme }) => theme.ui.secondary};
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 10px;
   row-gap: 30px;
 
@@ -235,6 +278,69 @@ export const Panel = styled.div<IProps>`
   }
 
   & div {
-    text-indent: 10px;
+    column-gap: 10px;
+  }
+
+  &.menu {
+    height: fit-content !important;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px !important;
+
+    & .mobile-links {
+      height: fit-content;
+      padding: 0;
+
+      & a {
+        width: 50%;
+      }
+    }
+
+    & .option-toggle {
+      border-color: ${({ theme }) => theme.ui.secondary} !important;
+    }
+
+    & .options {
+      position: unset !important;
+      transform: unset !important;
+      width: 100% !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 95%;
+    bottom: 90px;
+    top: unset;
+    right: unset;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
+    align-items: flex-start;
+    column-gap: 10px;
+
+    & .group {
+      height: 100% !important;
+      row-gap: 10px;
+      justify-content: space-around;
+
+      & div {
+        border: 1px solid;
+        width: 100%;
+
+        &.musicWrap {
+          width: 100%;
+          margin: 3px 0;
+        }
+        &.songinfo {
+          width: 100% !important;
+          height: 30px !important;
+
+          p {
+            width: 100% !important;
+            font-size: 16px;
+          }
+        }
+      }
+    }
   }
 `;

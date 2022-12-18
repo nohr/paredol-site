@@ -15,6 +15,7 @@ export const GlobalStyles = createGlobalStyle`
         line-height: 1.5;
         color: ${({ theme }) => theme.ui.secondary};
         background-color: ${({ theme }) => theme.ui.background};
+        overscroll-behavior: contain;
     }
 
     body .loading{

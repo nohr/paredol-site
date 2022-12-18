@@ -27,7 +27,7 @@ const Options = () => {
   );
 
   return (
-    <Panel>
+    <Panel className="options">
       <div className="group">
         <p>Audio</p>
         <ToolTray />
@@ -70,23 +70,24 @@ const Options = () => {
 export default Options;
 
 export function SongInfo({ song }: { song: string }) {
+  const { songIndex, songs, motion } = useSnapshot(state);
   return (
-    <SongBox className="songinfo li">
-      <textarea
-        readOnly
-        // type="text"
-        value={`(${state.songIndex + 1}/${state.songs.length}) ${song}`}
-        onSelect={() => {
-          navigator.clipboard.writeText(song);
-        }}
-      ></textarea>
+    <SongBox className="songinfo">
+      <div>
+        <p
+          style={motion ? { animation: "none" } : undefined}
+          onClick={() => {
+            navigator.clipboard.writeText(song);
+          }}
+        >{`(${songIndex + 1}/${songs.length}) ${song}`}</p>
+      </div>
     </SongBox>
   );
 }
 
 function ToolTray() {
   return (
-    <MusicWrapper className="trayWrap">
+    <MusicWrapper className="musicWrap">
       <PlayButton />
       {/* Song track */}
       <FFButton />

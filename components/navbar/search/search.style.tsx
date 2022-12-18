@@ -15,7 +15,11 @@ export const SearchWrapper = styled.div`
 export const SearchBar = styled.input<Props>`
   padding: 0px 30px !important;
   text-align: center;
-  border: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  outline: none !important;
+  border: 1px solid !important;
   border-radius: 10px;
   width: 100%;
   height: 28px;
@@ -23,13 +27,13 @@ export const SearchBar = styled.input<Props>`
   backdrop-filter: blur(20px) !important;
   display: flex;
   background-color: transparent;
-  box-shadow: 0 0 0 1px
+  box-shadow: 0 0 0 0px
     ${(props: { theme: { ui: { secondary: string } } }) =>
       props.theme.ui.secondary};
-  -webkit-box-shadow: 0 0 0 1px
+  -webkit-box-shadow: 0 0 0 0px
     ${(props: { theme: { ui: { secondary: string } } }) =>
       props.theme.ui.secondary};
-  -moz-box-shadow: 0 0 0 1px
+  -moz-box-shadow: 0 0 0 0px
     ${(props: { theme: { ui: { secondary: string } } }) =>
       props.theme.ui.secondary};
   color: ${(props: { theme: { ui: { secondary: string } } }) =>
@@ -39,6 +43,10 @@ export const SearchBar = styled.input<Props>`
   -webkit-user-select: text;
   font-size: 13px;
   cursor: pointer;
+
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+  }
 
   #searchIcon {
     position: absolute;
@@ -63,7 +71,7 @@ export const SearchBar = styled.input<Props>`
     color: #ebebeb;
     background-color: ${(props: { theme: { ui: { hover: string } } }) =>
       props.theme.ui.hover};
-    outline: 1px solid #ebebeb;
+    border: 1px solid #ebebeb;
     box-shadow: 0 0 0 1px
       ${(props: { theme: { ui: { secondary: string } } }) =>
         props.theme.ui.secondary};
@@ -81,7 +89,7 @@ export const SearchBar = styled.input<Props>`
     color: #ebebeb;
     background-color: ${(props: { theme: { ui: { hover: string } } }) =>
       props.theme.ui.hover};
-    outline: 1px solid #ebebeb;
+    border: 1px solid #ebebeb;
     box-shadow: 0 0 50px 50px
       ${(props: { theme: { ui: { hover: string } } }) => props.theme.ui.hover};
     -webkit-box-shadow: 0 0 50px 50px
