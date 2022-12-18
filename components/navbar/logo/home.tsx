@@ -1,4 +1,5 @@
 // import { useRef } from "react";
+import { useState } from "react";
 import { LogoWrapper } from "../nav.style";
 import { LogoCanvas } from "./logo.comp";
 
@@ -7,9 +8,12 @@ export function HomeButton() {
   //   const snap = useSnapshot(state);
   //   const clip = useSnapshot(state);
 
+  const [hover, setHover] = useState<boolean>(false);
   return (
     <LogoWrapper
       href="/"
+      onMouseOver={() => setHover(true)}
+      onMouseOut={() => setHover(false)}
       //   onClick={() => handleClick(clip, dong, nabla, svg)}
       //   onMouseDown={() => !clip.talking && activeTap(nabla, svg)}
       //   onMouseUp={() => !clip.talking && unActiveTap(nabla, svg)}
@@ -17,7 +21,7 @@ export function HomeButton() {
       //   onTouchEnd={() => !clip.talking && unActiveTap(nabla, svg)}
       // ref={nabla}
     >
-      <LogoCanvas />
+      <LogoCanvas hover={hover} />
       Paredol
     </LogoWrapper>
   );
