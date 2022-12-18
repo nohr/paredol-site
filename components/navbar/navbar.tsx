@@ -94,7 +94,7 @@ export default function Navbar() {
     }
   }, [mobile]);
 
-  if (!menu) state.options = false;
+  if (!menu && mobile) state.options = false;
 
   return (
     <>
