@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-// import { cloud } from "../../common/state";
+// import { state } from "../../common/state";
 import { useTheme } from "styled-components";
 import { MeshPhysicalMaterial, Texture } from "three";
 import { useFrame } from "@react-three/fiber";
@@ -8,7 +8,7 @@ import { useSelect, useTexture } from "@react-three/drei";
 // import { useSnapshot } from "valtio";
 import { cloudComp } from "./comp.state";
 import { useRouter } from "next/navigation";
-import { cloud } from "../../common/state";
+import { state } from "../../common/state";
 
 function handleCollision(e: CollideEvent) {
   const { impactVelocity } = e.contact;
@@ -65,10 +65,10 @@ export function Node({ ...props }) {
 
   // Handle preview
   // if (Ref && selected[0] && selected[0].id === Ref.current.id) {
-  //   cloud.preview = [hit];
+  //   state.preview = [hit];
   // }
   // if (!selected[0]) {
-  //   cloud.preview = [];
+  //   state.preview = [];
   // }
 
   const router = useRouter();
@@ -82,10 +82,10 @@ export function Node({ ...props }) {
         if (Ref.current && selected[0] && selected[0].id === Ref.current.id) {
           // setLocation(`${hit.lot}`);
           router.push(`/${hit.lot}`);
-          // cloud.query = "";
+          // state.query = "";
           // confirm();
         } else {
-          cloud.project = [hit];
+          state.project = [hit];
           // Ref.current.scale.set([1, 1, 1]);
           // select();
         }
@@ -110,7 +110,7 @@ export function Node({ ...props }) {
 
 export function CD({ ...props }) {
   const cd = useRef<any>();
-  // const { mobile } = useSnapshot(cloud);
+  // const { mobile } = useSnapshot(state);
 
   function Ball({ ...props }) {
     const { canvas } = useTheme();

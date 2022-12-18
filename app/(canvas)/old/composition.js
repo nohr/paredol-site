@@ -24,7 +24,7 @@ import { Node } from "./nodes";
 import { Router, useLocation } from "wouter";
 import { PhysicsFloor } from "./reflector";
 import { Physics, usePlane } from "@react-three/cannon";
-import { cloud, state } from "../common/state";
+import { state, state } from "../common/state";
 
 // Canvas
 softShadows();
@@ -66,16 +66,16 @@ const makeNodes = ({ hits, select, confirm, location }) => {
 // Composition
 function Composition({ select, confirm, vWidth, vHeight }) {
   const snap = useSnapshot(state);
-  const clip = useSnapshot(cloud);
+  const clip = useSnapshot(state);
   const [selected, setSelected] = useState([]);
   const camera = useRef(null);
   const [location] = useLocation();
 
   useEffect(() => {
-    cloud.CanvasLoading = false;
+    state.CanvasLoading = false;
 
     return () => {
-      cloud.CanvasLoading = true;
+      state.CanvasLoading = true;
     };
   }, []);
 
@@ -144,9 +144,9 @@ function Composition({ select, confirm, vWidth, vHeight }) {
         target={clip.mobile ? clip.target : [0, 2, 0]}
         onEnd={(e) => {
           if (clip.mobile) {
-            // if (!selected[0]) { cloud.target = camera.target; }
-            cloud.frontback = 0;
-            cloud.leftright = 0;
+            // if (!selected[0]) { state.target = camera.target; }
+            state.frontback = 0;
+            state.leftright = 0;
           }
         }}
         touches={{
@@ -159,7 +159,7 @@ function Composition({ select, confirm, vWidth, vHeight }) {
         minPolarAngle={clip.mobile ? -3 : Math.PI / 3}
         maxPolarAngle={clip.mobile ? Math.PI / 2 : Math.PI / 2}
         // autoRotate={clip.CanvasLoading}
-        // autoRotateSpeed={clip.UILoading ? -50 : 0}
+        // autoRotateSpeed={clip.loading ? -50 : 0}
         minDistance={20}
         maxDistance={clip.mobile ? 40 : 36}
         enabled={clip.mobile ? !clip.drag : true}

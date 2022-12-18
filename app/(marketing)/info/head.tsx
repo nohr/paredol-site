@@ -1,4 +1,4 @@
-import PWATags from "../../components/interface/PWATags";
+import PWATags from "../../../components/PWATags";
 
 export default async function Head() {
   return (

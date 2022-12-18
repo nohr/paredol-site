@@ -2,18 +2,18 @@ import React, { Suspense, useMemo, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Select } from "@react-three/drei";
 import { useSnapshot } from "valtio";
-import { cloud } from "../../common/state";
+import { state } from "../../common/state";
 import { Floor, Fog, Lights, Sky } from "./comp.utils";
 import { Debug, Physics } from "@react-three/cannon";
 import { CD, Node } from "./models";
 import { Mesh, TOUCH } from "three";
 import { useSearch } from "../../common/utils";
-import { cloudSearch } from "../components/desktop/navigator/search/search.state";
+import { cloudSearch } from "../../components/navbar/search/search.state";
 import { cloudComp } from "./comp.state";
 import { useTheme } from "styled-components";
 
 const Camera = () => {
-  const { mobile } = useSnapshot(cloud);
+  const { mobile } = useSnapshot(state);
   // get the width and height of the canvas
   const { width, height } = useThree((state) => state.size);
   console.log(width, height);
@@ -32,7 +32,7 @@ const Camera = () => {
 };
 
 const Controls = ({ selected }: { selected: Array<Mesh> }) => {
-  const { mobile } = useSnapshot(cloud);
+  const { mobile } = useSnapshot(state);
   const { target } = useSnapshot(cloudComp);
 
   return (
@@ -49,7 +49,7 @@ const Controls = ({ selected }: { selected: Array<Mesh> }) => {
         minPolarAngle={Math.PI / 4}
         maxPolarAngle={Math.PI / 2}
         // autoRotate={true}
-        // autoRotateSpeed={clip.UILoading ? -50 : 0}
+        // autoRotateSpeed={clip.loading ? -50 : 0}
         minDistance={7}
         maxDistance={15}
         enabled
@@ -59,7 +59,7 @@ const Controls = ({ selected }: { selected: Array<Mesh> }) => {
 };
 
 export const Composition = () => {
-  const { projects } = useSnapshot(cloud);
+  const { projects } = useSnapshot(state);
   const { query } = useSnapshot(cloudSearch);
   const { leftright, frontback } = useSnapshot(cloudComp);
   const [selected, setSelected] = useState<Array<any>>([]);

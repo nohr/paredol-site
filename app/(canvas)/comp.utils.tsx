@@ -14,10 +14,10 @@ export const Spinner = () => {
   const { progress } = useProgress();
 
   // useEffect(() => {
-  //     cloud.CanvasLoading = true;
+  //     state.CanvasLoading = true;
 
   //     return () => {
-  //         cloud.CanvasLoading = false;
+  //         state.CanvasLoading = false;
   //     };
   // });
 

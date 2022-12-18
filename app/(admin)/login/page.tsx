@@ -6,6 +6,8 @@ import {
 } from "react-firebase-hooks/auth";
 import { auth } from "../../../firebase/config";
 import { useState } from "react";
+import { state } from "../../../common/state";
+import { useRouter } from "next/navigation";
 
 const login = (email: string, password: string) => {
   signInWithEmailAndPassword(auth, email, password).catch((error) => {
@@ -55,21 +57,23 @@ const SignUp = () => {
     );
   }
 };
-const CurrentUser = () => {
+export function CurrentUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
 
   if (loading) {
+    state.loading = true;
     return (
       <div>
         <p>Initialising User...</p>
       </div>
     );
   } else if (user) {
+    state.loading = false;
     return (
       <div>
-        <p>Current User: {user.email}</p>
+        <h1>Hi, {user.email}</h1>
         <button onClick={logout}>Log out</button>
       </div>
     );
@@ -90,7 +94,7 @@ const CurrentUser = () => {
       </div>
     );
   }
-};
+}
 
 export interface IInputWrapperProps {
   label?: string;
@@ -104,10 +108,13 @@ export interface IInputWrapperProps {
 
 export default function LoginPage() {
   const [user, loading, error] = useAuthState(auth);
+  const router = useRouter();
+  if (user) {
+    router.push("/editor");
+  }
   return (
     <div className="container">
       <h1>Be excused</h1>
-      <CurrentUser />
       {!user && <SignUp />}
     </div>
   );
