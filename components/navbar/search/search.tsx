@@ -72,11 +72,6 @@ export function Search() {
       <SearchBar
         placeholder={chatMode ? "what's up?" : placeholder}
         type="text"
-        padding={
-          chatText.length > 0 || searchText.length > 0
-            ? "margin: 0px 30px 0px 30px !important;"
-            : "margin: 0px 0px 0px 30px !important;"
-        }
         value={!chatMode ? searchText : chatText}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           handleChange(e, chatMode, setSearchText, setChatText)

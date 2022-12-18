@@ -13,7 +13,7 @@ export const SearchWrapper = styled.div`
   height: 28px;
 `;
 export const SearchBar = styled.input<Props>`
-  ${({ padding }) => padding}
+  padding: 0px 30px !important;
   text-align: center;
   border: none !important;
   border-radius: 10px;
@@ -90,11 +90,14 @@ export const SearchBar = styled.input<Props>`
       ${(props: { theme: { ui: { hover: string } } }) => props.theme.ui.hover};
   }
   &:focus ~ #searchIcon,
-  &:focus ~ #clearIcon svg {
+  &:hover ~ #searchIcon,
+  &:focus ~ #clearIcon svg,
+  &:hover ~ #clearIcon svg {
     fill: #ebebeb !important;
   }
 
-  &:focus ~ #cdIcon {
+  &:focus ~ #cdIcon,
+  &:hover ~ #cdIcon {
     stroke: #ebebeb !important;
     fill: transparent !important;
   }
