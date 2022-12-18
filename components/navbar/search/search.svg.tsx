@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useSnapshot } from "valtio";
 import { state } from "../../../common/state";
-import { BarIcon } from "./search.style";
+import { BarIcon, Clear } from "./search.style";
 
 export function SearchBarIcon() {
   const { chatMode } = useSnapshot(state);
@@ -40,20 +40,7 @@ export function SearchBarIcon() {
     );
   }
 }
-const Clear = styled.svg`
-  position: absolute;
-  top: 52%;
-  right: 15px;
-  transform: translate(50%, -57%);
-  height: 14px;
-  fill: ${({ theme }) => theme.ui.secondary};
-  cursor: pointer;
 
-  &:hover {
-    opacity: 50%;
-    pointer-events: painted;
-  }
-`;
 export function ClearIcon() {
   return (
     <Clear viewBox="0 0 52.98 52.98">
@@ -64,14 +51,3 @@ export function ClearIcon() {
     </Clear>
   );
 }
-
-const Caret = styled.svg`
-  fill: ${({ theme }) => theme.ui.secondary};
-  height: clamp(8px, 12px, 12px);
-  float: right;
-
-  &:hover {
-    -webkit-filter: drop-shadow(2px 2px 4px #ebebeb);
-    filter: drop-shadow(2px 2px 4px #ebebeb);
-  }
-`;

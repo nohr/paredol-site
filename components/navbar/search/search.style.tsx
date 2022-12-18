@@ -6,6 +6,7 @@ type Props = {
 
 export const SearchWrapper = styled.div`
   display: flex;
+  justify-self: center;
   align-items: center;
   position: relative;
   width: 90% !important;
@@ -127,5 +128,36 @@ export const BarIcon = styled.svg`
     stroke: ${({ theme }) => theme.ui.secondary} !important;
     stroke-width: 1px !important;
     fill: transparent !important;
+  }
+`;
+
+export const Clear = styled.svg`
+  position: absolute;
+  top: 52%;
+  right: 15px;
+  transform: translate(50%, -57%);
+  height: 14px;
+  fill: ${({ theme }) => theme.ui.secondary};
+  cursor: pointer;
+
+  &,
+  & path {
+    display: block;
+  }
+
+  &:hover {
+    opacity: 50%;
+    pointer-events: painted;
+  }
+`;
+
+const Caret = styled.svg`
+  fill: ${({ theme }) => theme.ui.secondary};
+  height: clamp(8px, 12px, 12px);
+  float: right;
+
+  &:hover {
+    -webkit-filter: drop-shadow(2px 2px 4px #ebebeb);
+    filter: drop-shadow(2px 2px 4px #ebebeb);
   }
 `;

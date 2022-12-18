@@ -60,10 +60,8 @@ export function Search() {
 
   useEffect(() => {
     if (chatText === "excuse me") {
-      router.push("/login");
-      // setChatText("");
+      router.replace("/login");
     }
-
     if (searchText !== "") router.replace(`/?q=${searchText}`);
 
     if (searchText === "" && path === "/") router.replace("/");
@@ -89,6 +87,7 @@ export function Search() {
       {(searchText.length > 0 || chatText.length > 0) && (
         <div
           id="clearIcon"
+          style={{ display: "block" }}
           onClick={() => {
             Bar.current?.focus();
             setSearchText("");

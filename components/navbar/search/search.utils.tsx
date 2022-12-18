@@ -12,6 +12,10 @@ export function handleChange(
       setSearchText(e.target.value);
     } else {
       setChatText(e.target.value);
+      if (e.target.value === "excuse me") {
+        state.chatMode = false;
+        setChatText("");
+      }
     }
   }
 }

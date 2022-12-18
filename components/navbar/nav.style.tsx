@@ -191,7 +191,7 @@ export const Panel = styled.div<IProps>`
   backdrop-filter: var(--blur);
   width: fit-content;
   border: 1px solid ${({ theme }) => theme.ui.secondary};
-  border-radius: 15px;
+  border-radius: 5px;
   padding: 10px;
 
   & p {
