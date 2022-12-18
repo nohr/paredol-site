@@ -30,7 +30,7 @@ export function LogoCanvas({ ...props }) {
 
 export function CD({ ...props }) {
   const { gl } = useThree();
-  console.log(gl.info);
+  // console.log(gl.info);
 
   function Ball({ ...props }) {
     const { ui } = useTheme();

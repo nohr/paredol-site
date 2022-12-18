@@ -24,9 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <p className="loading">Loading...</p>
         <ThemeProvider theme={theme === "light" ? light : dark}>
           <GlobalStyles />
+          <p className="loading">Loading...</p>
           <Navbar />
           <Container>{children}</Container>
         </ThemeProvider>

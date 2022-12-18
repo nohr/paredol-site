@@ -19,7 +19,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     body .loading{
-      display: none;
+      display: none !important;
     }
 
     a {
