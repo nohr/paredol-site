@@ -6,7 +6,7 @@ import { state } from "../../../common/state";
 import { Panel, Toggle } from "../nav.style";
 import { FFButton, PlayButton } from "./opt.utils";
 import { ColorIcon, ModeIcon, MuteIcon } from "./opt.svg";
-import { SongBox, TrayWrapper } from "./opt.style";
+import { SongBox, MusicWrapper } from "./opt.style";
 
 const toggleMute = () => {
   state.muted = !state.muted;
@@ -28,38 +28,41 @@ const Options = () => {
 
   return (
     <Panel>
-      <p id="audiohead">Audio</p>
-      <ToolTray />
-      {/* Add Music note icon */}
-      <SongInfo song={song} />
-      <Toggle onClick={() => toggleMute()}>
-        <MuteIcon />
-        {!muted ? "Mute SFX" : "Unmute SFX"}
-      </Toggle>
-      <br />
-      <p id="displayhead">Display</p>
-      <Toggle onClick={() => toggleTheme()}>
-        <ModeIcon />
-        {theme === "light" ? "Dark Theme" : "Light Theme"}
-      </Toggle>
-      <Toggle
-        onClick={() => {
-          toggleMotion();
-          // select();
-        }}
-      >
-        {/* <ColorIcon /> */}
-        {!motion ? "Reduce Motion" : "Enable Motion"}
-      </Toggle>
-      <Toggle
-      // onClick={() => {
-      //   openWheel();
-      //   select();
-      // }}
-      >
-        <ColorIcon />
-        Change Color
-      </Toggle>
+      <div className="group">
+        <p>Audio</p>
+        <ToolTray />
+        {/* Add Music note icon */}
+        <SongInfo song={song} />
+        <Toggle onClick={() => toggleMute()}>
+          <MuteIcon />
+          {!muted ? "Mute SFX" : "Unmute SFX"}
+        </Toggle>
+      </div>
+      <div className="group">
+        <p>Display</p>
+        <Toggle onClick={() => toggleTheme()}>
+          <ModeIcon />
+          {theme === "light" ? "Dark Theme" : "Light Theme"}
+        </Toggle>
+        <Toggle
+          onClick={() => {
+            toggleMotion();
+            // select();
+          }}
+        >
+          {/* <ColorIcon /> */}
+          {!motion ? "Reduce Motion" : "Enable Motion"}
+        </Toggle>
+        <Toggle
+        // onClick={() => {
+        //   openWheel();
+        //   select();
+        // }}
+        >
+          <ColorIcon />
+          Change Color
+        </Toggle>
+      </div>
     </Panel>
   );
 };
@@ -83,9 +86,10 @@ export function SongInfo({ song }: { song: string }) {
 
 function ToolTray() {
   return (
-    <TrayWrapper className="trayWrap">
+    <MusicWrapper className="trayWrap">
       <PlayButton />
+      {/* Song track */}
       <FFButton />
-    </TrayWrapper>
+    </MusicWrapper>
   );
 }

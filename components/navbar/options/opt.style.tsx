@@ -1,144 +1,142 @@
 import styled from "styled-components";
-import { IProps } from "../nav.style";
 
-export const Folder = styled.div<IProps>`
-  width: 100%;
-  margin: 3px 0;
-  padding: 2px 0;
-  display: block;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  fill: ${({ theme }) => theme.ui.secondary};
-  ${({ border }) => border};
-  backdrop-filter: blur(20px) !important;
+// export const Folder = styled.div<IProps>`
+//   width: 100%;
+//   margin: 3px 0;
+//   padding: 2px 0;
+//   display: block;
+//   cursor: pointer;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   fill: ${({ theme }) => theme.ui.secondary};
+//   ${({ border }) => border};
+//   backdrop-filter: blur(20px) !important;
 
-  &:hover {
-    background-color: ${({ theme }) => theme.ui?.hover} !important;
-    -webkit-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
-    -moz-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
-    box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
-  }
+//   &:hover {
+//     background-color: ${({ theme }) => theme.ui?.hover} !important;
+//     -webkit-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
+//     -moz-box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
+//     box-shadow: 0px 3px 10px 1px ${({ theme }) => theme.ui?.hover} !important;
+//   }
 
-  &.trayIcon {
-    border-radius: 50% !important;
-    justify-content: center;
-    width: 20px !important;
-    height: 20px !important;
+//   &.trayIcon {
+//     border-radius: 50% !important;
+//     justify-content: center;
+//     width: 20px !important;
+//     height: 20px !important;
 
-    svg {
-      overflow: visible;
-      height: 10px !important;
-      width: 10px !important;
-    }
-  }
+//     svg {
+//       overflow: visible;
+//       height: 10px !important;
+//       width: 10px !important;
+//     }
+//   }
 
-  &.mono {
-    width: 60% !important;
-    grid-area: 3/ 1 / span 1 / span 2;
-    text-align: center;
-    color: ${({ theme }) => theme.ui.main};
-    border: 1px solid ${({ theme }) => theme.ui.main};
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
-  }
+//   &.mono {
+//     width: 60% !important;
+//     grid-area: 3/ 1 / span 1 / span 2;
+//     text-align: center;
+//     color: ${({ theme }) => theme.ui.main};
+//     border: 1px solid ${({ theme }) => theme.ui.main};
+//     -webkit-user-select: none; /* Safari */
+//     -moz-user-select: none; /* Firefox */
+//     -ms-user-select: none; /* IE10+/Edge */
+//     user-select: none; /* Standard */
+//   }
 
-  &.resetPos {
-    pointer-events: all;
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
-    /* border: 1px solid #${({ theme }) => theme.ui.secondary}; */
-    border-radius: 50%;
-    justify-content: center;
-    display: flex;
-    height: 50px;
-    width: 50px;
-    flex-direction: column;
-    /* padding: 2px; */
+//   &.resetPos {
+//     pointer-events: all;
+//     -webkit-user-select: none; /* Safari */
+//     -moz-user-select: none; /* Firefox */
+//     -ms-user-select: none; /* IE10+/Edge */
+//     user-select: none; /* Standard */
+//     /* border: 1px solid #${({ theme }) => theme.ui.secondary}; */
+//     border-radius: 50%;
+//     justify-content: center;
+//     display: flex;
+//     height: 50px;
+//     width: 50px;
+//     flex-direction: column;
+//     /* padding: 2px; */
 
-    & svg {
-      stroke: #${({ theme }) => theme.ui.secondary};
-      width: 28px !important;
-      stroke-width: 3px;
-    }
-  }
+//     & svg {
+//       stroke: #${({ theme }) => theme.ui.secondary};
+//       width: 28px !important;
+//       stroke-width: 3px;
+//     }
+//   }
 
-  &.circleButton {
-    z-index: 6000;
-    border-radius: 50% !important;
-    width: 70px !important;
-    height: 70px !important;
-    display: flex !important;
-    justify-content: center !important;
-  }
+//   &.circleButton {
+//     z-index: 6000;
+//     border-radius: 50% !important;
+//     width: 70px !important;
+//     height: 70px !important;
+//     display: flex !important;
+//     justify-content: center !important;
+//   }
 
-  &.color {
-    border-color: #ebebeb !important;
-    fill: ${({ theme }) => theme.ui.hover};
-    background-color: ${({ theme }) => theme.ui.hover};
-    -webkit-filter: drop-shadow(1px 1px 6px ${({ theme }) => theme.ui.hover});
-    filter: drop-shadow(1px 1px 6px ${({ theme }) => theme.ui.hover});
-    text-align: center;
+//   &.color {
+//     border-color: #ebebeb !important;
+//     fill: ${({ theme }) => theme.ui.hover};
+//     background-color: ${({ theme }) => theme.ui.hover};
+//     -webkit-filter: drop-shadow(1px 1px 6px ${({ theme }) => theme.ui.hover});
+//     filter: drop-shadow(1px 1px 6px ${({ theme }) => theme.ui.hover});
+//     text-align: center;
 
-    & svg {
-      animation: flashConfirm 1s steps(5, start) infinite;
-      animation-delay: 3s;
-      -webkit-filter: none;
-      filter: none;
-      fill: #ebebeb;
-    }
-    transition: 0s;
-    outline: 0px;
-  }
-  &.reset {
-    border-color: #ebebeb !important;
-    color: #ebebeb;
-    background-color: ${({ theme }) => theme.ui.active};
-    -webkit-filter: drop-shadow(1px 1px 6px ${({ theme }) => theme.ui.active});
-    filter: drop-shadow(1px 1px 6px ${({ theme }) => theme.ui.active});
-    text-align: center;
-    transition: 0.3s;
-  }
+//     & svg {
+//       animation: flashConfirm 1s steps(5, start) infinite;
+//       animation-delay: 3s;
+//       -webkit-filter: none;
+//       filter: none;
+//       fill: #ebebeb;
+//     }
+//     transition: 0s;
+//     outline: 0px;
+//   }
+//   &.reset {
+//     border-color: #ebebeb !important;
+//     color: #ebebeb;
+//     background-color: ${({ theme }) => theme.ui.active};
+//     -webkit-filter: drop-shadow(1px 1px 6px ${({ theme }) => theme.ui.active});
+//     filter: drop-shadow(1px 1px 6px ${({ theme }) => theme.ui.active});
+//     text-align: center;
+//     transition: 0.3s;
+//   }
 
-  .light,
-  .dark {
-    stroke-width: 1px !important;
-  }
-  .nextIcon,
-  .muteIcon,
-  .ShowHideIcon,
-  .ColorIcon {
-    fill: ${({ theme }) => theme.ui.secondary} !important;
-    overflow: visible;
-  }
+//   .light,
+//   .dark {
+//     stroke-width: 1px !important;
+//   }
+//   .nextIcon,
+//   .muteIcon,
+//   .ShowHideIcon,
+//   .ColorIcon {
+//     fill: ${({ theme }) => theme.ui.secondary} !important;
+//     overflow: visible;
+//   }
 
-  .ConfirmIcon,
-  .ResetIcon {
-    height: 80%;
-  }
-  .ResetIcon {
-    fill: #ebebeb;
-  }
+//   .ConfirmIcon,
+//   .ResetIcon {
+//     height: 80%;
+//   }
+//   .ResetIcon {
+//     fill: #ebebeb;
+//   }
 
-  .PlayPauseIcon {
-    fill: ${({ theme }) => theme.ui.secondary} !important;
-    overflow: visible;
-  }
+//   .PlayPauseIcon {
+//     fill: ${({ theme }) => theme.ui.secondary} !important;
+//     overflow: visible;
+//   }
 
-  &.songinfo {
-  }
-`;
+//   &.songinfo {
+//   }
+// `;
 
-export const TrayWrapper = styled.div`
+export const MusicWrapper = styled.div`
   padding: 0 5px;
-  height: 28px;
-  margin: auto 0;
-  width: 50% !important;
+  height: 32px;
+  width: 80% !important;
   margin: 5px 0 7px 0;
   position: relative;
   display: flex;
@@ -166,7 +164,6 @@ export const SongBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin: 0 0 0px 15px !important;
   width: 80% !important;
   height: 35px !important;
   backdrop-filter: var(--blur);

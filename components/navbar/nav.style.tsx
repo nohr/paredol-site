@@ -138,6 +138,7 @@ export const Toggle = styled.div<IProps>`
   border: 1px solid transparent;
   border-radius: 10px;
   font-weight: 100;
+  fill: ${({ theme }) => theme.ui.secondary};
 
   & * {
     transition: var(--transition) !important;
@@ -155,7 +156,19 @@ export const Toggle = styled.div<IProps>`
     }
   }
 
-  fill: ${({ theme }) => theme.ui.secondary};
+  &.trayIcon {
+    cursor: pointer;
+    border-radius: 50% !important;
+    justify-content: center;
+    width: 20px !important;
+    height: 20px !important;
+
+    svg {
+      overflow: visible;
+      height: 10px !important;
+      width: 10px !important;
+    }
+  }
 
   .nextIcon,
   .modeIcon,
@@ -179,6 +192,7 @@ export const Toggle = styled.div<IProps>`
   }
 `;
 
+// Panels
 export const Panel = styled.div<IProps>`
   position: fixed;
   top: 68px;
@@ -193,14 +207,31 @@ export const Panel = styled.div<IProps>`
   border: 1px solid ${({ theme }) => theme.ui.secondary};
   border-radius: 5px;
   padding: 10px;
+  row-gap: 30px;
+
+  & .group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
 
   & p {
-    display: list-item;
+    text-indent: 0px;
+    display: block;
     text-transform: uppercase;
     font-size: xx-small;
     font-weight: 800;
     align-self: center;
     margin: 0;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
   }
 
   & div {
