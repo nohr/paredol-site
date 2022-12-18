@@ -45,7 +45,7 @@ export const state = proxy<stateypes>({
   chatMode: false,
   // Audio
   songs: [],
-  songIndex: 1,
+  songIndex: 0,
   muted: false,
   playMusic: false,
   playRate: 0.75,

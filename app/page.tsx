@@ -20,19 +20,18 @@ export default function HomePage() {
   // const svg = React.useRef(null);
   state.loading = false;
   return (
-    <div id="chart">
-      {quote !== "" && (
-        <>
-          <h1>{quote}</h1>
-          {/* <svg ref={svg} /> */}
-          {projects &&
-            projects.map((doc: DocumentData, index: number) => (
-              <Link key={index} href={doc.lot}>
-                {doc.name}
-              </Link>
-            ))}
-        </>
-      )}
+    <div
+      id="chart"
+      style={quote !== "" ? { display: "block" } : { display: "none" }}
+    >
+      <h1>{quote}</h1>
+      {/* <svg ref={svg} /> */}
+      {projects &&
+        projects.map((doc: DocumentData, index: number) => (
+          <Link key={index} href={doc.lot}>
+            {doc.name}
+          </Link>
+        ))}
     </div>
   );
 }

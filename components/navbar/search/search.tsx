@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useSnapshot } from "valtio";
 import { state } from "../../../common/state";
 import { SearchBar, SearchWrapper } from "./search.style";
@@ -13,7 +13,7 @@ export function Search() {
   const [chatText, setChatText] = useState<string>("");
   const [searchText, setSearchText] = useState<string>("");
   const Bar = useRef<any>();
-  const { chatMode, mobile } = useSnapshot(state);
+  const { chatMode } = useSnapshot(state);
   const router = useRouter();
   const path = usePathname();
 
@@ -58,12 +58,16 @@ export function Search() {
   //   };
   // }, [chatText, searchText, clip.chatMode, clip]);
 
-  if (chatText === "excuse me") {
-    setChatText("");
-    router.push("/login");
-  }
+  useEffect(() => {
+    if (chatText === "excuse me") {
+      router.push("/login");
+      // setChatText("");
+    }
 
-  if (searchText !== "") router.replace(`/?q=${searchText}`);
+    if (searchText !== "") router.replace(`/?q=${searchText}`);
+
+    if (searchText === "" && path === "/") router.replace("/");
+  }, [searchText, chatText, path, router]);
 
   return (
     <SearchWrapper>
@@ -77,11 +81,10 @@ export function Search() {
         }
         value={!chatMode ? searchText : chatText}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          handleChange(e, mobile, chatMode, setSearchText, setChatText)
+          handleChange(e, chatMode, setSearchText, setChatText)
         }
         ref={Bar}
       ></SearchBar>
-      {chatMode}
       <SearchBarIcon />
       {(searchText.length > 0 || chatText.length > 0) && (
         <div

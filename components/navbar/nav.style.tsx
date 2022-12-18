@@ -50,6 +50,10 @@ export const Nav = styled.nav<IProps>`
     height: 100% !important;
     padding: 0;
     margin: 0;
+
+    * {
+      display: flex;
+    }
   }
 
   & * {
@@ -99,6 +103,7 @@ export const Links = styled.div<IProps>`
   margin: 0;
 `;
 export const Path = styled(Link)<IProps>`
+  display: flex;
   width: fit-content;
   height: min-content;
   margin: 4px 0;
@@ -136,6 +141,7 @@ export const Toggle = styled.div<IProps>`
 
   & * {
     transition: var(--transition) !important;
+    display: block;
   }
 
   &:hover {
@@ -175,6 +181,7 @@ export const Toggle = styled.div<IProps>`
 
 export const Panel = styled.div<IProps>`
   position: fixed;
+  top: 68px;
   right: 40px;
   z-index: 4000 !important;
   display: flex;
@@ -188,6 +195,7 @@ export const Panel = styled.div<IProps>`
   padding: 10px;
 
   & p {
+    display: list-item;
     text-transform: uppercase;
     font-size: xx-small;
     font-weight: 800;

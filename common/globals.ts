@@ -17,6 +17,10 @@ export const GlobalStyles = createGlobalStyle`
         background-color: ${({ theme }) => theme.ui.background};
     }
 
+    body .loading{
+      display: none;
+    }
+
     a {
         color: inherit;
         text-decoration: none;
@@ -58,65 +62,4 @@ export const GlobalStyles = createGlobalStyle`
             /* transition: 0.3s; */
         }
     }
-
-    @keyframes gugmu9vdpaw {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  50% {
-    transform: rotate(180deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.gugmu9vdpaw div {
-  position: absolute;
-  animation: gugmu9vdpaw 0.25s linear infinite;
-  width: 40px;
-  height: 40px;
-  top: 80px;
-  left: 80px;
-  border-radius: 50%;
-  box-shadow: 0 1.8px 0 0 ${({ theme }) => theme.ui.secondary};
-  transform-origin: 20px 20.9px;
-}
-
-.htmlSpinner {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 200px;
-  height: 200px;
-  display: inline-block;
-  overflow: hidden;
-  background: none;
-}
-
-.gugmu9vdpaw {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform: translateZ(0) scale(1);
-  backface-visibility: hidden;
-  transform-origin: 0 0;
-}
-
-.gugmu9vdpaw p {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -55%);
-  color: ${({ theme }) => theme.ui.secondary};
-  text-shadow: 0 1px 1 1 ${({ theme }) => theme.ui.secondary};
-  font-size: 18px;
-}
-
-.content{
-  margin-top: 68px !important;
-  padding: 0 10px;
-}
 `;

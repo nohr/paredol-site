@@ -148,6 +148,10 @@ export const TrayWrapper = styled.div`
   column-gap: 10px;
   border: 1px solid;
   border-radius: 50px !important;
+
+  * {
+    display: flex;
+  }
 `;
 
 export const SongBox = styled.div`
@@ -168,6 +172,7 @@ export const SongBox = styled.div`
   backdrop-filter: var(--blur);
 
   & textarea {
+    display: block;
     overflow-y: scroll;
     padding: 0 !important;
     border: none !important;

@@ -1,4 +1,4 @@
-import { CurrentUser } from "../login/page";
+// import { CurrentUser } from "../login/page";
 
 export default function StoreLayout({
   children,
@@ -7,7 +7,7 @@ export default function StoreLayout({
 }) {
   return (
     <div>
-      <CurrentUser />
+      {/* <CurrentUser /> */}
       {children}
     </div>
   );

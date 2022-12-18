@@ -89,14 +89,11 @@ export const SearchBar = styled.input<Props>`
       ${(props: { theme: { ui: { hover: string } } }) => props.theme.ui.hover};
   }
   &:focus ~ #searchIcon,
-  &:hover ~ #searchIcon,
-  &:focus ~ #clearIcon svg,
-  &:hover ~ #clearIcon svg {
+  &:focus ~ #clearIcon svg {
     fill: #ebebeb !important;
   }
 
-  &:focus ~ #cdIcon,
-  &:hover ~ #cdIcon {
+  &:focus ~ #cdIcon {
     stroke: #ebebeb !important;
     fill: transparent !important;
   }
@@ -111,6 +108,12 @@ export const BarIcon = styled.svg`
   fill: ${({ theme }) => theme.ui.secondary};
   cursor: pointer;
   stroke-width: 1px;
+  &,
+  & path,
+  & g,
+  & g path {
+    display: block;
+  }
 
   g {
     height: 12px;

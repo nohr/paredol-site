@@ -1,19 +1,18 @@
 import styled from "styled-components";
 import { useSnapshot } from "valtio";
-import { cloudSearch } from "./search.state";
+import { state } from "../../../common/state";
 import { BarIcon } from "./search.style";
 
 export function SearchBarIcon() {
-  const clipSearch = useSnapshot(cloudSearch);
-  const { chatMode } = clipSearch;
+  const { chatMode } = useSnapshot(state);
 
   if (chatMode) {
     //CD
     return (
       <BarIcon
         id="cdIcon"
-        onClick={() => (cloudSearch.chatMode = false)}
-        onTouchEnd={() => (cloudSearch.chatMode = false)}
+        onClick={() => (state.chatMode = false)}
+        onTouchEnd={() => (state.chatMode = false)}
         viewBox="0 0 354 356"
       >
         <g data-name="CD">
@@ -29,8 +28,8 @@ export function SearchBarIcon() {
     return (
       <BarIcon
         id="searchIcon"
-        onClick={() => (cloudSearch.chatMode = true)}
-        onTouchEnd={() => (cloudSearch.chatMode = false)}
+        onClick={() => (state.chatMode = true)}
+        onTouchEnd={() => (state.chatMode = false)}
         viewBox="0 0 354 356"
       >
         <path

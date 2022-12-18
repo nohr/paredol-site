@@ -57,7 +57,7 @@ const SignUp = () => {
     );
   }
 };
-export function CurrentUser() {
+function CurrentUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);

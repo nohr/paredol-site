@@ -1,5 +1,6 @@
 "use client";
 
+import "../common/CLS.css";
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import { useSnapshot } from "valtio";
@@ -8,6 +9,7 @@ import { GlobalStyles } from "../common/globals";
 import { dark, light } from "../common/themes";
 import Navbar from "../components/navbar/navbar";
 import { Theme, useMobile, useMotion } from "../common/utils";
+import { Container } from "../components/pages/page.style";
 
 export default function RootLayout({
   children,
@@ -22,10 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <p className="loading">Loading...</p>
         <ThemeProvider theme={theme === "light" ? light : dark}>
           <GlobalStyles />
           <Navbar />
-          <div className="content">{children}</div>
+          <Container>{children}</Container>
         </ThemeProvider>
       </body>
     </html>
