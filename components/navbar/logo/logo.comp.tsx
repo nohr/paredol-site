@@ -1,5 +1,5 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Ref, useEffect, useRef } from "react";
+import { Ref, useEffect, useMemo, useRef } from "react";
 import { useTheme } from "styled-components";
 import {
   BufferGeometry,
@@ -8,6 +8,7 @@ import {
   Material,
   MeshBasicMaterial,
   Object3D,
+  SphereGeometry,
 } from "three";
 import { useSnapshot } from "valtio";
 import { state } from "../../../common/state";
@@ -17,12 +18,12 @@ export function LogoCanvas({ ...props }) {
   return (
     <Canvas
       className="r3fCanvas"
-      gl={{ antialias: true, physicallyCorrectLights: false }}
+      // gl={{ antialias: true }}
       // dpr={[1, 1.5]}
+      // performance={{ min: 0.5 }}
       frameloop={motion ? "demand" : "always"}
     >
-      <orthographicCamera zoom={1} />
-      <ambientLight intensity={1} />
+      <ambientLight intensity={0.1} />
       <CD {...props} rotation={[-Math.PI / 2, 0, 0]} />
     </Canvas>
   );
@@ -30,26 +31,12 @@ export function LogoCanvas({ ...props }) {
 
 export function CD({ ...props }) {
   const { gl } = useThree();
-  // console.log(gl.info);
-
-  function Ball({ ...props }) {
-    const { ui } = useTheme();
-    // const { hover } = props;
-
-    return (
-      <mesh {...props}>
-        <sphereGeometry args={[220, 15, 15]} />
-        <meshBasicMaterial color={ui.secondary} />
-      </mesh>
-    );
-  }
-
+  console.log(gl.info);
   const cd = useRef<any>();
   const { hover } = props;
   const { loading, motion } = useSnapshot(state);
+  const { ui } = useTheme();
 
-  //   const { motion } = useSnapshot(state);
-  // TODO: stop if motion disabled
   useFrame(() => {
     if (cd.current) {
       let { rotation } = cd.current;
@@ -59,11 +46,14 @@ export function CD({ ...props }) {
     }
   });
 
+  const mat = useMemo(() => new MeshBasicMaterial({ color: ui.secondary }), []);
+  const sphere = useMemo(() => new SphereGeometry(220, 15, 15), []);
+
   return (
     <group {...props} ref={cd} scale={0.0055} dispose={null}>
-      <Ball {...props} position={[5.28, 0, -265.23]} />
-      <Ball {...props} position={[306.5, 0, 134.46]} />
-      <Ball {...props} position={[-296.7, 0, 134.46]} />
+      <mesh position={[5.28, 0, -265.23]} geometry={sphere} material={mat} />
+      <mesh position={[306.5, 0, 134.46]} geometry={sphere} material={mat} />
+      <mesh position={[-296.7, 0, 134.46]} geometry={sphere} material={mat} />
     </group>
   );
 }
