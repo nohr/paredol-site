@@ -3,12 +3,14 @@
 import { DocumentData } from "@firebase/firestore";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useSnapshot } from "valtio";
 import { state } from "../common/state";
 import { getData, getQuote } from "../firebase/api";
 
 export default function HomePage() {
   const [quote, setQuote] = useState("");
   const [projects, setProjects] = useState<DocumentData | undefined>();
+  const { motion } = useSnapshot(state);
   useEffect(() => {
     (async () => {
       setQuote(await getQuote());
@@ -24,7 +26,13 @@ export default function HomePage() {
       id="chart"
       style={quote !== "" ? { display: "block" } : { display: "none" }}
     >
-      <h1>{quote}</h1>
+      <h1
+        style={
+          motion ? undefined : { animation: "autoscroll 7s linear infinite" }
+        }
+      >
+        {quote}
+      </h1>
       {/* <svg ref={svg} /> */}
       {projects &&
         projects.map((doc: DocumentData, index: number) => (

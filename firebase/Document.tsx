@@ -16,12 +16,12 @@ export const FirestoreDocument: React.FC<Props> = ({ path }) => {
     }
   );
   return (
-    <div>
+    <>
       <p>
         {error && <strong>Error: {JSON.stringify(error)}</strong>}
         {loading && <span>Document: Loading...</span>}
       </p>
       {value && <h1>{value.data()?.name}</h1>}
-    </div>
+    </>
   );
 };

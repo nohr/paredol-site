@@ -160,27 +160,19 @@ export const SongBox = styled.div`
   -webkit-user-select: text !important;
   border-radius: 10px !important;
   background: inherit !important;
-  padding: 3px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   align-items: flex-end;
   width: 80% !important;
-  height: 35px !important;
+  height: 30px !important;
   margin: 3px 0;
+  padding: 0 3px;
   backdrop-filter: var(--blur);
+  overflow: hidden;
 
-  & div {
-    /* white-space: nowrap; */
-    display: flex;
-    flex-direction: row;
-    width: fit-content !important;
-    border: none !important;
-    overflow-x: scroll !important;
-    ::-webkit-scrollbar {
-      display: none !important;
-    }
-  }
-  & div p {
+  & p {
+    white-space: nowrap;
     font-size: 14px !important;
     text-transform: unset !important;
     display: block;
@@ -201,14 +193,5 @@ export const SongBox = styled.div`
     background-color: ${({ theme }) => theme.ui.tertiary} !important;
     box-shadow: inherit !important;
     color: inherit !important;
-  }
-
-  @keyframes autoscroll {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      transform: translate3d(0, -90%, 0);
-    }
   }
 `;

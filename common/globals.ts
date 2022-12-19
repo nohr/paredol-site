@@ -5,7 +5,11 @@ export const GlobalStyles = createGlobalStyle`
         --blur: blur(10px);
         --transition:0.2s;
     }
+    [data-nextjs-scroll-focus-boundary] { display: contents !important; }
 
+    html{
+    overflow-x: hidden;
+    }
     html, body {
         height: 100%;
         padding: 0;
@@ -63,4 +67,12 @@ export const GlobalStyles = createGlobalStyle`
             /* transition: 0.3s; */
         }
     }
+      @keyframes autoscroll {
+    from {
+      transform: translate3d(50%, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
 `;

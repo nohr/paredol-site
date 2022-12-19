@@ -11,6 +11,10 @@ export const SearchWrapper = styled.div`
   position: relative;
   width: 90% !important;
   height: 28px;
+
+  @media screen and (max-width: 768px) {
+    height: 34px !important;
+  }
 `;
 export const SearchBar = styled.input<Props>`
   padding: 0px 30px !important;
@@ -46,6 +50,7 @@ export const SearchBar = styled.input<Props>`
 
   @media screen and (max-width: 768px) {
     font-size: 16px;
+    height: 34px !important;
   }
 
   #searchIcon {

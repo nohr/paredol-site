@@ -13,7 +13,7 @@ export function Search() {
   const [chatText, setChatText] = useState<string>("");
   const [searchText, setSearchText] = useState<string>("");
   const Bar = useRef<any>();
-  const { chatMode } = useSnapshot(state);
+  const { chatMode, mobile } = useSnapshot(state);
   const router = useRouter();
   const path = usePathname();
 
@@ -67,6 +67,11 @@ export function Search() {
     if (searchText === "" && path === "/") router.replace("/");
   }, [searchText, chatText, path, router]);
 
+  useEffect(() => {
+    if (mobile) {
+      setPlaceholder("Search");
+    }
+  }, [mobile]);
   return (
     <SearchWrapper>
       <SearchBar

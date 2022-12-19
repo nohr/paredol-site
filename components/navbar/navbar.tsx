@@ -17,6 +17,7 @@ function Link({ ...props }) {
   let { href, active } = props;
   return (
     <Path
+      onClick={() => (state.menu = false)}
       active={
         path?.substring(1) === `${href.toLowerCase()}`
           ? active
@@ -35,11 +36,9 @@ function NavLinks() {
   const { ui } = useTheme();
   const active = `border-color: ${ui.secondary} !important;`;
   const { options } = useSnapshot(state);
-  const user = useUser();
 
   return (
     <Links>
-      {user && <Link href="Editor" />}
       <Link href="Info" />
       <Link href="Store" />
       <Toggle
@@ -64,18 +63,18 @@ function Menu() {
 
   return (
     <Panel className="menu">
-      <Toggle
-        className="option-toggle"
-        active={options ? active : undefined}
-        tabIndex={-1}
-        onClick={() => (state.options = !options)}
-      >
-        Options
-      </Toggle>
       {options ? <Options /> : null}
       <Links className="mobile-links">
         {user && <Link href="Editor" />}
         <Link href="Info" active={active} />
+        <Toggle
+          className="option-toggle"
+          active={options ? active : undefined}
+          tabIndex={-1}
+          onClick={() => (state.options = !options)}
+        >
+          Options
+        </Toggle>
         <Link href="Store" active={active} />
       </Links>
     </Panel>
@@ -83,12 +82,12 @@ function Menu() {
 }
 
 export default function Navbar() {
-  const { options, mobile } = useSnapshot(state);
+  const { options, mobile, menu } = useSnapshot(state);
   const [area, setArea] = useState<JSX.Element>(<NavLinks />);
-  const [menu, setMenu] = useState<boolean>(false);
+  const user = useUser();
   useEffect(() => {
     if (mobile) {
-      setArea(<MenuButton setMenu={setMenu} />);
+      setArea(<MenuButton />);
     } else {
       setArea(<NavLinks />);
     }
@@ -101,11 +100,12 @@ export default function Navbar() {
       <Nav>
         <div className="logo-area">
           <HomeButton />
+          {user && !mobile ? <Link href="Editor" /> : null}
         </div>
         <Search />
         {area}
       </Nav>
-      {options ? <Options /> : null}
+      {options && !mobile ? <Options /> : null}
       {menu ? <Menu /> : null}
     </>
   );

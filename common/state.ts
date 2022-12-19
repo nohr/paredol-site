@@ -28,6 +28,7 @@ interface stateypes {
   resetRate: number;
   selectRate: number;
   // Mobile
+  menu: boolean;
   gyro: boolean;
   mobile: boolean;
   orientation: boolean;
@@ -52,6 +53,7 @@ export const state = proxy<stateypes>({
   resetRate: Math.random() * (1.15 - 0.3) + 0.3,
   selectRate: Math.random() * (1.15 - 0.85) + 0.85,
   // Mobile
+  menu: false,
   gyro: false,
   mobile: false,
   orientation: true,

@@ -73,14 +73,12 @@ export function SongInfo({ song }: { song: string }) {
   const { songIndex, songs, motion } = useSnapshot(state);
   return (
     <SongBox className="songinfo">
-      <div>
-        <p
-          style={motion ? { animation: "none" } : undefined}
-          onClick={() => {
-            navigator.clipboard.writeText(song);
-          }}
-        >{`(${songIndex + 1}/${songs.length}) ${song}`}</p>
-      </div>
+      <p
+        style={motion ? { animation: "none" } : undefined}
+        onClick={() => {
+          navigator.clipboard.writeText(song);
+        }}
+      >{`(${songIndex + 1}/${songs.length}) ${song}`}</p>
     </SongBox>
   );
 }

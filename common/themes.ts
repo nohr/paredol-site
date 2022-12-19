@@ -37,7 +37,7 @@ declare module "styled-components" {
 
 export const light: DefaultTheme = {
   ui: {
-    main: `#151515`,
+    main: `#000000`,
     secondary: `hsl(209, 100%, 20%)`,
     hover: `hsla(209, 100%, 20%, 0.67)`,
     active: `#5e5e5ed6`,
@@ -68,7 +68,7 @@ export const light: DefaultTheme = {
 
 export const dark: DefaultTheme = {
   ui: {
-    main: `#C1C2C2`,
+    main: `#ffffff`,
     secondary: `hsl(209, 31%, 80%)`,
     hover: `hsla(209, 31%, 80%, 0.67)`,
     active: `#ebebeb97`,

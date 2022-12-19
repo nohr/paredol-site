@@ -1,5 +1,6 @@
 // import { useRef } from "react";
 import { useState } from "react";
+import { state } from "../../../common/state";
 import { LogoWrapper } from "../nav.style";
 import { LogoCanvas } from "./logo.comp";
 
@@ -11,6 +12,7 @@ export function HomeButton() {
   const [hover, setHover] = useState<boolean>(false);
   return (
     <LogoWrapper
+      onClick={() => (state.menu = false)}
       href="/"
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}

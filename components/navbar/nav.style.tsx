@@ -44,7 +44,7 @@ export const Nav = styled.nav<IProps>`
   & .logo-area {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     width: 100% !important;
     height: 100% !important;
@@ -67,6 +67,8 @@ export const Nav = styled.nav<IProps>`
     grid-template-rows: 100%;
     top: unset;
     bottom: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 25px;
 
     & .logo-area {
       justify-content: center;
@@ -282,6 +284,7 @@ export const Panel = styled.div<IProps>`
   }
 
   &.menu {
+    border-radius: 15px !important;
     height: fit-content !important;
     flex-direction: column;
     align-items: center;
@@ -294,6 +297,11 @@ export const Panel = styled.div<IProps>`
       & a {
         width: 50%;
       }
+
+      & a,
+      & div {
+        margin: 0 !important;
+      }
     }
 
     & .option-toggle {
@@ -304,6 +312,9 @@ export const Panel = styled.div<IProps>`
       position: unset !important;
       transform: unset !important;
       width: 100% !important;
+      display: grid !important;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 100%;
     }
   }
 
@@ -337,7 +348,7 @@ export const Panel = styled.div<IProps>`
 
           p {
             width: 100% !important;
-            font-size: 16px;
+            font-size: 16px !important;
           }
         }
       }

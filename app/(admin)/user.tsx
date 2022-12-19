@@ -27,21 +27,19 @@ export function CurrentUser() {
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
           justifyContent: "space-between",
           width: "100%",
         }}
       >
-        <button onClick={logout}>Log out</button>
         <h1>Hi, {user.displayName?.split(" ")[0]}</h1>
+        <button onClick={logout} style={{ width: "80px", height: "40px" }}>
+          Log out
+        </button>
       </div>
     );
   } else {
-    router.push("/login");
-    return (
-      <>
-        <p>Not logged in</p>
-      </>
-    );
+    router.replace("/login");
+    return <></>;
   }
 }
