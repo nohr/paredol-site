@@ -254,6 +254,12 @@ export const Panel = styled.div<IProps>`
   padding: 10px;
   row-gap: 30px;
 
+  @media screen and (max-width: 768px) {
+    &.options {
+      width: 200px !important;
+    }
+  }
+
   & .group {
     display: flex;
     flex-direction: column;

@@ -184,14 +184,21 @@ export const SongBox = styled.div`
     /* height: fit-content !important; */
     color: ${({ theme }) => theme.ui.secondary} !important;
     animation: autoscroll 7s linear infinite;
-    &:active {
-      border: 1px solid ${({ theme }) => theme.ui.secondary} !important;
+  }
+
+  @media (min-width: 768px) {
+    &:hover {
+      background-color: ${({ theme }) => theme.ui.tertiary} !important;
+      box-shadow: inherit !important;
+      color: inherit !important;
     }
   }
 
-  &:hover {
-    background-color: ${({ theme }) => theme.ui.tertiary} !important;
-    box-shadow: inherit !important;
-    color: inherit !important;
+  @media (max-width: 768px) {
+    &:active {
+      background-color: ${({ theme }) => theme.ui.tertiary} !important;
+      box-shadow: inherit !important;
+      color: inherit !important;
+    }
   }
 `;

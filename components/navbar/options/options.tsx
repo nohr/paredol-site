@@ -71,14 +71,24 @@ export default Options;
 
 export function SongInfo({ song }: { song: string }) {
   const { songIndex, songs, motion } = useSnapshot(state);
+  const [value, setValue] = useState<string>(
+    `(${songIndex + 1}/${songs.length}) ${song}`
+  );
   return (
     <SongBox className="songinfo">
       <p
         style={motion ? { animation: "none" } : undefined}
         onClick={() => {
           navigator.clipboard.writeText(song);
+          setValue("Copied!");
+          setTimeout(
+            () => setValue(`(${songIndex + 1}/${songs.length}) ${song}`),
+            2500
+          );
         }}
-      >{`(${songIndex + 1}/${songs.length}) ${song}`}</p>
+      >
+        {value}
+      </p>
     </SongBox>
   );
 }
