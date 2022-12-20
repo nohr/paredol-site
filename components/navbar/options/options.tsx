@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSnapshot } from "valtio";
 import { state } from "../../../common/state";
 import { Panel, Toggle } from "../nav.style";
 import { FFButton, PlayButton } from "./opt.utils";
 import { ColorIcon, ModeIcon, MuteIcon } from "./opt.svg";
 import { SongBox, MusicWrapper } from "./opt.style";
+import { getSongs } from "../../../api/firebase.api";
 
 const toggleMute = () => {
   state.muted = !state.muted;
@@ -20,11 +21,16 @@ const toggleTheme = () => {
 };
 
 const Options = () => {
-  const { muted, songIndex, songs, theme, motion } = useSnapshot(state);
+  const { muted, songIndex, theme, motion } = useSnapshot(state);
+  const songs = useRef<any>();
+  const [song, setSong] = useState("");
 
-  const [song, setSong] = useState(
-    `${songs[songIndex]?.artist} - ${songs[songIndex]?.name}`
-  );
+  useEffect(() => {
+    songs.current = getSongs();
+    setSong(
+      `${songs.current[songIndex]?.artist} - ${songs.current[songIndex]?.name}`
+    );
+  }, []);
 
   return (
     <Panel className="options">

@@ -2,7 +2,7 @@
 
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../firebase/config";
+import { auth } from "../../api/firebase.config";
 import { state } from "../../common/state";
 import { useRouter } from "next/navigation";
 

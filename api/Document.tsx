@@ -2,7 +2,7 @@
 import React from "react";
 import { getFirestore, doc } from "firebase/firestore";
 import { useDocument } from "react-firebase-hooks/firestore";
-import { app } from "./config";
+import { app } from "./firebase.config";
 
 type Props = {
   path: string;

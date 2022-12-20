@@ -1,14 +1,5 @@
 import { proxy } from "valtio";
 
-interface songTypes {
-  name: string;
-  artist: string;
-  album?: string;
-  url?: string;
-  cover?: string;
-  duration?: number;
-}
-
 interface stateypes {
   // UI
   theme: string;
@@ -20,7 +11,7 @@ interface stateypes {
   colorBar: boolean;
   chatMode: boolean;
   // Audio
-  songs: Array<songTypes>;
+  songs: any;
   songIndex: number;
   muted: boolean;
   playMusic: boolean;

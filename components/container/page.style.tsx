@@ -41,4 +41,24 @@ export const Container = styled.div`
   h6 {
     margin: 0;
   }
+
+  & .login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    margin: 0;
+    row-gap: 5px;
+
+    & * {
+      margin: 0 !important;
+    }
+  }
+
+  * pre {
+    white-space: normal;
+  }
 `;

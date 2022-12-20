@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { state } from "../../../common/state";
 import { LogoWrapper } from "../nav.style";
-import { LogoCanvas } from "./logo.comp";
+import LogoCanvas from "./logo.comp";
 
 export function HomeButton() {
   // const svg = useRef(null);
@@ -23,7 +23,7 @@ export function HomeButton() {
       //   onTouchEnd={() => !clip.talking && unActiveTap(nabla, svg)}
       // ref={nabla}
     >
-      <LogoCanvas hover={hover} />
+      <LogoCanvas />
       Paredol
     </LogoWrapper>
   );

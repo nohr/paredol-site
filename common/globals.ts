@@ -72,7 +72,7 @@ export const GlobalStyles = createGlobalStyle`
       transform: translate3d(50%, 0, 0);
     }
     to {
-      transform: translate3d(-50%, 0, 0);
+      transform: translate3d(-90%, 0, 0);
     }
   }
 `;

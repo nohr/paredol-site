@@ -5,7 +5,7 @@ import { Links, Nav, Panel, Path, Toggle } from "./nav.style";
 import { useTheme } from "styled-components";
 import { usePathname } from "next/navigation";
 import { Search } from "./search/search";
-import { useUser } from "../../firebase/api";
+import { useUser } from "../../api/firebase.api";
 import { state } from "../../common/state";
 import { MenuButton } from "./nav.svg";
 import { useEffect, useState } from "react";

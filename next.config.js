@@ -9,6 +9,7 @@ const withPWA = require('next-pwa')({
 module.exports = withPWA({
   experimental: {
     appDir: true,
+    runtime: 'experimental-edge',
   },
   reactStrictMode: true,
   swcMinify: true,

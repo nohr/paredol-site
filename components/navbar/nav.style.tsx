@@ -238,10 +238,10 @@ export const Toggle = styled.div<IProps>`
 `;
 
 // Panels
-export const Panel = styled.div<IProps>`
+export const Panel = styled.div`
   position: fixed;
   top: 68px;
-  right: 40px;
+  right: 20px;
   z-index: 4000 !important;
   display: flex;
   flex-direction: column;

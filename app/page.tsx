@@ -5,7 +5,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useSnapshot } from "valtio";
 import { state } from "../common/state";
-import { getData, getQuote } from "../firebase/api";
+import { getData, getQuote } from "../api/firebase.api";
 
 export default function HomePage() {
   const [quote, setQuote] = useState("");
@@ -33,6 +33,7 @@ export default function HomePage() {
       >
         {quote}
       </h1>
+
       {/* <svg ref={svg} /> */}
       {projects &&
         projects.map((doc: DocumentData, index: number) => (

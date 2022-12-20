@@ -12,7 +12,7 @@ import {
 } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { state } from "../common/state";
-import { auth, db } from "./config";
+import { auth, db } from "./firebase.config";
 
 export async function getData(lot?: string) {
   state.loading = true;
@@ -49,6 +49,14 @@ export async function getQuote() {
     const random = Math.floor(Math.random() * quotes.length);
     return await quotes[random];
   }
+}
+
+// fetch songs collection from firestore and order them by the index
+export async function getSongs() {
+  const data = await getDocs(
+    query(collection(db, "songs"), orderBy("index", "asc"))
+  );
+  return data.docs.map((doc) => doc.data());
 }
 
 export function useUser() {

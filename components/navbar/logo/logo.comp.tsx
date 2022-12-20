@@ -1,5 +1,5 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Ref, useEffect, useMemo, useRef } from "react";
+import { memo, Ref, useEffect, useMemo, useRef } from "react";
 import { useTheme } from "styled-components";
 import {
   BufferGeometry,
@@ -13,7 +13,7 @@ import {
 import { useSnapshot } from "valtio";
 import { state } from "../../../common/state";
 
-export function LogoCanvas({ ...props }) {
+function LogoCanvas() {
   const { motion } = useSnapshot(state);
   return (
     <Canvas
@@ -24,33 +24,46 @@ export function LogoCanvas({ ...props }) {
       frameloop={motion ? "demand" : "always"}
     >
       <ambientLight intensity={0.1} />
-      <CD {...props} rotation={[-Math.PI / 2, 0, 0]} />
+      <CD />
     </Canvas>
   );
 }
 
-export function CD({ ...props }) {
+export default memo(LogoCanvas);
+
+export function CD() {
   const { gl } = useThree();
   console.log(gl.info);
   const cd = useRef<any>();
-  const { hover } = props;
-  const { loading, motion } = useSnapshot(state);
+  // const { hover } = props;
+  const { loading, motion, theme } = useSnapshot(state);
   const { ui } = useTheme();
 
   useFrame(() => {
     if (cd.current) {
       let { rotation } = cd.current;
       if (rotation) {
-        handleMotion(motion, loading, hover, rotation);
+        handleMotion(motion, loading, rotation);
       }
     }
   });
 
-  const mat = useMemo(() => new MeshBasicMaterial({ color: ui.secondary }), []);
+  const mat = useMemo(
+    () =>
+      new MeshBasicMaterial({
+        color: `${theme === "light" ? "#013C66" : "#96B1C8"}`,
+      }),
+    [ui.secondary, theme]
+  );
   const sphere = useMemo(() => new SphereGeometry(220, 15, 15), []);
 
   return (
-    <group {...props} ref={cd} scale={0.0055} dispose={null}>
+    <group
+      rotation={[-Math.PI / 2, 0, 0]}
+      ref={cd}
+      scale={0.0055}
+      dispose={null}
+    >
       <mesh position={[5.28, 0, -265.23]} geometry={sphere} material={mat} />
       <mesh position={[306.5, 0, 134.46]} geometry={sphere} material={mat} />
       <mesh position={[-296.7, 0, 134.46]} geometry={sphere} material={mat} />
@@ -61,7 +74,7 @@ export function CD({ ...props }) {
 function handleMotion(
   motion: boolean,
   loading: boolean,
-  hover: boolean,
+  // hover: boolean,
   rotation: Euler
 ) {
   if (!motion) {
