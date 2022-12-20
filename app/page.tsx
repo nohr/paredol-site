@@ -6,11 +6,14 @@ import React, { useEffect, useState } from "react";
 import { useSnapshot } from "valtio";
 import { state } from "../common/state";
 import { getData, getQuote } from "../api/firebase.api";
+import { Wireframe } from "../components/home/home.svg";
+import { useTheme } from "styled-components";
 
 export default function HomePage() {
   const [quote, setQuote] = useState("");
   const [projects, setProjects] = useState<DocumentData | undefined>();
-  const { motion } = useSnapshot(state);
+  const { motion, theme } = useSnapshot(state);
+  const { ui } = useTheme();
   useEffect(() => {
     (async () => {
       setQuote(await getQuote());
@@ -33,7 +36,13 @@ export default function HomePage() {
       >
         {quote}
       </h1>
-
+      <Wireframe
+        style={{
+          justifySelf: "center",
+          fill: ui.secondary,
+          opacity: 0.1,
+        }}
+      />
       {/* <svg ref={svg} /> */}
       {projects &&
         projects.map((doc: DocumentData, index: number) => (

@@ -4,7 +4,7 @@ export const Container = styled.div`
   padding: 0 10px;
   display: flex;
   width: 100%;
-  /* height: 100%; */
+  height: 100%;
   flex-direction: column;
 
   @media screen and (min-width: 768px) {
@@ -27,10 +27,21 @@ export const Container = styled.div`
   & #chart {
     width: 100%;
     height: 100%;
+    display: flex !important;
+    flex-direction: column;
   }
 
   & #chart h1 {
     white-space: nowrap;
+    height: min-content;
+  }
+
+  & #chart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    pointer-events: none !important;
   }
 
   & h1,

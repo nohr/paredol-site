@@ -33,7 +33,7 @@ export default memo(LogoCanvas);
 
 export function CD() {
   const { gl } = useThree();
-  console.log(gl.info);
+  // console.log(gl.info);
   const cd = useRef<any>();
   // const { hover } = props;
   const { loading, motion, theme } = useSnapshot(state);
