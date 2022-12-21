@@ -47,8 +47,14 @@ export async function getQuote() {
   if (docSnap.exists()) {
     let quotes = docSnap.data().quotes;
     const random = Math.floor(Math.random() * quotes.length);
-    return await quotes[random];
+    return quotes[random];
   }
+}
+
+export async function newQuote() {
+  getQuote().then((res) => {
+    state.quote = res;
+  });
 }
 
 // fetch songs collection from firestore and order them by the index

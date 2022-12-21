@@ -1,6 +1,8 @@
 import { proxy } from "valtio";
 
 interface stateypes {
+  // Firebase
+  quote: string;
   // UI
   theme: string;
   monochrome: boolean;
@@ -26,6 +28,8 @@ interface stateypes {
 }
 
 export const state = proxy<stateypes>({
+  // Firebase
+  quote: "",
   //UI
   theme: "dark",
   monochrome: false,

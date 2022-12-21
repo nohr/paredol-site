@@ -98,12 +98,11 @@ export function ProjectEditor({
               id: string;
               orientation: string;
             }[];
-              
           };
         },
         IDs: string | any[]
       ) => (
-        <Form onSubmit={(e) => e.preventDefault()} className="secondary">
+        <form onSubmit={(e) => e.preventDefault()} className="secondary">
           <div className="section">
             Metadata
             <div className="nameGroup">
@@ -276,7 +275,15 @@ export function ProjectEditor({
           </div>
           <button
             className={`submit ${isFilePicked ? "disabled" : ""}`}
-            onClick={() => handleUploadPost(data.current, content, cover, setSaved, setContent)}
+            onClick={() =>
+              handleUploadPost(
+                data.current,
+                content,
+                cover,
+                setSaved,
+                setContent
+              )
+            }
             disabled={isFilePicked}
             type="submit"
           >

@@ -65,7 +65,7 @@ function Menu() {
     <Panel className="menu">
       {options ? <Options /> : null}
       <Links className="mobile-links">
-        {user && <Link href="Editor" />}
+        {user && <Link href="Editor" active={active} />}
         <Link href="Info" active={active} />
         <Toggle
           className="option-toggle"
