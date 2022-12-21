@@ -77,6 +77,10 @@ export function Search() {
       <SearchBar
         placeholder={chatMode ? "what's up?" : placeholder}
         type="text"
+        onFocus={() => {
+          state.menu = false;
+          state.options = false;
+        }}
         value={!chatMode ? searchText : chatText}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           handleChange(e, chatMode, setSearchText, setChatText)

@@ -19,8 +19,8 @@ export function Backdrop() {
   );
 }
 
-// generate a random degree between 0 and 360
-const randomDeg = () => Math.floor(Math.random() * 360);
+// generate a random degree between 160 and 190
+const randomDeg = Math.floor(Math.random() * 30) + 160;
 
 const Slideshow = styled.div`
   &,

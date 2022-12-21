@@ -28,16 +28,12 @@ export function Quote() {
   const { motion, quote } = useSnapshot(state);
 
   useEffect(() => {
-    console.log(motion);
-
     getQuote().then((res) =>
       scramble.current.scramble(res, setText, {
         characters: characters,
       })
     );
   }, [quote, setText]);
-
-  //   console.log(!motion && quote === "");
 
   return (
     <QuoteHeader

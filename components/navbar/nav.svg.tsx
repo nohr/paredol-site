@@ -34,6 +34,7 @@ export function MenuButton() {
               border: "1px solid #ebebeb",
               backgroundColor: `${ui.hover}`,
               fill: `#ebebeb`,
+              boxShadow: `0 0 50px 50px ${ui.hover}`,
             }
           : undefined
       }
