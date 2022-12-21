@@ -33,5 +33,9 @@ const Slideshow = styled.div`
     pointer-events: none !important;
     top: 50%;
     transform: translateY(-50%) rotate(${randomDeg}deg);
+
+    @media screen and (min-width: 768px) {
+      width: 100%;
+    }
   }
 `;
