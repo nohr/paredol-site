@@ -31,7 +31,7 @@ export const Nav = styled.nav<IProps>`
   background-color: transparent;
   backdrop-filter: var(--blur);
   -webkit-backdrop-filter: var(--blur);
-  overflow: visible;
+  overflow: visible !important;
   padding: 10px;
   margin: 0;
   user-select: none;
@@ -290,6 +290,7 @@ export const Panel = styled.div`
   }
 
   &.menu {
+    border-color: transparent !important;
     border-radius: 15px !important;
     height: fit-content !important;
     flex-direction: column;

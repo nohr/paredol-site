@@ -9,7 +9,7 @@ import { ClearIcon, SearchBarIcon } from "./search.svg";
 import { usePathname, useRouter } from "next/navigation";
 
 export function Search() {
-  const [placeholder, setPlaceholder] = useState<string>("(alt + z)");
+  const [placeholder, setPlaceholder] = useState<string>(`(cmd + k)`);
   const [chatText, setChatText] = useState<string>("");
   const [searchText, setSearchText] = useState<string>("");
   const Bar = useRef<any>();

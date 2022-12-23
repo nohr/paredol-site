@@ -1,26 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 import { useSnapshot } from "valtio";
 import { getQuote } from "../../api/firebase.api";
 import { state } from "../../common/state";
 const Scrambler = require("scrambling-text");
-
-const QuoteHeader = styled.h1<{
-  animate?: string;
-}>`
-  ${({ animate }) => animate}
-
-  @keyframes quotescroll {
-    from {
-      transform: translate3d(50%, 0, 0);
-    }
-    to {
-      transform: translate3d(-90%, 0, 0);
-    }
-  }
-`;
 
 export function Quote() {
   const scramble = useRef(new Scrambler());
@@ -36,15 +20,11 @@ export function Quote() {
   }, [quote, setText]);
 
   return (
-    <QuoteHeader
-      animate={
-        !motion
-          ? "animation: quotescroll 7s linear infinite; width: max-content;"
-          : "white-space: pre-wrap !important;"
-      }
+    <h1
+    className={`text-5xl ${!motion ? "animate-[quotescroll_7s_linear_infinite] w-max" : "whitespace-pre-wrap"}`}
     >
       {text}
-    </QuoteHeader>
+    </h1>
   );
 }
 

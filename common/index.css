@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100% !important;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+
+  color: hsl(209, 100%, 20%);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000;
+    color: hsl(209, 31%, 80%);
+  }
+}
+body * {
+  display: none;
+}
+
+body .loading {
+  display: flex;
+}

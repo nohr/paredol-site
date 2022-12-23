@@ -6,11 +6,20 @@ const withPWA = require('next-pwa')({
   dest: 'public'
 })
 
-module.exports = withPWA({
+const nextConfig = withPWA({
   experimental: {
     appDir: true,
     runtime: 'experimental-edge',
   },
   reactStrictMode: true,
   swcMinify: true,
+  compiler: {
+    styledComponents: {
+      displayName: true,
+      ssr: true,
+      minify: false,
+    },
+  },
 })
+
+module.exports = nextConfig

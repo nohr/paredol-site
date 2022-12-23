@@ -1,9 +1,0 @@
-/* Hide everything while loading for cumulative layout shift */
-
-body * {
-  display: none;
-}
-
-body .loading {
-  display: block;
-}

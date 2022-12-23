@@ -13,11 +13,11 @@ export const Container = styled.div`
 
   @media screen and (max-width: 768px) {
     padding: 10px !important;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   & * {
-    display: block;
+    display: flex;
   }
 
   & a {

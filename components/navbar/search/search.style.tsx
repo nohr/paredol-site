@@ -60,6 +60,7 @@ export const SearchBar = styled.input<Props>`
   }
 
   &::placeholder {
+    font-weight: 300;
     text-align: center;
     color: ${(props: { theme: { ui: { secondary: string } } }) =>
       props.theme.ui.secondary};
