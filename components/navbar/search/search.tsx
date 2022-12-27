@@ -3,7 +3,11 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useSnapshot } from "valtio";
 import { state } from "../../../common/state";
-import { handleCommandPress, handleKeyPress, useChange } from "./search.utils";
+import {
+  handleCommandPress,
+  handleKeyPress,
+  handleChange,
+} from "./search.utils";
 import { SearchBarIcon } from "./search.svg";
 import { usePathname, useRouter } from "next/navigation";
 import { getData } from "../../../api/firebase.api";
@@ -58,7 +62,7 @@ export function Search() {
         )
       );
     };
-  }, [searchText, chatText, setPlaceholder, chatMode]);
+  }, [searchText, chatText, setPlaceholder, chatMode, router, path]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -77,7 +81,7 @@ export function Search() {
     if (chatText === "excuse me") {
       router.push("/login");
     }
-  }, [chatText]);
+  }, [chatText, router]);
 
   useEffect(() => {
     if (searchText !== "") router.push(`${path}?q=${searchText}`);
@@ -126,7 +130,7 @@ export function Search() {
           }}
           value={!chatMode ? searchText : chatText}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            useChange(e, chatMode, setSearchText, setChatText)
+            handleChange(e, chatMode, setSearchText, setChatText)
           }
           ref={Bar}
         ></input>
@@ -162,7 +166,7 @@ export function Search() {
             hits.map((hit: any, index: number) => (
               <Link
                 key={index}
-                className="w-fit text-white dark:text-white "
+                className="w-fit text-white dark:text-white"
                 href={`/${hit.lot}`}
                 onClick={() => setSearchText("")}
                 onTouchEnd={() => setSearchText("")}

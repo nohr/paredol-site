@@ -15,7 +15,7 @@ import { toggleTheme } from "../../../common/utils";
 import { IoAccessibility } from "react-icons/io5";
 
 const Options = ({ ...props }) => {
-  const { muted, theme, motion } = useSnapshot(state);
+  const { muted, theme, motion, mobile } = useSnapshot(state);
   const ref = useRef<any>(null);
   const { optionsBtn } = props;
 
@@ -25,12 +25,8 @@ const Options = ({ ...props }) => {
 
   // close the options menu when the user clicks outside of it
   const handleClick = (e: any) => {
-    if (
-      ref.current?.contains(e.target) ||
-      (optionsBtn.current && optionsBtn.current?.contains(e.target))
-    ) {
-      return;
-    }
+    if (ref.current?.contains(e.target)) return;
+    if (!mobile && optionsBtn.current?.contains(e.target)) return;
     state.options = false;
   };
 
@@ -41,7 +37,7 @@ const Options = ({ ...props }) => {
       if (typeof window === "undefined") return;
       window.removeEventListener("mousedown", handleClick);
     };
-  }, []);
+  }, [handleClick]);
 
   return (
     <div

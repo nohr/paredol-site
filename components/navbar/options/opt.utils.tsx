@@ -100,7 +100,7 @@ export function SongInfo() {
 
   useEffect(() => {
     setValue(normal);
-  }, [songs]);
+  }, [songs, normal]);
 
   return (
     <div

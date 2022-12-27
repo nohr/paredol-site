@@ -346,7 +346,7 @@ export function handleUploadPost(
   if (name !== "" && category !== "" && client !== "" && date !== "") {
     let by = getCreator();
     let lot = generateLot(client, name, date);
-    uploadData(data, by, lot);
+    // uploadData(data, by, lot);
     getData();
     setContent([]);
     setSaved(true);

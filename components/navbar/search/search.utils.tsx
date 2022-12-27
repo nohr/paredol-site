@@ -3,7 +3,7 @@ import { state } from "../../../common/state";
 import { toggleTheme } from "../../../common/utils";
 import { toggleMotion } from "../options/opt.utils";
 
-export function useChange(
+export function handleChange(
   e: ChangeEvent<HTMLInputElement>,
   chatMode: boolean,
   setSearchText: Dispatch<SetStateAction<string>>,
