@@ -1,10 +1,10 @@
 import { useSnapshot } from "valtio";
 import { state } from "../../../common/state";
 
-export function FFIcon() {
+export function FFIcon({ ...props }) {
   return (
     <svg
-      className="nextIcon"
+      className={props.className}
       xmlns="http://www.w3.org/2000/svg"
       data-name="Layer 1"
       viewBox="0 0 320 354"
@@ -16,8 +16,7 @@ export function FFIcon() {
     </svg>
   );
 }
-
-export function PlayPauseIcon() {
+export function PlayPauseIcon({ ...props }) {
   const { playMusic } = useSnapshot(state);
 
   return (
@@ -27,7 +26,7 @@ export function PlayPauseIcon() {
           xmlns="http://www.w3.org/2000/svg"
           data-name="Layer 1"
           viewBox="0 0 350 356"
-          className="PlayPauseIcon"
+          className={props.className}
         >
           <path
             vectorEffect="non-scaling-stroke"
@@ -38,7 +37,7 @@ export function PlayPauseIcon() {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           data-name="Layer 1"
-          className="PlayPauseIcon"
+          className={props.className}
           viewBox="0 0 274.92 356.4"
         >
           <path
@@ -52,15 +51,15 @@ export function PlayPauseIcon() {
     </>
   );
 }
-
-export function MuteIcon() {
+export function MuteIcon({ ...props }) {
+  const { className } = props;
   const { muted } = useSnapshot(state);
   return (
     <>
       {muted ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="muteIcon"
+          className={className}
           data-name="Layer 1"
           viewBox="0 0 354 356"
         >
@@ -72,7 +71,7 @@ export function MuteIcon() {
       ) : (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="muteIcon"
+          className={className}
           data-name="Layer 1"
           viewBox="0 0 353.41 356.2"
         >
@@ -85,16 +84,14 @@ export function MuteIcon() {
     </>
   );
 }
-export function ModeIcon() {
-  const { theme } = useSnapshot(state);
-
+export function ModeIcon({ ...props }) {
   return (
     <>
-      {theme === "light" ? (
+      {localStorage.getItem("theme") === "light" ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           data-name="Layer 1"
-          className="modeIcon dark"
+          className={props.className}
           viewBox="0 0 126.13 144.27"
         >
           <path
@@ -106,7 +103,7 @@ export function ModeIcon() {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           data-name="Layer 1"
-          className="modeIcon light"
+          className={props.className}
           viewBox="0 0 144.55 144.61"
         >
           <path
@@ -118,7 +115,7 @@ export function ModeIcon() {
     </>
   );
 }
-export function ColorIcon() {
+export function ColorIcon({ ...props }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +123,7 @@ export function ColorIcon() {
       height="356.443"
       data-name="Layer 1"
       viewBox="0 0 354.098 356.443"
-      className="ColorIcon"
+      className={props.className}
     >
       <path
         fill="#53cb26"

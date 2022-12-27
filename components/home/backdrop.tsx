@@ -1,24 +1,23 @@
-"use client";
-
-import { useMemo } from "react";
-import { useSnapshot } from "valtio";
-import { state } from "../../common/state";
-
-export default function Backdrop() {
-// generate a random degree that slightly rotates the wireframe
-  const randomDeg = useMemo(()=> Math.floor(Math.random() * 10) - 5,[]);
-  const { theme } = useSnapshot(state);
+const deg = Math.floor(Math.random() * 15) - 5;
+function Backdrop() {
   return (
-    <div className={`fixed pointer-events-none h-auto w-fit`}
-    style={{top:"50%", left:"50%", transform:`translate(-50%,-50%) rotate(${randomDeg}deg)`}}
+    <div
+      className={`pointer-events-none fixed h-auto w-fit`}
+      style={{
+        top: "50%",
+        left: "50%",
+        transform: `translate(-50%,-50%) rotate(${deg}deg)`,
+      }}
     >
-      <Wireframe className={`${theme === "light" ?"fill-blue-900 opacity-[.05]" : "fill-blue-300 opacity-[0.15]"} `}/>
+      <Wireframe className="fill-blue-900 opacity-[.05] dark:fill-blue-100 dark:opacity-[.1]" />
     </div>
   );
 }
 
+export default Backdrop;
+
 function Wireframe({ ...props }) {
-  const {className} = props;
+  const { className } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

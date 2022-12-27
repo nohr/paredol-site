@@ -1,110 +1,112 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useSnapshot } from "valtio";
 import { state } from "../../../common/state";
-import { Panel, Toggle } from "../nav.style";
-import { FFButton, PlayButton } from "./opt.utils";
+import {
+  FFButton,
+  PlayButton,
+  SongInfo,
+  toggleMotion,
+  toggleMute,
+} from "./opt.utils";
 import { ColorIcon, ModeIcon, MuteIcon } from "./opt.svg";
-import { SongBox, MusicWrapper } from "./opt.style";
-import { getSongs } from "../../../api/firebase.api";
+import { toggleTheme } from "../../../common/utils";
+import { IoAccessibility } from "react-icons/io5";
 
-const toggleMute = () => {
-  state.muted = !state.muted;
-};
-const toggleMotion = () => {
-  state.motion = !state.motion;
-};
+const Options = ({ ...props }) => {
+  const { muted, theme, motion } = useSnapshot(state);
+  const ref = useRef<any>(null);
+  const { optionsBtn } = props;
 
-const toggleTheme = () => {
-  state.theme = state.theme === "light" ? "dark" : "light";
-};
+  ref.current?.addEventListener("touchmove", (e: any) => {
+    e.preventDefault();
+  });
 
-const Options = () => {
-  const { muted, songIndex, theme, motion } = useSnapshot(state);
-  const songs = useRef<any>();
-  const [song, setSong] = useState("");
+  // close the options menu when the user clicks outside of it
+  const handleClick = (e: any) => {
+    if (
+      ref.current?.contains(e.target) ||
+      (optionsBtn.current && optionsBtn.current?.contains(e.target))
+    ) {
+      return;
+    }
+    state.options = false;
+  };
 
-  useEffect(() => {
-    songs.current = getSongs();
-    setSong(
-      `${songs.current[songIndex]?.artist} - ${songs.current[songIndex]?.name}`
-    );
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.addEventListener("mousedown", handleClick);
+    return () => {
+      if (typeof window === "undefined") return;
+      window.removeEventListener("mousedown", handleClick);
+    };
   }, []);
 
   return (
-    <Panel className="options">
-      <div className="group">
-        <p>Audio</p>
+    <div
+      ref={ref}
+      className="bottom-36 grid w-full grid-cols-[48%_4%_48%] grid-rows-[min-content] items-start border-y-[1px] border-blue-900 p-3 backdrop-blur-lg dark:border-blue-200 md:fixed md:top-24 md:right-4 md:h-min md:w-1/5 md:grid-cols-[100%] md:grid-rows-[min-content_20px_min-content]"
+    >
+      <div className="m-0 flex h-full w-full flex-col items-center justify-center gap-y-5 p-0">
+        <p className="absolute -top-[30px] select-none p-2 text-[0.5rem] font-black uppercase backdrop-blur-lg md:static">
+          Audio
+        </p>
         <ToolTray />
-        {/* Add Music note icon */}
-        <SongInfo song={song} />
-        <Toggle onClick={() => toggleMute()}>
-          <MuteIcon />
+        <SongInfo />
+        <div
+          className="relative flex h-min w-full cursor-pointer select-none flex-row-reverse items-center justify-between gap-x-2 rounded-lg border-[1px] border-blue-900 py-1 px-1 dark:border-blue-200"
+          onClick={() => toggleMute()}
+        >
           {!muted ? "Mute SFX" : "Unmute SFX"}
-        </Toggle>
+          <MuteIcon className="m-0 h-4 w-4 fill-blue-900 p-0 dark:fill-blue-200" />
+        </div>
       </div>
-      <div className="group">
-        <p>Display</p>
-        <Toggle onClick={() => toggleTheme()}>
-          <ModeIcon />
+      <div className="grid_space w-full md:h-full"></div>
+      <div className="m-0 flex h-full w-full flex-col items-center justify-center gap-y-5 p-0 md:relative">
+        <p className="absolute -top-[30px] select-none p-2 text-[0.5rem] font-black uppercase backdrop-blur-lg md:static">
+          Display
+        </p>
+        <div
+          className="relative flex h-min w-full cursor-pointer select-none flex-row-reverse items-center justify-between gap-x-2 rounded-lg border-[1px] border-blue-900 py-1 px-1 dark:border-blue-200"
+          onClick={() => toggleTheme()}
+        >
           {theme === "light" ? "Dark Theme" : "Light Theme"}
-        </Toggle>
-        <Toggle
+          <ModeIcon className="m-0 h-4 w-4 fill-blue-900 p-0 dark:fill-blue-200" />
+        </div>
+        <div
+          className="relative flex h-min w-full cursor-pointer select-none flex-row-reverse items-center justify-between gap-x-2 rounded-lg border-[1px] border-blue-900 py-1 px-1 dark:border-blue-200"
           onClick={() => {
             toggleMotion();
             // select();
           }}
         >
-          {/* <ColorIcon /> */}
           {!motion ? "Reduce Motion" : "Enable Motion"}
-        </Toggle>
-        <Toggle
-        // onClick={() => {
-        //   openWheel();
-        //   select();
-        // }}
+          <IoAccessibility className="m-0 h-4 w-4 fill-blue-900 p-0 dark:fill-blue-200" />
+        </div>
+        <div
+          className="relative flex h-min w-full cursor-pointer select-none flex-row-reverse items-center justify-between gap-x-2 rounded-lg border-[1px] border-blue-900 py-1 px-1 dark:border-blue-200"
+          // onClick={() => {
+          //   openWheel();
+          //   select();
+          // }}
         >
-          <ColorIcon />
           Change Color
-        </Toggle>
+          <ColorIcon className="m-0 h-4 w-4" />
+        </div>
       </div>
-    </Panel>
+    </div>
   );
 };
 
 export default Options;
 
-export function SongInfo({ song }: { song: string }) {
-  const { songIndex, songs, motion } = useSnapshot(state);
-  const [value, setValue] = useState<string>(
-    `(${songIndex + 1}/${songs.length}) ${song}`
-  );
-  return (
-    <SongBox className="songinfo">
-      <p
-        style={motion ? { animation: "none" } : undefined}
-        onClick={() => {
-          navigator.clipboard.writeText(song);
-          setValue("Copied!");
-          setTimeout(
-            () => setValue(`(${songIndex + 1}/${songs.length}) ${song}`),
-            2500
-          );
-        }}
-      >
-        {value}
-      </p>
-    </SongBox>
-  );
-}
-
 function ToolTray() {
   return (
-    <MusicWrapper className="musicWrap">
+    <div className="relative m-0 flex h-8 w-full items-center justify-between gap-x-1 self-center rounded-3xl border-[1px] border-blue-900 px-[5px] py-2 dark:border-blue-200 ">
       <PlayButton />
       {/* Song track */}
       <FFButton />
-    </MusicWrapper>
+    </div>
   );
 }

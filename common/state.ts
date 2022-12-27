@@ -31,7 +31,7 @@ export const state = proxy<stateypes>({
   // Firebase
   quote: "",
   //UI
-  theme: "dark",
+  theme: "light",
   monochrome: false,
   motion: false,
   loading: true,

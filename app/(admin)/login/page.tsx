@@ -50,7 +50,7 @@ export default function LoginPage() {
     return (
       <>
         <h1>Be excused</h1>
-        <div className="login">
+        <div className="m-0 flex h-full w-full flex-col items-center justify-center gap-y-[5px] px-[10px] py-[0px]">
           <p>Sign in to your account</p>
           <input required type="email" placeholder="Email" ref={email} />
           <button

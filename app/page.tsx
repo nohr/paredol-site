@@ -1,9 +1,9 @@
-import React from "react";
-import { Quote } from "../components/home/quote";
-import { Projects } from "../components/home/projects";
+import React, { memo } from "react";
+import Quote from "../components/home/quote";
+import Projects from "../components/home/projects";
 import Backdrop from "../components/home/backdrop";
 
-export default function HomePage() {
+function HomePage() {
   return (
     <>
       <Quote />
@@ -12,3 +12,5 @@ export default function HomePage() {
     </>
   );
 }
+
+export default memo(HomePage);

@@ -1,24 +1,17 @@
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { memo, Ref, useEffect, useMemo, useRef } from "react";
-import { useTheme } from "styled-components";
-import {
-  BufferGeometry,
-  Euler,
-  InstancedMesh,
-  Material,
-  MeshBasicMaterial,
-  Object3D,
-  SphereGeometry,
-} from "three";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { memo, useMemo, useRef } from "react";
+import { Euler, MeshBasicMaterial, SphereGeometry } from "three";
 import { useSnapshot } from "valtio";
 import { state } from "../../../common/state";
+import { colors } from "../../../styles/colors";
 
 function LogoCanvas() {
   const { motion } = useSnapshot(state);
   return (
     <Canvas
-      className="r3fCanvas"
-      // gl={{ antialias: true }}
+      style={{ width: "48px", height: "46px" }}
+      className="drag-none select-none"
+      gl={{ antialias: true }}
       // dpr={[1, 1.5]}
       // performance={{ min: 0.5 }}
       frameloop={motion ? "demand" : "always"}
@@ -32,12 +25,11 @@ function LogoCanvas() {
 export default memo(LogoCanvas);
 
 export function CD() {
-  const { gl } = useThree();
+  // const { gl } = useThree();
   // console.log(gl.info);
   const cd = useRef<any>();
   // const { hover } = props;
   const { loading, motion, theme } = useSnapshot(state);
-  const { ui } = useTheme();
 
   useFrame(() => {
     if (cd.current) {
@@ -51,11 +43,11 @@ export function CD() {
   const mat = useMemo(
     () =>
       new MeshBasicMaterial({
-        color: `${theme === "light" ? "#013C66" : "#96B1C8"}`,
+        color: `${theme === "light" ? colors?.blue[900] : colors?.blue[200]}`,
       }),
-    [ui.secondary, theme]
+    [theme]
   );
-  const sphere = useMemo(() => new SphereGeometry(220, 15, 15), []);
+  const sphere = useMemo(() => new SphereGeometry(220, 20, 20), []);
 
   return (
     <group

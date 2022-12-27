@@ -1,112 +1,154 @@
 import { useSnapshot } from "valtio";
 import Options from "./options/options";
 import { HomeButton } from "./logo/home";
-import { Links, Nav, Panel, Path, Toggle } from "./nav.style";
-import { useTheme } from "styled-components";
 import { usePathname } from "next/navigation";
 import { Search } from "./search/search";
 import { useUser } from "../../api/firebase.api";
 import { state } from "../../common/state";
 import { MenuButton } from "./nav.svg";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { BsFillInfoCircleFill } from "react-icons/bs";
+import { FaShoppingBasket } from "react-icons/fa";
+import { BsFillGearFill } from "react-icons/bs";
+import { useRef } from "react";
 
-function Link({ ...props }) {
-  const { ui } = useTheme();
-  const activeOriginal = `border-color: ${ui.secondary} !important;`;
+function Path({ ...props }) {
   const path = usePathname();
-  let { href, active } = props;
+  let { href, style } = props;
   return (
-    <Path
+    <Link
       onClick={() => (state.menu = false)}
-      active={
+      className={`my-1 flex ${
+        style === "md" ? "hidden md:flex" : ""
+      } h-min w-full select-none items-center justify-between rounded-xl border-[1px] border-blue-900 px-[6px] py-[4px] font-thin backdrop-blur-lg dark:border-blue-200 md:w-fit md:gap-x-2 md:!border-transparent md:hover:!border-blue-900 md:hover:dark:!border-blue-200 ${
         path?.substring(1) === `${href.toLowerCase()}`
-          ? active
-            ? active
-            : activeOriginal
-          : undefined
-      }
+          ? `bg-blue-900 text-white dark:bg-blue-200 dark:text-black`
+          : ""
+      }`}
       href={`/${href.toLowerCase()}`}
     >
       {href}
-    </Path>
+      {href === "Info" ? (
+        <BsFillInfoCircleFill
+          className={`m-0 h-3 ${
+            path?.substring(1) === `${href.toLowerCase()}`
+              ? "text-white dark:text-black"
+              : "fill-blue-900 p-0 dark:fill-blue-200"
+          } `}
+        />
+      ) : href === "Store" ? (
+        <FaShoppingBasket
+          className={`m-0 h-3 ${
+            path?.substring(1) === `${href.toLowerCase()}`
+              ? "text-white dark:text-black"
+              : "fill-blue-900 p-0 dark:fill-blue-200"
+          } `}
+        />
+      ) : null}
+    </Link>
   );
 }
 
-function NavLinks() {
-  const { ui } = useTheme();
-  const active = `border-color: ${ui.secondary} !important;`;
+function NavLinks({ ...props }) {
   const { options } = useSnapshot(state);
-
+  const { optionsBtn } = props;
   return (
-    <Links>
-      <Link href="Info" />
-      <Link href="Store" />
-      <Toggle
-        className="toggle"
-        active={options ? active : undefined}
+    <div
+      className={`m-0 hidden ${
+        options ? "border-blue-900 dark:border-blue-200" : ""
+      } h-full w-full flex-row items-center justify-end gap-x-1  md:flex`}
+    >
+      <Path href="Info" />
+      <Path href="Store" />
+      <div
+        className={`my-1 flex h-min w-fit cursor-pointer select-none items-center rounded-xl border-[1px] border-transparent px-[6px] py-[4px] font-thin backdrop-blur-lg md:gap-x-2 md:hover:border-blue-900 md:hover:dark:border-blue-200 ${
+          options
+            ? "bg-blue-900 text-white dark:bg-blue-200 dark:text-black"
+            : ""
+        }`}
         tabIndex={-1}
         onClick={() => (state.options = !options)}
+        ref={optionsBtn}
       >
         Options
-      </Toggle>
-    </Links>
+        <BsFillGearFill
+          className={`m-0 h-3 ${
+            options
+              ? "text-white dark:text-black"
+              : "fill-blue-900 p-0 dark:fill-blue-200"
+          } `}
+        />
+      </div>
+    </div>
   );
 }
 
-function Menu() {
+function MobileMenu() {
   const user = useUser();
   const { options } = useSnapshot(state);
-  const { ui } = useTheme();
-  const active = `background-color: ${ui.secondary} !important;
-  color: ${ui.background} !important;
-  `;
+  const ref = useRef<any>(null);
+
+  ref.current?.addEventListener("touchmove", (e: any) => {
+    e.preventDefault();
+  });
 
   return (
-    <Panel className="menu">
+    <div ref={ref} className="fixed bottom-24 h-fit w-screen md:hidden">
       {options ? <Options /> : null}
-      <Links className="mobile-links">
-        {user && <Link href="Editor" active={active} />}
-        <Link href="Info" active={active} />
-        <Toggle
-          className="option-toggle"
-          active={options ? active : undefined}
+      <div className="flex h-fit w-full flex-row items-center justify-evenly gap-x-3 p-3">
+        {user && <Path href="Editor" />}
+        <Path href="Info" />
+        <div
+          className={`m-0 flex h-min w-fit select-none items-center justify-between rounded-xl border-[1px] border-blue-900 px-[6px] py-[4px] font-thin backdrop-blur-lg dark:border-blue-200 md:w-fit md:border-transparent ${
+            options
+              ? "bg-blue-900 text-white dark:bg-blue-200 dark:text-black "
+              : "bg-transparent text-blue-900 dark:text-blue-200 "
+          }}`}
           tabIndex={-1}
           onClick={() => (state.options = !options)}
         >
+          <BsFillGearFill
+            className={`m-0 h-3 ${
+              options
+                ? "text-white dark:text-black"
+                : "fill-blue-900 p-0 dark:fill-blue-200"
+            } `}
+          />
           Options
-        </Toggle>
-        <Link href="Store" active={active} />
-      </Links>
-    </Panel>
+        </div>
+        <Path href="Store" />
+      </div>
+    </div>
   );
 }
 
 export default function Navbar() {
   const { options, mobile, menu } = useSnapshot(state);
-  const [area, setArea] = useState<JSX.Element>(<NavLinks />);
   const user = useUser();
-  useEffect(() => {
-    if (mobile) {
-      setArea(<MenuButton />);
-    } else {
-      setArea(<NavLinks />);
-    }
-  }, [mobile]);
-
+  const optionsBtn = useRef(null);
   if (!menu && mobile) state.options = false;
+  const ref = useRef<any>(null);
+
+  ref.current?.addEventListener("touchmove", (e: any) => {
+    e.preventDefault();
+  });
 
   return (
     <>
-      <Nav>
-        <div className="logo-area">
+      <div
+        ref={ref}
+        className={`fixed bottom-4 grid h-min w-screen grid-cols-[0.2fr_0.6fr_0.2fr] grid-rows-[min-content] items-center justify-center justify-items-center p-3 md:top-0 md:grid-cols-[25%_50%_25%]`}
+      >
+        <div className="m-0 flex h-full flex-row items-center justify-between gap-0 p-0 md:w-full">
           <HomeButton />
-          {user && !mobile ? <Link href="Editor" /> : null}
+          {user ? <Path href="Editor" style={"md"} /> : null}
         </div>
         <Search />
-        {area}
-      </Nav>
-      {options && !mobile ? <Options /> : null}
-      {menu ? <Menu /> : null}
+        <MenuButton />
+        <NavLinks optionsBtn={optionsBtn} />
+      </div>
+      {options && !mobile ? <Options optionsBtn={optionsBtn} /> : null}
+      {menu ? <MobileMenu /> : null}
     </>
   );
 }

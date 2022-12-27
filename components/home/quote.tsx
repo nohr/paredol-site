@@ -6,27 +6,39 @@ import { getQuote } from "../../api/firebase.api";
 import { state } from "../../common/state";
 const Scrambler = require("scrambling-text");
 
-export function Quote() {
+function Quote() {
   const scramble = useRef(new Scrambler());
   const [text, setText] = useState<string>(state.quote);
-  const { motion, quote } = useSnapshot(state);
+  const { motion, quote, theme } = useSnapshot(state);
 
   useEffect(() => {
-    getQuote().then((res) =>
+    getQuote().then((res) => {
+      state.quote = res;
       scramble.current.scramble(res, setText, {
         characters: characters,
-      })
-    );
-  }, [quote, setText]);
+      });
+    });
+  }, [setText, theme]);
 
+  useEffect(() => {
+    return () => {
+      state.quote = "";
+    };
+  }, []);
   return (
     <h1
-    className={`text-5xl ${!motion ? "animate-[quotescroll_7s_linear_infinite] w-max" : "whitespace-pre-wrap"}`}
+      className={`text-5xl  ${
+        !motion
+          ? "w-full animate-[autoscroll_7s_linear_infinite] whitespace-nowrap will-change-transform"
+          : "animate-none whitespace-pre-wrap"
+      }`}
     >
-      {text}
+      {motion ? quote : text}
     </h1>
   );
 }
+
+export default Quote;
 
 const characters = [
   "a",

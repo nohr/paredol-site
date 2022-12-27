@@ -62,7 +62,8 @@ export async function getSongs() {
   const data = await getDocs(
     query(collection(db, "songs"), orderBy("index", "asc"))
   );
-  return data.docs.map((doc) => doc.data());
+  const songs = data.docs.map((doc) => doc.data());
+  return songs;
 }
 
 export function useUser() {

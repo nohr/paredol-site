@@ -1,13 +1,12 @@
 "use client";
 
-import { DocumentData } from "firebase/firestore";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getData } from "../../api/firebase.api";
 import { state } from "../../common/state";
 
-export function Projects() {
-  const [projects, setProjects] = useState<DocumentData | undefined>();
+function Projects() {
+  const [projects, setProjects] = useState<any>();
 
   useEffect(() => {
     getData().then((data) => setProjects(data));
@@ -22,12 +21,17 @@ export function Projects() {
   return (
     <>
       {/* <svg ref={svg} /> */}
-      {projects &&
-        projects.map((doc: DocumentData, index: number) => (
-          <Link key={index} href={doc.lot}>
+      {projects ? (
+        projects.map((doc: any, index: number) => (
+          <Link key={index} href={doc.lot} className="w-fit">
             {doc.name}
           </Link>
-        ))}
+        ))
+      ) : (
+        <p>Loading projects...</p>
+      )}
     </>
   );
 }
+
+export default Projects;
