@@ -14,14 +14,13 @@ export default function PWATags() {
       <meta
         name="theme-color"
         media="(prefers-color-scheme: light)"
-        content="#ffffff"
+        content="#ebebeb"
       />
       <meta
         name="theme-color"
         media="(prefers-color-scheme: dark)"
-        content="#000000"
+        content="#101010"
       />
-
       <meta
         name="viewport"
         content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSnapshot } from "valtio";
 import { state } from "../../../common/state";
 import {
@@ -30,7 +30,7 @@ const Options = ({ ...props }) => {
     state.options = false;
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof window === "undefined") return;
     window.addEventListener("mousedown", handleClick);
     return () => {
@@ -42,13 +42,13 @@ const Options = ({ ...props }) => {
   return (
     <div
       ref={ref}
-      className="bottom-36 grid w-full grid-cols-[48%_4%_48%] grid-rows-[min-content] items-start border-y-[1px] border-blue-900 p-3 backdrop-blur-lg dark:border-blue-200 md:fixed md:top-24 md:right-4 md:h-min md:w-1/5 md:grid-cols-[100%] md:grid-rows-[min-content_20px_min-content]"
+      className="bottom-36 grid w-full grid-cols-[48%_4%_48%] grid-rows-[min-content] items-start border-y-[1px] border-blue-900 p-3 backdrop-blur-lg dark:border-blue-200 md:fixed md:top-24 md:right-4 md:h-min md:w-48 md:grid-cols-[100%] md:grid-rows-[min-content_20px_min-content] md:border-y-0 md:border-l-[1px]"
     >
       <div className="m-0 flex h-full w-full flex-col items-center justify-center gap-y-5 p-0">
         <p className="absolute -top-[30px] select-none p-2 text-[0.5rem] font-black uppercase backdrop-blur-lg md:static">
           Audio
         </p>
-        <ToolTray />
+        <MusicPlayer />
         <SongInfo />
         <div
           className="relative flex h-min w-full cursor-pointer select-none flex-row-reverse items-center justify-between gap-x-2 rounded-lg border-[1px] border-blue-900 py-1 px-1 dark:border-blue-200"
@@ -97,12 +97,20 @@ const Options = ({ ...props }) => {
 
 export default Options;
 
-function ToolTray() {
+function MusicPlayer() {
+  const { playing } = useSnapshot(state);
+  // change styling of the  buttons when the song track passes behind them
+
+  //
   return (
     <div className="relative m-0 flex h-8 w-full items-center justify-between gap-x-1 self-center rounded-3xl border-[1px] border-blue-900 px-[5px] py-2 dark:border-blue-200 ">
-      <PlayButton />
-      {/* Song track */}
-      <FFButton />
+      <PlayButton
+        className={`flex h-[20px] w-[20px] cursor-pointer items-center justify-center rounded-full border-[1px] border-transparent bg-blue-900 fill-white dark:bg-blue-200 dark:fill-black  md:hover:border-blue-900 md:hover:bg-transparent md:hover:fill-blue-900 md:hover:dark:border-blue-200 md:hover:dark:fill-blue-200`}
+      />
+      {/*TODO: Song track */}
+      <FFButton
+        className={`flex h-[20px] w-[20px] cursor-pointer items-center justify-center rounded-full border-[1px] border-transparent bg-blue-900 fill-white dark:bg-blue-200 dark:fill-black md:hover:border-blue-900 md:hover:bg-transparent md:hover:fill-blue-900 md:hover:dark:border-blue-200 md:hover:dark:fill-blue-200`}
+      />
     </div>
   );
 }

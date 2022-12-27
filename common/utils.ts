@@ -29,6 +29,7 @@ export const useTheme = () => {
 
     if (userTheme === "dark" || (!userTheme && systemDark)) {
       document.documentElement.classList.add("dark");
+      // document.querySelector("html")?.setAttribute("theme-color", "#101010");
       state.theme = "dark";
       return;
     }
@@ -42,10 +43,12 @@ export const toggleTheme = (theme?: string) => {
       theme === "light"
     ) {
       document.documentElement.classList.remove("dark");
+      // document.querySelector("html")?.setAttribute("theme-color", "#ebebeb");
       localStorage.setItem("theme", "light");
       state.theme = "light";
     } else {
       document.documentElement.classList.add("dark");
+      // document.querySelector("html")?.setAttribute("theme-color", "#101010");
       localStorage.setItem("theme", "dark");
       state.theme = "dark";
     }

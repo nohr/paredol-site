@@ -17,11 +17,11 @@ export function FFIcon({ ...props }) {
   );
 }
 export function PlayPauseIcon({ ...props }) {
-  const { playMusic } = useSnapshot(state);
+  const { playing } = useSnapshot(state);
 
   return (
     <>
-      {!playMusic ? (
+      {!playing ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           data-name="Layer 1"

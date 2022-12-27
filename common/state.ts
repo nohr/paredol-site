@@ -16,7 +16,7 @@ interface stateypes {
   songs: any;
   songIndex: number;
   muted: boolean;
-  playMusic: boolean;
+  playing: boolean;
   playRate: number;
   resetRate: number;
   selectRate: number;
@@ -43,7 +43,7 @@ export const state = proxy<stateypes>({
   songs: [],
   songIndex: 0,
   muted: false,
-  playMusic: false,
+  playing: false,
   playRate: 0.75,
   resetRate: Math.random() * (1.15 - 0.3) + 0.3,
   selectRate: Math.random() * (1.15 - 0.85) + 0.85,

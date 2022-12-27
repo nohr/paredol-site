@@ -1,12 +1,20 @@
-const deg = Math.floor(Math.random() * 15) - 5;
+"use client";
+
+import { useEffect, useRef } from "react";
+
 function Backdrop() {
+  const deg = useRef(0);
+  useEffect(() => {
+    deg.current = Math.floor(Math.random() * 15) - 5;
+  }, []);
+
   return (
     <div
       className={`pointer-events-none fixed h-auto w-fit`}
       style={{
         top: "50%",
         left: "50%",
-        transform: `translate(-50%,-50%) rotate(${deg}deg)`,
+        transform: `translate(-50%,-50%) rotate(${deg.current}deg)`,
       }}
     >
       <Wireframe className="fill-blue-900 opacity-[.05] dark:fill-blue-100 dark:opacity-[.1]" />
