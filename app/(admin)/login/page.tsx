@@ -41,7 +41,7 @@ export default function LoginPage() {
         signInWithEmailLink(auth, email, window.location.href)
           .then((result) => {
             window.localStorage.removeItem("emailForSignIn");
-            console.log(result);
+            // console.log(result);
           })
           .catch((error) => error);
       }

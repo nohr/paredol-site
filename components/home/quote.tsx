@@ -20,7 +20,7 @@ function Quote() {
           characters: characters,
         });
     });
-  }, [setText]);
+  }, [setText, motion]);
 
   useEffect(() => {
     motion
@@ -52,7 +52,7 @@ function Quote() {
 
   useEffect(() => {
     return () => {
-      state.quote = "";
+      state.quote = " ";
     };
   }, []);
   return (

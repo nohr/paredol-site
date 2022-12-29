@@ -2,8 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useSnapshot } from "valtio";
-import { getSongs } from "../api/firebase.api";
-import { state } from "./state";
+import { getSongs } from "@api/firebase.api";
+import { state } from "state";
+
+export function useMounted() {
+  const [hasMounted, setHasMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  return hasMounted;
+}
 
 export const useSearch = (projects: any, query: any) => {
   if (query === "") return projects;
@@ -26,29 +36,38 @@ export const useTheme = () => {
     const systemDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
+    const docTheme: HTMLMetaElement | null = document.querySelector(
+      "meta[name='theme-color']"
+    );
 
     if (userTheme === "dark" || (!userTheme && systemDark)) {
       document.documentElement.classList.add("dark");
-      // document.querySelector("html")?.setAttribute("theme-color", "#101010");
+      if (docTheme) docTheme.content = "#101010";
       state.theme = "dark";
       return;
+    } else {
+      if (docTheme) docTheme.content = "#ebebeb";
+      state.theme = "light";
     }
   }
 };
 
 export const toggleTheme = (theme?: string) => {
   if (typeof document !== "undefined") {
+    const docTheme: HTMLMetaElement | null = document.querySelector(
+      "meta[name='theme-color']"
+    );
     if (
       document.documentElement.classList.contains("dark") ||
       theme === "light"
     ) {
       document.documentElement.classList.remove("dark");
-      // document.querySelector("html")?.setAttribute("theme-color", "#ebebeb");
+      if (docTheme) docTheme.content = "#ebebeb";
       localStorage.setItem("theme", "light");
       state.theme = "light";
     } else {
       document.documentElement.classList.add("dark");
-      // document.querySelector("html")?.setAttribute("theme-color", "#101010");
+      if (docTheme) docTheme.content = "#101010";
       localStorage.setItem("theme", "dark");
       state.theme = "dark";
     }

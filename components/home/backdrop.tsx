@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 function Backdrop() {
   const deg = useRef(0);
   useEffect(() => {
-    deg.current = Math.floor(Math.random() * 15) - 5;
+    deg.current = Math.floor(Math.random() * 30) - 15;
   }, []);
 
   return (
@@ -17,7 +17,7 @@ function Backdrop() {
         transform: `translate(-50%,-50%) rotate(${deg.current}deg)`,
       }}
     >
-      <Wireframe className="fill-blue-900 opacity-[.05] dark:fill-blue-100 dark:opacity-[.1]" />
+      <Wireframe className="fill-blue-900 opacity-[.05] dark:fill-blue-100 dark:opacity-[.1] md:h-auto md:w-[100vw]" />
     </div>
   );
 }

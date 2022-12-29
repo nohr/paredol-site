@@ -1,7 +1,9 @@
+import { DocumentData } from "firebase/firestore/lite";
 import { proxy } from "valtio";
 
 interface stateypes {
   // Firebase
+  data: DocumentData;
   quote: string;
   // UI
   theme: string;
@@ -29,7 +31,8 @@ interface stateypes {
 
 export const state = proxy<stateypes>({
   // Firebase
-  quote: "",
+  data: [],
+  quote: " ",
   //UI
   theme: "light",
   monochrome: false,
@@ -48,6 +51,7 @@ export const state = proxy<stateypes>({
   resetRate: Math.random() * (1.15 - 0.3) + 0.3,
   selectRate: Math.random() * (1.15 - 0.85) + 0.85,
   // Mobile
+  // TODO: make this into a MenuContext.ts
   menu: false,
   gyro: false,
   mobile: false,

@@ -9,7 +9,7 @@ import {
   orderBy,
   query,
   where,
-} from "firebase/firestore";
+} from "firebase/firestore/lite";
 import { useState, useEffect } from "react";
 import { state } from "../common/state";
 import { auth, db } from "./firebase.config";

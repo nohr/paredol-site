@@ -23,7 +23,16 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@common/*": ["./common/*"],
+      "state": ["./common/state"],
+      "utils":[ "./common/utils"],
+      "@context/*": ["./common/context/*"],
+      "@components/*": ["./components/*"],
+      "svg": ["./components/svg"],
+      "@api/*": ["./api/*"],
+    }
   },
   "include": [
     "next-env.d.ts",

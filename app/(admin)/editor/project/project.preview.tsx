@@ -1,13 +1,13 @@
 import { Key, useContext, useEffect } from "react";
-import {
-  handleDeleteContent,
-  handleGetContent,
-} from "../../../../api/editor.api";
-import { EditorContext } from "../../../../common/editor.context";
+import { handleDeleteContent, handleGetContent } from "@api/editor.api";
+import { EditorContext } from "@context/editor.context";
+import { useSnapshot } from "valtio";
+import { state } from "state";
 
-export default function Preview() {
-  const { content, setContent, name, IDs, setCover } =
+function ProjectEditorPreview() {
+  const { content, setContent, name, lot, titles, setCover } =
     useContext(EditorContext);
+  const { data } = useSnapshot(state);
   // set the cover image when the content changes
   useEffect(() => {
     if (content.length > 0) {
@@ -27,11 +27,11 @@ export default function Preview() {
   // Set the preview content when the document matches from the database
   useEffect(() => {
     // Set the content to the data from the database if the name matches an ID
-    if (IDs.indexOf(name) !== -1) {
+    if (titles.indexOf(name) !== -1) {
       // get the data from the database
-      handleGetContent(name, setContent);
+      handleGetContent(lot, data, setContent);
     }
-  }, [name, IDs, setContent]);
+  }, [lot, name, titles, data, setContent]);
 
   function GenerateElement({
     item,
@@ -46,21 +46,25 @@ export default function Preview() {
   }) {
     const { type, name, url, caption, id } = item;
     return (
-      <div className="previewContent" key={id}>
+      <div className="relative flex flex-col gap-y-2" key={id}>
         <>
           {type === "image" ? (
-            <img src={url} alt={name} key={id} />
+            <img className="h-[50vh] w-auto" src={url} alt={name} key={id} />
           ) : type === "video" ? (
-            <video src={url} key={id} controls></video>
+            <video
+              className="h-[50vh] w-auto"
+              src={url}
+              key={id}
+              controls
+            ></video>
           ) : (
             <p>{type} type not supported</p>
           )}
         </>
-        <p>{caption}</p>
+        <p className=" z-20">{caption}</p>
         <button
-          className={`delete`}
-          style={{ width: "min-content" }}
-          onClick={() => handleDeleteContent(item, name, content, setContent)}
+          className={`mb-1 h-min w-fit !appearance-none self-center rounded-md !bg-red-500 px-3 py-1 text-xs font-bold uppercase text-white shadow-md outline-none transition-all duration-150 ease-linear hover:shadow-lg focus:outline-none`}
+          onClick={() => handleDeleteContent(item, lot, content, setContent)}
           type="button"
         >
           Delete {type}
@@ -69,7 +73,7 @@ export default function Preview() {
     );
   }
   return (
-    <div className="slideshow">
+    <div className=" flex h-[90%] w-full flex-row flex-nowrap items-center gap-x-4 overflow-x-scroll ">
       {content.length > 0 &&
         content.map((value: any, index: Key) => (
           <GenerateElement item={value} key={index} />
@@ -79,3 +83,5 @@ export default function Preview() {
     </div>
   );
 }
+
+export default ProjectEditorPreview;

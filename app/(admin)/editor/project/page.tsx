@@ -1,37 +1,37 @@
 "use client";
 
-import React, { useState } from "react";
-// import { useSnapshot } from "valtio";
-import { EditorProvider } from "../../../../common/editor.context";
-// import { state } from "../../../../common/state";
-import { ContentPage } from "./form.style";
-// import { ProjectEditor } from "./project.form";
+import React, { useContext } from "react";
+import { useSnapshot } from "valtio";
+import { EditorContext, EditorProvider } from "@context/editor.context";
+import { state } from "state";
+import { ProjectEditorForm } from "./project.form";
+import ProjectEditorPreview from "./project.preview";
 
-function ProjectForm() {
-  // const { mobile } = useSnapshot(state);
-  const [saved, setSaved] = useState(false);
+function ProjectEditor() {
+  const { mobile } = useSnapshot(state);
+  const { saved, setSaved } = useContext(EditorContext);
 
   return (
-    <ContentPage>
-      <div className="formWrap">
-        {/* {saved ? (
+    <div className=" flex h-fit w-full flex-col items-center justify-start bg-transparent md:flex-row">
+      <div className="mb-28 flex w-full flex-col items-center justify-start gap-x-5 md:mb-0 md:h-full md:w-fit md:resize-x md:overflow-y-scroll md:p-4">
+        {saved ? (
           <>
             <p>Changes Saved!</p>
             <button onClick={() => setSaved(false)}>Post Again</button>
           </>
         ) : (
-          <ProjectEditor setSaved={setSaved} />
-        )} */}
+          <ProjectEditorForm />
+        )}
       </div>
-      {/* {!mobile && <Preview />} */}
-    </ContentPage>
+      {!mobile && <ProjectEditorPreview />}
+    </div>
   );
 }
+
 export default function EditPostsPage() {
   return (
     <EditorProvider>
-      <h3>edit posts</h3>
-      <ProjectForm />
+      <ProjectEditor />
     </EditorProvider>
   );
 }

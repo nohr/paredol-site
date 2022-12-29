@@ -1,9 +1,8 @@
 import {
-  collection,
   deleteDoc,
   doc,
+  DocumentData,
   getDoc,
-  getDocs,
   setDoc,
   Timestamp,
 } from "firebase/firestore/lite";
@@ -19,12 +18,10 @@ import { db, storage } from "./firebase.config";
 import { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { getAuth } from "firebase/auth";
 import { getData } from "./firebase.api";
-import { dataProps } from "../common/editor.context";
-// import { convertToWebp } from '../common';
 
 export async function handleAddContent(
   selectedFiles: any,
-  name: any,
+  lot: any,
   setLoad: (arg0: string) => void,
   content: any,
   setContent: any,
@@ -47,10 +44,7 @@ export async function handleAddContent(
     // create a unique id for the file
     const id = v4();
     // create a reference to the storage bucket location
-    const storageRef = ref(
-      storage,
-      `projects/${name} Media/${id}-${file.name}`
-    );
+    const storageRef = ref(storage, `projects/${lot} Media/${id}-${file.name}`);
     // upload the file
     uploadTask = uploadBytesResumable(storageRef, file);
     uploadTask.on(
@@ -67,10 +61,10 @@ export async function handleAddContent(
       },
       () => {
         getDownloadURL(
-          ref(storage, `projects/${name} Media/${id}-${file.name}`)
+          ref(storage, `projects/${lot} Media/${id}-${file.name}`)
         ).then((downloadURL) => {
           handleSetContent(
-            name,
+            lot,
             setContent,
             newContent,
             content,
@@ -94,7 +88,7 @@ export async function handleAddContent(
 }
 // wait for the firebase extension to finish and grab the download url
 function handleSetContent(
-  name: string,
+  lot: string,
   setContent: (arg0: any[]) => void,
   newContent: {
     id: any;
@@ -125,7 +119,7 @@ function handleSetContent(
   setContent([...content, ...newContent]);
   // update the firestore document
   setDoc(
-    doc(db, "projects", name),
+    doc(db, "projects", lot),
     { content: [...content, ...newContent] },
     { merge: true }
   );
@@ -139,7 +133,7 @@ export function handleDeleteContent(
     caption?: string;
     id?: string;
   },
-  name: string,
+  lot: string,
   content: any[],
   setContent: {
     (
@@ -150,12 +144,12 @@ export function handleDeleteContent(
     (arg0: any): void;
   }
 ) {
-  deleteObject(ref(storage, `projects/${name} Media/${item.name}`));
+  deleteObject(ref(storage, `projects/${lot} Media/${item.name}`));
   // remove the item from the content array
-  setContent(content.filter((i: any) => i !== item));
+  setContent((prev) => prev.filter((i: any) => i !== item));
   // update the firestore doc
   setDoc(
-    doc(db, "projects", name),
+    doc(db, "projects", lot),
     {
       content: content.filter((i: any) => i !== item),
     },
@@ -165,39 +159,48 @@ export function handleDeleteContent(
 
 export async function handleDeletePost(
   lot: string,
-  name: any,
   setSaved: (arg0: boolean) => void
 ) {
-  setSaved(true);
   await deleteDoc(doc(db, "projects", lot));
   // delete firebase storage folder
-  listAll(ref(storage, `projects/${name} Media`)).then((res) => {
+  listAll(ref(storage, `projects/${lot} Media`)).then((res) => {
     res.items.forEach((itemRef) => {
       deleteObject(itemRef);
     });
   });
+  setSaved(true);
 }
 
 export async function uploadData(
-  data: dataProps["current"],
-  by: string,
+  name: string,
+  category: string,
+  client: string,
+  description: string,
+  program: string[],
+  url: string,
+  published: boolean,
+  date: any,
+  content: any[],
+  cover: string,
+  by: any,
   lot: string
 ) {
-  const {
+  console.log(
     name,
-    date,
     category,
     client,
     description,
-    url,
     program,
+    url,
+    published,
+    date,
     content,
     cover,
-    published,
-  } = data;
-
+    by,
+    lot
+  );
   await setDoc(
-    doc(db, "projects", name),
+    doc(db, "projects", lot),
     {
       by: by,
       lot: lot,
@@ -242,51 +245,66 @@ export async function uploadData(
 // }
 
 export async function handleGetContent(
-  name: string,
-  setContent: {
-    (
-      value: SetStateAction<
-        { type: string; url: string; caption: string; id: string }[]
-      >
-    ): void;
-    (arg0: any): void;
-  }
+  lot: string,
+  data: DocumentData,
+  setContent: Dispatch<
+    SetStateAction<
+      {
+        type: string;
+        url: string;
+        caption: string;
+        id: string;
+      }[]
+    >
+  >
 ) {
-  getDoc(doc(db, "projects", name))
-    .then((doc) => {
-      if (doc.exists()) {
-        setContent(doc.data().content);
-      } else {
-        console.log("No such document!");
-      }
-    })
-    .catch((error) => {
-      console.log("Error getting document:", error);
-    });
+  let projectContent: any = data.filter(
+    (item: { lot: string }) => item.lot === lot
+  )[0];
+  if (projectContent) projectContent = projectContent.content;
+  if (projectContent) setContent(projectContent);
 }
 
 export async function fillFormData(
-  data: {}[],
-  IDs: string | any[],
-  name: string
+  name: string,
+  data: DocumentData,
+  setName: Dispatch<SetStateAction<string>>,
+  setDate: Dispatch<SetStateAction<any>>,
+  setCategory: Dispatch<SetStateAction<string>>,
+  setClient: Dispatch<SetStateAction<string>>,
+  setDescription: Dispatch<SetStateAction<string>>,
+  setProgram: Dispatch<SetStateAction<string[]>>,
+  setURL: Dispatch<SetStateAction<string>>,
+  setPublished: Dispatch<SetStateAction<boolean>>,
+  setLot: Dispatch<SetStateAction<string>>
 ) {
-  if (IDs.indexOf(name) !== -1) {
-    const docSnap = await getDoc(doc(db, "projects", name));
-    if (docSnap.exists()) {
-      data.push(docSnap.data());
-    } else {
-      console.log("No such document!");
-    }
+  // check the data array if the name matches and populate the form
+  const project = data.filter((item: any) => item["name"] === name)[0];
+  if (project) {
+    setName(project.name);
+    setDate(formatDate(convertDate(project.date)));
+    setCategory(project.category);
+    setClient(project.client);
+    setDescription(project.description);
+    setProgram(project.program);
+    setURL(project.url);
+    setPublished(project.published);
+    setLot(project.lot);
+  } else {
+    console.log("not found");
   }
 }
 
 export async function getFormLists(
-  setIDs: Dispatch<SetStateAction<string[]>>,
+  data: DocumentData,
+  setTitles: Dispatch<SetStateAction<string[]>>,
   setCategories: Dispatch<SetStateAction<string[]>>
 ) {
-  const data = await getDocs(collection(db, "projects"));
-  setIDs(data.docs.map((doc) => doc.id));
-  setCategories([...new Set(data.docs.map((doc) => doc.data().category))]);
+  // iterate through the projects and add the project names and categories to the datalist
+  const names = data.map((doc: { name: string }) => doc.name);
+  const categories = data.map((doc: { category: string }) => doc.category);
+  setTitles(names);
+  setCategories(categories);
 }
 
 export function getType(client: string) {
@@ -306,17 +324,38 @@ export const convertDate = (timestamp: { seconds: number }) => {
 };
 
 export function clearSelectedName(
-  data: Object,
   nameInput: MutableRefObject<HTMLInputElement>,
   dataList: MutableRefObject<HTMLDataListElement>,
   setIsFilePicked: Dispatch<SetStateAction<boolean>>,
-  setSelectedFiles: Dispatch<SetStateAction<FileList | undefined>>
+  setSelectedFiles: Dispatch<SetStateAction<FileList | undefined>>,
+  setName: Dispatch<SetStateAction<string>>,
+  setDate: Dispatch<SetStateAction<any>>,
+  setCategory: Dispatch<SetStateAction<string>>,
+  setClient: Dispatch<SetStateAction<string>>,
+  setDescription: Dispatch<SetStateAction<string>>,
+  setProgram: Dispatch<SetStateAction<string[]>>,
+  setURL: Dispatch<SetStateAction<string>>,
+  setPublished: Dispatch<SetStateAction<boolean>>,
+  setLot: Dispatch<SetStateAction<string>>,
+  setContent: Dispatch<
+    SetStateAction<{ type: string; url: string; caption: string; id: string }[]>
+  >
 ) {
+  setSelectedFiles(undefined);
+  setIsFilePicked(false);
+  setName("");
+  setDate("");
+  setCategory("");
+  setClient("");
+  setDescription("");
+  setProgram([]);
+  setURL("");
+  setPublished(false);
+  setLot("");
+  setContent([]);
+
   if (nameInput.current) {
     nameInput.current.value = "";
-
-    setSelectedFiles(undefined);
-    setIsFilePicked(false);
 
     let options = dataList.current.options;
 
@@ -327,26 +366,44 @@ export function clearSelectedName(
 }
 
 export function handleUploadPost(
-  data: {
-    name: string;
-    published: boolean;
-    date: any;
-    client: string;
-    category: string;
-    description: string;
-    url: string;
-    program: string[];
-  },
   setSaved: Dispatch<SetStateAction<boolean>>,
   setContent: Dispatch<
     SetStateAction<{ type: string; url: string; caption: string; id: string }[]>
-  >
+  >,
+  name: string,
+  category: string,
+  client: string,
+  description: string,
+  program: string[],
+  url: string,
+  published: boolean,
+  date: string,
+  content: {
+    type: string;
+    url: string;
+    caption: string;
+    id: string;
+  }[],
+  cover: string,
+  lot?: string
 ) {
-  const { name, date, client, category } = data;
   if (name !== "" && category !== "" && client !== "" && date !== "") {
-    let by = getCreator();
-    let lot = generateLot(client, name, date);
-    // uploadData(data, by, lot);
+    const by = getCreator();
+    if (!lot) lot = generateLot(client, name, date);
+    uploadData(
+      name,
+      category,
+      client,
+      description,
+      program,
+      url,
+      published,
+      date,
+      content,
+      cover,
+      by,
+      lot
+    );
     getData();
     setContent([]);
     setSaved(true);

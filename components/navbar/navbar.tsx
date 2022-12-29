@@ -3,14 +3,14 @@ import Options from "./options/options";
 import { HomeButton } from "./logo/home";
 import { usePathname } from "next/navigation";
 import { Search } from "./search/search";
-import { useUser } from "../../api/firebase.api";
-import { state } from "../../common/state";
-import { MenuButton } from "./nav.svg";
+import { useUser } from "@api/firebase.api";
+import { state } from "state";
 import Link from "next/link";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { FaShoppingBasket } from "react-icons/fa";
 import { BsFillGearFill } from "react-icons/bs";
 import { useRef } from "react";
+import { Squash as Hamburger } from "hamburger-react";
 
 function Path({ ...props }) {
   const path = usePathname();
@@ -49,14 +49,14 @@ function Path({ ...props }) {
   );
 }
 
-function NavLinks({ ...props }) {
+function DesktopLinks({ ...props }) {
   const { options } = useSnapshot(state);
   const { optionsBtn } = props;
   return (
     <div
       className={`m-0 hidden ${
         options ? "border-blue-900 dark:border-blue-200" : ""
-      } h-full w-full flex-row items-center justify-end gap-x-1  md:flex`}
+      } h-full w-full flex-row items-center justify-between gap-x-1  md:flex`}
     >
       <Path href="Info" />
       <Path href="Store" />
@@ -83,9 +83,10 @@ function NavLinks({ ...props }) {
   );
 }
 
-function MobileMenu() {
+function MobileMenu({ ...props }) {
   const user = useUser();
-  const { options } = useSnapshot(state);
+  const { optionsBtn } = props;
+  const { options, menu } = useSnapshot(state);
   const ref = useRef<any>(null);
 
   ref.current?.addEventListener("touchmove", (e: any) => {
@@ -93,8 +94,13 @@ function MobileMenu() {
   });
 
   return (
-    <div ref={ref} className="fixed bottom-24 h-fit w-screen md:hidden">
-      {options ? <Options /> : null}
+    <div
+      ref={ref}
+      className={`${
+        menu ? "" : "!hidden"
+      } fixed bottom-24 h-fit w-screen md:hidden`}
+    >
+      {options ? <Options optionsBtn={optionsBtn} /> : null}
       <div className="flex h-fit w-full flex-row items-center justify-evenly gap-x-3 p-3">
         {user && <Path href="Editor" />}
         <Path href="Info" />
@@ -104,9 +110,11 @@ function MobileMenu() {
               ? "bg-blue-900 text-white dark:bg-blue-200 dark:text-black "
               : "bg-transparent text-blue-900 dark:text-blue-200 "
           }}`}
+          ref={optionsBtn}
           tabIndex={-1}
           onClick={() => (state.options = !options)}
         >
+          Options
           <BsFillGearFill
             className={`m-0 h-3 ${
               options
@@ -114,7 +122,6 @@ function MobileMenu() {
                 : "fill-blue-900 p-0 dark:fill-blue-200"
             } `}
           />
-          Options
         </div>
         <Path href="Store" />
       </div>
@@ -123,32 +130,49 @@ function MobileMenu() {
 }
 
 export default function Navbar() {
-  const { options, mobile, menu } = useSnapshot(state);
+  const { options, mobile } = useSnapshot(state);
   const user = useUser();
   const optionsBtn = useRef(null);
-  if (!menu && mobile) state.options = false;
   const ref = useRef<any>(null);
 
-  ref.current?.addEventListener("touchmove", (e: any) => {
-    e.preventDefault();
-  });
+  ref.current?.addEventListener(
+    "touchmove",
+    (e: any) => {
+      e.preventDefault();
+    },
+    { passive: false }
+  );
 
   return (
     <>
       <div
         ref={ref}
-        className={`fixed bottom-4 grid h-min w-screen grid-cols-[0.2fr_0.6fr_0.2fr] grid-rows-[min-content] items-center justify-center justify-items-center p-3 md:top-0 md:grid-cols-[25%_50%_25%]`}
+        className={`fixed bottom-4 z-50 grid h-min w-screen grid-cols-[0.2fr_0.6fr_0.2fr] grid-rows-[min-content] items-center justify-center justify-items-center p-3 backdrop-blur-lg md:top-0 md:grid-cols-[25%_50%_25%]`}
       >
         <div className="m-0 flex h-full flex-row items-center justify-between gap-0 p-0 md:w-full">
           <HomeButton />
           {user ? <Path href="Editor" style={"md"} /> : null}
         </div>
         <Search />
-        <MenuButton />
-        <NavLinks optionsBtn={optionsBtn} />
+        <div className="contents md:hidden">
+          <Hamburger
+            label="Show menu"
+            duration={0.2}
+            distance="sm"
+            rounded
+            onToggle={(toggled) => {
+              if (toggled) state.menu = true;
+              else {
+                state.menu = false;
+                state.options = false;
+              }
+            }}
+          />
+        </div>
+        <DesktopLinks optionsBtn={optionsBtn} />
       </div>
       {options && !mobile ? <Options optionsBtn={optionsBtn} /> : null}
-      {menu ? <MobileMenu /> : null}
+      <MobileMenu optionsBtn={optionsBtn} />
     </>
   );
 }

@@ -1,333 +1,405 @@
-export {};
-// "use client";
+"use client";
 
-// import React, {
-//   Dispatch,
-//   SetStateAction,
-//   useContext,
-//   useEffect,
-//   //   useEffect,
-//   useRef,
-//   useState,
-// } from "react";
-// import { useSnapshot } from "valtio";
-// import {
-//   clearSelectedName,
-//   fillFormData,
-//   getFormLists,
-//   handleUploadPost,
-// } from "../../../../api/editor.api";
-// import {
-//   EditorConsumer,
-//   EditorContext,
-// } from "../../../../common/editor.context";
-// import { state } from "../../../../common/state";
-// import Preview from "./project.preview";
+import React, {
+  FormEvent,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { useSnapshot } from "valtio";
+import {
+  clearSelectedName,
+  fillFormData,
+  getFormLists,
+  handleAddContent,
+  handleDeletePost,
+  handleUploadPost,
+} from "@api/editor.api";
+import { EditorContext } from "@context/editor.context";
+import { state } from "state";
+import ProjectEditorPreview from "./project.preview";
+import { Program } from "../../../../components/program";
 
-// export function ProjectEditor({
-//   setSaved,
-// }: {
-//   setSaved: Dispatch<SetStateAction<boolean>>;
-// }) {
-//   const { mobile } = useSnapshot(state);
-//   const nameInput = useRef<HTMLInputElement | undefined>();
-//   const dataList = useRef<HTMLInputElement>(null!);
-//   const fileInput = useRef<HTMLInputElement>(null!);
-//   const [categories, setCategories] = useState<string[]>([]);
-//   const [selectedFiles, setSelectedFiles] = useState<FileList>();
-//   const [isFilePicked, setIsFilePicked] = useState<boolean>(false);
-//   const [load, setLoad] = useState<string>("5MB Max");
-//   const [confirm, setConfirm] = useState<boolean>(false);
-//   const { name, setName, data, IDs, setIDs, setContent } =
-//     useContext(EditorContext);
-//   const addProgram = useRef("");
-//   const contentData = useRef({
-//     caption: "",
-//     orientation: "",
-//     url: "",
-//   });
+export function ProjectEditorForm() {
+  const nameInput = useRef<HTMLInputElement>(null!);
+  const dataList = useRef<HTMLDataListElement>(null!);
+  const fileInput = useRef<HTMLInputElement>(null!);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedFiles, setSelectedFiles] = useState<FileList>();
+  const [isFilePicked, setIsFilePicked] = useState<boolean>(false);
+  const [confirm, setConfirm] = useState<boolean>(false);
+  const {
+    name,
+    setName,
+    date,
+    setDate,
+    category,
+    setCategory,
+    client,
+    setClient,
+    description,
+    setDescription,
+    program,
+    setProgram,
+    url,
+    setURL,
+    published,
+    setPublished,
+    lot,
+    setLot,
+    titles,
+    setTitles,
+    content,
+    setContent,
+    cover,
+    setCover,
+    saved,
+    setSaved,
+  } = useContext(EditorContext);
 
-//   // Hide mobile keyboard on selection
-//   useEffect(() => {
-//     if (IDs.indexOf(name) !== -1 && nameInput.current) nameInput.current.blur();
-//   }, [name, IDs, nameInput]);
+  return (
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      className="flex h-min w-full flex-col justify-evenly gap-y-5 rounded-md border-[1px] border-blue-900 bg-white p-4 backdrop-blur-lg dark:border-blue-200 dark:bg-black md:h-full md:justify-start "
+    >
+      <MetadataLoader
+        setSelectedFiles={setSelectedFiles}
+        setIsFilePicked={setIsFilePicked}
+      />
+      <FileLoader
+        selectedFiles={selectedFiles}
+        setSelectedFiles={setSelectedFiles}
+        isFilePicked={isFilePicked}
+        setIsFilePicked={setIsFilePicked}
+      />
+      <button
+        className={`submit ${isFilePicked ? "disabled" : ""}`}
+        disabled={isFilePicked}
+        type="button"
+        onClick={() =>
+          handleUploadPost(
+            setSaved,
+            setContent,
+            name,
+            category,
+            client,
+            description,
+            program,
+            url,
+            published,
+            date,
+            content,
+            cover,
+            lot
+          )
+        }
+      >
+        {titles.indexOf(name) === -1 ? "Upload" : "Save"} Post
+      </button>
+      {titles.indexOf(name) !== -1 && (
+        <button
+          className={`${confirm ? "submit" : "delete"}`}
+          onClick={() => setConfirm(!confirm)}
+          type="button"
+        >
+          {confirm ? "Cancel" : "Delete Post"}
+        </button>
+      )}
+      {confirm ? (
+        <button
+          className={`delete`}
+          onClick={() => {
+            handleDeletePost(lot, setSaved);
+            clearSelectedName(
+              nameInput,
+              dataList,
+              setIsFilePicked,
+              setSelectedFiles,
+              setName,
+              setDate,
+              setCategory,
+              setClient,
+              setDescription,
+              setProgram,
+              setURL,
+              setPublished,
+              setLot,
+              setContent
+            );
+          }}
+          type="button"
+        >
+          Confirm
+        </button>
+      ) : null}
+    </form>
+  );
+}
 
-//   // Get and List document id and categories in datalist
-//   useEffect(() => {
-//     getFormLists(setIDs, setCategories);
-//   }, [setIDs, setCategories]);
+function MetadataLoader({ ...props }) {
+  const nameInput = useRef<HTMLInputElement>(null!);
+  const dataList = useRef<HTMLDataListElement>(null!);
+  const [programs, setPrograms] = useState<string[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [tempProgram, setTempProgram] = useState<string>("");
+  const { setSelectedFiles, setIsFilePicked } = props;
+  const {
+    name,
+    setName,
+    date,
+    setDate,
+    category,
+    setCategory,
+    client,
+    setClient,
+    description,
+    setDescription,
+    program,
+    setProgram,
+    url,
+    setURL,
+    published,
+    setPublished,
+    lot,
+    setLot,
+    titles,
+    setTitles,
+    setContent,
+  } = useContext(EditorContext);
+  const { data } = useSnapshot(state);
 
-//   // Populate form with data from firestore when name matches
-//   useEffect(() => {
-//     fillFormData(data.current, IDs, name);
-//   }, [name, IDs]);
+  // Hide mobile keyboard on selection
+  useEffect(() => {
+    if (titles.indexOf(name) !== -1 && nameInput.current)
+      nameInput.current.blur();
+  }, [name, titles, nameInput]);
 
-//   useEffect(() => {
-//     return () => {
-//       setName("");
-//       clearSelectedName(
-//         data,
-//         nameInput.current,
-//         dataList,
-//         setIsFilePicked,
-//         setSelectedFiles
-//       );
-//       setContent([]);
-//     };
-//   }, [setContent, setName]);
+  // Get and List document id and categories in datalist
+  useEffect(() => {
+    getFormLists(data, setTitles, setCategories);
+  }, [data, setTitles, setCategories]);
 
-//   return (
-//     <EditorConsumer>
-//       {(
-//         name: string,
-//         setName: Dispatch<SetStateAction<string>>,
-//         data: {
-//           current: {
-//             name: string;
-//             published: boolean;
-//             date: string;
-//             client: string;
-//             category: string;
-//             description: string;
-//             url: string;
-//             program: string[];
-//             cover: string;
-//             content: {
-//               type: string;
-//               url: string;
-//               caption: string;
-//               id: string;
-//               orientation: string;
-//             }[];
-//           };
-//         },
-//         IDs: string | any[]
-//       ) => (
-//         <form onSubmit={(e) => e.preventDefault()} className="secondary">
-//           <div className="section">
-//             Metadata
-//             <div className="nameGroup">
-//               <input
-//                 onChange={(e) => {
-//                   setName(e.target.value);
-//                   data.current.name = e.target.value;
-//                 }}
-//                 list="names"
-//                 type="text"
-//                 placeholder="Name"
-//                 className="name"
-//                 required
-//               ></input>
-//               <input
-//                 type="checkbox"
-//                 id="published"
-//                 name="published"
-//                 className="published"
-//                 onChange={(e) => (data.current.published = e.target.checked)}
-//               ></input>
-//             </div>
-//             <button
-//               type="button"
-//               onClick={() =>
-//                 clearSelectedName(
-//                   data,
-//                   nameInput,
-//                   dataList,
-//                   setIsFilePicked,
-//                   setSelectedFiles
-//                 )
-//               }
-//             >
-//               Clear
-//             </button>
-//             {/* <datalist id="names" ref={dataList}>
-//           {IDs.map((name, index) => (
-//             <option value={name} key={index} />
-//           ))}
-//         </datalist> */}
-//             <input
-//               onChange={(e) => (data.current.date = e.target.value)}
-//               type="date"
-//               required
-//             ></input>
-//             <input
-//               onChange={(e) => (data.current.client = e.target.value)}
-//               type="text"
-//               placeholder="Client"
-//             ></input>
-//             <input
-//               onChange={(e) => (data.current.category = e.target.value)}
-//               list="categories"
-//               type="text"
-//               placeholder="Category"
-//               required
-//             ></input>
-//             <datalist id="categories" ref={dataList}>
-//               {categories.map((category, index) => (
-//                 <option value={category} key={index} />
-//               ))}
-//             </datalist>
-//             <textarea
-//               onChange={(e) => (data.current.description = e.target.value)}
-//               className="desc"
-//               placeholder="Description"
-//             ></textarea>
-//             <input
-//               onChange={(e) => (data.current.url = e.target.value)}
-//               type="text"
-//               placeholder="Project URL"
-//             ></input>
-//             <input
-//               onChange={(e) => (addProgram.current = e.target.value)}
-//               type="text"
-//               placeholder="Add Program"
-//             ></input>
-//             <button
-//               type="button"
-//               onClick={() => {
-//                 addProgram.current !== "" &&
-//                   data.current.program.push(addProgram.current);
-//                 addProgram.current = "";
-//               }}
-//             >
-//               Add Program
-//             </button>
-//             {data.current.program.length === 0 && (
-//               <ul>
-//                 {data.current.program.map((program: any, index: number) => (
-//                   <li
-//                     key={index}
-//                     style={{ cursor: "pointer" }}
-//                     onClick={() => {
-//                       data.current.program.filter(
-//                         (item: any) => item !== program
-//                       );
-//                     }}
-//                   >
-//                     {program}
-//                   </li>
-//                 ))}
-//               </ul>
-//             )}
-//           </div>
-//           <div className="section third">
-//             Images
-//             {mobile && <Preview />}
-//             <input
-//               onChange={(e) => {
-//                 if (e.target.files) {
-//                   e.target.files.length > 0
-//                     ? setIsFilePicked(true)
-//                     : setIsFilePicked(false);
-//                   setSelectedFiles(e.target.files);
-//                   console.log(e.target.files[0].type);
-//                 }
-//               }}
-//               multiple
-//               type="file"
-//               ref={fileInput}
-//               className="fileInput"
-//             ></input>
-//             <div className="fileGroup">
-//               {isFilePicked ? (
-//                 <input
-//                   onChange={(e) =>
-//                     (contentData.current.caption = e.target.value)
-//                   }
-//                   type="text"
-//                   placeholder="Caption"
-//                 ></input>
-//               ) : null}
-//               {selectedFiles !== undefined &&
-//               selectedFiles[0] &&
-//               selectedFiles[0].type.split("/")[0] === "video" ? (
-//                 <input
-//                   onChange={(e) =>
-//                     (contentData.current.orientation = e.target.value)
-//                   }
-//                   type="text"
-//                   placeholder="Orientation"
-//                 ></input>
-//               ) : null}
-//             </div>
-//             <div className="addContentWrap">
-//               <button
-//                 className={`addContent ${!isFilePicked ? "disabled" : ""}`}
-//                 type="button"
-//                 onClick={() => {
-//                   //   handleAddContent(
-//                   //     selectedFiles,
-//                   //     name,
-//                   //     setLoad,
-//                   //     content,
-//                   //     setContent,
-//                   //     caption,
-//                   //     orientation,
-//                   //     setIsFilePicked,
-//                   //     fileInput
-//                   //   );
-//                   contentData.current.caption = "";
-//                 }}
-//               >
-//                 Add Content
-//               </button>
-//               <p>{load === "5MB Max" ? `${load}` : `${load} uploaded`}</p>
-//             </div>
-//           </div>
-//           <button
-//             className={`submit ${isFilePicked ? "disabled" : ""}`}
-//             onClick={() =>
-//               handleUploadPost(
-//                 data.current,
-//                 content,
-//                 cover,
-//                 setSaved,
-//                 setContent
-//               )
-//             }
-//             disabled={isFilePicked}
-//             type="submit"
-//           >
-//             {IDs.indexOf(data.current.name) === -1 ? "Upload" : "Save"} Post
-//           </button>
-//           {IDs.indexOf(data.current.name) !== -1 && (
-//             <button
-//               className={`${confirm ? "submit" : "delete"}`}
-//               onClick={() => setConfirm(!confirm)}
-//               type="button"
-//             >
-//               {confirm ? "Cancel" : "Delete Post"}
-//             </button>
-//           )}
-//           {confirm && (
-//             <button
-//               className={`delete`}
-//               //   onClick={() => {
-//               //     handleDeletePost(name, setSaved);
-//               //     clearSelectedName(
-//               //       nameInput,
-//               //       dataList,
-//               //       setName,
-//               //       setChecked,
-//               //       setCategory,
-//               //       setClient,
-//               //       setDescription,
-//               //       setDate,
-//               //       setProgram,
-//               //       setProgramArray,
-//               //       setContent,
-//               //       setIsFilePicked,
-//               //       setURL,
-//               //       setSelectedFiles
-//               //     );
-//               //   }}
-//               type="button"
-//             >
-//               Confirm
-//             </button>
-//           )}
-//         </form>
-//       )}
-//     </EditorConsumer>
-//   );
-// }
+  // Populate form with data from firestore when name matches
+  useEffect(() => {
+    if (titles.indexOf(name) !== -1) {
+      data.length > 0 &&
+        fillFormData(
+          name,
+          data,
+          setName,
+          setDate,
+          setCategory,
+          setClient,
+          setDescription,
+          setProgram,
+          setURL,
+          setPublished,
+          setLot
+        );
+    }
+  }, [name, data]);
+
+  // Clear the form when it unmounts
+  useEffect(() => {
+    return () =>
+      clearSelectedName(
+        nameInput,
+        dataList,
+        setIsFilePicked,
+        setSelectedFiles,
+        setName,
+        setDate,
+        setCategory,
+        setClient,
+        setDescription,
+        setProgram,
+        setURL,
+        setPublished,
+        setLot,
+        setContent
+      );
+  }, []);
+
+  return (
+    <div className="flex flex-col gap-y-5">
+      Metadata {lot !== "" ? `for ${lot}` : null}
+      <div className="nameGroup">
+        <input
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          list="names"
+          type="text"
+          placeholder="Name"
+          className="name"
+          required
+        ></input>
+        <input
+          type="checkbox"
+          id="published"
+          name="published"
+          className="published"
+          onChange={(e) => setPublished(e.target.checked)}
+          checked={published}
+        ></input>
+      </div>
+      <button
+        type="button"
+        onClick={() =>
+          clearSelectedName(
+            nameInput,
+            dataList,
+            setIsFilePicked,
+            setSelectedFiles,
+            setName,
+            setDate,
+            setCategory,
+            setClient,
+            setDescription,
+            setProgram,
+            setURL,
+            setPublished,
+            setLot,
+            setContent
+          )
+        }
+      >
+        Clear
+      </button>
+      <datalist id="names" ref={dataList}>
+        {titles.map((name, index) => (
+          <option value={name} key={index} />
+        ))}
+      </datalist>
+      <input
+        onChange={(e) => setDate(e.target.value)}
+        value={date}
+        type="date"
+        required
+      ></input>
+      <input
+        onChange={(e) => setClient(e.target.value)}
+        value={client}
+        type="text"
+        placeholder="Client"
+      ></input>
+      <input
+        onChange={(e) => setCategory(e.target.value)}
+        value={category}
+        list="categories"
+        type="text"
+        placeholder="Category"
+        required
+      ></input>
+      <datalist id="categories" ref={dataList}>
+        {categories.map((category, index) => (
+          <option value={category} key={index} />
+        ))}
+      </datalist>
+      <textarea
+        onChange={(e) => setDescription(e.target.value)}
+        value={description}
+        className="desc"
+        placeholder="Description"
+      ></textarea>
+      <input
+        onChange={(e) => setURL(e.target.value)}
+        value={url}
+        type="text"
+        placeholder="Project URL"
+      ></input>
+      <input
+        onChange={(e) => setTempProgram(e.target.value)}
+        value={tempProgram}
+        type="text"
+        placeholder="Add Program"
+      ></input>
+      <button
+        type="button"
+        onClick={() => {
+          tempProgram !== "" && data.program.push(tempProgram);
+          setTempProgram("");
+        }}
+      >
+        Add Program
+      </button>
+      {program.length !== 0 && (
+        <Program program={program} setProgram={setProgram} />
+      )}
+    </div>
+  );
+}
+
+function FileLoader({ ...props }) {
+  const { selectedFiles, setSelectedFiles, isFilePicked, setIsFilePicked } =
+    props;
+  const { mobile } = useSnapshot(state);
+  const fileInput = useRef<HTMLInputElement>(null!);
+  const [load, setLoad] = useState<string>("5MB Max");
+  const [caption, setCaption] = useState<string>("");
+  const [orientation, setOrientaion] = useState<string>("");
+  const { lot, content, setContent } = useContext(EditorContext);
+  return (
+    <div className="third flex flex-col gap-y-5">
+      Images
+      {mobile ? <ProjectEditorPreview /> : null}
+      <input
+        onChange={(e) => {
+          if (e.target.files) {
+            e.target.files.length > 0
+              ? setIsFilePicked(true)
+              : setIsFilePicked(false);
+            setSelectedFiles(e.target.files);
+            console.log(e.target.files[0].type);
+          }
+        }}
+        multiple
+        type="file"
+        ref={fileInput}
+        className="fileInput"
+      ></input>
+      <div className="fileGroup">
+        {isFilePicked ? (
+          <input
+            onChange={(e) => setCaption(e.target.value)}
+            type="text"
+            placeholder="Caption"
+          ></input>
+        ) : null}
+        {selectedFiles !== undefined &&
+        selectedFiles[0] &&
+        selectedFiles[0].type.split("/")[0] === "video" ? (
+          <input
+            onChange={(e) => setOrientaion(e.target.value)}
+            type="text"
+            placeholder="Orientation"
+          ></input>
+        ) : null}
+      </div>
+      <div className="addContentWrap">
+        <button
+          className={`addContent ${!isFilePicked ? "disabled" : ""}`}
+          type="button"
+          onClick={() => {
+            handleAddContent(
+              selectedFiles,
+              lot,
+              setLoad,
+              content,
+              setContent,
+              caption,
+              orientation,
+              setIsFilePicked,
+              fileInput
+            );
+            setCaption("");
+            setOrientaion("");
+          }}
+        >
+          Add Content
+        </button>
+        <p>{load === "5MB Max" ? `${load}` : `${load} uploaded`}</p>
+      </div>
+    </div>
+  );
+}

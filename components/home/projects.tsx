@@ -1,37 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { getData } from "../../api/firebase.api";
+import { useSnapshot } from "valtio";
 import { state } from "../../common/state";
 
 function Projects() {
-  const [projects, setProjects] = useState<any>();
-
-  useEffect(() => {
-    getData().then((data) => setProjects(data));
-  }, []);
+  const { data } = useSnapshot(state);
 
   // handle d3 circle packing
   // const svg = React.useRef(null);
 
-  if (projects !== undefined) {
+  if (data.length === 0) return <p>Loading projects...</p>;
+  else {
     state.loading = false;
-  }
-  return (
-    <>
-      {/* <svg ref={svg} /> */}
-      {projects ? (
-        projects.map((doc: any, index: number) => (
+    return (
+      <>
+        {/* <svg ref={svg} /> */}
+        {data.map((doc: any, index: number) => (
           <Link key={index} href={doc.lot} className="w-fit">
             {doc.name}
           </Link>
-        ))
-      ) : (
-        <p>Loading projects...</p>
-      )}
-    </>
-  );
+        ))}
+      </>
+    );
+  }
 }
 
 export default Projects;

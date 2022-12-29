@@ -2,16 +2,15 @@
 
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useSnapshot } from "valtio";
-import { state } from "../../../common/state";
+import { state } from "state";
 import {
   handleCommandPress,
   handleKeyPress,
   handleChange,
 } from "./search.utils";
-import { SearchBarIcon } from "./search.svg";
+import { SearchBarIcon } from "svg";
 import { usePathname, useRouter } from "next/navigation";
-import { getData } from "../../../api/firebase.api";
-import { useSearch } from "../../../common/utils";
+import { useSearch } from "utils";
 import Link from "next/link";
 
 export function Search() {
@@ -20,16 +19,11 @@ export function Search() {
   const [searchText, setSearchText] = useState<string>("");
   const Bar = useRef<any>();
   const Results = useRef<any>();
-  const { chatMode, mobile } = useSnapshot(state);
+  const { chatMode, mobile, data } = useSnapshot(state);
   const router = useRouter();
   const path = usePathname();
-  const [projects, setProjects] = useState<any>();
 
-  useEffect(() => {
-    getData().then((data) => setProjects(data));
-  }, []);
-
-  const hits = useSearch(projects, searchText);
+  const hits = useSearch(data, searchText);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -114,9 +108,9 @@ export function Search() {
 
   return (
     <>
-      <div className="relative flex h-[34px] w-[90%] items-center justify-center md:h-[28px]">
+      <div className="relative flex h-[34px] w-[90%] items-center justify-center md:h-full">
         <input
-          className="md:hover: bg-opacity-60focus:dark:text-white peer m-0 my-auto flex h-full w-full appearance-none rounded-xl border-[1px] border-blue-900 bg-transparent bg-opacity-60 px-8 text-center text-base font-light text-blue-900 shadow-none outline-none backdrop-blur-xl placeholder:text-blue-900 focus:border-white focus:bg-blue-900 focus:bg-opacity-60 focus:text-white focus:shadow-lg focus:shadow-blue-900 focus:outline-none focus:ring-0 focus:backdrop-blur-[10px] focus:placeholder:text-white dark:border-blue-200 dark:text-blue-200 dark:placeholder:text-blue-200 focus:dark:border-white focus:dark:bg-blue-200 focus:dark:bg-opacity-60 dark:focus:text-white focus:dark:shadow-blue-200 focus:dark:placeholder:text-white md:text-sm md:hover:bg-blue-900 md:hover:text-white
+          className="md:hover: bg-opacity-60focus:dark:text-white peer m-0 my-auto flex h-[32px] w-full appearance-none rounded-xl border-[1px] border-blue-900 bg-transparent bg-opacity-60 px-8 text-center text-base font-light text-blue-900 shadow-none outline-none backdrop-blur-xl placeholder:text-blue-900 focus:border-white focus:bg-blue-900 focus:bg-opacity-60 focus:text-white focus:shadow-lg focus:shadow-blue-900 focus:outline-none focus:ring-0 focus:backdrop-blur-[10px] focus:placeholder:text-white dark:border-blue-200 dark:text-blue-200 dark:placeholder:text-blue-200 focus:dark:border-white focus:dark:bg-blue-200 focus:dark:bg-opacity-60 dark:focus:text-white focus:dark:shadow-blue-200 focus:dark:placeholder:text-white md:text-sm md:hover:bg-blue-900 md:hover:text-white
         md:hover:placeholder:text-white md:hover:dark:bg-blue-200 md:hover:dark:text-black md:hover:placeholder:dark:text-black "
           placeholder={chatMode ? "what's up?" : placeholder}
           type="text"
