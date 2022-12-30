@@ -5,7 +5,7 @@ import { useSnapshot } from "valtio";
 import { state } from "state";
 import { MusicPlayer } from "./musicPlayer";
 import { SongInfo } from "./songInfo";
-import { ColorIcon, ModeIcon, MuteIcon } from "../../svg";
+import { ColorIcon, ModeIcon, MuteIcon } from "svg";
 import { toggleTheme, toggleMotion, toggleMute } from "utils";
 import { IoAccessibility } from "react-icons/io5";
 

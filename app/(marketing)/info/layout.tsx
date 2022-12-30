@@ -1,11 +1,11 @@
-export default function StoreLayout({
+export default function InfoLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <>
-      <h1>Store</h1>
+      <h1>Info</h1>
       {children}
     </>
   );

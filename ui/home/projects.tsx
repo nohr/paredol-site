@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSnapshot } from "valtio";
-import { state } from "../../common/state";
+import { state } from "state";
 
 function Projects() {
   const { data } = useSnapshot(state);

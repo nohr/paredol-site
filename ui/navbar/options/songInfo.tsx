@@ -2,8 +2,8 @@ import copy from "copy-to-clipboard";
 import { useEffect, useState } from "react";
 import { MdLibraryMusic } from "react-icons/md";
 import { useSnapshot } from "valtio";
-import { state } from "../../../common/state";
-import { useSong } from "../../../common/utils";
+import { state } from "state";
+import { useSong } from "utils";
 
 export function SongInfo() {
   const [song, songs] = useSong();

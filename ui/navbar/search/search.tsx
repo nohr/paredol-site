@@ -3,7 +3,7 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useSnapshot } from "valtio";
 import { state } from "state";
-import { SearchBarIcon } from "../../svg";
+import { SearchBarIcon } from "svg";
 import { usePathname, useRouter } from "next/navigation";
 import {
   useSearch,

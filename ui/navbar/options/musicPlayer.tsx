@@ -1,6 +1,6 @@
 import { useSnapshot } from "valtio";
 import { state } from "state";
-import { FFIcon, PlayPauseIcon } from "../../svg";
+import { FFIcon, PlayPauseIcon } from "svg";
 
 // export function toggleMusic(current, setSong) {
 //   let audio = current.current;

@@ -1,5 +1,5 @@
 import { usePathname } from "next/navigation";
-import { programObject } from "./svg";
+import { programObject } from "svg";
 
 const ProgramTray = `
   & svg {

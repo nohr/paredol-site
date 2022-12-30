@@ -2,7 +2,6 @@ import {
   deleteDoc,
   doc,
   DocumentData,
-  getDoc,
   setDoc,
   Timestamp,
 } from "firebase/firestore/lite";
