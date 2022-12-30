@@ -1,4 +1,4 @@
-// remember to update ./styles/colors on update
+
 const colors = {
   transparent: 'transparent',
   "white": "#ebebeb",
@@ -22,7 +22,7 @@ module.exports = {
   mode: 'jit',
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./ui/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: 'class',
   theme: {

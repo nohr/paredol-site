@@ -1,20 +1,17 @@
 // "use client";
 
-import { useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { useSnapshot } from "valtio";
 import { getSongs } from "@api/firebase.api";
 import { state } from "state";
-
-export function useMounted() {
-  const [hasMounted, setHasMounted] = useState<boolean>(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  return hasMounted;
-}
-
+// search
 export const useSearch = (projects: any, query: any) => {
   if (query === "") return projects;
   return (
@@ -28,6 +25,105 @@ export const useSearch = (projects: any, query: any) => {
     )
   );
 };
+
+export function handleChange(
+  e: ChangeEvent<HTMLInputElement>,
+  chatMode: boolean,
+  setSearchText: Dispatch<SetStateAction<string>>,
+  setChatText: Dispatch<SetStateAction<string>>
+) {
+  if (!state.colorBar) {
+    if (!chatMode) {
+      setSearchText(e.target.value);
+    } else {
+      setChatText(e.target.value);
+      if (e.target.value === "excuse me") {
+        state.chatMode = false;
+        setChatText("");
+      }
+    }
+  }
+}
+
+export function handleKeyPress(
+  e: KeyboardEvent,
+  setSearchText: Dispatch<SetStateAction<string>>,
+  setChatText: Dispatch<SetStateAction<string>>,
+  setPlaceholder: Dispatch<SetStateAction<string>>,
+  chatText: string,
+  searchText: string,
+  router: any,
+  path: string | null
+) {
+  if (e.key === "Enter" && state.chatMode) {
+    e.preventDefault();
+    setChatText("");
+    if (chatText === "dark") {
+      toggleTheme("dark");
+    }
+    if (chatText === "light") {
+      toggleTheme("light");
+    }
+    if (chatText === "color") {
+      state.colorBar = true;
+    }
+    if (chatText === "reduce motion") {
+      toggleMotion("reduce");
+    }
+    if (chatText === "help") {
+      setPlaceholder("try typing clear, dark, light, reduce motion, or color");
+    }
+  }
+  if (e.key === "Escape") {
+    e.preventDefault();
+    if (state.chatMode) {
+      setPlaceholder(`(cmd + k)`);
+    }
+    setSearchText("");
+  }
+  if (e.key === "Tab") {
+    e.preventDefault;
+    state.chatMode = !state.chatMode;
+  }
+  if (searchText === "") router.replace(`${path}`);
+}
+
+export function handleCommandPress(
+  e: KeyboardEvent,
+  Bar: React.RefObject<HTMLInputElement>,
+  setPlaceholder: Dispatch<SetStateAction<string>>
+) {
+  if (e.key === "k" && e.metaKey) {
+    e.preventDefault();
+    setPlaceholder("");
+    Bar.current?.focus();
+  }
+}
+
+// Options
+export const toggleMute = () => {
+  state.muted = !state.muted;
+};
+export const toggleMotion = (motion?: string) => {
+  if (motion === "reduce") {
+    state.motion = true;
+    localStorage.setItem("motion", `true`);
+    return;
+  }
+  state.motion = !state.motion;
+  localStorage.setItem("motion", `${state.motion}`);
+};
+
+// UI
+export function useMounted() {
+  const [hasMounted, setHasMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  return hasMounted;
+}
 
 export const useTheme = () => {
   if (typeof window !== "undefined") {

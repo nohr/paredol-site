@@ -32,7 +32,7 @@ interface stateypes {
 export const state = proxy<stateypes>({
   // Firebase
   data: [],
-  quote: " ",
+  quote: "...",
   //UI
   theme: "light",
   monochrome: false,

@@ -29,8 +29,8 @@
       "state": ["./common/state"],
       "utils":[ "./common/utils"],
       "@context/*": ["./common/context/*"],
-      "@components/*": ["./components/*"],
-      "svg": ["./components/svg"],
+      "@ui/*": ["./ui/*"],
+      "svg": ["./ui/svg"],
       "@api/*": ["./api/*"],
     }
   },

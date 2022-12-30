@@ -1,8 +1,8 @@
 "use client";
 
-import "../styles/globals.css";
+import "../globals.css";
 import React, { useEffect } from "react";
-import Navbar from "../components/navbar/navbar";
+import Navbar from "@ui/navbar/navbar";
 import { useTheme, useMobile, useMotion } from "utils";
 import { getData } from "@api/firebase.api";
 import { state } from "state";

@@ -185,20 +185,20 @@ export async function uploadData(
   by: any,
   lot: string
 ) {
-  console.log(
-    name,
-    category,
-    client,
-    description,
-    program,
-    url,
-    published,
-    date,
-    content,
-    cover,
-    by,
-    lot
-  );
+  // console.log(
+  //   name,
+  //   category,
+  //   client,
+  //   description,
+  //   program,
+  //   url,
+  //   published,
+  //   date,
+  //   content,
+  //   cover,
+  //   by,
+  //   lot
+  // );
   await setDoc(
     doc(db, "projects", lot),
     {
@@ -308,7 +308,7 @@ export async function getFormLists(
 }
 
 export function getType(client: string) {
-  if (client === "Nabla" || client === "NYU" || client === "Nohri") {
+  if (client === "Paredol" || client === "NYU" || client === "Nohri") {
     return "Self-Initiated";
   } else {
     return "Client";

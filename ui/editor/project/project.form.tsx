@@ -19,7 +19,7 @@ import {
 import { EditorContext } from "@context/editor.context";
 import { state } from "state";
 import ProjectEditorPreview from "./project.preview";
-import { Program } from "../../../../components/program";
+import { Program } from "../../program";
 
 export function ProjectEditorForm() {
   const nameInput = useRef<HTMLInputElement>(null!);

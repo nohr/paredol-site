@@ -3,14 +3,14 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useSnapshot } from "valtio";
 import { state } from "state";
+import { SearchBarIcon } from "../../svg";
+import { usePathname, useRouter } from "next/navigation";
 import {
+  useSearch,
   handleCommandPress,
   handleKeyPress,
   handleChange,
-} from "./search.utils";
-import { SearchBarIcon } from "svg";
-import { usePathname, useRouter } from "next/navigation";
-import { useSearch } from "utils";
+} from "utils";
 import Link from "next/link";
 
 export function Search() {

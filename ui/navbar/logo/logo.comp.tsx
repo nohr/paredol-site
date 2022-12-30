@@ -2,8 +2,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { memo, useMemo, useRef } from "react";
 import { Euler, MeshBasicMaterial, SphereGeometry } from "three";
 import { useSnapshot } from "valtio";
-import { state } from "../../../common/state";
-import { colors } from "../../../styles/colors";
+import { state } from "state";
 
 function LogoCanvas() {
   const { motion } = useSnapshot(state);
@@ -43,7 +42,7 @@ export function CD() {
   const mat = useMemo(
     () =>
       new MeshBasicMaterial({
-        color: `${theme === "light" ? colors?.blue[900] : colors?.blue[200]}`,
+        color: `${theme === "light" ? "#013566" : "#D1D5DB"}`,
       }),
     [theme]
   );

@@ -2,8 +2,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useSnapshot } from "valtio";
-import { getQuote } from "../../api/firebase.api";
-import { state } from "../../common/state";
+import { getQuote } from "@api/firebase.api";
+import { state } from "state";
 const Scrambler = require("scrambling-text");
 
 function Quote() {
@@ -52,7 +52,7 @@ function Quote() {
 
   useEffect(() => {
     return () => {
-      state.quote = " ";
+      state.quote = "...";
     };
   }, []);
   return (
