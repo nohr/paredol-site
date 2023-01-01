@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { getIntonation, getRoster } from "@api/info.api";
 import { state } from "state";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BsGithub, BsSpotify, BsLinkedin } from "react-icons/bs";
 import { HiSpeakerWave } from "react-icons/hi2";
 import { SiMaildotru } from "react-icons/si";
 import { MemberBio } from "@ui/info/member/member.bio";
+import { AudioContext } from "@context/audio.context";
 
 export interface PageProps {
   params: { slug: string };
@@ -32,11 +33,12 @@ export default function Page({ params, searchParams }: PageProps) {
     audio.addEventListener("loadeddata", () => (state.loading = false));
   };
 
+  const { select } = useContext(AudioContext);
   return (
     <>
       {member && (
         <div className="flex w-full flex-col gap-y-8 pb-48 md:grid md:h-full md:grid-cols-[50%_50%] md:grid-rows-[100%] md:pb-0">
-          <div className="flex flex-col items-center justify-center  justify-items-center gap-y-4">
+          <div className="flex flex-col items-center justify-center justify-items-center gap-y-4 md:w-fit">
             <img
               src={member && member?.photo}
               alt=""
@@ -44,12 +46,17 @@ export default function Page({ params, searchParams }: PageProps) {
             />
             <div className="flex flex-col items-center justify-center gap-y-2">
               <div className="flex w-fit flex-row items-center justify-center gap-x-2">
-                <h1 className="title whitespace-nowrap">{member?.name}</h1>
+                <h1 className="title !select-text whitespace-nowrap">
+                  {member?.name}
+                </h1>
                 {member?.intonation ? (
                   <HiSpeakerWave
                     className="link fill !h-auto !w-8  !cursor-pointer"
                     title="Pronounce"
-                    onClick={() => play()}
+                    onClick={() => {
+                      play();
+                      select();
+                    }}
                   />
                 ) : null}
               </div>
@@ -71,7 +78,7 @@ export default function Page({ params, searchParams }: PageProps) {
               )}
             </div>
           </div>
-          <div className="flex flex-col gap-y-4 font-bold md:justify-center">
+          <div className="mx-12 flex flex-col gap-y-4 font-bold md:mx-0 md:w-fit md:justify-center">
             {member.bio ? <p>{member.bio}</p> : <MemberBio slug={slug} />}
           </div>
         </div>

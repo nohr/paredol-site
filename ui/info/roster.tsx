@@ -5,8 +5,12 @@ import Link from "next/link";
 import { useSnapshot } from "valtio";
 import { TfiArrowCircleRight } from "react-icons/tfi";
 import { CgSpinner } from "react-icons/cg";
+import { useContext } from "react";
+import { AudioContext } from "@context/audio.context";
+
 export default function Roster() {
   const { roster } = useSnapshot(state);
+  const { confirm } = useContext(AudioContext);
 
   // reorder roster by name
   const orderedRoster = Object.keys(roster)
@@ -21,9 +25,10 @@ export default function Roster() {
           orderedRoster.map((member) => (
             <Link
               key={member.key}
+              onClick={() => confirm()}
               href={member.url ? member.url : `/info/${member.key}`}
               target={member.url ? "_blank" : "_self"}
-              className="link fill !underline-offset-1md:!border-blue-900 !flex !w-full flex-row gap-x-3 self-center justify-self-center border-[1px] !p-3 md:self-start md:dark:!border-blue-200"
+              className="link fill !flex !w-full flex-row gap-x-3 self-center justify-self-center border-[1px] !p-3 !underline-offset-1 md:self-start md:!border-blue-900 md:dark:!border-blue-200"
             >
               <div
                 style={{

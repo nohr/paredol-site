@@ -71,7 +71,7 @@ body .loading {
 }
 
 .title {
-  @apply select-none text-4xl font-thin md:text-6xl;
+  @apply text-4xl font-thin md:text-6xl;
 }
 
 .link {

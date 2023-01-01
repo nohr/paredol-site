@@ -1,59 +1,29 @@
 import { useSnapshot } from "valtio";
 import { state } from "state";
 import { FFIcon, PlayPauseIcon } from "svg";
+import { loadSong, useSong } from "utils";
+import { useContext, useEffect, useRef } from "react";
+import { AudioContext } from "@context/audio.context";
 
-// export function toggleMusic(current, setSong) {
-//   let audio = current.current;
-//   if (!cloud.songs[state.songIndex].url) {
-//     loadSong(current, cloud.songs[state.songIndex]);
-//   } else {
-//     if (cloud.playing === false) {
-//       cloud.playing = true;
-//       audio.play();
-//     } else if (cloud.playing === true) {
-//       cloud.playing = false;
-//       audio.pause();
-//     }
-//   }
-//   audio.onended = () => nextSong(current, setSong);
-// }
-// export function nextSong(current, setSong) {
-//   function next() {
-//     let audio = current.current;
+export function toggleMusic(audio: any, nextSong: () => any) {
+  state.playing = !state.playing;
+  if (state.playing === false) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
 
-//     cloud.playing = false;
-//     audio.pause();
-//     console.log(state.songIndex);
-
-//     if (state.songIndex < cloud.songs.length - 1) {
-//       state.songIndex += 1;
-//     } else {
-//       state.songIndex = 0;
-//     }
-//     if (!cloud.songs[state.songIndex].url) {
-//       loadSong(current, cloud.songs[state.songIndex]);
-//     } else {
-//       audio.setAttribute("src", cloud.songs[state.songIndex].url);
-//       audio.play();
-//     }
-//   }
-//   next();
-//   setSong(
-//     `${cloud.songs[state.songIndex].artist} - ${
-//       cloud.songs[state.songIndex].name
-//     }`
-//   );
-//   current.current.onEnded = () => next();
-// }
+  audio.onended = () => nextSong();
+}
 
 function PlayButton({ ...props }) {
-  const { className } = props;
+  const { audio, nextSong, select, className } = props;
+  const { playing } = useSnapshot(state);
   return (
     <div
       className={className}
       onClick={() => {
-        state.playing = !state.playing;
-        // toggleMusic(audio, setSong);
+        toggleMusic(audio.current, nextSong);
       }}
     >
       <PlayPauseIcon className="h-[10px] w-[10px] overflow-visible" />
@@ -62,13 +32,14 @@ function PlayButton({ ...props }) {
 }
 
 function FFButton({ ...props }) {
-  const { className } = props;
+  const { nextSong, select, className } = props;
+
   return (
     <div
       className={className}
       onClick={() => {
-        // nextSong(audio, setSong);
-        // select();
+        nextSong();
+        select();
       }}
     >
       <FFIcon className="h-[10px] w-[10px] overflow-visible" />
@@ -77,19 +48,46 @@ function FFButton({ ...props }) {
 }
 
 export function MusicPlayer() {
-  const { playing } = useSnapshot(state);
+  const { playing, songIndex } = useSnapshot(state);
+  const { select } = useContext(AudioContext);
+  const audio = useRef<HTMLAudioElement>(null!);
+  const [song, songs, setSong, nextSong] = useSong();
   // change styling of the  buttons when the song track passes behind them
 
-  //
+  useEffect(() => {
+    async () => {
+      songs[songIndex].src = await loadSong(songs[songIndex].name);
+      console.log(audio.current.src);
+    };
+    // audio.current.play();
+  }, [songIndex, songs]);
+
   return (
-    <div className="relative m-0 flex h-8 w-full items-center justify-between gap-x-1 self-center rounded-3xl border-[1px] border-blue-900 px-[5px] py-2 dark:border-blue-200 ">
-      <PlayButton
-        className={`flex h-[20px] w-[20px] cursor-pointer items-center justify-center rounded-full border-[1px] border-transparent bg-blue-900 fill-white dark:bg-blue-200 dark:fill-black  md:hover:border-blue-900 md:hover:bg-transparent md:hover:fill-blue-900 md:hover:dark:border-blue-200 md:hover:dark:fill-blue-200`}
+    <>
+      <div className="relative m-0 flex h-8 w-full items-center justify-between gap-x-1 self-center rounded-3xl border-[1px] border-blue-900 px-[5px] py-2 dark:border-blue-200 ">
+        <PlayButton
+          audio={audio}
+          select={select}
+          nextSong={nextSong}
+          className={`flex h-[20px] w-[20px] cursor-pointer items-center justify-center rounded-full border-[1px] border-transparent bg-blue-900 fill-white dark:bg-blue-200 dark:fill-black  md:hover:border-blue-900 md:hover:bg-transparent md:hover:fill-blue-900 md:hover:dark:border-blue-200 md:hover:dark:fill-blue-200`}
+        />
+        {/*TODO: Song track */}
+        <FFButton
+          select={select}
+          nextSong={nextSong}
+          className={`flex h-[20px] w-[20px] cursor-pointer items-center justify-center rounded-full border-[1px] border-transparent bg-blue-900 fill-white dark:bg-blue-200 dark:fill-black md:hover:border-blue-900 md:hover:bg-transparent md:hover:fill-blue-900 md:hover:dark:border-blue-200 md:hover:dark:fill-blue-200`}
+        />
+      </div>
+      <input
+        type="range"
+        className="relative m-0 flex h-8 w-full items-center justify-between gap-x-1 self-center rounded-3xl border-[1px] border-blue-900 px-[5px] py-2 dark:border-blue-200"
       />
-      {/*TODO: Song track */}
-      <FFButton
-        className={`flex h-[20px] w-[20px] cursor-pointer items-center justify-center rounded-full border-[1px] border-transparent bg-blue-900 fill-white dark:bg-blue-200 dark:fill-black md:hover:border-blue-900 md:hover:bg-transparent md:hover:fill-blue-900 md:hover:dark:border-blue-200 md:hover:dark:fill-blue-200`}
-      />
-    </div>
+      <audio
+        ref={audio}
+        src={songs[songIndex]?.url}
+        preload="metadata"
+        autoPlay={false}
+      ></audio>
+    </>
   );
 }

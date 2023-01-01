@@ -11,6 +11,8 @@ import {
 import { useSnapshot } from "valtio";
 import { getSongs } from "@api/firebase.api";
 import { state } from "state";
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "@api/firebase.config";
 // search
 export const useSearch = (projects: any, query: any) => {
   if (query === "") return projects;
@@ -206,9 +208,25 @@ export function useSong() {
     });
   }, [songIndex]);
 
-  return [song, songs.current, setSong];
+  function nextSong() {
+    if (songIndex < songs.current.length - 1) {
+      state.songIndex++;
+    } else {
+      state.songIndex = 0;
+    }
+  }
+
+  return [song, songs.current, setSong, nextSong];
 }
 
+export async function loadSong(song: string) {
+  // get the url of the song from firebase storage
+  const songRef = ref(storage, `info/songs/${song}.mp3`);
+  const url = await getDownloadURL(songRef).then((url) => {
+    return url;
+  });
+  return url;
+}
 // export function useWindowDimensions() {
 //   let dimensions: any;
 //   useEffect(() => {

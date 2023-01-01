@@ -1,12 +1,6 @@
 "use client";
 
-import React, {
-  FormEvent,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useSnapshot } from "valtio";
 import {
   clearSelectedName,

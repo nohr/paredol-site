@@ -9,16 +9,23 @@ import Link from "next/link";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { FaShoppingBasket } from "react-icons/fa";
 import { BsFillGearFill } from "react-icons/bs";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Squash as Hamburger } from "hamburger-react";
+import { AudioContext } from "@context/audio.context";
 
 function Path({ ...props }) {
   const path = usePathname();
   let { href, style } = props;
+  const { select } = useContext(AudioContext);
+
   return (
     <Link
-      onClick={() => (state.menu = false)}
-      className={`link my-1 flex md:!border-transparent md:hover:!border-current  md:dark:!border-transparent md:dark:hover:!border-current ${
+      onClick={() => {
+        state.menu = false;
+        select();
+        console.log("clicked");
+      }}
+      className={`link my-1 flex md:!border-transparent md:hover:!border-current md:dark:!border-transparent md:dark:hover:!border-current ${
         style === "md" ? "hidden md:flex" : ""
       }  ${
         path?.includes(href.toLowerCase())
@@ -52,6 +59,7 @@ function Path({ ...props }) {
 function DesktopLinks({ ...props }) {
   const { options } = useSnapshot(state);
   const { optionsBtn } = props;
+  const { open, close } = useContext(AudioContext);
   return (
     <div
       className={`m-0 hidden ${
@@ -67,7 +75,10 @@ function DesktopLinks({ ...props }) {
             : ""
         }`}
         tabIndex={-1}
-        onClick={() => (state.options = !options)}
+        onClick={() => {
+          options ? close() : open();
+          state.options = !options;
+        }}
         ref={optionsBtn}
       >
         Options
@@ -135,6 +146,8 @@ export default function Navbar() {
   const user = useUser();
   const optionsBtn = useRef(null);
   const ref = useRef<any>(null);
+  const { open, close } = useContext(AudioContext);
+
   ref.current?.addEventListener(
     "touchmove",
     (e: any) => {
@@ -176,10 +189,13 @@ export default function Navbar() {
               toggled={toggle}
               toggle={setToggle}
               onToggle={(toggled) => {
-                if (toggled) state.menu = true;
-                else {
+                if (toggled) {
+                  state.menu = true;
+                  open();
+                } else {
                   state.menu = false;
                   state.options = false;
+                  close();
                 }
               }}
             />

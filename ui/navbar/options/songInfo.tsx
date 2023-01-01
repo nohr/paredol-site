@@ -1,9 +1,10 @@
 import copy from "copy-to-clipboard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MdLibraryMusic } from "react-icons/md";
 import { useSnapshot } from "valtio";
 import { state } from "state";
 import { useSong } from "utils";
+import { AudioContext } from "@context/audio.context";
 
 export function SongInfo() {
   const [song, songs] = useSong();
@@ -11,7 +12,7 @@ export function SongInfo() {
   const normal = `(${songIndex + 1}/${songs.length}) ${song}`;
   const [value, setValue] = useState<string>(normal);
   const slide = "animate-[autoscroll_7s_linear_infinite]";
-
+  const { confirm } = useContext(AudioContext);
   useEffect(() => {
     setValue(normal);
   }, [songs, normal, theme]);
@@ -24,6 +25,7 @@ export function SongInfo() {
       }}
       onMouseLeave={() => setValue(normal)}
       onClick={() => {
+        confirm();
         copy(song);
         setValue("Copied!");
         setTimeout(() => setValue(normal), 2500);

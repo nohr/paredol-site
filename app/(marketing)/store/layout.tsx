@@ -3,9 +3,13 @@ export default function StoreLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const cart = [];
   return (
     <>
-      <h1>Store</h1>
+      <div className="flex flex-row justify-between">
+        <h1>Store</h1>
+        <p>Cart {cart.length}</p>
+      </div>
       {children}
     </>
   );
