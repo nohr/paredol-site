@@ -5,6 +5,9 @@ interface stateypes {
   // Firebase
   data: DocumentData;
   quote: string;
+  bio: string;
+  email: string;
+  roster: any;
   // UI
   theme: string;
   monochrome: boolean;
@@ -33,6 +36,9 @@ export const state = proxy<stateypes>({
   // Firebase
   data: [],
   quote: "...",
+  bio: "...",
+  email: "...",
+  roster: "...",
   //UI
   theme: "light",
   monochrome: false,

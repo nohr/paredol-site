@@ -11,7 +11,7 @@ import {
   where,
 } from "firebase/firestore/lite";
 import { useState, useEffect } from "react";
-import { state } from "../common/state";
+import { state } from "state";
 import { auth, db } from "./firebase.config";
 
 export async function getData(lot?: string) {

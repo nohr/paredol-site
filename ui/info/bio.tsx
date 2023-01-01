@@ -1,19 +1,24 @@
 "use client";
 
-import { getBio } from "@api/info.api";
-import { useEffect, useRef, useState } from "react";
+import { CgSpinner } from "react-icons/cg";
+import { state } from "state";
+import { useSnapshot } from "valtio";
 
 export default function Bio() {
-  const [bio, setBio] = useState("...");
-
-  useEffect(() => {
-    (async () => setBio(await getBio()))();
-  }, []);
+  const { bio } = useSnapshot(state);
 
   return (
-    <>
-      <h1>The gist...</h1>
-      <p>{bio}</p>
-    </>
+    <div className="flex flex-col gap-y-2  p-3">
+      <h1 className="title">The gist...</h1>
+      <div className="flex h-full w-full justify-center">
+        {bio! !== "..." ? (
+          <p className="p-1 font-semibold first-letter:float-left first-letter:pr-2 first-letter:font-serif first-letter:text-7xl first-letter:font-extralight first-letter:italic first-letter:text-red-500">
+            {bio}
+          </p>
+        ) : (
+          <CgSpinner className="!flex h-8 w-auto animate-spin self-center" />
+        )}
+      </div>
+    </div>
   );
 }

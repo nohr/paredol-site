@@ -13,13 +13,15 @@ function Quote() {
   const { motion, quote, theme } = useSnapshot(state);
 
   useEffect(() => {
-    getQuote().then((res) => {
-      state.quote = res;
-      !motion &&
-        scramble.current.scramble(res, setText, {
-          characters: characters,
-        });
-    });
+    getQuote()
+      .then((res) => {
+        state.quote = res;
+        !motion &&
+          scramble.current.scramble(res, setText, {
+            characters: characters,
+          });
+      })
+      .catch((err) => console.log(err));
   }, [setText, motion]);
 
   useEffect(() => {
@@ -56,7 +58,7 @@ function Quote() {
     };
   }, []);
   return (
-    <h1 ref={ref} className={`text-5xl`}>
+    <h1 ref={ref} className={`title`}>
       {text}
     </h1>
   );

@@ -18,9 +18,9 @@ function Path({ ...props }) {
   return (
     <Link
       onClick={() => (state.menu = false)}
-      className={`my-1 flex ${
+      className={`link my-1 flex md:!border-transparent md:hover:!border-current  md:dark:!border-transparent md:dark:hover:!border-current ${
         style === "md" ? "hidden md:flex" : ""
-      } h-min w-full select-none items-center justify-between rounded-xl border-[1px] border-blue-900 px-[6px] py-[4px] font-thin backdrop-blur-lg dark:border-blue-200 md:w-fit md:gap-x-2 md:!border-transparent md:hover:!border-blue-900 md:hover:dark:!border-blue-200 ${
+      }  ${
         path?.substring(1) === `${href.toLowerCase()}`
           ? `bg-blue-900 text-white dark:bg-blue-200 dark:text-black`
           : ""
@@ -56,7 +56,7 @@ function DesktopLinks({ ...props }) {
     <div
       className={`m-0 hidden ${
         options ? "border-blue-900 dark:border-blue-200" : ""
-      } h-full w-full flex-row items-center justify-between gap-x-1  md:flex`}
+      } h-full w-full flex-row items-center justify-end gap-x-1 md:flex lg:!gap-x-6`}
     >
       <Path href="Info" />
       <Path href="Store" />
@@ -98,7 +98,7 @@ function MobileMenu({ ...props }) {
       ref={ref}
       className={`${
         menu ? "" : "!hidden"
-      } fixed bottom-24 h-fit w-screen md:hidden`}
+      } fixed bottom-28 z-50 h-fit w-screen md:hidden`}
     >
       {options ? <Options optionsBtn={optionsBtn} /> : null}
       <div className="flex h-fit w-full flex-row items-center justify-evenly gap-x-3 p-3">

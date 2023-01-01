@@ -108,10 +108,9 @@ export function Search() {
 
   return (
     <>
-      <div className="relative flex h-[34px] w-[90%] items-center justify-center md:h-full">
+      <div className=" relative flex h-[34px] w-[90%] items-center justify-center">
         <input
-          className="md:hover: bg-opacity-60focus:dark:text-white peer m-0 my-auto flex h-[32px] w-full appearance-none rounded-xl border-[1px] border-blue-900 bg-transparent bg-opacity-60 px-8 text-center text-base font-light text-blue-900 shadow-none outline-none backdrop-blur-xl placeholder:text-blue-900 focus:border-white focus:bg-blue-900 focus:bg-opacity-60 focus:text-white focus:shadow-lg focus:shadow-blue-900 focus:outline-none focus:ring-0 focus:backdrop-blur-[10px] focus:placeholder:text-white dark:border-blue-200 dark:text-blue-200 dark:placeholder:text-blue-200 focus:dark:border-white focus:dark:bg-blue-200 focus:dark:bg-opacity-60 dark:focus:text-white focus:dark:shadow-blue-200 focus:dark:placeholder:text-white md:text-sm md:hover:bg-blue-900 md:hover:text-white
-        md:hover:placeholder:text-white md:hover:dark:bg-blue-200 md:hover:dark:text-black md:hover:placeholder:dark:text-black "
+          className="inputField peer m-0 my-auto flex h-[32px] w-full px-8 text-center"
           placeholder={chatMode ? "what's up?" : placeholder}
           type="text"
           onFocus={() => {
@@ -151,16 +150,16 @@ export function Search() {
         <div
           ref={Results}
           style={{ width: `${Bar.current.clientWidth}px` }}
-          className={`fixed bottom-24 left-[50%] z-50 flex h-min translate-x-[-50%] flex-col rounded-xl border-[1px] border-white bg-blue-900 bg-opacity-60 p-3 shadow-lg shadow-blue-900 backdrop-blur-xl dark:border-white dark:bg-blue-200 dark:bg-opacity-60 dark:shadow-blue-200 md:top-16`}
+          className={`fade-transition group fixed bottom-24 left-[50%] z-50 flex h-min translate-x-[-50%] flex-col rounded-xl border-[1px] border-transparent bg-blue-900 bg-opacity-60 p-3 shadow-lg shadow-blue-900 backdrop-blur-xl hover:bg-opacity-100 dark:border-transparent dark:bg-blue-200 dark:bg-opacity-60 dark:shadow-blue-200 dark:hover:bg-opacity-100 md:top-16`}
         >
-          <p className="mb-3 border-b-[1px] border-white text-xs font-black uppercase text-white dark:border-white dark:text-white">
+          <p className="mb-3 border-b-[1px] border-white text-xs font-black uppercase text-white dark:border-white dark:text-white dark:group-hover:!border-black dark:group-hover:text-black ">
             {searchText} results
           </p>
           {hits && hits.length > 0 ? (
             hits.map((hit: any, index: number) => (
               <Link
                 key={index}
-                className="w-fit text-white dark:text-white"
+                className="w-fit text-white dark:text-white dark:group-hover:text-black"
                 href={`/${hit.lot}`}
                 onClick={() => setSearchText("")}
                 onTouchEnd={() => setSearchText("")}
@@ -169,7 +168,7 @@ export function Search() {
               </Link>
             ))
           ) : (
-            <p className="self-center text-white dark:text-white">
+            <p className="self-center text-white dark:text-white dark:group-hover:text-black">
               I can't find {searchText}!
             </p>
           )}
