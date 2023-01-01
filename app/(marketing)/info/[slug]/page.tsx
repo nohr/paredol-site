@@ -33,9 +33,9 @@ export default function Page({ params, searchParams }: PageProps) {
   return (
     <>
       {member && (
-        <div className="flex flex-row gap-x-4">
+        <div className="flex flex-col gap-x-4 md:flex-row">
           <div className="flex flex-col gap-y-4">
-            <div className="flex w-fit flex-row items-center gap-x-2">
+            <div className="flex w-fit flex-row items-center justify-center gap-x-2">
               <h1 className="title whitespace-nowrap">{member?.name}</h1>
               {member?.intonation ? (
                 <HiSpeakerWave
@@ -45,7 +45,7 @@ export default function Page({ params, searchParams }: PageProps) {
                 />
               ) : null}
             </div>
-            <div className="flex flex-row gap-x-2">
+            <div className="flex flex-col items-center justify-center gap-x-2 md:flex-row ">
               <div
                 style={{
                   backgroundImage: `url(${member?.photo})`,
@@ -58,10 +58,10 @@ export default function Page({ params, searchParams }: PageProps) {
                 <p className="font-thin italic">{member?.role}</p>
                 <p>{member?.email}</p>
                 {member?.links && (
-                  <div className="flex w-full flex-row items-center gap-x-2">
+                  <div className="flex w-full flex-row items-center justify-center gap-x-2">
                     {member?.links.map((link: any) => (
                       <GetIcon
-                        className="fade-transition hover:opacity-50"
+                        className="fade-transition h-auto !w-8 hover:opacity-50"
                         link={link}
                       />
                     ))}

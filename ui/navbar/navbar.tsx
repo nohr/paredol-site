@@ -86,7 +86,7 @@ function DesktopLinks({ ...props }) {
 function MobileMenu({ ...props }) {
   const user = useUser();
   const { optionsBtn } = props;
-  const { options, menu } = useSnapshot(state);
+  const { options, menu, mobile } = useSnapshot(state);
   const ref = useRef<any>(null);
 
   ref.current?.addEventListener("touchmove", (e: any) => {
@@ -100,7 +100,10 @@ function MobileMenu({ ...props }) {
         menu ? "" : "!hidden"
       } fixed bottom-28 z-50 h-fit w-screen md:hidden`}
     >
-      {options ? <Options optionsBtn={optionsBtn} /> : null}
+      <Options
+        className={`${options && mobile ? "flex" : "!hidden"}`}
+        optionsBtn={optionsBtn}
+      />
       <div className="flex h-fit w-full flex-row items-center justify-evenly gap-x-3 p-3">
         {user && <Path href="Editor" />}
         <Path href="Info" />
@@ -171,7 +174,10 @@ export default function Navbar() {
         </div>
         <DesktopLinks optionsBtn={optionsBtn} />
       </div>
-      {options && !mobile ? <Options optionsBtn={optionsBtn} /> : null}
+      <Options
+        className={`${options && !mobile ? "flex" : "!hidden"}`}
+        optionsBtn={optionsBtn}
+      />
       <MobileMenu optionsBtn={optionsBtn} />
     </>
   );

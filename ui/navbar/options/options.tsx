@@ -12,7 +12,7 @@ import { IoAccessibility } from "react-icons/io5";
 const Options = ({ ...props }) => {
   const { muted, theme, motion, mobile } = useSnapshot(state);
   const ref = useRef<HTMLDivElement>(null!);
-  // const { optionsBtn } = props;
+  const { className } = props;
 
   ref.current?.addEventListener(
     "touchmove",
@@ -43,7 +43,7 @@ const Options = ({ ...props }) => {
   return (
     <div
       ref={ref}
-      className="bottom-36 z-50 grid w-full grid-cols-[48%_4%_48%] grid-rows-[min-content] items-start border-y-[1px] border-blue-900 p-3 backdrop-blur-lg dark:border-blue-200 md:fixed md:top-[68px] md:right-4 md:h-min md:w-48 md:grid-cols-[100%] md:grid-rows-[min-content_20px_min-content] md:border-y-0 md:border-l-[1px] lg:w-80"
+      className={`${className} bottom-36 z-50 grid w-full grid-cols-[48%_4%_48%] grid-rows-[min-content] items-start border-y-[1px] border-blue-900 p-3 backdrop-blur-lg dark:border-blue-200 md:fixed md:top-[68px] md:right-4 md:h-min md:w-48 md:grid-cols-[100%] md:grid-rows-[min-content_20px_min-content] md:border-y-0 md:border-l-[1px] lg:w-80`}
     >
       <div className="m-0 flex h-full w-full flex-col items-center justify-center gap-y-5 p-0">
         <p className="absolute -top-[30px] select-none rounded-lg p-2 text-[0.5rem] font-black uppercase backdrop-blur-lg md:static">
