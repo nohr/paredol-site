@@ -33,8 +33,8 @@ export default function Page({ params, searchParams }: PageProps) {
   return (
     <>
       {member && (
-        <div className="flex flex-col gap-x-4 md:flex-row">
-          <div className="flex flex-col gap-y-4">
+        <div className="mt-64 flex flex-col gap-y-8 md:flex-row md:gap-x-4">
+          <div className="flex flex-col items-center justify-items-center gap-y-4">
             <div className="flex w-fit flex-row items-center justify-center gap-x-2">
               <h1 className="title whitespace-nowrap">{member?.name}</h1>
               {member?.intonation ? (
