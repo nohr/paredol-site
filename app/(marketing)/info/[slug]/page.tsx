@@ -1,19 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { getRoster } from "@api/info.api";
+import { getIntonation, getRoster } from "@api/info.api";
 import { state } from "state";
 import { useEffect, useState } from "react";
 import { BsGithub, BsSpotify, BsLinkedin } from "react-icons/bs";
 import { HiSpeakerWave } from "react-icons/hi2";
+import { SiMaildotru } from "react-icons/si";
+import { MemberBio } from "@ui/info/member/member.bio";
 
 export interface PageProps {
-  params?: { slug: string };
+  params: { slug: string };
   searchParams?: any;
 }
 
 export default function Page({ params, searchParams }: PageProps) {
-  const slug = params?.slug;
+  const slug = params.slug;
   const id = searchParams?.id;
   // create a name variable and grab the name from the database using the slug
   const [member, setMember] = useState<any>();
@@ -23,8 +25,8 @@ export default function Page({ params, searchParams }: PageProps) {
   }, []);
 
   // get the intonation from the database and play it with the audio tag
-  const play = () => {
-    const audio = new Audio(member?.intonation);
+  const play = async () => {
+    const audio = new Audio(await getIntonation(slug));
     audio.play();
     audio.addEventListener("loadstart", () => (state.loading = true));
     audio.addEventListener("loadeddata", () => (state.loading = false));
@@ -33,61 +35,66 @@ export default function Page({ params, searchParams }: PageProps) {
   return (
     <>
       {member && (
-        <div className="mt-64 flex flex-col gap-y-8 md:flex-row md:gap-x-4">
-          <div className="flex flex-col items-center justify-items-center gap-y-4">
-            <div className="flex w-fit flex-row items-center justify-center gap-x-2">
-              <h1 className="title whitespace-nowrap">{member?.name}</h1>
-              {member?.intonation ? (
-                <HiSpeakerWave
-                  className="link fill !h-auto !w-8  !cursor-pointer"
-                  title="Pronounce"
-                  onClick={() => play()}
-                />
-              ) : null}
-            </div>
-            <div className="flex flex-col items-center justify-center gap-x-2 md:flex-row ">
-              <div
-                style={{
-                  backgroundImage: `url(${member?.photo})`,
-                  backgroundSize: "120%",
-                  backgroundPosition: "center",
-                }}
-                className="aspect-square w-60 rounded-md shadow-md"
-              ></div>
-              <div className="flex flex-col gap-y-1">
-                <p className="font-thin italic">{member?.role}</p>
-                <p>{member?.email}</p>
-                {member?.links && (
-                  <div className="flex w-full flex-row items-center justify-center gap-x-2">
-                    {member?.links.map((link: any) => (
-                      <GetIcon
-                        className="fade-transition h-auto !w-8 hover:opacity-50"
-                        link={link}
-                      />
-                    ))}
-                  </div>
-                )}
+        <div className="flex w-full flex-col gap-y-8 pb-48 md:grid md:h-full md:grid-cols-[50%_50%] md:grid-rows-[100%] md:pb-0">
+          <div className="flex flex-col items-center justify-center  justify-items-center gap-y-4">
+            <img
+              src={member && member?.photo}
+              alt=""
+              className="aspect-square h-auto !w-[160px] rounded-md shadow-md"
+            />
+            <div className="flex flex-col items-center justify-center gap-y-2">
+              <div className="flex w-fit flex-row items-center justify-center gap-x-2">
+                <h1 className="title whitespace-nowrap">{member?.name}</h1>
+                {member?.intonation ? (
+                  <HiSpeakerWave
+                    className="link fill !h-auto !w-8  !cursor-pointer"
+                    title="Pronounce"
+                    onClick={() => play()}
+                  />
+                ) : null}
               </div>
+              <p className="flex self-center font-thin italic">
+                {member?.role}
+              </p>
+            </div>
+            <div className="flex w-full  flex-col items-center justify-center gap-2 md:flex-row ">
+              {member?.links && (
+                <div className="flex w-full flex-row items-center justify-center gap-x-4 ">
+                  {member?.links.map((link: any, index: number) => (
+                    <GetIcon
+                      className="fade-transition h-auto !w-8 hover:opacity-50"
+                      link={link}
+                      key={index}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
-          <p className="text-base font-thin">{member?.bio}</p>
+          <div className="flex flex-col gap-y-4 font-bold md:justify-center">
+            {member.bio ? <p>{member.bio}</p> : <MemberBio slug={slug} />}
+          </div>
         </div>
       )}
-      {searchParams && <p>{searchParams.id}</p>}
     </>
   );
 }
 
-//export a function that accepts a link and returns the icon
 function GetIcon({ link, className }: { link: string; className?: string }) {
   return (
-    <Link href={link} target="_blank" className="">
+    <Link
+      href={link.includes("@") ? "mailto:" + link : link}
+      target="_blank"
+      className=""
+    >
       {link.includes("github") ? (
         <BsGithub className={className} />
       ) : link.includes("linkedin") ? (
         <BsLinkedin className={className} />
       ) : link.includes("spotify") ? (
         <BsSpotify className={className} />
+      ) : link.includes("@") ? (
+        <SiMaildotru className={className} />
       ) : null}
     </Link>
   );

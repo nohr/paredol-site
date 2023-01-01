@@ -18,7 +18,7 @@ export default function InfoLayout({
   }, []);
 
   return (
-    <div className=" flex h-full w-full flex-col justify-center self-center py-2 md:!w-full lg:mx-24 lg:!w-[120ch]">
+    <div className="flex h-full w-full justify-start self-center py-2 md:w-full md:justify-center lg:mx-24 lg:w-[120ch]">
       {children}
     </div>
   );

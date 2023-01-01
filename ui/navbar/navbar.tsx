@@ -9,7 +9,7 @@ import Link from "next/link";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { FaShoppingBasket } from "react-icons/fa";
 import { BsFillGearFill } from "react-icons/bs";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Squash as Hamburger } from "hamburger-react";
 
 function Path({ ...props }) {
@@ -21,7 +21,7 @@ function Path({ ...props }) {
       className={`link my-1 flex md:!border-transparent md:hover:!border-current  md:dark:!border-transparent md:dark:hover:!border-current ${
         style === "md" ? "hidden md:flex" : ""
       }  ${
-        path?.substring(1) === `${href.toLowerCase()}`
+        path?.includes(href.toLowerCase())
           ? `bg-blue-900 text-white dark:bg-blue-200 dark:text-black`
           : ""
       }`}
@@ -31,7 +31,7 @@ function Path({ ...props }) {
       {href === "Info" ? (
         <BsFillInfoCircleFill
           className={`m-0 h-3 ${
-            path?.substring(1) === `${href.toLowerCase()}`
+            path?.includes(href.toLowerCase())
               ? "text-white dark:text-black"
               : "fill-blue-900 p-0 dark:fill-blue-200"
           } `}
@@ -39,7 +39,7 @@ function Path({ ...props }) {
       ) : href === "Store" ? (
         <FaShoppingBasket
           className={`m-0 h-3 ${
-            path?.substring(1) === `${href.toLowerCase()}`
+            path?.includes(href.toLowerCase())
               ? "text-white dark:text-black"
               : "fill-blue-900 p-0 dark:fill-blue-200"
           } `}
@@ -96,12 +96,10 @@ function MobileMenu({ ...props }) {
   return (
     <div
       ref={ref}
-      className={`${
-        menu ? "" : "!hidden"
-      } fixed bottom-28 z-50 h-fit w-screen md:hidden`}
+      className={`${menu ? "" : "!hidden"} z-50 h-fit w-screen md:hidden`}
     >
       <Options
-        className={`${options && mobile ? "flex" : "!hidden"}`}
+        className={`${options && mobile ? "flex" : "!hidden"} !mb-4`}
         optionsBtn={optionsBtn}
       />
       <div className="flex h-fit w-full flex-row items-center justify-evenly gap-x-3 p-3">
@@ -137,7 +135,6 @@ export default function Navbar() {
   const user = useUser();
   const optionsBtn = useRef(null);
   const ref = useRef<any>(null);
-
   ref.current?.addEventListener(
     "touchmove",
     (e: any) => {
@@ -146,39 +143,50 @@ export default function Navbar() {
     { passive: false }
   );
 
+  const [toggle, setToggle] = useState(false);
+  const path = usePathname();
+
+  useEffect(() => {
+    return () => setToggle(false);
+  }, [path]);
+
   return (
     <>
-      <div
-        ref={ref}
-        className={`fixed bottom-4 z-50 grid h-min w-screen grid-cols-[0.2fr_0.6fr_0.2fr] grid-rows-[min-content] items-center justify-center justify-items-center p-3 backdrop-blur-lg md:top-0 md:grid-cols-[25%_50%_25%]`}
-      >
-        <div className="m-0 flex h-full flex-row items-center justify-between gap-0 p-0 md:w-full">
-          <HomeButton />
-          {user ? <Path href="Editor" style={"md"} /> : null}
-        </div>
-        <Search />
-        <div className="contents md:hidden">
-          <Hamburger
-            label="Show menu"
-            duration={0.2}
-            distance="sm"
-            rounded
-            onToggle={(toggled) => {
-              if (toggled) state.menu = true;
-              else {
-                state.menu = false;
-                state.options = false;
-              }
-            }}
-          />
-        </div>
-        <DesktopLinks optionsBtn={optionsBtn} />
-      </div>
       <Options
         className={`${options && !mobile ? "flex" : "!hidden"}`}
         optionsBtn={optionsBtn}
       />
-      <MobileMenu optionsBtn={optionsBtn} />
+      <div className="fixed bottom-0 z-50 h-min backdrop-blur-lg md:top-0 md:bottom-[unset] ">
+        <MobileMenu optionsBtn={optionsBtn} />
+        <div
+          ref={ref}
+          className={` grid h-min w-screen grid-cols-[0.2fr_0.6fr_0.2fr] grid-rows-[min-content] items-center justify-items-center p-3  md:grid-cols-[25%_50%_25%]`}
+        >
+          <div className="m-0 flex h-full flex-row items-center justify-between gap-0 p-0 md:w-full">
+            <HomeButton />
+            {user ? <Path href="Editor" style={"md"} /> : null}
+          </div>
+          <Search />
+          <div className="contents md:hidden">
+            <Hamburger
+              label="Show menu"
+              duration={0.2}
+              distance="sm"
+              rounded
+              toggled={toggle}
+              toggle={setToggle}
+              onToggle={(toggled) => {
+                if (toggled) state.menu = true;
+                else {
+                  state.menu = false;
+                  state.options = false;
+                }
+              }}
+            />
+          </div>
+          <DesktopLinks optionsBtn={optionsBtn} />
+        </div>
+      </div>
     </>
   );
 }

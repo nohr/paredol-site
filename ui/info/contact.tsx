@@ -23,7 +23,6 @@ export default function Contact() {
       alert("Please enter a valid email address");
       return;
     }
-    console.log(form.current);
 
     emailjs
       .sendForm(
@@ -33,9 +32,7 @@ export default function Contact() {
         "8jVloGhppkscKbbNB"
       )
       .then(
-        (result) => {
-          console.log(result.text);
-        },
+        (result) => {},
         (error) => {
           console.log(error.text);
         }
@@ -54,8 +51,8 @@ export default function Contact() {
         onSubmit={handleSubmit}
         className="flex w-full flex-col gap-y-4 p-2"
       >
-        <div className="flex w-full flex-row gap-x-2">
-          <div className="flex w-full flex-row items-center gap-x-2">
+        <div className="flex w-full flex-col gap-x-2 gap-y-2 md:flex-row">
+          <div className="flex w-full flex-row  items-center gap-x-2">
             <BsFillPersonFill className="w-4" />
             <input
               ref={name}

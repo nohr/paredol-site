@@ -18,7 +18,7 @@ export function SongInfo() {
 
   return (
     <div
-      className="relative flex w-full cursor-pointer flex-row items-center gap-x-2 overflow-hidden rounded-lg border-[1px] border-blue-900 px-0 py-1 dark:border-blue-200"
+      className="fill group relative flex w-full cursor-pointer flex-row items-center gap-x-2 overflow-hidden rounded-lg border-[1px] border-blue-900 px-0 py-1 dark:border-blue-200"
       onMouseOver={() => {
         setValue("Click to copy song info");
       }}
@@ -29,7 +29,7 @@ export function SongInfo() {
         setTimeout(() => setValue(normal), 2500);
       }}
     >
-      <MdLibraryMusic className="absolute left-[6px] h-4 w-4 fill-blue-900 dark:fill-blue-200" />
+      <MdLibraryMusic className="absolute left-[6px]  h-4 w-4 md:group-hover:fill-white dark:md:group-hover:fill-black" />
       <p
         style={
           motion
@@ -38,7 +38,7 @@ export function SongInfo() {
             ? { animation: "none", alignSelf: "center" }
             : undefined
         }
-        className={`pointer-events-none select-none whitespace-nowrap pl-6 text-blue-900 dark:text-blue-200 ${
+        className={`md:group-hover:text-whitedark:md:group-hover:text-black pointer-events-none  select-none whitespace-nowrap  pl-6 ${
           !motion ? slide : ""
         }`}
       >

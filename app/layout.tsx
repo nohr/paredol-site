@@ -27,7 +27,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="overflow-x-hidden bg-white text-blue-900 selection:bg-blue-900 selection:bg-opacity-60 selection:text-white dark:bg-black dark:text-blue-200 dark:selection:bg-blue-200 selection:dark:bg-opacity-60 dark:selection:text-black ">
+      <body className="h-full overflow-x-hidden bg-white text-blue-900 selection:bg-blue-900 selection:bg-opacity-60 selection:text-white dark:bg-black dark:text-blue-200 dark:selection:bg-blue-200 selection:dark:bg-opacity-60 dark:selection:text-black ">
         <Navbar />
         <div className=" flex h-full w-full flex-col justify-start p-[10px] py-20 md:px-[10px] md:py-[70px]">
           {children}
