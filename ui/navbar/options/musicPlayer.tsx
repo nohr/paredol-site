@@ -62,11 +62,13 @@ export function MusicPlayer() {
           className={`flex h-[20px] w-[20px] cursor-pointer items-center justify-center rounded-full border-[1px] border-transparent bg-blue-900 fill-white dark:bg-blue-200 dark:fill-black md:hover:border-blue-900 md:hover:bg-transparent md:hover:fill-blue-900 md:hover:dark:border-blue-200 md:hover:dark:fill-blue-200`}
         />
       </div>
+      {/* TODO: song track */}
       {/* <input
         type="range"
-        className="relative m-0 flex h-8 w-full items-center justify-between gap-x-1 self-center rounded-3xl border-[1px] border-blue-900 px-[5px] py-2 dark:border-blue-200"
+        style={{}}
+        className="!before:dark:bg-blue-200 m-0 flex h-8  w-full appearance-none items-center justify-between gap-x-1 self-center overflow-hidden rounded-3xl border-[1px] !border-blue-900 bg-transparent before:absolute before:z-10 before:!bg-blue-900 before:content-[''] dark:!border-blue-200 "
       /> */}
-      <audio ref={audio} src={""} preload="metadata" autoPlay={false}></audio>
+      <audio ref={audio} preload="metadata" autoPlay={false}></audio>
     </>
   );
 }

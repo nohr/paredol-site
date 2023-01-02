@@ -230,7 +230,8 @@ export function loadSong(current: any, song: any) {
 
 export function toggleMusic(current: any, songs: any) {
   let audio = current.current;
-  if (!audio.src) {
+
+  if (audio.src.length === 0) {
     loadSong(current, songs[state.songIndex]);
   } else {
     if (state.playing === false) {
