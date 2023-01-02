@@ -23,7 +23,6 @@ function Path({ ...props }) {
       onClick={() => {
         state.menu = false;
         select();
-        console.log("clicked");
       }}
       className={`link my-1 flex md:!border-transparent md:hover:!border-current md:dark:!border-transparent md:dark:hover:!border-current ${
         style === "md" ? "hidden md:flex" : ""

@@ -199,34 +199,73 @@ export function useSong() {
   const [song, setSong] = useState("");
 
   useEffect(() => {
-    getSongs().then((res) => {
-      songs.current = res;
+    getSongs().then((res) => (songs.current = res));
+  }, []);
 
-      setSong(
-        `${songs.current[songIndex]?.artist} - ${songs.current[songIndex]?.name}`
-      );
-    });
+  useEffect(() => {
+    getSongs().then((res) =>
+      setSong(`${res[songIndex]?.artist} - ${res[songIndex]?.name}`)
+    );
   }, [songIndex]);
 
-  function nextSong() {
-    if (songIndex < songs.current.length - 1) {
-      state.songIndex++;
+  return [song, songs.current];
+}
+
+//AUDIO
+export function loadSong(current: any, song: any) {
+  state.loading = true;
+  let audio = current.current;
+  getDownloadURL(ref(storage, `info/songs/${song.name}.mp3`))
+    .then((url) => {
+      song.url = url;
+      audio.setAttribute("src", url);
+      state.loading = false;
+      audio.play();
+      state.playing = true;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+export function toggleMusic(current: any, songs: any) {
+  let audio = current.current;
+  if (!audio.src) {
+    loadSong(current, songs[state.songIndex]);
+  } else {
+    if (state.playing === false) {
+      state.playing = true;
+      audio.play();
+    } else if (state.playing === true) {
+      state.playing = false;
+      audio.pause();
+    }
+  }
+  audio.onended = () => nextSong(current, songs);
+}
+export function nextSong(current: any, songs: any) {
+  function next() {
+    let audio = current.current;
+
+    state.playing = false;
+    audio.pause();
+
+    if (state.songIndex < songs.length - 1) {
+      state.songIndex += 1;
     } else {
       state.songIndex = 0;
     }
+    if (!songs[state.songIndex].url) {
+      loadSong(current, songs[state.songIndex]);
+    } else {
+      audio.setAttribute("src", songs[state.songIndex].url);
+      audio.play();
+    }
   }
-
-  return [song, songs.current, setSong, nextSong];
+  next();
+  current.current.onEnded = () => next();
 }
 
-export async function loadSong(song: string) {
-  // get the url of the song from firebase storage
-  const songRef = ref(storage, `info/songs/${song}.mp3`);
-  const url = await getDownloadURL(songRef).then((url) => {
-    return url;
-  });
-  return url;
-}
 // export function useWindowDimensions() {
 //   let dimensions: any;
 //   useEffect(() => {
