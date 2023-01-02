@@ -24,14 +24,17 @@ export const AudioContext = createContext<AudioContext>({
 });
 
 export const AudioProvider = ({ children }: { children?: React.ReactNode }) => {
-  const { muted } = useSnapshot(state);
+  const { muted, playRate } = useSnapshot(state);
   const [select] = useSound("/sounds/select.mp3", {
     volume: muted ? 0 : 1,
     playbackRate: Math.random() * (1.15 - 0.85) + 0.85,
   });
   const [open] = useSound("/sounds/open.mp3", { volume: muted ? 0 : 1 });
   const [close] = useSound("/sounds/close.mp3", { volume: muted ? 0 : 1 });
-  const [home] = useSound("/sounds/home.mp3", { volume: muted ? 0 : 1 });
+  const [home] = useSound("/sounds/home.mp3", {
+    volume: muted ? 0 : 1,
+    playbackRate: playRate,
+  });
   const [confirm] = useSound("/sounds/confirm.mp3", { volume: muted ? 0 : 1 });
   const [reset] = useSound("/sounds/reset.mp3", { volume: muted ? 0 : 1 });
 

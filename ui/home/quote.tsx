@@ -10,7 +10,7 @@ function Quote() {
   const ref = useRef<HTMLHeadingElement>(null!);
   const scramble = useRef(new Scrambler());
   const [text, setText] = useState<string>(state.quote);
-  const { motion, quote, theme } = useSnapshot(state);
+  const { motion, quote, theme, speech } = useSnapshot(state);
 
   useEffect(() => {
     getQuote()
@@ -22,7 +22,7 @@ function Quote() {
           });
       })
       .catch((err) => console.log(err));
-  }, [setText, motion]);
+  }, [setText, speech === true, motion]);
 
   useEffect(() => {
     motion

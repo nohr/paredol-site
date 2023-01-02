@@ -45,7 +45,7 @@ const Options = ({ ...props }) => {
   return (
     <div
       ref={ref}
-      className={`${className} bottom-36 z-50 grid w-full grid-cols-[48%_4%_48%] grid-rows-[min-content] items-start rounded-2xl border-y-[1px] border-blue-900 p-3 !backdrop-blur-lg dark:border-blue-200 md:fixed md:top-[68px] md:right-4 md:h-min md:w-48 md:grid-cols-[100%] md:grid-rows-[min-content_20px_min-content] md:border-y-0 lg:w-80`}
+      className={`${className} bottom-36 z-50 grid w-full grid-cols-[48%_4%_48%] grid-rows-[min-content] items-start rounded-2xl border-y-[1px] border-blue-900 p-3 !backdrop-blur-lg dark:border-blue-200 md:fixed md:top-[68px] md:right-4 md:h-min md:w-48 md:grid-cols-[100%] md:grid-rows-[min-content_20px_min-content] md:border-y-0 lg:w-60`}
     >
       <div className="m-0 flex h-full w-full flex-col items-center justify-center gap-y-5 p-0">
         <p className=" select-none rounded-lg p-0 text-xs font-black uppercase md:static">

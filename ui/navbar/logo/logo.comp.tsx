@@ -28,13 +28,13 @@ export function CD() {
   // console.log(gl.info);
   const cd = useRef<any>();
   // const { hover } = props;
-  const { loading, motion, theme } = useSnapshot(state);
+  const { loading, motion, theme, speech } = useSnapshot(state);
 
   useFrame(() => {
     if (cd.current) {
       let { rotation } = cd.current;
       if (rotation) {
-        handleMotion(motion, loading, rotation);
+        handleMotion(motion, loading, rotation, speech);
       }
     }
   });
@@ -66,20 +66,19 @@ function handleMotion(
   motion: boolean,
   loading: boolean,
   // hover: boolean,
-  rotation: Euler
+  rotation: Euler,
+  speech: boolean
 ) {
   if (!motion) {
     if (loading) {
       rotation.x = -Math.PI / 2;
       rotation.y += 0.05;
       rotation.z = 0;
-    }
-    // else if (hover) {
-    //   rotation.x = -Math.PI / 2;
-    //   rotation.y = 0;
-    //   rotation.z += 0.05;
-    // }
-    else {
+    } else if (speech) {
+      rotation.x = -Math.PI / 2;
+      rotation.y = 0;
+      rotation.z += 0.05;
+    } else {
       rotation.x += 0.005;
       rotation.y += 0.005;
       rotation.z += 0.005;

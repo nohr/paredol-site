@@ -97,6 +97,7 @@ function MobileMenu({ ...props }) {
   const user = useUser();
   const { optionsBtn } = props;
   const { options, menu, mobile } = useSnapshot(state);
+  const { open, close } = useContext(AudioContext);
   const ref = useRef<any>(null);
 
   ref.current?.addEventListener("touchmove", (e: any) => {
@@ -123,7 +124,10 @@ function MobileMenu({ ...props }) {
           }}`}
           ref={optionsBtn}
           tabIndex={-1}
-          onClick={() => (state.options = !options)}
+          onClick={() => {
+            state.options = !options;
+            options ? close() : open();
+          }}
         >
           Options
           <BsFillGearFill

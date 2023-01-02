@@ -10,6 +10,7 @@ interface stateypes {
   roster: any;
   // UI
   theme: string;
+  hue: number;
   monochrome: boolean;
   motion: boolean;
   loading: boolean;
@@ -17,6 +18,7 @@ interface stateypes {
   options: boolean;
   colorBar: boolean;
   chatMode: boolean;
+  speech: boolean;
   // Audio
   songs: any;
   songIndex: number;
@@ -41,6 +43,7 @@ export const state = proxy<stateypes>({
   roster: "...",
   //UI
   theme: "light",
+  hue: 0,
   monochrome: false,
   motion: false,
   loading: true,
@@ -48,6 +51,7 @@ export const state = proxy<stateypes>({
   options: false,
   colorBar: false,
   chatMode: false,
+  speech: false,
   // Audio
   songs: [],
   songIndex: 0,
