@@ -10,13 +10,13 @@ export default function InfoLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { reset } = useContext(AudioContext);
+  const { select } = useContext(AudioContext);
   return (
-    <div className="flex flex-col">
+    <div className="flex !w-full flex-col">
       <div className=" h-min w-full">
         <Link
           href="/info"
-          onClick={() => reset()}
+          onClick={() => select()}
           className="fill link flex !w-min flex-row"
         >
           <IoIosArrowBack />

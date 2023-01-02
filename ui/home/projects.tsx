@@ -3,10 +3,12 @@
 import Link from "next/link";
 import { useSnapshot } from "valtio";
 import { state } from "state";
+import { useContext } from "react";
+import { AudioContext } from "@context/audio.context";
 
 function Projects() {
   const { data } = useSnapshot(state);
-
+  const { select } = useContext(AudioContext);
   // handle d3 circle packing
   // const svg = React.useRef(null);
 
@@ -17,7 +19,12 @@ function Projects() {
       <>
         {/* <svg ref={svg} /> */}
         {data.map((doc: any, index: number) => (
-          <Link key={index} href={doc.lot} className="w-fit">
+          <Link
+            onClick={() => select()}
+            key={index}
+            href={doc.lot}
+            className="w-fit"
+          >
             {doc.name}
           </Link>
         ))}

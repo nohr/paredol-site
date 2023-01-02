@@ -77,7 +77,7 @@ function handleMotion(
     } else if (speech) {
       rotation.x = -Math.PI / 2;
       rotation.y = 0;
-      rotation.z += 0.05;
+      rotation.z += 0.25;
     } else {
       rotation.x += 0.005;
       rotation.y += 0.005;

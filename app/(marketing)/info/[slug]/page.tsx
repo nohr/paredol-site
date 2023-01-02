@@ -9,6 +9,8 @@ import { HiSpeakerWave } from "react-icons/hi2";
 import { SiMaildotru } from "react-icons/si";
 import { MemberBio } from "@ui/info/member/member.bio";
 import { AudioContext } from "@context/audio.context";
+import { useSnapshot } from "valtio";
+import { CgSpinner } from "react-icons/cg";
 
 export interface PageProps {
   params: { slug: string };
@@ -20,6 +22,7 @@ export default function Page({ params, searchParams }: PageProps) {
   const id = searchParams?.id;
   // create a name variable and grab the name from the database using the slug
   const [member, setMember] = useState<any>();
+  const { loading } = useSnapshot(state);
 
   useEffect(() => {
     (async () => setMember(await getRoster(slug)))();
@@ -33,7 +36,7 @@ export default function Page({ params, searchParams }: PageProps) {
     audio.addEventListener("loadeddata", () => (state.loading = false));
   };
 
-  const { select } = useContext(AudioContext);
+  const { reset } = useContext(AudioContext);
   return (
     <>
       {member && (
@@ -50,14 +53,18 @@ export default function Page({ params, searchParams }: PageProps) {
                   {member?.name}
                 </h1>
                 {member?.intonation ? (
-                  <HiSpeakerWave
-                    className="link fill !h-auto !w-8  !cursor-pointer"
-                    title="Pronounce"
-                    onClick={() => {
-                      play();
-                      select();
-                    }}
-                  />
+                  !loading ? (
+                    <HiSpeakerWave
+                      className="link fill !h-auto !w-8  !cursor-pointer"
+                      title="Pronounce"
+                      onClick={() => {
+                        play();
+                        reset();
+                      }}
+                    />
+                  ) : (
+                    <CgSpinner className="!h-auto !w-8 animate-spin !cursor-wait self-center" />
+                  )
                 ) : null}
               </div>
               <p className="flex self-center font-thin italic">
@@ -78,7 +85,7 @@ export default function Page({ params, searchParams }: PageProps) {
               )}
             </div>
           </div>
-          <div className="mx-12 flex flex-col gap-y-4 font-bold md:mx-0 md:w-fit md:justify-center">
+          <div className="mx-12 flex flex-col gap-y-4 font-bold md:!mx-0 md:w-full md:justify-center lg:mx-0">
             {member.bio ? <p>{member.bio}</p> : <MemberBio slug={slug} />}
           </div>
         </div>
