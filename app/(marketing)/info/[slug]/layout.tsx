@@ -13,7 +13,8 @@ export default function InfoLayout({
   const { select } = useContext(AudioContext);
   return (
     <div className="flex !w-full flex-col">
-      <div className=" h-min w-full">
+      {/* back bar */}
+      <div className="fixed hidden h-min w-full md:flex">
         <Link
           href="/info"
           onClick={() => select()}
@@ -23,7 +24,9 @@ export default function InfoLayout({
           Back
         </Link>
       </div>
-      {children}
+      <div className=" flex h-full pb-32 md:justify-center md:pt-9 md:pb-0 lg:mx-24">
+        {children}
+      </div>
     </div>
   );
 }

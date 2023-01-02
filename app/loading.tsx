@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { state } from "../common/state";
+import { state } from "state";
 
 export default function Loading() {
   useEffect(() => {

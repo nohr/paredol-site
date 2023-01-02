@@ -71,7 +71,11 @@ body .loading {
 }
 
 .title {
-  @apply text-4xl font-thin md:text-6xl;
+  @apply text-4xl font-thin md:text-4xl;
+}
+
+.subTitle {
+  @apply text-2xl font-thin md:text-2xl;
 }
 
 .link {
@@ -83,7 +87,7 @@ body .loading {
 }
 
 .fade-transition {
-  @apply delay-100 duration-300 ease-in-out  hover:transition-all motion-reduce:transition-none motion-reduce:hover:transform-none  md:transition-all;
+  @apply delay-75  duration-300 ease-in-out motion-reduce:transition-none  motion-reduce:hover:transform-none md:transition-all md:delay-100  md:hover:transition-all;
 }
 
 .inputField {

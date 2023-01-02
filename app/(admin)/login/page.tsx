@@ -9,7 +9,7 @@ import {
   sendSignInLinkToEmail,
   signInWithEmailLink,
 } from "firebase/auth";
-import { state } from "../../../common/state";
+import { state } from "state";
 
 const URL = [
   "http://localhost:1027/",

@@ -19,7 +19,7 @@ export default function Roster() {
 
   return (
     <div className="flex flex-col gap-y-2 p-3">
-      <h1 className="title">The crew...</h1>
+      <h1 className="title self-center md:self-start">The crew...</h1>
       <div className="flex flex-col justify-start gap-y-4">
         {roster !== "..." ? (
           orderedRoster.map((member) => (

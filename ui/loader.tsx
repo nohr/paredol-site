@@ -1,5 +1,4 @@
-import "../../common/index.css";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
 export default function Load() {
   const ref = useRef<HTMLParagraphElement>(null!);

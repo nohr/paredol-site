@@ -17,7 +17,7 @@ export default function Contact() {
     return re.test(email);
   }
 
-  function handleSubmit(e: FormEvent) {
+  function handleSubmit(e: any) {
     e.preventDefault();
     if (!validateEmail(email.current.value)) {
       alert("Please enter a valid email address");
@@ -41,8 +41,8 @@ export default function Contact() {
   }
 
   return (
-    <div className="flex flex-col gap-y-2 self-center p-3 !pb-24 md:w-[75ch]">
-      <h1 className="title">The start...</h1>
+    <div className="flex flex-col gap-y-2 self-center p-3 md:w-[75ch]">
+      <h1 className="title self-center md:self-start">The start...</h1>
       <p className="text-xs font-semibold !italic md:pl-4">
         Send a message to our email and we’ll get back to you asap!
       </p>

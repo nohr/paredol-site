@@ -8,7 +8,7 @@ import { AudioContext } from "@context/audio.context";
 
 function Projects() {
   const { data } = useSnapshot(state);
-  const { select } = useContext(AudioContext);
+  const { confirm } = useContext(AudioContext);
   // handle d3 circle packing
   // const svg = React.useRef(null);
 
@@ -20,7 +20,7 @@ function Projects() {
         {/* <svg ref={svg} /> */}
         {data.map((doc: any, index: number) => (
           <Link
-            onClick={() => select()}
+            onClick={() => confirm()}
             key={index}
             href={doc.lot}
             className="w-fit"

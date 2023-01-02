@@ -40,8 +40,8 @@ export default function Page({ params, searchParams }: PageProps) {
   return (
     <>
       {member && (
-        <div className="flex w-full flex-col gap-y-8 pb-48 md:grid md:h-full md:grid-cols-[50%_50%] md:grid-rows-[100%] md:pb-0">
-          <div className="flex flex-col items-center justify-center justify-items-center gap-y-4 md:w-fit">
+        <div className="flex h-full w-full flex-col gap-y-8  md:grid md:grid-cols-[50%_50%] md:grid-rows-[100%] md:pb-0">
+          <div className="flex flex-col items-center justify-items-center gap-y-4 md:w-full md:justify-start lg:justify-center">
             <img
               src={member && member?.photo}
               alt=""
@@ -49,9 +49,7 @@ export default function Page({ params, searchParams }: PageProps) {
             />
             <div className="flex flex-col items-center justify-center gap-y-2">
               <div className="flex w-fit flex-row items-center justify-center gap-x-2">
-                <h1 className="title !select-text whitespace-nowrap">
-                  {member?.name}
-                </h1>
+                <h1 className="title w-min !select-text">{member?.name}</h1>
                 {member?.intonation ? (
                   !loading ? (
                     <HiSpeakerWave
@@ -85,7 +83,8 @@ export default function Page({ params, searchParams }: PageProps) {
               )}
             </div>
           </div>
-          <div className="mx-12 flex flex-col gap-y-4 font-bold md:!mx-0 md:w-full md:justify-center lg:mx-0">
+          <div className="flex h-full flex-col gap-y-4 overflow-y-scroll font-bold md:w-full md:justify-start md:pb-0 lg:mx-0 lg:justify-center">
+            <h3 className="subTitle">Bio</h3>
             {member.bio ? <p>{member.bio}</p> : <MemberBio slug={slug} />}
           </div>
         </div>

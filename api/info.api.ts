@@ -1,4 +1,4 @@
-import { state } from "@common/state";
+import { state } from "state";
 import { doc, getDoc } from "firebase/firestore/lite";
 import { getBlob, getDownloadURL, ref } from "firebase/storage";
 import { db, storage } from "./firebase.config";

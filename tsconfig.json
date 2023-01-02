@@ -25,7 +25,6 @@
       }
     ],
     "paths": {
-      "@common/*": ["./common/*"],
       "state": ["./common/state"],
       "utils":[ "./common/utils"],
       "@context/*": ["./common/context/*"],

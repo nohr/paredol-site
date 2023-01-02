@@ -176,7 +176,7 @@ export default function Navbar() {
         <MobileMenu optionsBtn={optionsBtn} />
         <div
           ref={ref}
-          className={` grid h-min w-screen grid-cols-[0.2fr_0.6fr_0.2fr] grid-rows-[min-content] items-center justify-items-center p-3  md:grid-cols-[25%_50%_25%]`}
+          className={` grid h-min w-screen grid-cols-[1fr_2fr_1fr] grid-rows-[min-content] items-center justify-items-center p-3 md:grid-cols-[35%_30%_35%]  lg:grid-cols-[1fr_2fr_1fr]`}
         >
           <div className="m-0 flex h-full flex-row items-center justify-between gap-0 p-0 md:w-full">
             <HomeButton />
