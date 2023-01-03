@@ -13,6 +13,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const nextConfig = {
   experimental: {
     appDir: true,
+    enableUndici: true,
     runtime: 'experimental-edge',
   },
   reactStrictMode: true,
