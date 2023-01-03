@@ -5,7 +5,7 @@ import React, { createContext } from "react";
 import useSound from "use-sound";
 import { useSnapshot } from "valtio";
 
-interface AudioContext {
+interface SFXContext {
   select: () => void;
   open: () => void;
   close: () => void;
@@ -14,7 +14,7 @@ interface AudioContext {
   reset: () => void;
 }
 
-export const AudioContext = createContext<AudioContext>({
+export const SFXContext = createContext<SFXContext>({
   select: () => {},
   open: () => {},
   close: () => {},
@@ -39,7 +39,7 @@ export const AudioProvider = ({ children }: { children?: React.ReactNode }) => {
   const [reset] = useSound("/sounds/reset.mp3", { volume: muted ? 0 : 1 });
 
   return (
-    <AudioContext.Provider
+    <SFXContext.Provider
       value={{
         select,
         open,
@@ -50,7 +50,7 @@ export const AudioProvider = ({ children }: { children?: React.ReactNode }) => {
       }}
     >
       {children}
-    </AudioContext.Provider>
+    </SFXContext.Provider>
   );
 };
 
@@ -59,9 +59,9 @@ interface AudioConsumerProps {
 }
 
 export const AudioConsumer = ({ children }: AudioConsumerProps) => (
-  <AudioContext.Consumer>
+  <SFXContext.Consumer>
     {({ select, open, close, home, confirm, reset }) =>
       children({ select, open, close, home, confirm, reset })
     }
-  </AudioContext.Consumer>
+  </SFXContext.Consumer>
 );

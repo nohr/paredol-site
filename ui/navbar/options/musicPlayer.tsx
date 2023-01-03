@@ -3,7 +3,7 @@ import { state } from "state";
 import { FFIcon, PlayPauseIcon } from "svg";
 import { nextSong, toggleMusic, useSong } from "utils";
 import { useContext, useRef } from "react";
-import { AudioContext } from "@context/audio.context";
+import { SFXContext } from "@context/sfx.context";
 
 function PlayButton({ ...props }) {
   const { audio, select, className } = props;
@@ -42,7 +42,7 @@ function FFButton({ ...props }) {
 
 export function MusicPlayer() {
   const { playing, songIndex } = useSnapshot(state);
-  const { select } = useContext(AudioContext);
+  const { select } = useContext(SFXContext);
   const audio = useRef<HTMLAudioElement>(null!);
   const [song, songs] = useSong();
   // change styling of the  buttons when the song track passes behind them

@@ -8,7 +8,7 @@ import { BsGithub, BsSpotify, BsLinkedin } from "react-icons/bs";
 import { HiSpeakerWave } from "react-icons/hi2";
 import { SiMaildotru } from "react-icons/si";
 import { MemberBio } from "@ui/info/member/member.bio";
-import { AudioContext } from "@context/audio.context";
+import { SFXContext } from "@context/sfx.context";
 import { useSnapshot } from "valtio";
 import { CgSpinner } from "react-icons/cg";
 
@@ -36,7 +36,7 @@ export default function Page({ params, searchParams }: PageProps) {
     audio.addEventListener("loadeddata", () => (state.loading = false));
   };
 
-  const { reset } = useContext(AudioContext);
+  const { reset } = useContext(SFXContext);
   return (
     <>
       {member && (

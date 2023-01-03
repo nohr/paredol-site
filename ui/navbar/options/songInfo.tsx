@@ -4,7 +4,7 @@ import { MdLibraryMusic } from "react-icons/md";
 import { useSnapshot } from "valtio";
 import { state } from "state";
 import { useSong } from "utils";
-import { AudioContext } from "@context/audio.context";
+import { SFXContext } from "@context/sfx.context";
 
 export function SongInfo() {
   const [song, songs] = useSong();
@@ -12,7 +12,7 @@ export function SongInfo() {
   const normal = `(${songIndex + 1}/${songs.length}) ${song}`;
   const [value, setValue] = useState<string>(normal);
   const slide = "animate-[autoscroll_7s_linear_infinite]";
-  const { reset } = useContext(AudioContext);
+  const { reset } = useContext(SFXContext);
   useEffect(() => {
     setValue(normal);
   }, [songs, normal, theme]);

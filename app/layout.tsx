@@ -7,7 +7,7 @@ import { useTheme, useMobile, useMotion } from "utils";
 import { getData } from "@api/firebase.api";
 import { state } from "state";
 import { Footer } from "@ui/footer";
-import { AudioProvider } from "@context/audio.context";
+import { AudioProvider } from "@context/sfx.context";
 import Backdrop from "@ui/home/backdrop";
 // import Load from "../components/container/loader";
 

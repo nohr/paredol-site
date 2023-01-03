@@ -11,13 +11,13 @@ import { FaShoppingBasket } from "react-icons/fa";
 import { BsFillGearFill } from "react-icons/bs";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Squash as Hamburger } from "hamburger-react";
-import { AudioContext } from "@context/audio.context";
+import { SFXContext } from "@context/sfx.context";
 import { IoIosArrowBack } from "react-icons/io";
 
 function Path({ ...props }) {
   const path = usePathname();
   let { href, style } = props;
-  const { select } = useContext(AudioContext);
+  const { select } = useContext(SFXContext);
 
   return (
     <Link
@@ -59,7 +59,7 @@ function Path({ ...props }) {
 function DesktopLinks({ ...props }) {
   const { options } = useSnapshot(state);
   const { optionsBtn } = props;
-  const { open, close } = useContext(AudioContext);
+  const { open, close } = useContext(SFXContext);
   return (
     <div
       className={`m-0 hidden ${
@@ -98,7 +98,7 @@ function MobileMenu({ ...props }) {
   const user = useUser();
   const { optionsBtn } = props;
   const { options, menu, mobile } = useSnapshot(state);
-  const { open, close } = useContext(AudioContext);
+  const { open, close } = useContext(SFXContext);
   const ref = useRef<any>(null);
 
   ref.current?.addEventListener("touchmove", (e: any) => {
@@ -150,7 +150,7 @@ export default function Navbar() {
   const user = useUser();
   const optionsBtn = useRef(null);
   const ref = useRef<any>(null);
-  const { open, close } = useContext(AudioContext);
+  const { open, close } = useContext(SFXContext);
 
   ref.current?.addEventListener(
     "touchmove",
@@ -174,7 +174,7 @@ export default function Navbar() {
   //   hour12: false,
   // });
 
-  const { select } = useContext(AudioContext);
+  const { select } = useContext(SFXContext);
   return (
     <>
       <Options

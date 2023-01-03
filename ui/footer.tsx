@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import { getEmail } from "@api/info.api";
 import { CgSpinner } from "react-icons/cg";
 import { usePathname } from "next/navigation";
-import { AudioContext } from "@context/audio.context";
+import { SFXContext } from "@context/sfx.context";
 
 export function Footer() {
   const { email } = useSnapshot(state);
@@ -24,7 +24,7 @@ export function Footer() {
     (async () => (state.email = await getEmail()))();
   }, []);
 
-  const { select } = useContext(AudioContext);
+  const { select } = useContext(SFXContext);
   return (
     <div
       className={`fixed top-3 !flex w-screen ${

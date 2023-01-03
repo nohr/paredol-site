@@ -6,11 +6,11 @@ import { useSnapshot } from "valtio";
 import { TfiArrowCircleRight } from "react-icons/tfi";
 import { CgSpinner } from "react-icons/cg";
 import { useContext } from "react";
-import { AudioContext } from "@context/audio.context";
+import { SFXContext } from "@context/sfx.context";
 
 export default function Roster() {
   const { roster } = useSnapshot(state);
-  const { confirm } = useContext(AudioContext);
+  const { confirm } = useContext(SFXContext);
 
   // reorder roster by name
   const orderedRoster = Object.keys(roster)

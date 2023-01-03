@@ -8,7 +8,7 @@ import { SongInfo } from "./songInfo";
 import { ColorIcon, ModeIcon, MuteIcon } from "svg";
 import { toggleTheme, toggleMotion, toggleMute, useColor } from "utils";
 import { IoAccessibility } from "react-icons/io5";
-import { AudioContext } from "@context/audio.context";
+import { SFXContext } from "@context/sfx.context";
 import { Flex } from "@adobe/react-spectrum";
 import { ColorSlider } from "@react-spectrum/color";
 
@@ -16,7 +16,7 @@ const Options = ({ ...props }) => {
   const { muted, theme, motion, colorBar } = useSnapshot(state);
   const ref = useRef<HTMLDivElement>(null!);
   const { className } = props;
-  const { select, confirm } = useContext(AudioContext);
+  const { select, confirm } = useContext(SFXContext);
 
   ref.current?.addEventListener(
     "touchmove",

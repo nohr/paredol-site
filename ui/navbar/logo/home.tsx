@@ -1,5 +1,5 @@
 // import { useRef } from "react";
-import { AudioContext } from "@context/audio.context";
+import { SFXContext } from "@context/sfx.context";
 import Link from "next/link";
 import { useContext } from "react";
 // import { useState } from "react";
@@ -60,7 +60,7 @@ function handleSpeech(home: () => void, speech: boolean) {
 }
 
 export function HomeButton() {
-  const { home } = useContext(AudioContext);
+  const { home } = useContext(SFXContext);
   const { speech } = useSnapshot(state);
   // const [hover, setHover] = useState<boolean>(false);
   return (

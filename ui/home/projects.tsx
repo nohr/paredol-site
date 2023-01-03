@@ -4,11 +4,11 @@ import Link from "next/link";
 import { useSnapshot } from "valtio";
 import { state } from "state";
 import { useContext } from "react";
-import { AudioContext } from "@context/audio.context";
+import { SFXContext } from "@context/sfx.context";
 
 export default function Projects() {
   const { data } = useSnapshot(state);
-  const { confirm } = useContext(AudioContext);
+  const { confirm } = useContext(SFXContext);
 
   if (data.length === 0) return <p>Loading projects...</p>;
   else {
