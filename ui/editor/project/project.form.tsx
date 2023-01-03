@@ -18,8 +18,6 @@ import { Program } from "../../program";
 export function ProjectEditorForm() {
   const nameInput = useRef<HTMLInputElement>(null!);
   const dataList = useRef<HTMLDataListElement>(null!);
-  const fileInput = useRef<HTMLInputElement>(null!);
-  const [categories, setCategories] = useState<string[]>([]);
   const [selectedFiles, setSelectedFiles] = useState<FileList>();
   const [isFilePicked, setIsFilePicked] = useState<boolean>(false);
   const [confirm, setConfirm] = useState<boolean>(false);
@@ -43,12 +41,9 @@ export function ProjectEditorForm() {
     lot,
     setLot,
     titles,
-    setTitles,
     content,
     setContent,
     cover,
-    setCover,
-    saved,
     setSaved,
   } = useContext(EditorContext);
 
@@ -134,7 +129,6 @@ export function ProjectEditorForm() {
 function MetadataLoader({ ...props }) {
   const nameInput = useRef<HTMLInputElement>(null!);
   const dataList = useRef<HTMLDataListElement>(null!);
-  const [programs, setPrograms] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [tempProgram, setTempProgram] = useState<string>("");
   const { setSelectedFiles, setIsFilePicked } = props;
@@ -171,7 +165,7 @@ function MetadataLoader({ ...props }) {
 
   // Get and List document id and categories in datalist
   useEffect(() => {
-    getFormLists(data, setTitles, setCategories);
+    getFormLists(setTitles, setCategories);
   }, [data, setTitles, setCategories]);
 
   // Populate form with data from firestore when name matches
@@ -180,7 +174,6 @@ function MetadataLoader({ ...props }) {
       data.length > 0 &&
         fillFormData(
           name,
-          data,
           setName,
           setDate,
           setCategory,
@@ -225,7 +218,7 @@ function MetadataLoader({ ...props }) {
           list="names"
           type="text"
           placeholder="Name"
-          className="name"
+          className="name inputField"
           required
         ></input>
         <input
@@ -239,6 +232,7 @@ function MetadataLoader({ ...props }) {
       </div>
       <button
         type="button"
+        className="link"
         onClick={() =>
           clearSelectedName(
             nameInput,
@@ -269,12 +263,14 @@ function MetadataLoader({ ...props }) {
         onChange={(e) => setDate(e.target.value)}
         value={date}
         type="date"
+        className="inputField"
         required
       ></input>
       <input
         onChange={(e) => setClient(e.target.value)}
         value={client}
         type="text"
+        className="inputField"
         placeholder="Client"
       ></input>
       <input
@@ -282,6 +278,7 @@ function MetadataLoader({ ...props }) {
         value={category}
         list="categories"
         type="text"
+        className="inputField"
         placeholder="Category"
         required
       ></input>
@@ -293,25 +290,28 @@ function MetadataLoader({ ...props }) {
       <textarea
         onChange={(e) => setDescription(e.target.value)}
         value={description}
-        className="desc"
+        className="desc inputField"
         placeholder="Description"
       ></textarea>
       <input
         onChange={(e) => setURL(e.target.value)}
         value={url}
         type="text"
+        className="inputField"
         placeholder="Project URL"
       ></input>
       <input
         onChange={(e) => setTempProgram(e.target.value)}
         value={tempProgram}
         type="text"
+        className="inputField"
         placeholder="Add Program"
       ></input>
       <button
+        className="link fill"
         type="button"
         onClick={() => {
-          tempProgram !== "" && data.program.push(tempProgram);
+          tempProgram !== "" && setProgram([...program, tempProgram]);
           setTempProgram("");
         }}
       >
@@ -350,7 +350,7 @@ function FileLoader({ ...props }) {
         multiple
         type="file"
         ref={fileInput}
-        className="fileInput"
+        className="fileInput inputField"
       ></input>
       <div className="fileGroup">
         {isFilePicked ? (
@@ -358,6 +358,7 @@ function FileLoader({ ...props }) {
             onChange={(e) => setCaption(e.target.value)}
             type="text"
             placeholder="Caption"
+            className="inputField"
           ></input>
         ) : null}
         {selectedFiles !== undefined &&
@@ -367,12 +368,13 @@ function FileLoader({ ...props }) {
             onChange={(e) => setOrientaion(e.target.value)}
             type="text"
             placeholder="Orientation"
+            className="inputField"
           ></input>
         ) : null}
       </div>
       <div className="addContentWrap">
         <button
-          className={`addContent ${!isFilePicked ? "disabled" : ""}`}
+          className={`addContent link ${!isFilePicked ? "disabled" : ""}`}
           type="button"
           onClick={() => {
             handleAddContent(

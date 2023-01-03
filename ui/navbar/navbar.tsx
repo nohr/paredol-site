@@ -63,7 +63,7 @@ function DesktopLinks({ ...props }) {
     <div
       className={`m-0 hidden ${
         options ? "border-blue-900 dark:border-blue-200" : ""
-      } h-full w-full flex-row items-center justify-end gap-x-1 md:flex lg:!gap-x-6`}
+      } h-full w-full flex-row items-center justify-evenly gap-x-1 md:flex lg:!gap-x-6`}
     >
       <Path href="Info" />
       <Path href="Store" />
@@ -166,6 +166,13 @@ export default function Navbar() {
     return () => setToggle(false);
   }, [path]);
 
+  // write a function that returns EST time in military time
+  const time = new Date().toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+
   return (
     <>
       <Options
@@ -180,6 +187,8 @@ export default function Navbar() {
         >
           <div className="m-0 flex h-full flex-row items-center justify-between gap-0 p-0 md:w-full">
             <HomeButton />
+            {/* time */}
+            {/* <p className="font-thin">{time}</p> */}
             {user ? <Path href="Editor" style={"md"} /> : null}
           </div>
           <Search />

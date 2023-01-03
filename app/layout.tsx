@@ -33,7 +33,7 @@ export default function RootLayout({
         <Backdrop />
         <AudioProvider>
           <Navbar />
-          <div className=" flex h-full w-full flex-col justify-start p-[10px] py-20 md:px-[10px] md:py-[74px]">
+          <div className=" flex h-full w-full flex-col justify-start p-2 pt-20 md:px-[10px] md:pt-[74px] md:pb-2">
             {children}
           </div>
         </AudioProvider>

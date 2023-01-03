@@ -1,7 +1,9 @@
 import {
+  collection,
   deleteDoc,
   doc,
   DocumentData,
+  getDocs,
   setDoc,
   Timestamp,
 } from "firebase/firestore/lite";
@@ -266,7 +268,6 @@ export async function handleGetContent(
 
 export async function fillFormData(
   name: string,
-  data: DocumentData,
   setName: Dispatch<SetStateAction<string>>,
   setDate: Dispatch<SetStateAction<any>>,
   setCategory: Dispatch<SetStateAction<string>>,
@@ -277,6 +278,9 @@ export async function fillFormData(
   setPublished: Dispatch<SetStateAction<boolean>>,
   setLot: Dispatch<SetStateAction<string>>
 ) {
+  // get all projects from firestore
+  const querySnapshot = await getDocs(collection(db, "projects"));
+  const data = querySnapshot.docs.map((doc) => doc.data());
   // check the data array if the name matches and populate the form
   const project = data.filter((item: any) => item["name"] === name)[0];
   if (project) {
@@ -295,13 +299,15 @@ export async function fillFormData(
 }
 
 export async function getFormLists(
-  data: DocumentData,
   setTitles: Dispatch<SetStateAction<string[]>>,
   setCategories: Dispatch<SetStateAction<string[]>>
 ) {
+  // get all projects from firestore
+  const querySnapshot = await getDocs(collection(db, "projects"));
+  const data = querySnapshot.docs.map((doc) => doc.data());
   // iterate through the projects and add the project names and categories to the datalist
-  const names = data.map((doc: { name: string }) => doc.name);
-  const categories = data.map((doc: { category: string }) => doc.category);
+  const names = data.map((doc: any) => doc.name);
+  const categories = data.map((doc: any) => doc.category);
   setTitles(names);
   setCategories(categories);
 }

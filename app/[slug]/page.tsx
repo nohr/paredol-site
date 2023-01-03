@@ -1,4 +1,7 @@
-import { FirestoreDocument } from "../../api/Document";
+"use client";
+
+import { state } from "state";
+import { useSnapshot } from "valtio";
 
 export interface PageProps {
   params?: { slug: string };
@@ -7,12 +10,20 @@ export interface PageProps {
 
 export default function Page({ params, searchParams }: PageProps) {
   const slug = params?.slug;
-  const id = searchParams?.id;
-  // console.log(slug, id);
+  // const id = searchParams?.id;
+  const { data } = useSnapshot(state);
+
+  // check the data array for the object with the matching slug
+  const d = data.find((doc: any) => doc.lot === slug);
+  const { cover, category, client, name, date, description, lot, content } = d;
+
   return (
     <>
-      {slug && <FirestoreDocument path={slug} />}
-      {searchParams && <p>{searchParams.id}</p>}
+      <h1 className="title">{name}</h1>
+      <img src={cover} alt={name} />
+      <p className="description">{client}</p>
+      <p className="description">{category}</p>
+      <p className="description">{description}</p>
     </>
   );
 }

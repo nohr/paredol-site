@@ -24,7 +24,7 @@ export default function InfoLayout({
           Back
         </Link>
       </div>
-      <div className=" flex h-full pb-32 md:justify-center md:pt-9 md:pb-0 lg:mx-24">
+      <div className=" flex h-full pb-32 md:justify-center md:pt-9 md:pb-0 xl:mx-24">
         {children}
       </div>
     </div>

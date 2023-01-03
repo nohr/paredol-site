@@ -1,5 +1,5 @@
 import { getMemberBio } from "@api/info.api";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
 export function MemberBio({ slug }: { slug: string }) {
@@ -9,5 +9,5 @@ export function MemberBio({ slug }: { slug: string }) {
     (async () => setBio(await getMemberBio(slug)))();
   }, [slug]);
 
-  return <ReactMarkdown children={bio} />;
+  return <ReactMarkdown>{bio}</ReactMarkdown>;
 }
