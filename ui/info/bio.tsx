@@ -8,7 +8,7 @@ export default function Bio() {
   const { bio } = useSnapshot(state);
 
   return (
-    <div className="flex flex-col gap-y-2  p-3">
+    <div className="flex flex-col gap-y-2  p-3 md:w-[65ch]">
       <h1 className="title self-center md:self-start">The gist...</h1>
       <div className="flex h-full w-full justify-center">
         {bio! !== "..." ? (

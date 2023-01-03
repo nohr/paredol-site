@@ -40,8 +40,8 @@ export default function Page({ params, searchParams }: PageProps) {
   return (
     <>
       {member && (
-        <div className="flex h-full w-full flex-col gap-y-8  md:grid md:grid-cols-[50%_50%] md:grid-rows-[100%] md:pb-0">
-          <div className="flex flex-col items-center justify-items-center gap-y-4 md:w-full md:justify-start lg:justify-center">
+        <div className="flex h-full w-full flex-col gap-8 md:flex-row md:pb-0 lg:mx-24 2xl:!mx-96">
+          <div className="flex flex-col items-center justify-items-center gap-y-4 md:justify-start lg:justify-center">
             <img
               src={member && member?.photo}
               alt=""
@@ -69,7 +69,7 @@ export default function Page({ params, searchParams }: PageProps) {
                 {member?.role}
               </p>
             </div>
-            <div className="flex w-full  flex-col items-center justify-center gap-2 md:flex-row ">
+            <div className="flex w-full flex-col items-center justify-center gap-2 md:flex-row ">
               {member?.links && (
                 <div className="flex w-full flex-row items-center justify-center gap-x-4 ">
                   {member?.links.map((link: any, index: number) => (
@@ -83,7 +83,7 @@ export default function Page({ params, searchParams }: PageProps) {
               )}
             </div>
           </div>
-          <div className="flex h-full flex-col gap-y-4 overflow-y-scroll font-bold md:w-full md:justify-start md:pb-0 lg:mx-0 lg:justify-center">
+          <div className="flex h-full flex-col gap-y-4 overflow-y-scroll font-bold md:w-[65ch] md:justify-start md:pb-0 lg:mx-0 lg:justify-center">
             <h3 className="subTitle">Bio</h3>
             {member.bio ? <p>{member.bio}</p> : <MemberBio slug={slug} />}
           </div>

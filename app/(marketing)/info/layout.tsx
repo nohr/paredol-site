@@ -18,8 +18,8 @@ export default function InfoLayout({
   }, []);
 
   return (
-    <div className="flex h-auto w-full justify-start self-center py-2 md:mx-24 md:w-full md:justify-center ">
-      <div className="pb-24 md:pb-0 lg:mx-24 2xl:mx-[40rem]"> {children}</div>
+    <div className="flex h-auto w-full justify-start self-center py-2 md:w-full md:justify-center ">
+      <div className="pb-24 md:pb-0"> {children}</div>
     </div>
   );
 }

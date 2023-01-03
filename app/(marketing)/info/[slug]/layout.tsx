@@ -13,18 +13,7 @@ export default function InfoLayout({
   const { select } = useContext(AudioContext);
   return (
     <div className="flex !w-full flex-col">
-      {/* back bar */}
-      <div className="fixed hidden h-min w-full md:flex">
-        <Link
-          href="/info"
-          onClick={() => select()}
-          className="fill link flex !w-min flex-row"
-        >
-          <IoIosArrowBack />
-          Back
-        </Link>
-      </div>
-      <div className=" flex h-full pb-32 md:justify-center md:pt-9 md:pb-0 xl:mx-24">
+      <div className=" flex h-full pb-32 md:mx-8 md:justify-center md:pb-0">
         {children}
       </div>
     </div>

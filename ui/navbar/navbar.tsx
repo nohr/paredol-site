@@ -12,6 +12,7 @@ import { BsFillGearFill } from "react-icons/bs";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Squash as Hamburger } from "hamburger-react";
 import { AudioContext } from "@context/audio.context";
+import { IoIosArrowBack } from "react-icons/io";
 
 function Path({ ...props }) {
   const path = usePathname();
@@ -173,6 +174,7 @@ export default function Navbar() {
     hour12: false,
   });
 
+  const { select } = useContext(AudioContext);
   return (
     <>
       <Options
@@ -188,6 +190,16 @@ export default function Navbar() {
         >
           <div className="m-0 flex h-full flex-row items-center justify-between gap-0 p-0 md:w-full">
             <HomeButton />
+            <Link
+              href="/info"
+              onClick={() => select()}
+              className={`fill link hidden ${
+                path?.includes("info/") ? "md:flex" : "md:hidden"
+              } !w-min flex-row`}
+            >
+              <IoIosArrowBack />
+              Back
+            </Link>
             {/* time */}
             {/* <p className="font-thin">{time}</p> */}
             {user ? <Path href="Editor" style={"md"} /> : null}
