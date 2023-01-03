@@ -18,7 +18,7 @@ function PlayButton({ ...props }) {
         playing && select();
       }}
     >
-      <PlayPauseIcon className="h-[10px] w-[10px] overflow-visible" />
+      <PlayPauseIcon className="fade-transition h-[10px] w-[10px] overflow-visible" />
     </div>
   );
 }
@@ -35,7 +35,7 @@ function FFButton({ ...props }) {
         select();
       }}
     >
-      <FFIcon className="h-[10px] w-[10px] overflow-visible" />
+      <FFIcon className="fade-transition h-[10px] w-[10px] overflow-visible" />
     </div>
   );
 }

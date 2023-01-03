@@ -70,6 +70,10 @@ body .loading {
   display: flex;
 }
 
+.spectrum-ColorSlider_a5bb06 {
+  height: 100% !important;
+}
+
 .title {
   @apply text-4xl font-thin md:text-4xl;
 }

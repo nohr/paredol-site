@@ -13,6 +13,8 @@ import { getSongs } from "@api/firebase.api";
 import { state } from "state";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "@api/firebase.config";
+import { parseColor } from "@react-stately/color";
+
 // search
 export const useSearch = (projects: any, query: any) => {
   if (query === "") return projects;
@@ -115,6 +117,16 @@ export const toggleMotion = (motion?: string) => {
   state.motion = !state.motion;
   localStorage.setItem("motion", `${state.motion}`);
 };
+
+export function useColor() {
+  let [value, setValue] = useState(parseColor("hsl(209, 98%, 20%)"));
+  useEffect(() => {
+    console.log(value.getChannelValue("hue"));
+    state.hue = value.getChannelValue("hue");
+  }, [value]);
+
+  return [value, setValue] as any;
+}
 
 // UI
 export function useMounted() {
@@ -227,7 +239,6 @@ export function loadSong(current: any, song: any) {
       console.log(error);
     });
 }
-
 export function toggleMusic(current: any, songs: any) {
   let audio = current.current;
 

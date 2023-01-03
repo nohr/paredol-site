@@ -12,7 +12,7 @@ export function SongInfo() {
   const normal = `(${songIndex + 1}/${songs.length}) ${song}`;
   const [value, setValue] = useState<string>(normal);
   const slide = "animate-[autoscroll_7s_linear_infinite]";
-  const { confirm } = useContext(AudioContext);
+  const { reset } = useContext(AudioContext);
   useEffect(() => {
     setValue(normal);
   }, [songs, normal, theme]);
@@ -25,13 +25,13 @@ export function SongInfo() {
       }}
       onMouseLeave={() => setValue(normal)}
       onClick={() => {
-        confirm();
+        reset();
         copy(song);
         setValue("Copied!");
         setTimeout(() => setValue(normal), 2500);
       }}
     >
-      <MdLibraryMusic className="absolute left-[6px]  h-4 w-4 md:group-hover:fill-white dark:md:group-hover:fill-black" />
+      <MdLibraryMusic className="fade-transition absolute left-[6px]  h-4 w-4 md:group-hover:fill-white dark:md:group-hover:fill-black" />
       <p
         style={
           motion

@@ -11,7 +11,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="mx-1 pb-24 md:pb-0 lg:px-[10rem] xl:px-[20rem] ">
+    <div className="mx-1 w-full pb-24 md:pb-0 lg:px-[10rem] xl:px-[20rem]">
       <Quote />
       <Projects />
     </div>

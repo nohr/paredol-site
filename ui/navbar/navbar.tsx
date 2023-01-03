@@ -37,7 +37,7 @@ function Path({ ...props }) {
       {href}
       {href === "Info" ? (
         <BsFillInfoCircleFill
-          className={`m-0 h-3 ${
+          className={`fade-transition m-0 h-3  ${
             path?.includes(href.toLowerCase())
               ? "text-white dark:text-black"
               : "fill-blue-900 p-0 dark:fill-blue-200"
@@ -45,7 +45,7 @@ function Path({ ...props }) {
         />
       ) : href === "Store" ? (
         <FaShoppingBasket
-          className={`m-0 h-3 ${
+          className={`fade-transition m-0 h-3  ${
             path?.includes(href.toLowerCase())
               ? "text-white dark:text-black"
               : "fill-blue-900 p-0 dark:fill-blue-200"
@@ -83,7 +83,7 @@ function DesktopLinks({ ...props }) {
       >
         Options
         <BsFillGearFill
-          className={`m-0 h-3 ${
+          className={`fade-transition m-0 h-3 ${
             options
               ? "text-white dark:text-black"
               : "fill-blue-900 p-0 dark:fill-blue-200"
@@ -132,7 +132,7 @@ function MobileMenu({ ...props }) {
         >
           Options
           <BsFillGearFill
-            className={`m-0 h-3 ${
+            className={`fade-transition m-0 h-3 ${
               options
                 ? "text-white dark:text-black"
                 : "fill-blue-900 p-0 dark:fill-blue-200"
@@ -168,11 +168,11 @@ export default function Navbar() {
   }, [path]);
 
   // write a function that returns EST time in military time
-  const time = new Date().toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
+  // const time = new Date().toLocaleTimeString("en-US", {
+  //   hour: "2-digit",
+  //   minute: "2-digit",
+  //   hour12: false,
+  // });
 
   const { select } = useContext(AudioContext);
   return (
@@ -181,7 +181,7 @@ export default function Navbar() {
         className={`${options && !mobile ? "flex" : "!hidden"}`}
         optionsBtn={optionsBtn}
       />
-      <div className="fade-transition fixed bottom-0 z-50 h-min backdrop-blur-lg md:top-0 md:bottom-[unset] md:hover:bg-white md:hover:bg-opacity-70 md:hover:dark:bg-black md:hover:dark:bg-opacity-70">
+      <div className="fade-transition fixed bottom-0 z-50 h-min bg-white bg-opacity-70 backdrop-blur-lg dark:bg-black dark:bg-opacity-70 md:top-0 md:bottom-[unset] md:bg-transparent md:hover:bg-white md:hover:bg-opacity-70 md:dark:bg-transparent md:hover:dark:bg-black md:hover:dark:bg-opacity-70">
         <MobileMenu optionsBtn={optionsBtn} />
         {/* navbar */}
         <div
@@ -197,7 +197,7 @@ export default function Navbar() {
                 path?.includes("info/") ? "md:flex" : "md:hidden"
               } !w-min flex-row`}
             >
-              <IoIosArrowBack />
+              <IoIosArrowBack className="fade-transition " />
               Back
             </Link>
             {/* time */}

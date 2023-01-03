@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useSnapshot } from "valtio";
 import { state } from "state";
-import { useContext, useEffect, useRef } from "react";
+import { useContext } from "react";
 import { AudioContext } from "@context/audio.context";
 
-function Projects() {
+export default function Projects() {
   const { data } = useSnapshot(state);
   const { confirm } = useContext(AudioContext);
 
@@ -40,5 +40,3 @@ function Projects() {
     );
   }
 }
-
-export default Projects;

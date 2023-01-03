@@ -30,14 +30,11 @@ export default function Roster() {
               target={member.url ? "_blank" : "_self"}
               className="link fill !flex !w-full flex-row gap-x-3 self-center justify-self-center border-[1px] !p-3 !underline-offset-1 md:self-start md:!border-blue-900 md:dark:!border-blue-200"
             >
-              <div
-                style={{
-                  backgroundImage: `url(${member.photo})`,
-                  backgroundSize: "120%",
-                  backgroundPosition: "center",
-                }}
-                className="aspect-square w-20 rounded-full"
-              ></div>
+              <img
+                src={member?.photo}
+                alt=""
+                className="aspect-square h-auto w-20 rounded-md shadow-md"
+              />
               <div className="flex flex-col gap-y-1">
                 <p className="h-fit w-full font-bold">{member.name}</p>
                 <p className="h-fit w-full text-xs italic">{member.role}</p>
