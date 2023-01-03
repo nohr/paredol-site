@@ -33,8 +33,8 @@ export default function RootLayout({
         <Backdrop />
         <AudioProvider>
           <Navbar />
-          <div className=" flex h-full w-full flex-col justify-start p-2 pt-20 md:px-[10px] md:pt-[74px] md:pb-2">
-            {children}
+          <div className="flex h-full w-full flex-col justify-start  p-2 md:px-[10px] md:pb-2">
+            <div className="pt-20">{children}</div>
           </div>
         </AudioProvider>
         <Footer />

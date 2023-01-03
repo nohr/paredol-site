@@ -14,13 +14,13 @@ function Projects() {
   else {
     state.loading = false;
     return (
-      <div className="overflow-y-scroll pb-24 md:pb-0 lg:mx-[10rem] xl:mx-[20rem]">
+      <>
         {data.map((doc: any, index: number) => (
           <Link
             onClick={() => confirm()}
             key={index}
             href={doc.lot}
-            className="flex h-[160px] w-full flex-row justify-between rounded-lg bg-opacity-50  p-2 md:hover:bg-blue-900 md:hover:bg-opacity-50  md:hover:text-white md:hover:dark:bg-blue-200 md:hover:dark:bg-opacity-50 md:hover:dark:text-black"
+            className="fade-transition my-2 flex h-[160px] w-full flex-row justify-between rounded-xl bg-opacity-50 p-2 md:hover:bg-blue-900 md:hover:bg-opacity-50 md:hover:text-white md:hover:shadow-lg md:hover:dark:bg-blue-200 md:hover:dark:bg-opacity-50 md:hover:dark:text-black"
           >
             <div className="flex h-full flex-col justify-start">
               <h3 className="text-xl font-thin">{doc.name}</h3>
@@ -32,11 +32,11 @@ function Projects() {
                 backgroundPosition: "center",
                 backgroundSize: "cover",
               }}
-              className="aspect-square h-full w-[160px] rounded-xl bg-center bg-no-repeat"
+              className="aspect-square h-full w-[160px] rounded-xl bg-center bg-no-repeat shadow-lg"
             ></div>
           </Link>
         ))}
-      </div>
+      </>
     );
   }
 }

@@ -35,13 +35,13 @@ function Quote() {
   useEffect(() => {
     !motion
       ? ref.current.classList.add(
-          "w-full",
+          "w-screen",
           "animate-[autoscroll_7s_linear_infinite]",
           "whitespace-nowrap",
           "will-change-transform"
         )
       : ref.current.classList.remove(
-          "w-full",
+          "w-screen",
           "animate-[autoscroll_7s_linear_infinite]",
           "whitespace-nowrap",
           "will-change-transform"

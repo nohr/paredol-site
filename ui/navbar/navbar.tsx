@@ -179,11 +179,12 @@ export default function Navbar() {
         className={`${options && !mobile ? "flex" : "!hidden"}`}
         optionsBtn={optionsBtn}
       />
-      <div className="fixed bottom-0 z-50 h-min backdrop-blur-lg md:top-0 md:bottom-[unset] ">
+      <div className="fade-transition fixed bottom-0 z-50 h-min backdrop-blur-lg md:top-0 md:bottom-[unset] md:hover:bg-white md:hover:bg-opacity-70 md:hover:dark:bg-black md:hover:dark:bg-opacity-70">
         <MobileMenu optionsBtn={optionsBtn} />
+        {/* navbar */}
         <div
           ref={ref}
-          className={` grid h-min w-screen grid-cols-[1fr_2fr_1fr] grid-rows-[min-content] items-center justify-items-center p-3 md:grid-cols-[35%_30%_35%]  lg:grid-cols-[1fr_2fr_1fr]`}
+          className={`grid h-min w-screen grid-cols-[1fr_2fr_1fr] grid-rows-[min-content] items-center justify-items-center p-3 md:grid-cols-[35%_30%_35%]  lg:grid-cols-[1fr_2fr_1fr]`}
         >
           <div className="m-0 flex h-full flex-row items-center justify-between gap-0 p-0 md:w-full">
             <HomeButton />
