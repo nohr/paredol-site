@@ -12,7 +12,7 @@ export function Results({ data, searchText, results, Bar }) {
   return (
     <div
       ref={results}
-      style={{ width: mobile ? "100%" : `${Bar.current.clientWidth}px` }}
+      style={{ width: mobile ? "90%" : `${Bar.current.clientWidth}px` }}
       className={`fade-transition group fixed bottom-24 left-[50%] z-50 flex h-fit translate-x-[-50%] flex-col rounded-xl border-[1px] border-transparent bg-blue-900 bg-opacity-60 p-3 shadow-lg shadow-blue-900 backdrop-blur-xl hover:bg-opacity-100 dark:border-transparent dark:bg-blue-200 dark:bg-opacity-60 dark:shadow-blue-200 dark:hover:bg-opacity-100 md:top-16`}
     >
       <p className="mb-3 border-b-[1px] border-white text-xs font-black uppercase text-white  dark:border-white dark:text-white dark:group-hover:!border-black dark:group-hover:text-black ">

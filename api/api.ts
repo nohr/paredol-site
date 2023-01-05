@@ -25,8 +25,15 @@ export async function getData(lot?: string) {
         orderBy("date", "desc")
       )
     );
+    const snap = data.docs.map((doc) => doc.data());
+    // Serialize the date object to a string to prevent the error
+    snap.map((doc: any) => {
+      const { date } = doc;
+      date.seconds = date.seconds.toString();
+      date.nanoseconds = date.nanoseconds.toString();
+    });
     state.loading = false;
-    return data.docs.map((doc) => doc.data());
+    return snap;
   } else {
     const data = await getDocs(
       query(
@@ -35,7 +42,14 @@ export async function getData(lot?: string) {
         where("lot", "==", lot)
       )
     );
-    let [project] = data.docs.map((doc) => doc.data());
+    const snap = data.docs.map((doc) => doc.data());
+    // Serialize the date object to a string to prevent the error
+    snap.map((doc: any) => {
+      const { date } = doc;
+      date.seconds = date.seconds.toString();
+      date.nanoseconds = date.nanoseconds.toString();
+    });
+    let [project] = snap;
     state.loading = false;
     return project;
   }
