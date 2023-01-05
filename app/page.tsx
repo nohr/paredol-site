@@ -9,6 +9,11 @@ export default async function HomePage() {
   //   window.scrollTo(0, 0);
   // }, []);
   const data = await getData();
+
+  // TODO: turn the date or each project into strings
+  const dataString = JSON.stringify(data);
+  console.log(dataString);
+
   return (
     <div className="mx-1 w-full pb-24 md:pb-6 lg:px-[10rem] xl:px-[20rem]">
       <Quote />

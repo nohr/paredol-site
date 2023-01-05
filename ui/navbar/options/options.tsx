@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { useSnapshot } from "valtio";
 import { state } from "state";
 import { MusicPlayer } from "./musicPlayer";
@@ -13,17 +13,22 @@ import { Flex } from "@adobe/react-spectrum";
 import { ColorSlider } from "@react-spectrum/color";
 
 const Options = ({ ...props }) => {
-  const { muted, theme, motion, colorBar } = useSnapshot(state);
+  const { muted, theme, motion, colorBar, options } = useSnapshot(state);
   const ref = useRef<HTMLDivElement>(null!);
   const { className } = props;
-  const { select, confirm } = useContext(SFXContext);
+  const { select, confirm, open, close } = useContext(SFXContext);
+
+  useEffect(() => {
+    options && open();
+    !options && close();
+  }, [options]);
 
   ref.current?.addEventListener(
     "touchmove",
     (e: any) => {
       e.preventDefault();
     },
-    false
+    { passive: true }
   );
 
   // close the options menu when the user clicks outside of it

@@ -8,7 +8,6 @@ export default function StoreLayout({
     <>
       <div className="flex flex-row justify-between">
         <h1>Store</h1>
-        <p>Cart {cart.length}</p>
       </div>
       {children}
     </>

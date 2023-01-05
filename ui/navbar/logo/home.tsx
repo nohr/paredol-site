@@ -28,7 +28,7 @@ function handleSpeech(home: () => void, speech: boolean) {
         // state.colorChanged = true;
         state.speech = true;
         // cloud.skew = !clip.skew;
-        // if (clip.mobile) cloud.chatMode = !clip.chatMode;
+        if (state.mobile) state.chatMode = !state.chatMode;
         // TODO: Trigger smile animation
         // TODO: lengthen speech to amount of words spoken
         // newQuote();

@@ -1,17 +1,22 @@
 import { useSnapshot } from "valtio";
 import { state } from "state";
+import { useContext } from "react";
+import { SFXContext } from "@context/sfx.context";
 
 // search
 export function SearchBarIcon() {
   const { chatMode } = useSnapshot(state);
+  const { select } = useContext(SFXContext);
 
   if (chatMode) {
     //CD
     return (
       <svg
         className="pointer-events-auto absolute top-[50%] left-[6px] h-4 translate-y-[-50%] cursor-pointer fill-transparent stroke-blue-900 stroke-[1px] peer-hover:stroke-white peer-focus:stroke-white dark:stroke-blue-200 dark:peer-hover:stroke-black md:hover:opacity-[50%]"
-        onClick={() => (state.chatMode = false)}
-        onTouchEnd={() => (state.chatMode = false)}
+        onClick={() => {
+          state.chatMode = false;
+          select();
+        }}
         viewBox="0 0 354 356"
       >
         <g data-name="CD">
@@ -27,8 +32,10 @@ export function SearchBarIcon() {
     return (
       <svg
         className="pointer-events-auto absolute top-[50%] left-[6px] h-4 translate-y-[-50%] cursor-pointer fill-blue-900 stroke-[1px] peer-hover:fill-white peer-focus:fill-white dark:fill-blue-200 dark:peer-hover:fill-black md:hover:opacity-[50%]"
-        onClick={() => (state.chatMode = true)}
-        onTouchEnd={() => (state.chatMode = false)}
+        onClick={() => {
+          state.chatMode = true;
+          select();
+        }}
         viewBox="0 0 354 356"
       >
         <path

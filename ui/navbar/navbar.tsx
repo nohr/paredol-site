@@ -2,7 +2,7 @@ import { useSnapshot } from "valtio";
 import Options from "./options/options";
 import { HomeButton } from "./logo/home";
 import { usePathname } from "next/navigation";
-import { Search } from "./search/search";
+import { Search } from "./search";
 import { useUser } from "@api/firebase.api";
 import { state } from "state";
 import Link from "next/link";
@@ -13,6 +13,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Squash as Hamburger } from "hamburger-react";
 import { SFXContext } from "@context/sfx.context";
 import { TfiAngleLeft } from "react-icons/tfi";
+import { DocumentData } from "firebase/firestore/lite";
 
 function Path({ ...props }) {
   const path = usePathname();
@@ -59,7 +60,6 @@ function Path({ ...props }) {
 function DesktopLinks({ ...props }) {
   const { options } = useSnapshot(state);
   const { optionsBtn } = props;
-  const { open, close } = useContext(SFXContext);
   return (
     <div
       className={`m-0 hidden ${
@@ -76,7 +76,6 @@ function DesktopLinks({ ...props }) {
         }`}
         tabIndex={-1}
         onClick={() => {
-          options ? close() : open();
           state.options = !options;
         }}
         ref={optionsBtn}
@@ -98,12 +97,15 @@ function MobileMenu({ ...props }) {
   const user = useUser();
   const { optionsBtn } = props;
   const { options, menu, mobile } = useSnapshot(state);
-  const { open, close } = useContext(SFXContext);
   const ref = useRef<any>(null);
 
-  ref.current?.addEventListener("touchmove", (e: any) => {
-    e.preventDefault();
-  });
+  ref.current?.addEventListener(
+    "touchmove",
+    (e: any) => {
+      e.preventDefault();
+    },
+    { passive: true }
+  );
 
   return (
     <div
@@ -127,7 +129,6 @@ function MobileMenu({ ...props }) {
           tabIndex={-1}
           onClick={() => {
             state.options = !options;
-            options ? close() : open();
           }}
         >
           Options
@@ -145,7 +146,7 @@ function MobileMenu({ ...props }) {
   );
 }
 
-export default function Navbar() {
+export default function Navbar({ data }: DocumentData) {
   const { options, mobile } = useSnapshot(state);
   const user = useUser();
   const optionsBtn = useRef(null);
@@ -204,7 +205,7 @@ export default function Navbar() {
             {/* <p className="font-thin">{time}</p> */}
             {user ? <Path href="Editor" style={"md"} /> : null}
           </div>
-          <Search />
+          <Search data={data} />
           <div className="contents md:hidden">
             <Hamburger
               label="Show menu"
