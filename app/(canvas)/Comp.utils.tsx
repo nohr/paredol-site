@@ -219,10 +219,10 @@ export function Wall() {
 const Reflector = memo(function Reflector() {
   const { theme } = useSnapshot(state);
   const textures = useTexture([
-    "/reflector/Ice_OCC.jpg",
-    "/reflector/Ice_NORM.jpg",
-    "/reflector/Ice_DISP.png",
-    "/reflector/floor_rough.jpeg",
+    "/reflector/Ice_OCC.webp",
+    "/reflector/Ice_NORM.webp",
+    "/reflector/Ice_DISP.webp",
+    "/reflector/floor_rough.webp",
   ]);
   const [ao, normal, height, roughness] = textures;
   useLayoutEffect(() => {
