@@ -12,6 +12,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
+    "noImplicitAny": false,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -31,6 +32,7 @@
       "@ui/*": ["./ui/*"],
       "svg": ["./ui/svg"],
       "@api/*": ["./api/*"],
+      "api": ["./api/api"],
     }
   },
   "include": [

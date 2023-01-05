@@ -13,6 +13,7 @@ import {
   listAll,
   ref,
   uploadBytesResumable,
+  UploadTask,
 } from "firebase/storage";
 import { v4 } from "uuid";
 import { db, storage } from "./firebase.config";
@@ -31,7 +32,7 @@ export async function handleAddContent(
   setIsFilePicked: (arg0: boolean) => void,
   fileInput: { current: { value: string } }
 ) {
-  let uploadTask = null;
+  let uploadTask: UploadTask;
   let newContent: never[] = [];
   // handle uploading multiple files with an ordered id
   for (let file of selectedFiles) {

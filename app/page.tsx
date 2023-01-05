@@ -1,19 +1,20 @@
-"use client";
-
-import React, { useEffect } from "react";
+import React from "react";
 import Quote from "../ui/home/quote";
-import Projects from "../ui/home/projects";
+import ProjectLink from "./ProjectLink";
+import { getData } from "@api/api";
 
-export default function HomePage() {
+export default async function HomePage() {
   // scroll to the top when the component mounts
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
+  const data = await getData();
   return (
-    <div className="mx-1 w-full pb-24 md:pb-0 lg:px-[10rem] xl:px-[20rem]">
+    <div className="mx-1 w-full pb-24 md:pb-6 lg:px-[10rem] xl:px-[20rem]">
       <Quote />
-      <Projects />
+      {data.map((doc: any, index: number) => (
+        <ProjectLink doc={doc} index={index} />
+      ))}
     </div>
   );
 }

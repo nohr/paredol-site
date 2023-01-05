@@ -121,7 +121,6 @@ export const toggleMotion = (motion?: string) => {
 export function useColor() {
   let [value, setValue] = useState(parseColor("hsl(209, 98%, 20%)"));
   useEffect(() => {
-    console.log(value.getChannelValue("hue"));
     state.hue = value.getChannelValue("hue");
   }, [value]);
 

@@ -15,7 +15,7 @@ import { state } from "state";
 import { auth, db } from "./firebase.config";
 
 export async function getData(lot?: string) {
-  state.loading = true;
+  // state.loading = true;
   if (!lot) {
     const data = await getDocs(
       query(
@@ -24,7 +24,7 @@ export async function getData(lot?: string) {
         orderBy("date", "desc")
       )
     );
-    state.loading = false;
+    // state.loading = false;
     return data.docs.map((doc) => doc.data());
   } else {
     const data = await getDocs(
@@ -36,7 +36,7 @@ export async function getData(lot?: string) {
       )
     );
     let [project] = data.docs.map((doc) => doc.data());
-    state.loading = false;
+    // state.loading = false;
     return project;
   }
 }

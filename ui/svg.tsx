@@ -126,7 +126,7 @@ export function MuteIcon({ ...props }) {
 export function ModeIcon({ ...props }) {
   return (
     <>
-      {localStorage.getItem("theme") === "light" ? (
+      {state.theme === "light" ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           data-name="Layer 1"

@@ -23,7 +23,7 @@ export const SFXContext = createContext<SFXContext>({
   reset: () => {},
 });
 
-export const AudioProvider = ({ children }: { children?: React.ReactNode }) => {
+export const SFXProvider = ({ children }: { children?: React.ReactNode }) => {
   const { muted, playRate } = useSnapshot(state);
   const [select] = useSound("/sounds/select.mp3", {
     volume: muted ? 0 : 1,

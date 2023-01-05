@@ -12,7 +12,7 @@ import { BsFillGearFill } from "react-icons/bs";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Squash as Hamburger } from "hamburger-react";
 import { SFXContext } from "@context/sfx.context";
-import { IoIosArrowBack } from "react-icons/io";
+import { TfiAngleLeft } from "react-icons/tfi";
 
 function Path({ ...props }) {
   const path = usePathname();
@@ -197,7 +197,7 @@ export default function Navbar() {
                 path?.includes("info/") ? "md:flex" : "md:hidden"
               } !w-min flex-row`}
             >
-              <IoIosArrowBack className="fade-transition " />
+              <TfiAngleLeft className="fade-transition h-3 w-auto" />
               Back
             </Link>
             {/* time */}

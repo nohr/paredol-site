@@ -14,9 +14,9 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="error">
+    <div className="error w-full p-2">
       <h1>ERROR</h1>
-      <pre>{error.message}</pre>
+      <pre className="w-full">{error.message}</pre>
       <button onClick={reset}>RESET</button>
     </div>
   );

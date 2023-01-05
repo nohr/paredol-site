@@ -1,3 +1,5 @@
+"use client";
+
 import { DocumentData } from "firebase/firestore/lite";
 import { proxy } from "valtio";
 

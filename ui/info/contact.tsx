@@ -60,7 +60,7 @@ export default function Contact() {
               type="text"
               required
               placeholder="Your name..."
-              className="fill link inputField !w-full p-2"
+              className="fill inputField link !w-full p-2"
             />
           </div>
           <div className="flex w-full flex-row items-center gap-x-2 invalid:border-red-600 invalid:text-red-600">
@@ -71,7 +71,7 @@ export default function Contact() {
               type="email"
               required
               placeholder="Your email..."
-              className="fill link inputField !w-full p-2"
+              className="fill inputField link !w-full p-2"
             />
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function Contact() {
         </div>
         <button
           type="submit"
-          className="link fill !flex !w-fit gap-x-2 self-center justify-self-center border-[1px] !underline-offset-1 md:!border-blue-900 md:dark:!border-blue-200"
+          className="fill link !flex !w-fit gap-x-2 self-center justify-self-center border-[1px] md:!border-blue-900 md:dark:!border-blue-200"
         >
           <BiMailSend />
           Send

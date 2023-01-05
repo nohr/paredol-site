@@ -4,20 +4,26 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSnapshot } from "valtio";
 import { getQuote } from "@api/firebase.api";
 import { state } from "state";
-const Scrambler = require("scrambling-text");
 
 function Quote() {
   const ref = useRef<HTMLHeadingElement>(null!);
-  const scramble = useRef(new Scrambler());
+  const scramble = useRef<any>();
   const [text, setText] = useState<string>(state.quote);
   const { motion, quote, theme, speech } = useSnapshot(state);
+
+  // import Scrambler from "scrambling-text" dynamically
+  useEffect(() => {
+    import("scrambling-text").then((Scrambler) => {
+      scramble.current = new Scrambler.default();
+    });
+  }, []);
 
   useEffect(() => {
     getQuote()
       .then((res) => {
         state.quote = res;
         !motion &&
-          scramble.current.scramble(res, setText, {
+          scramble.current?.scramble(res, setText, {
             characters: characters,
           });
       })
@@ -27,7 +33,7 @@ function Quote() {
   useEffect(() => {
     motion
       ? setText(quote)
-      : scramble.current.scramble(quote, setText, {
+      : scramble.current?.scramble(quote, setText, {
           characters: characters,
         });
   }, [quote, motion, theme]);

@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const withPlugins = require('next-compose-plugins');
+// const withPlugins = require('next-compose-plugins');
 const prod = process.env.NODE_ENV === 'production'
 const withPWA = require('next-pwa')({
   disable: prod ? false : true,
@@ -13,7 +13,15 @@ const withPWA = require('next-pwa')({
 const nextConfig = {
   experimental: {
     appDir: true,
-    runtime: 'experimental-edge',
+    // runtime: 'experimental-edge',
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'firebasestorage.googleapis.com',
+      },
+    ],
   },
   reactStrictMode: true,
   swcMinify: true,

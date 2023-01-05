@@ -1,14 +1,8 @@
-"use client";
-
 import "../globals.css";
-import React, { useEffect } from "react";
-import Navbar from "@ui/navbar/navbar";
-import { useTheme, useMobile, useMotion } from "utils";
-import { getData } from "@api/firebase.api";
-import { state } from "state";
+import React from "react";
 import { Footer } from "@ui/footer";
-import { AudioProvider } from "@context/sfx.context";
 import Backdrop from "@ui/home/backdrop";
+import { Init } from "./init";
 // import Load from "../components/container/loader";
 
 export default function RootLayout({
@@ -16,27 +10,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  useEffect(() => {
-    useTheme();
-    useMobile();
-    useMotion();
-    getData()
-      .then((data) => (state.data = data))
-      .catch((error) => {
-        throw error;
-      });
-  }, []);
-
   return (
     <html lang="en">
       <body className="h-full  bg-white text-blue-900 selection:bg-blue-900 selection:bg-opacity-60 selection:text-white dark:bg-black dark:text-blue-200 dark:selection:bg-blue-200 selection:dark:bg-opacity-60 dark:selection:text-black ">
-        <Backdrop />
-        <AudioProvider>
-          <Navbar />
+        <Init>
           <div className="flex h-full w-screen flex-col justify-start overflow-x-hidden  p-2 md:px-[10px] md:pb-2">
-            <div className="py-20">{children}</div>
+            <div className="h-full py-20 md:pb-6">{children}</div>
           </div>
-        </AudioProvider>
+        </Init>
+        <Backdrop />
         <Footer />
       </body>
     </html>

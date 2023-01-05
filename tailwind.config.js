@@ -39,6 +39,15 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  // daisyUI config (optional)
+  daisyui: {
+    styled: false,
+    themes: false,
+    base: false,
+    utils: true,
+    logs: true,
+    rtl: false,
+  },
 }
 
