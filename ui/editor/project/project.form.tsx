@@ -155,7 +155,6 @@ function MetadataLoader({ ...props }) {
     setTitles,
     setContent,
   } = useContext(EditorContext);
-  const { data } = useSnapshot(state);
 
   // Hide mobile keyboard on selection
   useEffect(() => {
@@ -166,26 +165,25 @@ function MetadataLoader({ ...props }) {
   // Get and List document id and categories in datalist
   useEffect(() => {
     getFormLists(setTitles, setCategories);
-  }, [data, setTitles, setCategories]);
+  }, [setTitles, setCategories]);
 
   // Populate form with data from firestore when name matches
   useEffect(() => {
     if (titles.indexOf(name) !== -1) {
-      data.length > 0 &&
-        fillFormData(
-          name,
-          setName,
-          setDate,
-          setCategory,
-          setClient,
-          setDescription,
-          setProgram,
-          setURL,
-          setPublished,
-          setLot
-        );
+      fillFormData(
+        name,
+        setName,
+        setDate,
+        setCategory,
+        setClient,
+        setDescription,
+        setProgram,
+        setURL,
+        setPublished,
+        setLot
+      );
     }
-  }, [name, data]);
+  }, [name]);
 
   // Clear the form when it unmounts
   useEffect(() => {
@@ -308,7 +306,7 @@ function MetadataLoader({ ...props }) {
         placeholder="Add Program"
       ></input>
       <button
-        className="link fill"
+        className="fill link"
         type="button"
         onClick={() => {
           tempProgram !== "" && setProgram([...program, tempProgram]);

@@ -248,7 +248,6 @@ export async function uploadData(
 
 export async function handleGetContent(
   lot: string,
-  data: DocumentData,
   setContent: Dispatch<
     SetStateAction<
       {
@@ -260,9 +259,9 @@ export async function handleGetContent(
     >
   >
 ) {
-  let projectContent: any = data.filter(
-    (item: { lot: string }) => item.lot === lot
-  )[0];
+  let snap = await getDocs(collection(db, "projects"));
+  const data = snap.docs.map((doc) => doc.data());
+  let projectContent: any = data.filter((item: any) => item.lot === lot)[0];
   if (projectContent) projectContent = projectContent.content;
   if (projectContent) setContent(projectContent);
 }

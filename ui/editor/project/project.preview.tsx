@@ -7,7 +7,6 @@ import { state } from "state";
 function ProjectEditorPreview() {
   const { content, setContent, name, lot, titles, setCover } =
     useContext(EditorContext);
-  const { data } = useSnapshot(state);
   // set the cover image when the content changes
   useEffect(() => {
     if (content.length > 0) {
@@ -29,9 +28,9 @@ function ProjectEditorPreview() {
     // Set the content to the data from the database if the name matches an ID
     if (titles.indexOf(name) !== -1) {
       // get the data from the database
-      handleGetContent(lot, data, setContent);
+      handleGetContent(lot, setContent);
     }
-  }, [lot, name, titles, data, setContent]);
+  }, [lot, name, titles, setContent]);
 
   function GenerateElement({
     item,

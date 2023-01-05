@@ -1,23 +1,25 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { Composition } from "../../app/(canvas)/Canvas";
 
 function Backdrop() {
-  const deg = useRef(0);
-  useEffect(() => {
-    deg.current = Math.floor(Math.random() * 30) - 15;
-  }, []);
+  // const deg = useRef(0);
+  // useEffect(() => {
+  //   deg.current = Math.floor(Math.random() * 30) - 15;
+  // }, []);
 
   return (
     <div
-      className={`pointer-events-none fixed -z-50 h-auto w-fit`}
-      style={{
-        top: "50%",
-        left: "50%",
-        transform: `translate(-50%,-50%) rotate(${deg.current}deg)`,
-      }}
+      className={`pointer-events-none fixed -z-50 h-full w-full`}
+      // style={{
+      //   top: "50%",
+      //   left: "50%",
+      //   transform: `translate(-50%,-50%) rotate(${deg.current}deg)`,
+      // }}
     >
-      <Wireframe className="fill-blue-900 opacity-[.05] dark:fill-blue-100 dark:opacity-[.05] md:h-auto md:w-[100vw]" />
+      <Composition />
+      {/* <Wireframe className="fill-blue-900 opacity-[.05] dark:fill-blue-100 dark:opacity-[.05] md:h-auto md:w-[100vw]" /> */}
     </div>
   );
 }
