@@ -19,7 +19,7 @@ import { v4 } from "uuid";
 import { db, storage } from "./firebase.config";
 import { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { getAuth } from "firebase/auth";
-import { getData } from "./firebase.api";
+import { getData } from "./api";
 
 export async function handleAddContent(
   selectedFiles: any,
