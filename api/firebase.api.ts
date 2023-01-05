@@ -8,38 +8,10 @@ import {
   getDocs,
   orderBy,
   query,
-  where,
 } from "firebase/firestore/lite";
 import { useState, useEffect } from "react";
 import { state } from "state";
 import { auth, db } from "./firebase.config";
-
-export async function getData(lot?: string) {
-  // state.loading = true;
-  if (!lot) {
-    const data = await getDocs(
-      query(
-        collection(db, "projects"),
-        where("published", "==", true),
-        orderBy("date", "desc")
-      )
-    );
-    // state.loading = false;
-    return data.docs.map((doc) => doc.data());
-  } else {
-    const data = await getDocs(
-      query(
-        collection(db, "projects"),
-        where("published", "==", true),
-        where("lot", "==", lot),
-        orderBy("date", "desc")
-      )
-    );
-    let [project] = data.docs.map((doc) => doc.data());
-    // state.loading = false;
-    return project;
-  }
-}
 
 export async function getQuote() {
   const docRef = doc(db, "info", "site");

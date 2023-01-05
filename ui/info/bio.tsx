@@ -1,6 +1,15 @@
-import { getBio } from "@api/info.api";
+import { db } from "@api/firebase.config";
+import { doc, getDoc } from "firebase/firestore/lite";
 import { Suspense } from "react";
 import { CgSpinner } from "react-icons/cg";
+
+async function getBio() {
+  const docRef = doc(db, "info", "site");
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return docSnap.data().bio;
+  }
+}
 
 export default async function Bio() {
   const bio = await getBio();

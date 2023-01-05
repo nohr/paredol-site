@@ -1,5 +1,3 @@
-"use client";
-
 import { state } from "state";
 import React, { createContext } from "react";
 import useSound from "use-sound";
@@ -23,11 +21,12 @@ export const SFXContext = createContext<SFXContext>({
   reset: () => {},
 });
 
+const rate = Math.random() * (1.15 - 0.85) + 0.85;
 export const SFXProvider = ({ children }: { children?: React.ReactNode }) => {
   const { muted, playRate } = useSnapshot(state);
   const [select] = useSound("/sounds/select.mp3", {
     volume: muted ? 0 : 1,
-    playbackRate: Math.random() * (1.15 - 0.85) + 0.85,
+    playbackRate: rate,
   });
   const [open] = useSound("/sounds/open.mp3", { volume: muted ? 0 : 1 });
   const [close] = useSound("/sounds/close.mp3", { volume: muted ? 0 : 1 });
