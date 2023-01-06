@@ -23,11 +23,12 @@ const nextConfig = {
       },
     ],
   },
-  async rewrites() {
+  async redirect() {
     return [
       {
         destination: 'https://aite.paredol.com',
         source: '/info/aite/',
+        permanent: true,
       },
     ]
   },
