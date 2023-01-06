@@ -23,15 +23,6 @@ const nextConfig = {
       },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        destination: 'https://paredol.com/aite',
-        source: '/info/aite/',
-        permanent: true,
-      },
-    ]
-  },
   reactStrictMode: true,
   swcMinify: true,
 }
