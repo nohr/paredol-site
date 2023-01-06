@@ -53,7 +53,6 @@ export const Composition = () => {
       className="h-full w-full"
       gl={{
         physicallyCorrectLights: false,
-        preserveDrawingBuffer: true,
       }}
       frameloop={"always"}
     >
