@@ -23,21 +23,13 @@ const nextConfig = {
       },
     ],
   },
-  rewrites() {
-    return {
-      beforeFiles: [
-        {
-          source: '/:path*',
-          has: [
-            {
-              type: 'host',
-              value: 'aite.paredol.com',
-            },
-          ],
-          destination: '/info/aite/:path*',
-        },
-      ]
-    }
+  async rewrites() {
+    return [
+      {
+        destination: 'aite.paredol.com',
+        source: '/info/aite/',
+      },
+    ]
   },
   reactStrictMode: true,
   swcMinify: true,
