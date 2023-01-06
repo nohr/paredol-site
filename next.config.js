@@ -23,6 +23,22 @@ const nextConfig = {
       },
     ],
   },
+  rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/:path*',
+          has: [
+            {
+              type: 'host',
+              value: 'aite.paredol.com',
+            },
+          ],
+          destination: '/info/aite/:path*',
+        },
+      ]
+    }
+  },
   reactStrictMode: true,
   swcMinify: true,
 }

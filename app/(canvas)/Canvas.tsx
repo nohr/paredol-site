@@ -16,7 +16,7 @@ const Camera = () => {
         position={[0, 2, -10]}
         // far={30}
         near={0.1}
-        fov={70}
+        fov={40}
         // aspect={width / height}
       ></PerspectiveCamera>
     </>
