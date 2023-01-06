@@ -54,3 +54,9 @@ export async function getData(lot?: string) {
     return project;
   }
 }
+
+export async function getStore() {
+  const data = await getDocs(collection(db, "store"));
+  const snap = data.docs.map((doc) => doc.data());
+  return snap;
+}
