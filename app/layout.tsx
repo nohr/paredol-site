@@ -4,6 +4,7 @@ import { Footer } from "@ui/footer";
 import Backdrop from "@ui/home/backdrop";
 import { Init } from "./init";
 import { getData } from "@api/api";
+import { AnalyticsWrapper } from "@ui/analytics";
 // import Load from "../components/container/loader";
 
 export default async function RootLayout({
@@ -20,6 +21,7 @@ export default async function RootLayout({
           <div className="flex h-full w-screen flex-col justify-start overflow-x-hidden  p-2 md:px-[10px] md:pb-2">
             <div className="h-full pt-14 pb-24 md:py-20 md:pb-6">
               {children}
+              <AnalyticsWrapper />
             </div>
           </div>
         </Init>

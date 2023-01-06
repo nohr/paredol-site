@@ -23,10 +23,10 @@ const nextConfig = {
       },
     ],
   },
-  async redirect() {
+  async rewrites() {
     return [
       {
-        destination: 'https://aite.paredol.com',
+        destination: 'https://paredol.com/aite',
         source: '/info/aite/',
         permanent: true,
       },
