@@ -26,8 +26,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: 'aite.paredol.com',
-        destination: '/info/aite/',
+        destination: 'https://aite.paredol.com',
+        source: '/info/aite/',
       },
     ]
   },
