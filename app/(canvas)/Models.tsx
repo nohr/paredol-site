@@ -29,13 +29,13 @@ export function CD({ ...props }) {
   }
 
   useFrame(() => {
-    if (cd.current.rotation) {
+    if (cd.current) {
       let { rotation } = cd.current;
       if (loading && !motion) {
-        rotation["x"] += 0.15;
-        rotation["y"] += 0.05;
-        rotation["z"] += 0.15;
-        console.log(rotation);
+        rotation["x"] += 0.005;
+        rotation["y"] += 0.005;
+        rotation["z"] += 0.005;
+        // console.log(rotation);
       }
     }
   });

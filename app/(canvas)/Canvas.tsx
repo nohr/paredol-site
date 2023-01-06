@@ -1,11 +1,10 @@
 import React, { Suspense } from "react";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { useSnapshot } from "valtio";
 import { state } from "../../common/state";
 import { Floor, Fog, Lights, Spinner } from "./Comp.utils";
 import { CD } from "./Models";
-import { useTheme } from "styled-components";
 
 const Camera = () => {
   //   const { width, height } = useThree((state) => state.size);
@@ -14,8 +13,8 @@ const Camera = () => {
       <PerspectiveCamera
         makeDefault
         position={[0, 2, -10]}
-        // far={30}
-        near={0.1}
+        far={30}
+        near={1}
         fov={40}
         // aspect={width / height}
       ></PerspectiveCamera>
@@ -50,21 +49,21 @@ const Controls = () => {
 export const Composition = () => {
   return (
     <Canvas
-      // dpr={[1, 1.5]}
+      dpr={[1, 1.5]}
       className="h-full w-full"
       gl={{
         physicallyCorrectLights: false,
         preserveDrawingBuffer: true,
       }}
-      frameloop={"demand"}
+      frameloop={"always"}
     >
-      <Camera />
-      <Lights />
-      <Fog />
       <Suspense fallback={<Spinner />}>
+        <Camera />
+        <Lights />
+        <Fog />
         <CD />
+        <Floor />
       </Suspense>
-      <Floor />
       <Controls />
     </Canvas>
   );

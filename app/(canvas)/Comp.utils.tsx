@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, Suspense, useLayoutEffect } from "react";
+import { memo, useEffect, useLayoutEffect } from "react";
 import {
   Html,
   useProgress,
@@ -15,13 +15,13 @@ import { useSnapshot } from "valtio";
 export const Spinner = () => {
   const { progress } = useProgress();
 
-  // useEffect(() => {
-  //     cloud.CanvasLoading = true;
+  useEffect(() => {
+    state.loading = true;
 
-  //     return () => {
-  //         cloud.CanvasLoading = false;
-  //     };
-  // });
+    return () => {
+      state.loading = false;
+    };
+  });
 
   return (
     <Html fullscreen>
@@ -261,11 +261,9 @@ const Reflector = memo(function Reflector() {
 
 export function Floor() {
   return (
-    <Suspense fallback={<Spinner />}>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]}>
-        <planeGeometry args={[70, 70]} />
-        <Reflector />
-      </mesh>
-    </Suspense>
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]}>
+      <planeGeometry args={[70, 70]} />
+      <Reflector />
+    </mesh>
   );
 }
