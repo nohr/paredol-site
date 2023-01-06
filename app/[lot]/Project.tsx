@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export function Project({ ...props }) {
   // check the data array for the object with the matching lot
 
-  const { category, client, name, type, description, content, by, lot } =
+  const { category, client, name, type, description, content, by, lot, url } =
     props.project;
   return (
     <div className="grid h-full w-full grid-cols-[100%] grid-rows-[fit-content_max-content] flex-col items-center justify-start overflow-y-scroll md:flex lg:px-12">
@@ -18,6 +19,17 @@ export function Project({ ...props }) {
                 ? `${type} ${category} `
                 : `${category} for ${client}`
             }`}</p>
+          ) : null}
+          {url ? (
+            !url.includes("paredol.com/store") ? (
+              <a href={url} target="_blank" className="fill link py-2">
+                View Project
+              </a>
+            ) : (
+              <Link href="/store" className="fill link py-2">
+                Visit Store
+              </Link>
+            )
           ) : null}
         </div>
         <div className="relative overflow-y-auto md:max-w-prose">
