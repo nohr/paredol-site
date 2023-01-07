@@ -26,12 +26,11 @@ export async function getData(lot?: string) {
       )
     );
     const snap = data.docs.map((doc) => doc.data());
-    // Serialize the date object to a string to prevent the error
+    // remove the date property from each object in the array
     snap.map((doc: any) => {
-      const { date } = doc;
-      date.seconds = date.seconds.toString();
-      date.nanoseconds = date.nanoseconds.toString();
+      delete doc.date;
     });
+
     state.loading = false;
     return snap;
   } else {
@@ -45,9 +44,7 @@ export async function getData(lot?: string) {
     const snap = data.docs.map((doc) => doc.data());
     // Serialize the date object to a string to prevent the error
     snap.map((doc: any) => {
-      const { date } = doc;
-      date.seconds = date.seconds.toString();
-      date.nanoseconds = date.nanoseconds.toString();
+      delete doc.date;
     });
     let [project] = snap;
     state.loading = false;
