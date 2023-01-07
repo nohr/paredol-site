@@ -42,7 +42,7 @@ export function CD() {
   const mat = useMemo(
     () =>
       new MeshBasicMaterial({
-        color: `${theme === "light" ? "#013566" : "#D1D5DB"}`,
+        color: `${theme === "light" ? "#013566" : "#5d98d7"}`,
       }),
     [theme]
   );
