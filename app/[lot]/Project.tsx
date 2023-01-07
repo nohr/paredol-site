@@ -38,7 +38,7 @@ export function Project({ ...props }) {
       </div>
       {/* carosel */}
       <div className="flex h-full w-full flex-col items-center justify-center gap-2 py-2">
-        <div className="carousel-center carousel rounded-box h-[40vh] w-full space-x-4 bg-white bg-opacity-70 p-4 pb-1 dark:bg-black dark:bg-opacity-70 md:h-full md:max-w-[80%]">
+        <div className="carousel-center rounded-box flex h-[40vh] w-full space-x-4 overflow-x-scroll bg-white bg-opacity-70 p-4 pb-1 dark:bg-black dark:bg-opacity-70 md:h-full md:max-w-[80%]">
           {content &&
             content?.map((value: any, index: number) => (
               <Content value={value} key={index} index={index} />
@@ -70,13 +70,13 @@ function Content({ ...props }) {
       {type === "image" ? (
         <div
           id={`item${index}`}
-          className="carousel-item relative h-auto w-96 overflow-hidden"
+          className="carousel-item relative aspect-auto h-auto w-[inherit] overflow-hidden"
         >
           <Image
             src={url}
             fill
             alt={name}
-            className="rounded-md shadow-md"
+            className="aspect-auto rounded-md shadow-md"
             style={{ objectFit: "cover" }}
             sizes="100vw"
           />
@@ -91,7 +91,7 @@ function Content({ ...props }) {
         orientation === "portrait" ? (
           <div
             id={`item${index}`}
-            className="carousel-item relative h-auto w-40 overflow-hidden"
+            className="carousel-item relative h-fit w-40 overflow-hidden md:w-80"
           >
             <video
               className="rounded-md shadow-md"
@@ -113,11 +113,11 @@ function Content({ ...props }) {
           // Landscape
           <div
             id={`item${index}`}
-            className="carousel-item relative h-full w-fit overflow-hidden"
+            className="relative aspect-video h-full w-full"
           >
             <video
               controls
-              className="rounded-md shadow-md"
+              className="aspect-video rounded-md shadow-md"
               autoPlay={false}
               muted={false}
               playsInline

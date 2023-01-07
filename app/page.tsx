@@ -10,7 +10,7 @@ export default async function HomePage() {
     <div className="mx-1 w-full pb-24 md:pb-6 lg:px-[10rem] xl:px-[20rem]">
       <Quote />
       {data.map((doc: any, index: number) => (
-        <ProjectLink doc={doc} index={index} />
+        <ProjectLink doc={doc} index={index} key={index} />
       ))}
     </div>
   );
