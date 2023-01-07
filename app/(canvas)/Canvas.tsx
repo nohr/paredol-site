@@ -54,7 +54,7 @@ export const Composition = () => {
       gl={{
         physicallyCorrectLights: false,
       }}
-      frameloop={"always"}
+      frameloop={"demand"}
     >
       <Suspense fallback={<Spinner />}>
         <Camera />
