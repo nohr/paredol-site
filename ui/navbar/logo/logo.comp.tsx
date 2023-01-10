@@ -1,41 +1,50 @@
+"use client";
+
 import { Canvas, useFrame } from "@react-three/fiber";
 import { memo, useMemo, useRef } from "react";
 import { Euler, MeshBasicMaterial, SphereGeometry } from "three";
 import { useSnapshot } from "valtio";
 import { state } from "state";
+import { usePathname } from "next/navigation";
 
-function LogoCanvas() {
+function LogoCanvas({ style, text }: { [key: string]: any; text?: string }) {
   const { motion } = useSnapshot(state);
+  const path = usePathname();
   return (
     <Canvas
-      style={{ width: "48px", height: "46px" }}
-      className="drag-none select-none"
+      style={style}
+      className={`drag-none select-none ${
+        path === "/" ? (text ? "mx-auto flex" : "hidden") : "flex"
+      }`}
       gl={{ antialias: true }}
       // dpr={[1, 1.5]}
       // performance={{ min: 0.5 }}
       frameloop={motion ? "demand" : "always"}
     >
       <ambientLight intensity={0.1} />
-      <CD />
+      {text ? <CD text={text} /> : <CD />}
     </Canvas>
   );
 }
 
 export default memo(LogoCanvas);
 
-export function CD() {
+export function CD({ text }: { text?: string }) {
   // const { gl } = useThree();
   // console.log(gl.info);
   const cd = useRef<any>();
   // const { hover } = props;
   const { loading, motion, theme, speech } = useSnapshot(state);
 
-  useFrame(() => {
+  useFrame(({ mouse }) => {
     if (cd.current) {
       let { rotation } = cd.current;
       if (rotation) {
         handleMotion(motion, loading, rotation, speech);
       }
+      // if (text) {
+      //   cd.current.lookAt(mouse);
+      // }
     }
   });
 
@@ -46,7 +55,7 @@ export function CD() {
       }),
     [theme]
   );
-  const sphere = useMemo(() => new SphereGeometry(220, 20, 20), []);
+  const sphere = useMemo(() => new SphereGeometry(220, 40, 40), []);
 
   return (
     <group

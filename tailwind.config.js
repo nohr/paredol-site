@@ -30,24 +30,29 @@ module.exports = {
       colors: colors,
       animation: {
         autoscroll: 'autoscroll 7s linear infinite',
+        noise: "noise 0.1s infinite steps(200)",
       },
       keyframes: {
         autoscroll: {
           'from': { transform: 'translateX(100%)' },
           'to': { transform: 'translateX(-100%)' },
         },
+        noise: {
+          '0%': { backgroundPosition: '0%' },
+          '50%': { backgroundPosition: '100%' },
+          'to': { backgroundPosition: '0%' },
+        },
       },
     },
-  },
-  plugins: [require("daisyui")],
-  // daisyUI config (optional)
-  daisyui: {
-    styled: false,
-    themes: false,
-    base: false,
-    utils: true,
-    logs: true,
-    rtl: false,
-  },
-}
-
+    plugins: [require("daisyui")],
+    // daisyUI config (optional)
+    daisyui: {
+      styled: false,
+      themes: false,
+      base: false,
+      utils: true,
+      logs: true,
+      rtl: false,
+    },
+  }
+};

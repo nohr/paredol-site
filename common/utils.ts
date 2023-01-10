@@ -56,6 +56,12 @@ export const toggleMotion = (motion?: string) => {
     localStorage.setItem("motion", `true`);
     return;
   }
+
+  if (state.motion) {
+    document.body.classList.add("animate-[noise_0.1s_infinite_steps(200)]");
+  } else {
+    document.body.classList.remove("animate-[noise_0.1s_infinite_steps(200)]");
+  }
   state.motion = !state.motion;
   localStorage.setItem("motion", `${state.motion}`);
 };
@@ -140,7 +146,13 @@ export function useMotion() {
     ).matches;
 
     if (userMotion === "true" || systemMotion) {
+      document.body.classList.remove(
+        "animate-[noise_0.1s_infinite_steps(200)]"
+      );
       state.motion = true;
+      return;
+    } else {
+      document.body.classList.add("animate-[noise_0.1s_infinite_steps(200)]");
       return;
     }
   }

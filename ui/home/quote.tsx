@@ -28,7 +28,8 @@ function Quote() {
           });
       })
       .catch((err) => console.log(err));
-  }, [setText, speech === true, motion]);
+  }, [setText, speech, motion]);
+  //  FIXME: Rescramble only once when the speech var is true instead of twice in the useEffect above
 
   useEffect(() => {
     motion

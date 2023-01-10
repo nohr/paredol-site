@@ -71,23 +71,6 @@ input {
   text-decoration: none !important;
 }
 
-body {
-  background-image: url("/watermarks/bg-noise.png");
-  background-blend-mode: exclusion;
-  animation: noise 0.1s infinite steps(200);
-}
-@keyframes noise {
-  0% {
-    background-position: 0%;
-  }
-  50% {
-    background-position: 100%;
-  }
-  to {
-    background-position: 0%;
-  }
-}
-
 .spectrum-ColorSlider_a5bb06 {
   height: 100% !important;
 }
