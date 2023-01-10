@@ -27,7 +27,7 @@ export function Project({ ...props }) {
   // remove https:// from url
   const urlNoProtocol = url.replace(/(^\w+:|^)\/\//, "");
   return (
-    <div className="grid h-full w-full grid-cols-[100%] grid-rows-[fit-content_max-content] flex-col items-center justify-start gap-y-3 overflow-y-scroll md:flex md:w-[unset] md:grid-rows-[1fr_3fr] lg:px-12">
+    <div className="grid h-full w-full grid-cols-[100%] grid-rows-[1fr_4fr] flex-col items-start justify-start gap-y-3 overflow-y-scroll pb-32 md:flex md:w-[unset] md:grid-rows-[1fr_3fr] md:pb-0 lg:px-12">
       {/* Modal */}
       {modal && modalContent ? (
         <div className="absolute top-0 left-0 z-50 h-full w-full">
@@ -49,7 +49,7 @@ export function Project({ ...props }) {
       <div className="flex w-full flex-col items-start justify-center !gap-y-3 md:mx-0 md:grid md:h-60 md:grid-cols-[1fr_1fr] md:grid-rows-[1fr]">
         {/* Left */}
         <div className="flex w-full flex-row flex-wrap  justify-between gap-x-3 md:w-fit md:flex-col">
-          <div className="flex w-full max-w-fit flex-col items-start justify-center  md:gap-y-0">
+          <div className="flex w-full max-w-fit flex-col items-start justify-center md:gap-y-0">
             {/* LOT */}
             <p className="text-xs font-black uppercase">{`[${lot}]`}</p>
             {/* Title */}
@@ -93,8 +93,8 @@ export function Project({ ...props }) {
       </div>
       {/* Content */}
       {category !== "Website" ? (
-        <div className="flex h-full w-screen flex-col items-center justify-center gap-2 py-2">
-          <div className="carousel-center flex h-[40vh] w-full space-x-4 overflow-x-scroll p-4 pb-1 md:h-full md:max-w-[80%]">
+        <div className="flex h-full w-full flex-col items-center justify-center gap-2 py-2">
+          <div className="flex h-full flex-col !gap-y-10 overflow-hidden p-1 md:overflow-y-auto ">
             {content &&
               content?.map((value: any, index: number) => (
                 <Content
@@ -106,7 +106,8 @@ export function Project({ ...props }) {
                 />
               ))}
           </div>
-          {content && content.length > 1 ? (
+          {/* Carousel Buttons */}
+          {/* {content && content.length > 1 ? (
             <div className="flex w-full justify-center gap-2 py-2">
               {content.map((value: any, index: number) => (
                 <a
@@ -118,7 +119,7 @@ export function Project({ ...props }) {
                 </a>
               ))}
             </div>
-          ) : null}
+          ) : null} */}
         </div>
       ) : (
         <iframe
@@ -137,7 +138,7 @@ function Content({ ...props }) {
   function ModalImage() {
     return (
       <div className="relative h-auto w-full">
-        <Image alt={name} src={url} fill sizes="100vw" />
+        <Image alt={name} src={url} fill sizes="100vw" className="" />
       </div>
     );
   }
@@ -146,15 +147,14 @@ function Content({ ...props }) {
       {type === "image" ? (
         <div
           id={`item${index}`}
-          className="carousel-item relative aspect-auto h-auto w-96 overflow-hidden"
+          className="relative flex h-auto w-full justify-center"
         >
           <Image
             src={url}
-            fill
             alt={name}
-            className="aspect-auto cursor-pointer rounded-md shadow-md"
-            style={{ objectFit: "cover" }}
-            sizes="100vw"
+            className=""
+            width={600}
+            height={600}
             // onClick={() => {
             //   setModalContent(<ModalImage />);
             //   setModal(true);
@@ -172,10 +172,11 @@ function Content({ ...props }) {
         </div>
       ) : //   TODO: add video styling
       type === "video" ? (
+        // portrait
         orientation === "portrait" ? (
           <div
             id={`item${index}`}
-            className="carousel-item relative h-fit w-40 overflow-hidden md:w-80"
+            className="carousel-item relative mx-auto h-fit w-40 overflow-hidden md:w-80"
           >
             <video
               className="rounded-md shadow-md"
@@ -188,7 +189,7 @@ function Content({ ...props }) {
               support the video tag. I suggest you upgrade your browser.
             </video>
             {caption ? (
-              <p className="absolute bottom-0 w-full bg-white bg-opacity-70 p-1 text-xs backdrop-blur-md dark:bg-black dark:bg-opacity-70">
+              <p className=" absolute bottom-0 w-full bg-white bg-opacity-70 p-1 text-xs backdrop-blur-md dark:bg-black dark:bg-opacity-70">
                 {caption}
               </p>
             ) : null}
@@ -197,7 +198,7 @@ function Content({ ...props }) {
           // Landscape
           <div
             id={`item${index}`}
-            className="relative aspect-video h-full w-full"
+            className="carousel-item relative !ml-0 aspect-video h-fit w-full"
           >
             <video
               controls

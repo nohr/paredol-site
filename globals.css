@@ -6,9 +6,6 @@
   --blur: blur(10px);
   --transition: 0.2s;
 }
-[data-nextjs-scroll-focus-boundary] {
-  display: contents !important;
-}
 
 html {
   overflow-x: hidden;
