@@ -96,7 +96,7 @@ body .loading {
 }
 
 .fade-transition {
-  @apply delay-75  duration-300 ease-in-out motion-reduce:transition-none  motion-reduce:hover:transform-none md:transition-all md:delay-100  md:hover:transition-all;
+  @apply duration-100 ease-in-out motion-reduce:transition-none  motion-reduce:hover:transform-none md:transition-all md:delay-100  md:hover:transition-all;
 }
 
 .inputField {

@@ -1,8 +1,6 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import { useSnapshot } from "valtio";
-import { state } from "../../common/state";
 import { Floor, Fog, Lights, Spinner } from "./Comp.utils";
 import { CD } from "./Models";
 
@@ -12,7 +10,7 @@ const Camera = () => {
     <>
       <PerspectiveCamera
         makeDefault
-        position={[0, 2, -10]}
+        position={[0, 0, -15]}
         far={30}
         near={1}
         fov={40}
