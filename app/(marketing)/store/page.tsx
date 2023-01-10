@@ -13,19 +13,22 @@ export default async function StorePage() {
   const products = await getStore();
   return (
     <>
-      {products.map((product: any) => (
-        <div className="card image-full mx-auto aspect-square w-full !rounded-xl shadow-xl md:h-96 md:w-96">
-          <figure>
+      {products.map((product: any, index: number) => (
+        <div
+          className="flex w-full flex-col rounded-xl shadow-xl md:flex-row"
+          key={index}
+        >
+          <div className="relative h-96 w-full">
             <Image
-              className="rounded-xl"
+              className="rounded-xl "
               src={product.cover}
               alt={product.name}
               fill
-              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="100vw"
               style={{ objectFit: "cover" }}
             />
-          </figure>
-          <div className="card-body rounded-xl bg-white bg-opacity-50 p-2 dark:bg-black dark:bg-opacity-50">
+          </div>
+          <div className="flex flex-col gap-y-2 rounded-xl bg-white bg-opacity-50 p-2 dark:bg-black dark:bg-opacity-50">
             <h2 className="card-title text-6xl font-thin">{product.name}</h2>
             <p>{product.tag}</p>
             <div className="card-actions justify-end">
