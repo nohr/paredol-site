@@ -1,3 +1,10 @@
+export const dynamic = "auto",
+  dynamicParams = true,
+  revalidate = 0,
+  fetchCache = "only-no-store",
+  runtime = "nodejs",
+  preferredRegion = "auto";
+
 import { getData } from "api";
 import { notFound } from "next/navigation";
 import { Project } from "./Project";

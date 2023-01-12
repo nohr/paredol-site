@@ -1,3 +1,10 @@
+export const dynamic = "auto",
+  dynamicParams = true,
+  revalidate = 0,
+  fetchCache = "only-no-store",
+  runtime = "nodejs",
+  preferredRegion = "auto";
+
 import React from "react";
 import Quote from "../ui/home/quote";
 import ProjectLink from "./ProjectLink";
