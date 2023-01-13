@@ -1,3 +1,10 @@
+export const dynamic = "auto",
+  dynamicParams = true,
+  revalidate = 0,
+  fetchCache = "only-no-store",
+  runtime = "nodejs",
+  preferredRegion = "auto";
+
 import { getStore } from "api";
 import Image from "next/image";
 import Script from "next/script";
