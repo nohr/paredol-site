@@ -1,3 +1,10 @@
+export const dynamic = "auto",
+  dynamicParams = true,
+  revalidate = 0,
+  fetchCache = "only-no-store",
+  runtime = "nodejs",
+  preferredRegion = "auto";
+
 import Bio from "@ui/info/bio";
 import Contact from "@ui/info/contact";
 import Roster from "./Roster";
