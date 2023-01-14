@@ -2,7 +2,7 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { memo, useMemo, useRef } from "react";
-import { Euler, MeshBasicMaterial, SphereGeometry } from "three";
+import { Color, Euler, MeshBasicMaterial, SphereGeometry } from "three";
 import { useSnapshot } from "valtio";
 import { state } from "state";
 import { usePathname } from "next/navigation";
@@ -21,7 +21,6 @@ function LogoCanvas({ style, text }: { [key: string]: any; text?: string }) {
       // performance={{ min: 0.5 }}
       frameloop={motion ? "demand" : "always"}
     >
-      <ambientLight intensity={0.1} />
       {text ? <CD text={text} /> : <CD />}
     </Canvas>
   );
@@ -51,7 +50,7 @@ export function CD({ text }: { text?: string }) {
   const mat = useMemo(
     () =>
       new MeshBasicMaterial({
-        color: `${theme === "light" ? "#013566" : "#5d98d7"}`,
+        color: theme === "light" ? new Color(0x013566) : new Color(0x5d98d7),
       }),
     [theme]
   );
