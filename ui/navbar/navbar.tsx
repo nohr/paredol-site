@@ -14,6 +14,7 @@ import { Squash as Hamburger } from "hamburger-react";
 import { SFXContext } from "@context/sfx.context";
 import { TfiAngleLeft } from "react-icons/tfi";
 import { DocumentData } from "firebase/firestore/lite";
+import { AnimatePresence, motion } from "framer-motion";
 
 function Path({ ...props }) {
   const path = usePathname();
@@ -59,6 +60,7 @@ function Path({ ...props }) {
 
 function DesktopLinks({ ...props }) {
   const { options } = useSnapshot(state);
+  const { open, close } = useContext(SFXContext);
   const { optionsBtn } = props;
   return (
     <div
@@ -77,6 +79,7 @@ function DesktopLinks({ ...props }) {
         tabIndex={-1}
         onClick={() => {
           state.options = !options;
+          options ? close() : open();
         }}
         ref={optionsBtn}
       >
@@ -98,6 +101,12 @@ function MobileMenu({ ...props }) {
   const { optionsBtn } = props;
   const { options, menu, mobile } = useSnapshot(state);
   const ref = useRef<any>(null);
+  const { open, close } = useContext(SFXContext);
+
+  // useEffect(() => {
+  //   open();
+  //   return () => close();
+  // }, [menu]);
 
   ref.current?.addEventListener(
     "touchmove",
@@ -108,41 +117,52 @@ function MobileMenu({ ...props }) {
   );
 
   return (
-    <div
-      ref={ref}
-      className={`${menu ? "" : "!hidden"} z-50 h-fit w-screen md:hidden`}
-    >
-      <Options
-        className={`${options && mobile ? "grid" : "!hidden"} !mb-4`}
-        // optionsBtn={optionsBtn}
-      />
-      <div className="flex h-fit w-full flex-row items-center justify-evenly gap-x-3 p-3">
-        {user && <Path href="Editor" />}
-        <Path href="Info" />
-        <div
-          className={`m-0 flex h-min w-fit select-none items-center justify-between rounded-xl border-[1px] border-blue-900 px-[6px] py-[4px] font-thin backdrop-blur-lg dark:border-blue-200 md:w-fit md:border-transparent ${
-            options
-              ? "bg-blue-900 text-white dark:bg-blue-200 dark:text-black "
-              : "bg-transparent text-blue-900 dark:text-blue-200 "
-          }}`}
-          ref={optionsBtn}
-          tabIndex={-1}
-          onClick={() => {
-            state.options = !options;
-          }}
+    <AnimatePresence>
+      {menu && (
+        <motion.div
+          initial={{ y: 500, scale: 0 }}
+          animate={{ y: 0, scale: 1 }}
+          exit={{ y: 500, scale: 0 }}
+          transition={{ duration: 0.2, type: "spring", bounce: 0.25 }}
+          ref={ref}
+          className={` z-50 h-fit w-screen md:hidden`}
         >
-          Options
-          <BsFillGearFill
-            className={`fade-transition m-0 h-3 ${
-              options
-                ? "text-white dark:text-black"
-                : "fill-blue-900 p-0 dark:fill-blue-200"
-            } `}
+          <Options
+            className={`${
+              options && mobile ? "grid" : "!hidden"
+            } !mb-4 grid-cols-[48%_4%_48%] grid-rows-[min-content]`}
+            // optionsBtn={optionsBtn}
           />
-        </div>
-        <Path href="Store" />
-      </div>
-    </div>
+          <div className="flex h-fit w-full flex-row items-center justify-evenly gap-x-3 p-3">
+            {user && <Path href="Editor" />}
+            <Path href="Info" />
+            <div
+              className={`m-0 flex h-min w-fit select-none items-center justify-between rounded-xl border-[1px] border-blue-900 px-[6px] py-[4px] font-thin backdrop-blur-lg dark:border-blue-200 md:w-fit md:border-transparent ${
+                options
+                  ? "bg-blue-900 text-white dark:bg-blue-200 dark:text-black "
+                  : "bg-transparent text-blue-900 dark:text-blue-200 "
+              }}`}
+              ref={optionsBtn}
+              tabIndex={-1}
+              onClick={() => {
+                options ? close() : open();
+                state.options = !options;
+              }}
+            >
+              Options
+              <BsFillGearFill
+                className={`fade-transition m-0 h-3 ${
+                  options
+                    ? "text-white dark:text-black"
+                    : "fill-blue-900 p-0 dark:fill-blue-200"
+                } `}
+              />
+            </div>
+            <Path href="Store" />
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -178,11 +198,7 @@ export default function Navbar({ data }: DocumentData) {
   const { select } = useContext(SFXContext);
   return (
     <>
-      <Options
-        className={`${
-          options && !mobile ? "flex flex-col gap-y-2" : "!hidden"
-        }`}
-      />
+      <Options className={`${options && !mobile ? "md:!h-fit" : "!hidden"}`} />
       <div className="fade-transition fixed bottom-0 z-50 h-min bg-white bg-opacity-70 backdrop-blur-lg dark:bg-black dark:bg-opacity-70 md:top-0 md:bottom-[unset] md:bg-transparent md:hover:bg-white md:hover:bg-opacity-70 md:dark:bg-transparent md:hover:dark:bg-black md:hover:dark:bg-opacity-70">
         <MobileMenu optionsBtn={optionsBtn} />
         {/* navbar */}
