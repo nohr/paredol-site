@@ -8,7 +8,7 @@ import { state } from "state";
 
 export function CD({ ...props }) {
   const cd = useRef<Group>(null!);
-  const { loading, motion, theme } = useSnapshot(state);
+  const { loading, enableMotion, theme } = useSnapshot(state);
 
   function Ball({ ...props }) {
     const material = new MeshPhysicalMaterial({
@@ -31,7 +31,7 @@ export function CD({ ...props }) {
   useFrame(() => {
     if (cd.current) {
       let { rotation } = cd.current;
-      if (loading && !motion) {
+      if (loading && !enableMotion) {
         rotation["x"] += 0.005;
         rotation["y"] += 0.005;
         rotation["z"] += 0.005;

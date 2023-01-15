@@ -1,6 +1,6 @@
 export const dynamic = "auto",
   dynamicParams = true,
-  revalidate = 0,
+  // revalidate = 0,
   fetchCache = "only-no-store",
   runtime = "nodejs",
   preferredRegion = "auto";

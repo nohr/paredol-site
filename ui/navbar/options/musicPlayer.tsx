@@ -2,7 +2,7 @@ import { useSnapshot } from "valtio";
 import { state } from "state";
 import { FFIcon, PlayPauseIcon } from "svg";
 import { nextSong, toggleMusic, useSong } from "utils";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { SFXContext } from "@context/sfx.context";
 
 function PlayButton({ ...props }) {
@@ -42,8 +42,8 @@ function FFButton({ ...props }) {
 
 export function MusicPlayer() {
   const { playing, songIndex } = useSnapshot(state);
-  const { select } = useContext(SFXContext);
-  const audio = useRef<HTMLAudioElement>(null!);
+  const { select, audio } = useContext(SFXContext);
+  // const audio = useRef<HTMLAudioElement>(null!);
   const [song, songs] = useSong();
   // change styling of the  buttons when the song track passes behind them
 
@@ -68,7 +68,6 @@ export function MusicPlayer() {
         style={{}}
         className="!before:dark:bg-blue-200 m-0 flex h-8  w-full appearance-none items-center justify-between gap-x-1 self-center overflow-hidden rounded-3xl border-[1px] !border-blue-900 bg-transparent before:absolute before:z-10 before:!bg-blue-900 before:content-[''] dark:!border-blue-200 "
       /> */}
-      <audio ref={audio} preload="metadata" autoPlay={false}></audio>
     </>
   );
 }

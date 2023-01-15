@@ -8,7 +8,7 @@ import { SFXContext } from "@context/sfx.context";
 
 export function SongInfo() {
   const [song, songs] = useSong();
-  const { songIndex, motion, theme } = useSnapshot(state);
+  const { songIndex, enableMotion, theme } = useSnapshot(state);
   const normal = `(${songIndex + 1}/${songs.length}) ${song}`;
   const [value, setValue] = useState<string>(normal);
   const slide = "animate-[autoscroll_7s_linear_infinite]";
@@ -34,14 +34,14 @@ export function SongInfo() {
       <MdLibraryMusic className="fade-transition absolute left-[6px]  h-4 w-4 md:group-hover:fill-white dark:md:group-hover:fill-black" />
       <p
         style={
-          motion
+          enableMotion
             ? { animation: "none" }
             : value === "Copied!"
             ? { animation: "none", alignSelf: "center" }
             : undefined
         }
         className={`md:group-hover:text-whitedark:md:group-hover:text-black pointer-events-none  select-none whitespace-nowrap  pl-6 ${
-          !motion ? slide : ""
+          !enableMotion ? slide : ""
         }`}
       >
         {songs.length > 0 ? value : "..."}

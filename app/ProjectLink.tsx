@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useContext, useEffect } from "react";
 import { SFXContext } from "@context/sfx.context";
 import { Program } from "@ui/program";
-
+import { motion } from "framer-motion";
 export default function ProjectLink({ doc }: any) {
   const { confirm } = useContext(SFXContext);
   useEffect(() => {
@@ -14,11 +14,16 @@ export default function ProjectLink({ doc }: any) {
   }, []);
 
   return (
-    <>
+    <motion.div
+      whileHover={{
+        scale: 1.02,
+        transition: { duration: 0.1 },
+      }}
+    >
       <Link
         onClick={() => confirm()}
         href={doc.lot}
-        className="fade-transition my-2 flex h-[160px] w-full flex-row justify-between overflow-hidden rounded-xl border-[1px] border-transparent bg-opacity-50 p-2 active:border-blue-900 active:dark:border-blue-200 md:hover:bg-blue-900 md:hover:bg-opacity-50 md:hover:text-white md:hover:shadow-lg md:hover:dark:bg-blue-200 md:hover:dark:bg-opacity-50 md:hover:dark:text-black"
+        className="fade-transition my-2 flex h-[160px] w-full flex-row justify-between overflow-hidden rounded-xl border-[1px] border-transparent bg-opacity-50 p-2 active:border-blue-900 active:dark:border-blue-200 md:hover:bg-blue-900 md:hover:bg-opacity-70 md:hover:text-white md:hover:shadow-lg md:hover:dark:bg-blue-200 md:hover:dark:bg-opacity-70 md:hover:dark:text-black"
       >
         <div className="flex h-full w-max flex-col justify-start gap-y-8">
           <div className="flex flex-col items-start">
@@ -40,6 +45,6 @@ export default function ProjectLink({ doc }: any) {
           />
         </div>
       </Link>
-    </>
+    </motion.div>
   );
 }

@@ -5,7 +5,7 @@ import { useSnapshot } from "valtio";
 import { state } from "state";
 import { SearchBarIcon } from "svg";
 import { usePathname, useRouter } from "next/navigation";
-import { handleChange, toggleMotion, toggleTheme } from "utils";
+import { handleChange, toggleEnableMotion, toggleTheme } from "utils";
 import useKeyboardShortcut from "use-keyboard-shortcut";
 import { Results } from "./resuts";
 import { DocumentData } from "firebase/firestore/lite";
@@ -74,12 +74,14 @@ export function Search({ data }: DocumentData) {
         state.colorBar = true;
         setChatText("");
       }
-      if (chatText === "reduce motion") {
-        toggleMotion("reduce");
+      if (chatText === "reduce enableMotion") {
+        toggleEnableMotion("reduce");
         setChatText("");
       }
       if (chatText === "help") {
-        setChatText("try typing clear, dark, light, reduce motion, or color");
+        setChatText(
+          "try typing clear, dark, light, reduce enableMotion, or color"
+        );
       }
     }
   }, [chatText]);

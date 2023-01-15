@@ -113,8 +113,8 @@ function MobileMenu({ ...props }) {
       className={`${menu ? "" : "!hidden"} z-50 h-fit w-screen md:hidden`}
     >
       <Options
-        className={`${options && mobile ? "flex" : "!hidden"} !mb-4`}
-        optionsBtn={optionsBtn}
+        className={`${options && mobile ? "grid" : "!hidden"} !mb-4`}
+        // optionsBtn={optionsBtn}
       />
       <div className="flex h-fit w-full flex-row items-center justify-evenly gap-x-3 p-3">
         {user && <Path href="Editor" />}
@@ -179,8 +179,9 @@ export default function Navbar({ data }: DocumentData) {
   return (
     <>
       <Options
-        className={`${options && !mobile ? "flex" : "!hidden"}`}
-        optionsBtn={optionsBtn}
+        className={`${
+          options && !mobile ? "flex flex-col gap-y-2" : "!hidden"
+        }`}
       />
       <div className="fade-transition fixed bottom-0 z-50 h-min bg-white bg-opacity-70 backdrop-blur-lg dark:bg-black dark:bg-opacity-70 md:top-0 md:bottom-[unset] md:bg-transparent md:hover:bg-white md:hover:bg-opacity-70 md:dark:bg-transparent md:hover:dark:bg-black md:hover:dark:bg-opacity-70">
         <MobileMenu optionsBtn={optionsBtn} />

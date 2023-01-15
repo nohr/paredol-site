@@ -19,7 +19,7 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className={`h-full bg-white text-blue-900 selection:bg-blue-900 selection:bg-opacity-60 selection:text-white dark:bg-black dark:text-blue-200 dark:selection:bg-blue-200 selection:dark:bg-opacity-60 dark:selection:text-black ${
-          !state.motion
+          !state.enableMotion
             ? "animate-[noise_0.1s_infinite_steps(200)] bg-[url('/watermarks/bg-noise.png')]"
             : "bg-none"
         }`}

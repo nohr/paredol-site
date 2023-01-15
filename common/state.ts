@@ -10,7 +10,7 @@ interface stateypes {
   theme: string;
   hue: number;
   monochrome: boolean;
-  motion: boolean;
+  enableMotion: boolean;
   loading: boolean;
   modalImg: null;
   options: boolean;
@@ -39,7 +39,7 @@ export const state = proxy<stateypes>({
   theme: "light",
   hue: 0,
   monochrome: false,
-  motion: false,
+  enableMotion: false,
   loading: true,
   modalImg: null,
   options: false,

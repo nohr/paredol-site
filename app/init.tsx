@@ -3,8 +3,7 @@
 import { SFXProvider } from "@context/sfx.context";
 import Navbar from "@ui/navbar/navbar";
 import { DocumentData } from "firebase/firestore/lite";
-import { useEffect } from "react";
-import { useMobile, useMotion, useTheme } from "utils";
+import { useMobile, useEnableMotion, useTheme } from "utils";
 
 export function Init({
   children,
@@ -13,11 +12,9 @@ export function Init({
   children: React.ReactNode;
   data: DocumentData;
 }) {
-  useEffect(() => {
-    useTheme();
-    useMobile();
-    useMotion();
-  }, []);
+  useTheme();
+  useMobile();
+  useEnableMotion();
 
   return (
     <SFXProvider>

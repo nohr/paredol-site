@@ -9,7 +9,7 @@ function Quote() {
   const ref = useRef<HTMLHeadingElement>(null!);
   const scramble = useRef<any>();
   const [text, setText] = useState<string>(state.quote);
-  const { motion, quote, theme, speech } = useSnapshot(state);
+  const { enableMotion, quote, theme, speech } = useSnapshot(state);
 
   // import Scrambler from "scrambling-text" dynamically
   useEffect(() => {
@@ -22,25 +22,25 @@ function Quote() {
     getQuote()
       .then((res) => {
         state.quote = res;
-        !motion &&
+        !enableMotion &&
           scramble.current?.scramble(res, setText, {
             characters: characters,
           });
       })
       .catch((err) => console.log(err));
-  }, [setText, speech, motion]);
+  }, [setText, speech, enableMotion]);
   //  FIXME: Rescramble only once when the speech var is true instead of twice in the useEffect above
 
   useEffect(() => {
-    motion
+    enableMotion
       ? setText(quote)
       : scramble.current?.scramble(quote, setText, {
           characters: characters,
         });
-  }, [quote, motion, theme]);
+  }, [quote, enableMotion, theme]);
 
   useEffect(() => {
-    !motion
+    !enableMotion
       ? ref.current.classList.add(
           "w-screen",
           "animate-[autoscroll_7s_linear_infinite]",
@@ -54,10 +54,10 @@ function Quote() {
           "will-change-transform"
         );
 
-    motion
+    enableMotion
       ? ref.current.classList.add("animate-none", "whitespace-pre-wrap")
       : ref.current.classList.remove("animate-none", "whitespace-pre-wrap");
-  }, [motion, quote]);
+  }, [enableMotion, quote]);
 
   useEffect(() => {
     return () => {

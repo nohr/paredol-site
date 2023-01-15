@@ -50,20 +50,20 @@ export function handleChange(
 export const toggleMute = () => {
   state.muted = !state.muted;
 };
-export const toggleMotion = (motion?: string) => {
-  if (motion === "reduce") {
-    state.motion = true;
-    localStorage.setItem("motion", `true`);
+export const toggleEnableMotion = (enableMotion?: string) => {
+  if (enableMotion === "reduce") {
+    state.enableMotion = true;
+    localStorage.setItem("enableMotion", `true`);
     return;
   }
 
-  if (state.motion) {
+  if (state.enableMotion) {
     document.body.classList.add("animate-[noise_0.1s_infinite_steps(200)]");
   } else {
     document.body.classList.remove("animate-[noise_0.1s_infinite_steps(200)]");
   }
-  state.motion = !state.motion;
-  localStorage.setItem("motion", `${state.motion}`);
+  state.enableMotion = !state.enableMotion;
+  localStorage.setItem("enableMotion", `${state.enableMotion}`);
 };
 
 export function useColor() {
@@ -137,19 +137,19 @@ export function useMobile() {
   }
 }
 
-export function useMotion() {
+export function useEnableMotion() {
   if (typeof window !== "undefined") {
-    // Check for reduced motion preference
-    const userMotion = localStorage.getItem("motion");
-    const systemMotion = window.matchMedia(
-      `(prefers-reduced-motion: reduce)`
+    // Check for reduced enableMotion preference
+    const userenableMotion = localStorage.getItem("enableMotion");
+    const systemenableMotion = window.matchMedia(
+      `(prefers-reduced-enableMotion: reduce)`
     ).matches;
 
-    if (userMotion === "true" || systemMotion) {
+    if (userenableMotion === "true" || systemenableMotion) {
       document.body.classList.remove(
         "animate-[noise_0.1s_infinite_steps(200)]"
       );
-      state.motion = true;
+      state.enableMotion = true;
       return;
     } else {
       document.body.classList.add("animate-[noise_0.1s_infinite_steps(200)]");

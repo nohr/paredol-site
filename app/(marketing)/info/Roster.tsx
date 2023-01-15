@@ -30,8 +30,8 @@ export default async function Roster() {
       <div className="flex flex-col justify-start gap-y-4">
         <Suspense fallback={<CgSpinner className="h-8 w-auto animate-spin" />}>
           <>
-            {orderedRoster.map((member) => (
-              <RosterLink member={member} />
+            {orderedRoster.map((member, index) => (
+              <RosterLink key={index} member={member} />
             ))}
           </>
         </Suspense>

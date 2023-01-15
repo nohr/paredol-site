@@ -8,7 +8,7 @@ import { state } from "state";
 import { usePathname } from "next/navigation";
 
 function LogoCanvas({ style, text }: { [key: string]: any; text?: string }) {
-  const { motion } = useSnapshot(state);
+  const { enableMotion } = useSnapshot(state);
   const path = usePathname();
   return (
     <Canvas
@@ -19,7 +19,7 @@ function LogoCanvas({ style, text }: { [key: string]: any; text?: string }) {
       gl={{ antialias: true }}
       // dpr={[1, 1.5]}
       // performance={{ min: 0.5 }}
-      frameloop={motion ? "demand" : "always"}
+      frameloop={enableMotion ? "demand" : "always"}
     >
       {text ? <CD text={text} /> : <CD />}
     </Canvas>
@@ -33,13 +33,13 @@ export function CD({ text }: { text?: string }) {
   // console.log(gl.info);
   const cd = useRef<any>();
   // const { hover } = props;
-  const { loading, motion, theme, speech } = useSnapshot(state);
+  const { loading, enableMotion, theme, speech } = useSnapshot(state);
 
   useFrame(({ mouse }) => {
     if (cd.current) {
       let { rotation } = cd.current;
       if (rotation) {
-        handleMotion(motion, loading, rotation, speech);
+        handleenableMotion(enableMotion, loading, rotation, speech);
       }
       // if (text) {
       //   cd.current.lookAt(mouse);
@@ -70,14 +70,14 @@ export function CD({ text }: { text?: string }) {
   );
 }
 
-function handleMotion(
-  motion: boolean,
+function handleenableMotion(
+  enableMotion: boolean,
   loading: boolean,
   // hover: boolean,
   rotation: Euler,
   speech: boolean
 ) {
-  if (!motion) {
+  if (!enableMotion) {
     if (loading) {
       rotation.x = -Math.PI / 2;
       rotation.y += 0.05;
