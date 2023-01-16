@@ -16,7 +16,7 @@ export default async function HomePage() {
   const data = await getData();
 
   return (
-    <div className="mx-1 w-full pb-24 md:px-[10rem] md:pb-6 xl:px-[20rem]">
+    <div className="mx-1 flex w-full flex-col pb-24 md:px-[10rem] md:pb-6 xl:px-[20rem]">
       <Quote />
       {/* <LogoCanvas
         style={{
@@ -31,7 +31,7 @@ export default async function HomePage() {
         }}
         text="paredol"
       /> */}
-      <p className="mt-6 mb-6 inline-flex items-center text-sm font-bold">
+      <p className="mt-6 mb-6 inline-flex items-center self-center text-sm font-bold">
         Some of our projects
         <FiChevronsDown className="h-4 w-auto stroke-2" />
       </p>
