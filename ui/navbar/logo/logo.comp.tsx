@@ -17,7 +17,7 @@ function LogoCanvas({ style, text }: { [key: string]: any; text?: string }) {
         // path === "/" ? (text ? "mx-auto flex" : "hidden") : "flex"
         "flex"
       }`}
-      gl={{ antialias: true }}
+      // gl={{ antialias: true }}
       // dpr={[1, 1.5]}
       // performance={{ min: 0.5 }}
       frameloop={enableMotion ? "demand" : "always"}

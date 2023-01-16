@@ -40,23 +40,24 @@ function Quote() {
   }, [quote, enableMotion, theme]);
 
   useEffect(() => {
-    !enableMotion
-      ? ref.current.classList.add(
-          "w-screen",
-          "animate-[autoscroll_7s_linear_infinite]",
-          "whitespace-nowrap",
-          "will-change-transform"
-        )
-      : ref.current.classList.remove(
-          "w-screen",
-          "animate-[autoscroll_7s_linear_infinite]",
-          "whitespace-nowrap",
-          "will-change-transform"
-        );
+    // !enableMotion
+    //   ? ref.current.classList.add(
+    //       "w-screen",
+    //       "animate-[autoscroll_7s_linear_infinite]",
+    //       "whitespace-nowrap",
+    //       "will-change-transform"
+    //     )
+    //   : ref.current.classList.remove(
+    //       "w-screen",
+    //       "animate-[autoscroll_7s_linear_infinite]",
+    //       "whitespace-nowrap",
+    //       "will-change-transform"
+    //     );
 
-    enableMotion
-      ? ref.current.classList.add("animate-none", "whitespace-pre-wrap")
-      : ref.current.classList.remove("animate-none", "whitespace-pre-wrap");
+    // enableMotion
+    //   ?
+    ref.current.classList.add("animate-none", "whitespace-pre-wrap");
+    // : ref.current.classList.remove("animate-none", "whitespace-pre-wrap");
   }, [enableMotion, quote]);
 
   useEffect(() => {

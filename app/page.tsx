@@ -31,8 +31,8 @@ export default async function HomePage() {
         }}
         text="paredol"
       /> */}
-      <p className="mt-6 mb-6 inline-flex items-center text-2xl font-bold">
-        Check out some of our projects
+      <p className="mt-6 mb-6 inline-flex items-center text-sm font-bold">
+        Some of our projects
         <FiChevronsDown className="h-4 w-auto stroke-2" />
       </p>
       {data.map((doc: any, index: number) => (
