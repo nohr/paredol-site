@@ -34,16 +34,18 @@ export default function ProjectLink({ doc }: any) {
           </div>
           <Program program={doc.program} setProgram={undefined} />
         </div>
-        <div className="relative aspect-square h-full w-[160px] overflow-hidden rounded-xl shadow-lg">
-          <Image
-            priority
-            src={doc.cover}
-            fill
-            alt={doc.name}
-            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw"
-            style={{ objectFit: "cover" }}
-          />
-        </div>
+        {doc.cover !== "" && (
+          <div className="relative aspect-square h-full w-[160px] overflow-hidden rounded-xl shadow-lg">
+            <Image
+              priority
+              src={doc.cover}
+              fill
+              alt={doc.name}
+              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+        )}
       </Link>
     </motion.div>
   );
