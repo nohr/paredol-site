@@ -18,7 +18,7 @@ export default async function HomePage() {
   return (
     <div className="mx-1 w-full pb-24 md:px-[10rem] md:pb-6 xl:px-[20rem]">
       <Quote />
-      <LogoCanvas
+      {/* <LogoCanvas
         style={{
           width: "70%",
           height: "auto",
@@ -30,7 +30,7 @@ export default async function HomePage() {
           zIndex: -100,
         }}
         text="paredol"
-      />
+      /> */}
       <p className="mt-6 mb-6 inline-flex items-center text-2xl font-bold">
         Check out some of our projects
         <FiChevronsDown className="h-4 w-auto stroke-2" />

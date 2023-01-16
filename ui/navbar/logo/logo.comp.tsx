@@ -14,7 +14,8 @@ function LogoCanvas({ style, text }: { [key: string]: any; text?: string }) {
     <Canvas
       style={style}
       className={`drag-none select-none ${
-        path === "/" ? (text ? "mx-auto flex" : "hidden") : "flex"
+        // path === "/" ? (text ? "mx-auto flex" : "hidden") : "flex"
+        "flex"
       }`}
       gl={{ antialias: true }}
       // dpr={[1, 1.5]}
