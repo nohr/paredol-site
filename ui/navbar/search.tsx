@@ -84,7 +84,7 @@ export function Search({ data }: DocumentData) {
         );
       }
     }
-  }, [chatText]);
+  }, [chatMode, chatText, router]);
 
   // focus on search bar when cmd + k is pressed
   useKeyboardShortcut(
