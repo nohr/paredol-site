@@ -23,7 +23,7 @@ export default async function RootLayout({
       >
         <Init data={data}>
           <div className="flex h-full w-screen flex-col justify-start overflow-x-hidden  p-2 md:px-[10px] md:pb-2">
-            <div className="h-full pt-0 md:py-20 md:pb-12">
+            <div className="flex h-full justify-center pt-0 md:py-20 md:pb-12">
               {children}
               <AnalyticsWrapper />
             </div>
