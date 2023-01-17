@@ -171,17 +171,18 @@ export const useTheme = () => {
     const systemDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
-    const docTheme: HTMLMetaElement | null = document.querySelector(
-      "meta[name='theme-color']"
-    );
+    const meta = document.querySelector("meta[name=theme-color]");
 
     if (userTheme === "dark" || (!userTheme && systemDark)) {
       document.documentElement.classList.add("dark");
-      if (docTheme) docTheme.content = "#101010";
+      if (meta)
+        meta.setAttribute("content", "#101010");
       state.theme = "dark";
       return;
     } else {
-      if (docTheme) docTheme.content = "#ebebeb";
+      if (meta)
+        meta.setAttribute("content", "#ebebeb");
+
       state.theme = "light";
     }
   }
@@ -189,20 +190,21 @@ export const useTheme = () => {
 
 export const toggleTheme = (theme?: string) => {
   if (typeof document !== "undefined") {
-    const docTheme: HTMLMetaElement | null = document.querySelector(
-      "meta[name='theme-color']"
-    );
+    const meta = document.querySelector("meta[name=theme-color]");
+
     if (
       document.documentElement.classList.contains("dark") ||
       theme === "light"
     ) {
       document.documentElement.classList.remove("dark");
-      if (docTheme) docTheme.content = "#ebebeb";
+      if (meta)
+        meta.setAttribute("content", "#ebebeb");
       localStorage.setItem("theme", "light");
       state.theme = "light";
     } else {
       document.documentElement.classList.add("dark");
-      if (docTheme) docTheme.content = "#101010";
+      if (meta)
+        meta.setAttribute("content", "#101010");
       localStorage.setItem("theme", "dark");
       state.theme = "dark";
     }
