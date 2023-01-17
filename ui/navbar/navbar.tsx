@@ -204,7 +204,7 @@ export default function Navbar({ data }: DocumentData) {
         {/* navbar */}
         <div
           ref={ref}
-          className={`grid h-min w-screen grid-cols-[1fr_2fr_1fr] grid-rows-[min-content] items-center justify-items-center p-3 md:grid-cols-[35%_30%_35%]  lg:grid-cols-[1fr_2fr_1fr]`}
+          className={`grid h-min w-screen grid-cols-[1fr_2fr_1fr] grid-rows-[min-content] items-center justify-items-center p-1 md:grid-cols-[35%_30%_35%] md:p-3  lg:grid-cols-[1fr_2fr_1fr]`}
         >
           <div className="m-0 flex h-full flex-row items-center justify-between gap-0 p-0 md:w-full">
             <HomeButton />
