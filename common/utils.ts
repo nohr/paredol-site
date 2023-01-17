@@ -68,9 +68,87 @@ export const toggleEnableMotion = (enableMotion?: string) => {
 
 export function useColor() {
   let [value, setValue] = useState(parseColor("hsl(209, 98%, 20%)"));
+  let light = useRef("hsl(209, 98%, 20%)");
+  let dark = useRef("hsl(209, 60%, 61%)");
   useEffect(() => {
+
     state.hue = value.getChannelValue("hue");
+    light.current = `hsl(${state.hue}, 98%, 20%)`;
+    dark.current = `hsl(${state.hue}, 60%, 61%)`;
+    // console.log(dark.current);
   }, [value]);
+
+  // useEffect(() => {
+  //   if (state.theme === "light") {
+  //     const lighttext = document.querySelectorAll(".text-blue-900");
+  //     lighttext.forEach((element: any) => {
+  //       element.style.color = light.current;
+  //     });
+  //     const lightborder = document.querySelectorAll(".border-blue-900");
+  //     lightborder.forEach((element: any) => {
+  //       element.style.borderColor = light.current;
+  //     });
+  //     const lightbg = document.querySelectorAll(".bg-blue-900");
+  //     lightbg.forEach((element: any) => {
+  //       element.style.backgroundColor = light.current;
+  //     });
+  //     const lightshadow = document.querySelectorAll(".shadow-blue-900");
+  //     lightshadow.forEach((element: any) => {
+  //       element.style.boxShadow = `0 0 0 3px light.current`;
+  //     });
+  //     const lightinputField = document.querySelectorAll(".inputField");
+  //     lightinputField.forEach((element: any) => {
+  //       element.style.borderColor = light.current;
+  //     });
+  //     const lightfill = document.querySelectorAll(".fill-blue-900");
+  //     lightfill.forEach((element: any) => {
+  //       element.style.fill = light.current;
+  //     });
+  //     const fill = document.querySelectorAll(".fill");
+  //     fill.forEach((element: any) => {
+  //       element.style.backgroundColor = light.current;
+  //     });
+  //     const lightlink = document.querySelectorAll(".border-blue-900");
+  //     lightlink.forEach((element: any) => {
+  //       element.style.borderColor = light.current;
+  //     });
+  //   }
+  //   // Dark
+  //   const darktext = document.querySelectorAll(".text-blue-200");
+  //   darktext.forEach((element: any) => {
+  //     element.style.color = dark.current;
+  //   });
+  //   const darkborder = document.querySelectorAll(".dark .border-blue-200");
+  //   darkborder.forEach((element: any) => {
+  //     element.style.borderColor = dark.current;
+  //   });
+  //   const darkbg = document.querySelectorAll(".dark .bg-blue-200");
+  //   darkbg.forEach((element: any) => {
+  //     element.style.backgroundColor = dark.current;
+  //   });
+  //   const darkshadow = document.querySelectorAll(".dark .shadow-blue-200");
+  //   darkshadow.forEach((element: any) => {
+  //     element.style.boxShadow = `0 0 0 3px ${dark.current}`;
+  //   });
+  //   const darkinputField = document.querySelectorAll(".dark .inputField .link");
+  //   darkinputField.forEach((element: any) => {
+  //     element.style.borderColor = dark.current;
+  //   });
+  //   const darkfill = document.querySelectorAll(".dark .fill-blue-200");
+  //   darkfill.forEach((element: any) => {
+  //     element.style.fill = dark.current;
+  //   });
+  //   const fill = document.querySelectorAll(".dark .fill");
+  //   fill.forEach((element: any) => {
+  //     element.style.backgroundColor = dark.current;
+  //   });
+  //   const darklink = document.querySelectorAll(".dark .border-blue-200");
+  //   darklink.forEach((element: any) => {
+  //     element.style.borderColor = dark.current;
+  //   });
+  // }, [value, state.options])
+
+
 
   return [value, setValue] as any;
 }

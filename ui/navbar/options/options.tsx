@@ -80,7 +80,7 @@ const Options = ({ ...props }) => {
             </div>
           </div>
           <div className="grid_space w-full md:h-full"></div>
-          <div className="m-0 flex h-full w-full flex-col items-center justify-center gap-y-5 p-0 md:relative">
+          <div className="m-0 flex h-full w-full flex-col items-center justify-start gap-y-5 p-0 md:relative">
             <p className=" select-none rounded-lg p-0 text-xs font-black uppercase md:static">
               Display
             </p>
@@ -104,7 +104,7 @@ const Options = ({ ...props }) => {
               {!enableMotion ? "Reduce Motion" : "Enable Motion"}
               <IoAccessibility className="fade-transition m-0 h-4 w-4 fill-blue-900 p-0 dark:fill-blue-200 md:group-hover:fill-white  dark:md:group-hover:fill-black" />
             </div>
-            {colorBar ? (
+            {/* {colorBar ? (
               <div className="flex h-fit w-full overflow-hidden rounded-lg border-[1px] border-blue-900 dark:border-blue-200">
                 <Flex
                   direction="column"
@@ -141,7 +141,7 @@ const Options = ({ ...props }) => {
                   <ColorIcon className="m-0 h-4 w-4" />
                 </>
               </div>
-            )}
+            )} */}
           </div>
         </motion.div>
       )}

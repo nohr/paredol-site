@@ -48,10 +48,16 @@ export function CD({ text }: { text?: string }) {
     }
   });
 
+  // const mat = new MeshBasicMaterial({
+  //   color:
+  //     theme === "light"
+  //       ? new Color().setHSL(hue, 0.98, 0.2)
+  //       : `hsl(${hue}, 0.6, 0.61)`,
+  // });
   const mat = useMemo(
     () =>
       new MeshBasicMaterial({
-        color: theme === "light" ? new Color(0x013566) : new Color(0x5d98d7),
+        color: theme === "light" ? new Color(0x000000) : new Color(0xffffff),
       }),
     [theme]
   );
