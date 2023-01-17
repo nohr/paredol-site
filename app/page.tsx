@@ -9,7 +9,7 @@ import React from "react";
 import Quote from "../ui/home/quote";
 import ProjectLink from "./ProjectLink";
 import { getData } from "@api/api";
-import LogoCanvas from "@ui/navbar/logo/logo.comp";
+// import LogoCanvas from "@ui/navbar/logo/logo.comp";
 import { FiChevronsDown } from "react-icons/fi";
 
 export default async function HomePage() {

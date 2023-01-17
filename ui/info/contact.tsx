@@ -41,7 +41,7 @@ export default function Contact() {
   }
 
   return (
-    <div className="flex flex-col gap-y-2 self-center p-3 md:w-[75ch]">
+    <div className="flex flex-col gap-y-2 self-center p-3">
       <h1 className="title self-center md:self-start">The start...</h1>
       <p className="text-xs font-semibold !italic md:pl-4">
         Send a message to our email and we’ll get back to you asap!
