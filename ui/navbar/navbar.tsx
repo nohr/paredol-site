@@ -7,7 +7,7 @@ import { useUser } from "@api/firebase.api";
 import { state } from "state";
 import Link from "next/link";
 import { BsFillInfoCircleFill } from "react-icons/bs";
-import { FaShoppingBasket } from "react-icons/fa";
+import { FaShoppingBasket, FaRegEdit } from "react-icons/fa";
 import { BsFillGearFill } from "react-icons/bs";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Squash as Hamburger } from "hamburger-react";
@@ -47,6 +47,14 @@ function Path({ ...props }) {
         />
       ) : href === "Store" ? (
         <FaShoppingBasket
+          className={`fade-transition m-0 h-3  ${
+            path?.includes(href.toLowerCase())
+              ? "text-white dark:text-black"
+              : "fill-blue-900 p-0 dark:fill-blue-200"
+          } `}
+        />
+      ) : href === "Editor" ? (
+        <FaRegEdit
           className={`fade-transition m-0 h-3  ${
             path?.includes(href.toLowerCase())
               ? "text-white dark:text-black"
