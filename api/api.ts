@@ -6,10 +6,14 @@ export const dynamic = "auto",
   preferredRegion = "auto";
 
 import {
+  addDoc,
   collection,
+  doc,
   getDocs,
   orderBy,
   query,
+  setDoc,
+  Timestamp,
   where,
 } from "firebase/firestore/lite";
 import { state } from "state";
@@ -57,3 +61,19 @@ export async function getStore() {
   const snap = data.docs.map((doc) => doc.data());
   return snap;
 }
+
+export const sendContactForm = async ({ name, email, message }) => {
+  try {
+    const ref = collection(db, "contact");
+    await setDoc(doc(db, "contact", name), {
+      name,
+      email,
+      message,
+      sentAt: Timestamp.now().toDate(),
+    });
+    return 0;
+  } catch (err) {
+    console.log(err)
+    return -1;
+  }
+};

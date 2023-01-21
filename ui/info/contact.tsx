@@ -1,54 +1,52 @@
 "use client";
 
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { BsFillPersonFill, BsFillChatDotsFill } from "react-icons/bs";
 import { MdAlternateEmail } from "react-icons/md";
 import { BiMailSend } from "react-icons/bi";
 import emailjs from "@emailjs/browser";
+import { sendContactForm } from "@api/api";
 
 export default function Contact() {
   const form = useRef<HTMLFormElement>(null!);
   const name = useRef<HTMLInputElement>(null!);
   const email = useRef<HTMLInputElement>(null!);
   const message = useRef<HTMLTextAreaElement>(null!);
+  const [result, setResult] = useState(
+    "Send a message to our email and we’ll get back to you asap!"
+  );
 
   function validateEmail(email: string) {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
   }
-
-  function handleSubmit(e: any) {
+  const submitContact = async (e) => {
     e.preventDefault();
     if (!validateEmail(email.current.value)) {
-      alert("Please enter a valid email address");
+      setResult("Please enter a valid email address");
       return;
     }
-
-    emailjs
-      .sendForm(
-        "service_o5dxq4p",
-        "template_fysayug",
-        form.current,
-        "8jVloGhppkscKbbNB"
-      )
-      .then(
-        (result) => {},
-        (error) => {
-          console.log(error.text);
-        }
-      );
-    e.target.reset();
-  }
+    console.log(e);
+    const res = await sendContactForm({
+      name: e.target[0].value,
+      email: e.target[1].value,
+      message: e.target[2].value,
+    });
+    if (res == 0) {
+      setResult("Thank you for your message!");
+      form.current.reset();
+    } else {
+      setResult("Something went wrong! Please try again");
+    }
+  };
 
   return (
     <div className="flex flex-col gap-y-2 self-center p-3">
       <h1 className="title self-center md:self-start">The start...</h1>
-      <p className="text-xs font-semibold !italic md:pl-4">
-        Send a message to our email and we’ll get back to you asap!
-      </p>
+      <p className="text-xs font-semibold !italic md:pl-4">{result}</p>
       <form
         ref={form}
-        onSubmit={handleSubmit}
+        onSubmit={submitContact}
         className="flex w-full flex-col gap-y-4 p-2"
       >
         <div className="flex w-full flex-col gap-x-2 gap-y-2 md:flex-row">
