@@ -94,7 +94,7 @@ const Options = ({ ...props }) => {
               {theme === "light" ? "Dark Theme" : "Light Theme"}
               <ModeIcon className="fade-transition m-0 h-4 w-4 fill-blue-900 p-0 dark:fill-blue-200 md:group-hover:fill-white  dark:md:group-hover:fill-black" />
             </div>
-            <div
+            {/* <div
               className="fill group relative flex h-min w-full cursor-pointer select-none flex-row-reverse items-center justify-between gap-x-2 rounded-lg border-[1px] border-blue-900 py-1 px-1 dark:border-blue-200"
               onClick={() => {
                 toggleEnableMotion();
@@ -103,7 +103,7 @@ const Options = ({ ...props }) => {
             >
               {!enableMotion ? "Reduce Motion" : "Enable Motion"}
               <IoAccessibility className="fade-transition m-0 h-4 w-4 fill-blue-900 p-0 dark:fill-blue-200 md:group-hover:fill-white  dark:md:group-hover:fill-black" />
-            </div>
+            </div> */}
             {/* {colorBar ? (
               <div className="flex h-fit w-full overflow-hidden rounded-lg border-[1px] border-blue-900 dark:border-blue-200">
                 <Flex
