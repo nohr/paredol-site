@@ -23,9 +23,9 @@ export default function ProjectLink({ doc }: any) {
       <Link
         onClick={() => confirm()}
         href={doc.lot}
-        className="fade-transition my-2 flex h-[160px] w-full flex-row justify-between overflow-hidden rounded-xl border-[1px] border-transparent bg-opacity-50 p-2 active:border-blue-900 active:dark:border-blue-200 md:hover:bg-blue-900 md:hover:bg-opacity-70 md:hover:text-white md:hover:shadow-lg md:hover:dark:bg-blue-200 md:hover:dark:bg-opacity-70 md:hover:dark:text-black"
+        className="fade-transition my-2 flex h-[160px] w-full flex-row justify-between overflow-hidden rounded-3xl border-[1px] border-transparent p-3 active:border-blue-900 active:dark:border-blue-200 md:hover:border-blue-900  md:hover:shadow-lg md:hover:dark:border-blue-200"
       >
-        <div className="flex h-full w-max flex-col justify-start gap-y-8">
+        <div className="flex h-full w-max flex-col justify-start gap-y-4">
           <div className="flex flex-col items-start">
             <h3 className="white-space-pre w-max text-xl font-thin">
               {doc.name}
