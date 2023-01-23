@@ -83,7 +83,7 @@ export function HomeButton() {
 }
 
 function LogoIcon() {
-  const { loading } = useSnapshot(state);
+  const { loading, speech } = useSnapshot(state);
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +93,7 @@ function LogoIcon() {
       viewBox="0 0 121.2 100"
       xmlSpace="preserve"
       className={` ${
-        loading && "animate-spin"
+        loading ? "animate-spin" : speech ? "animate-bounce" : ""
       }  h-6 w-6 fill-blue-900 dark:fill-blue-200 md:!h-4 md:!w-4`}
     >
       <path d="M-159.8 51.8c33.9.1 60.7 26.7 60.8 60.4s-27.1 61.2-60.8 61.3-61.2-27.1-61.3-60.8c-.5-33.9 26.8-60.9 61.3-60.9zM-250.2 48.1C-284 48-310.1 21.4-310-12.8c-.2-33.2 26.5-60.4 59.8-60.6h1.7c33.3.4 60.5 28.1 60.2 61.2-.3 34.1-27.4 60.4-61.9 60.3zM-70.5 48.1c-34.4 0-61.4-26.7-61.5-60.7-.1-33.4 28-61 61.9-60.8 33.4.2 60.3 27.5 60.1 61v.2c-.1 33.9-26.5 60.3-60.5 60.3z"></path>
