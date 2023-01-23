@@ -207,7 +207,7 @@ export default function Navbar({ data }: DocumentData) {
   return (
     <>
       <Options className={`${options && !mobile ? "md:!h-fit" : "!hidden"}`} />
-      <div className="fade-transition fixed bottom-0 z-50 h-min border-t-[1px] border-blue-900 bg-white bg-opacity-70 backdrop-blur-lg dark:border-blue-200 dark:bg-black dark:bg-opacity-70 md:top-0 md:bottom-[unset] md:border-b-[1px] md:bg-transparent md:hover:bg-white md:hover:bg-opacity-70 md:dark:bg-transparent md:hover:dark:bg-black md:hover:dark:bg-opacity-70">
+      <div className="fade-transition fixed bottom-0 z-50 h-min border-t-[1px] border-blue-900 bg-white bg-opacity-70 backdrop-blur-lg hover:shadow-xl dark:border-blue-200 dark:bg-black dark:bg-opacity-70 md:top-0 md:bottom-[unset] md:border-b-[1px] md:bg-transparent md:hover:bg-white md:hover:bg-opacity-70 md:dark:bg-transparent md:hover:dark:bg-black md:hover:dark:bg-opacity-70">
         <MobileMenu optionsBtn={optionsBtn} />
         {/* navbar */}
         <div

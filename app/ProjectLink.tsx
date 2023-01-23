@@ -43,7 +43,7 @@ export default function ProjectLink({ doc }: any) {
             alt={doc.name}
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw"
             style={{ objectFit: "cover", zIndex: -100 }}
-            className="opacity-30 group-hover:opacity-80"
+            className="rounded-3xl opacity-30 group-hover:opacity-80"
           />
           // </div>
         )}
