@@ -10,7 +10,7 @@ import {
   handleDeletePost,
   handleUploadPost,
 } from "@api/editor.api";
-import { EditorContext } from "@context/editor.context";
+import { EditorContext } from "@context/editor/editor.context";
 import { state } from "state";
 import ProjectEditorPreview from "./project.preview";
 import { Program } from "../../program";

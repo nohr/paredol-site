@@ -1,6 +1,6 @@
 import { Key, useContext, useEffect } from "react";
 import { handleDeleteContent, handleGetContent } from "@api/editor.api";
-import { EditorContext } from "@context/editor.context";
+import { EditorContext } from "@context/editor/editor.context";
 import { useSnapshot } from "valtio";
 import { state } from "state";
 

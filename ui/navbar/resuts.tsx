@@ -1,4 +1,4 @@
-import { SFXContext } from "@context/sfx.context";
+import { SFXContext } from "context/sfx";
 import Link from "next/link";
 import { useContext } from "react";
 import { state } from "state";

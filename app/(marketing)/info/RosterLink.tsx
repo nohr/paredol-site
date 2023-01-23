@@ -1,11 +1,11 @@
 "use client";
 
-import { SFXContext } from "@context/sfx.context";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
 import { TfiAngleRight, TfiNewWindow } from "react-icons/tfi";
 import { motion } from "framer-motion";
+import { SFXContext } from "context/sfx";
 export function RosterLink({ member }: any) {
   const { select } = useContext(SFXContext);
   return (

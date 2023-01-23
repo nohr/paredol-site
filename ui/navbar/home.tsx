@@ -1,12 +1,12 @@
 // import { useRef } from "react";
-import { SFXContext } from "@context/sfx.context";
+import { SFXContext } from "context/sfx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useContext } from "react";
 // import { useState } from "react";
 import { state } from "state";
 import { useSnapshot } from "valtio";
-import LogoCanvas from "./logo.comp";
+// import LogoCanvas from "./logo.comp";
 
 let taps = 0;
 let factor = 4;

@@ -4,9 +4,10 @@ import Link from "next/link";
 import { state } from "state";
 import Image from "next/image";
 import { useContext, useEffect } from "react";
-import { SFXContext } from "@context/sfx.context";
 import { Program } from "@ui/program";
 import { motion } from "framer-motion";
+import { SFXContext } from "context/sfx";
+
 export default function ProjectLink({ doc }: any) {
   const { confirm } = useContext(SFXContext);
   useEffect(() => {

@@ -1,30 +1,11 @@
 import { state } from "state";
-import React, { createContext, useRef } from "react";
+import React, { ReactNode, useRef } from "react";
 import useSound from "use-sound";
 import { useSnapshot } from "valtio";
-
-interface SFXContext {
-  select: () => void;
-  open: () => void;
-  close: () => void;
-  home: () => void;
-  confirm: () => void;
-  reset: () => void;
-  audio: React.RefObject<HTMLAudioElement> | null;
-}
-
-export const SFXContext = createContext<SFXContext>({
-  select: () => {},
-  open: () => {},
-  close: () => {},
-  home: () => {},
-  confirm: () => {},
-  reset: () => {},
-  audio: null,
-});
+import { SFXContext } from "./index";
 
 const rate = Math.random() * (1.15 - 0.85) + 0.85;
-export const SFXProvider = ({ children }: { children?: React.ReactNode }) => {
+function SFXProvider({ children }: { children?: ReactNode }) {
   const { muted, playRate } = useSnapshot(state);
   const [select] = useSound("/sounds/select.mp3", {
     volume: muted ? 0 : 1,
@@ -55,16 +36,6 @@ export const SFXProvider = ({ children }: { children?: React.ReactNode }) => {
       <audio ref={audio} preload="metadata" autoPlay={false}></audio>
     </SFXContext.Provider>
   );
-};
-
-interface AudioConsumerProps {
-  children: (value: any) => React.ReactNode;
 }
 
-export const AudioConsumer = ({ children }: AudioConsumerProps) => (
-  <SFXContext.Consumer>
-    {({ select, open, close, home, confirm, reset, audio }) =>
-      children({ select, open, close, home, confirm, reset, audio })
-    }
-  </SFXContext.Consumer>
-);
+export default SFXProvider;

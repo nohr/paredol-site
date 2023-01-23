@@ -3,7 +3,7 @@ import { state } from "state";
 import { FFIcon, PlayPauseIcon } from "svg";
 import { nextSong, toggleMusic, useSong } from "utils";
 import { useContext } from "react";
-import { SFXContext } from "@context/sfx.context";
+import { SFXContext } from "context/sfx";
 
 function PlayButton({ ...props }) {
   const { audio, select, className } = props;

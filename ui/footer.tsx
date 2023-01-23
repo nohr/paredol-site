@@ -5,7 +5,7 @@ import { IoIosArrowBack, IoIosMail } from "react-icons/io";
 import { useContext, useEffect, useState } from "react";
 // import { CgSpinner } from "react-icons/cg";
 import { usePathname } from "next/navigation";
-import { SFXContext } from "@context/sfx.context";
+import { SFXContext } from "context/sfx";
 // import { doc, getDoc } from "firebase/firestore/lite";
 // import { db } from "@api/firebase.config";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { SFXContext } from "@context/sfx.context";
+import { SFXContext } from "context/sfx";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect } from "react";

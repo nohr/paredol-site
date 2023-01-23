@@ -4,7 +4,7 @@ import { MdLibraryMusic } from "react-icons/md";
 import { useSnapshot } from "valtio";
 import { state } from "state";
 import { useSong } from "utils";
-import { SFXContext } from "@context/sfx.context";
+import { SFXContext } from "context/sfx";
 
 export function SongInfo() {
   const [song, songs] = useSong();

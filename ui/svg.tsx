@@ -1,7 +1,7 @@
 import { useSnapshot } from "valtio";
 import { state } from "state";
 import { useContext } from "react";
-import { SFXContext } from "@context/sfx.context";
+import { SFXContext } from "context/sfx";
 
 // search
 export function SearchBarIcon() {

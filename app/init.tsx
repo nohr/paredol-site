@@ -1,6 +1,6 @@
 "use client";
 
-import { SFXProvider } from "@context/sfx.context";
+import SFXProvider from "context/sfx";
 import Navbar from "@ui/navbar/navbar";
 import { DocumentData } from "firebase/firestore/lite";
 import { useMobile, useEnableMotion, useTheme } from "utils";

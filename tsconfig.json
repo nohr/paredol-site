@@ -28,7 +28,7 @@
     "paths": {
       "state": ["./common/state"],
       "utils":[ "./common/utils"],
-      "@context/*": ["./common/context/*"],
+      "context/*": ["./common/context/*"],
       "@ui/*": ["./ui/*"],
       "svg": ["./ui/svg"],
       "@api/*": ["./api/*"],

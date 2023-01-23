@@ -1,6 +1,6 @@
 import { useSnapshot } from "valtio";
-import Options from "./options/options";
-import { HomeButton } from "./logo/home";
+import Options from "@ui/options";
+import { HomeButton } from "./home";
 import { usePathname } from "next/navigation";
 import { Search } from "./search";
 import { useUser } from "@api/firebase.api";
@@ -11,10 +11,10 @@ import { FaShoppingBasket, FaRegEdit } from "react-icons/fa";
 import { BsFillGearFill } from "react-icons/bs";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Squash as Hamburger } from "hamburger-react";
-import { SFXContext } from "@context/sfx.context";
 import { TfiAngleLeft } from "react-icons/tfi";
 import { DocumentData } from "firebase/firestore/lite";
 import { AnimatePresence, motion } from "framer-motion";
+import { SFXContext } from "context/sfx";
 
 function Path({ ...props }) {
   const path = usePathname();
@@ -174,7 +174,7 @@ function MobileMenu({ ...props }) {
   );
 }
 
-export default function Navbar({ data }: DocumentData) {
+function Navbar({ data }: DocumentData) {
   const { options, mobile } = useSnapshot(state);
   const user = useUser();
   const optionsBtn = useRef(null);
@@ -257,3 +257,5 @@ export default function Navbar({ data }: DocumentData) {
     </>
   );
 }
+
+export default Navbar;
