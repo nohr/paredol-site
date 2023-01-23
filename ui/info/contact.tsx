@@ -1,10 +1,9 @@
 "use client";
 
-import { FormEvent, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { BsFillPersonFill, BsFillChatDotsFill } from "react-icons/bs";
 import { MdAlternateEmail } from "react-icons/md";
 import { BiMailSend } from "react-icons/bi";
-import emailjs from "@emailjs/browser";
 import { sendContactForm } from "@api/api";
 
 export default function Contact() {

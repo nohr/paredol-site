@@ -2,10 +2,11 @@
 
 import React, { useContext } from "react";
 import { useSnapshot } from "valtio";
-import { EditorContext, EditorProvider } from "@context/editor/editor.context";
+
 import { state } from "state";
 import { ProjectEditorForm } from "@ui/editor/project/project.form";
 import ProjectEditorPreview from "@ui/editor/project/project.preview";
+import EditorProvider, { EditorContext } from "context/editor";
 
 function ProjectEditor() {
   const { mobile } = useSnapshot(state);

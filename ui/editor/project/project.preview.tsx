@@ -1,8 +1,8 @@
 import { Key, useContext, useEffect } from "react";
 import { handleDeleteContent, handleGetContent } from "@api/editor.api";
-import { EditorContext } from "@context/editor/editor.context";
 import { useSnapshot } from "valtio";
 import { state } from "state";
+import { EditorContext } from "context/editor";
 
 function ProjectEditorPreview() {
   const { content, setContent, name, lot, titles, setCover } =
