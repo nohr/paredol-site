@@ -63,7 +63,7 @@ export function Footer() {
             <CgSpinner className="animate-spin self-center" />
           )}
         </> */}
-        info@paredol.com
+        hi@paredol.com
       </Link>
     </div>
   );
