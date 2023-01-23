@@ -2,7 +2,7 @@ import { useSnapshot } from "valtio";
 import { state } from "state";
 import { useContext } from "react";
 import { SFXContext } from "context/sfx";
-
+import Image from "next/image";
 // search
 export function SearchBarIcon() {
   const { chatMode } = useSnapshot(state);
@@ -277,6 +277,7 @@ export const programObject: Record<string, any> = {
       ></path>
     </svg>
   ),
+  astro: <Image src="/programs/astro.png" alt="Astro" height={24} width={24} />,
   blender: (
     <svg
       xmlns="http://www.w3.org/2000/svg"

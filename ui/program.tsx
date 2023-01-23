@@ -14,13 +14,13 @@ export function Program({ ...props }) {
   const { program, setProgram } = props;
   const path = usePathname();
   return (
-    <div className="Program box flex h-min w-fit flex-row flex-wrap justify-start overflow-x-visible rounded-xl bg-zinc-300 bg-opacity-20 p-0 backdrop-blur-xl dark:bg-zinc-700 md:p-2">
+    <div className="Program box flex h-min w-fit flex-row flex-wrap items-center justify-start overflow-x-visible rounded-xl bg-zinc-300 bg-opacity-20 p-0 backdrop-blur-xl dark:bg-zinc-700 md:p-2">
       {program.map((one: string, key: number) => (
         // <div className="tooltip" key={key} data-tip={one}>
         <div
           key={key}
           title={one}
-          className="program p-1 [&>svg]:h-6 [&>svg]:w-6 md:[&>svg]:h-8 md:[&>svg]:w-8"
+          className="program relative p-1 [&>svg]:h-6 [&>svg]:w-6 md:[&>svg]:h-8  md:[&>svg]:w-8"
           onClick={() =>
             path?.includes("/editor/") &&
             setProgram((prev: string[]) =>
