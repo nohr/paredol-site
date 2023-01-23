@@ -43,8 +43,6 @@ function Options({ ...props }) {
             <p className=" select-none rounded-lg p-0 text-xs font-black uppercase md:static">
               Audio
             </p>
-            <MusicPlayer />
-            <SongInfo />
             <div
               className="fill group relative flex h-min w-full cursor-pointer select-none flex-row-reverse items-center justify-between gap-x-2 rounded-lg border-[1px] border-blue-900 py-1 px-1 dark:border-blue-200"
               onClick={() => {
@@ -55,6 +53,8 @@ function Options({ ...props }) {
               {!muted ? "Mute SFX" : "Unmute SFX"}
               <MuteIcon className="fade-transition m-0 h-4 w-4 fill-blue-900 p-0 dark:fill-blue-200 md:group-hover:fill-white  dark:md:group-hover:fill-black " />
             </div>
+            <MusicPlayer />
+            <SongInfo />
           </div>
           <div className="grid_space w-full md:h-full"></div>
           <div className="m-0 flex h-full w-full flex-col items-center justify-start gap-y-5 p-0 md:relative">

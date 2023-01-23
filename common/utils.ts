@@ -300,7 +300,7 @@ export function nextSong(current: any, songs: any) {
     } else {
       state.songIndex = 0;
     }
-    if (!songs[state.songIndex].url) {
+    if (songs[state.songIndex] && !songs[state.songIndex].url) {
       loadSong(current, songs[state.songIndex]);
     } else {
       audio.setAttribute("src", songs[state.songIndex].url);
