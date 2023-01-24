@@ -13,7 +13,7 @@ import { getSongs } from "@api/firebase.api";
 import { state } from "state";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "@api/firebase.config";
-import { parseColor } from "@react-stately/color";
+// import { parseColor } from "@react-stately/color";
 
 // search
 
@@ -67,16 +67,16 @@ export const toggleEnableMotion = (enableMotion?: string) => {
 };
 
 export function useColor() {
-  let [value, setValue] = useState(parseColor("hsl(209, 98%, 20%)"));
-  let light = useRef("hsl(209, 98%, 20%)");
-  let dark = useRef("hsl(209, 60%, 61%)");
-  useEffect(() => {
+  // let [value, setValue] = useState(parseColor("hsl(209, 98%, 20%)"));
+  // let light = useRef("hsl(209, 98%, 20%)");
+  // let dark = useRef("hsl(209, 60%, 61%)");
+  // useEffect(() => {
 
-    state.hue = value.getChannelValue("hue");
-    light.current = `hsl(${state.hue}, 98%, 20%)`;
-    dark.current = `hsl(${state.hue}, 60%, 61%)`;
-    // console.log(dark.current);
-  }, [value]);
+  //   state.hue = value.getChannelValue("hue");
+  //   light.current = `hsl(${state.hue}, 98%, 20%)`;
+  //   dark.current = `hsl(${state.hue}, 60%, 61%)`;
+  //   // console.log(dark.current);
+  // }, [value]);
 
   // useEffect(() => {
   //   if (state.theme === "light") {
@@ -150,7 +150,7 @@ export function useColor() {
 
 
 
-  return [value, setValue] as any;
+  // return [value, setValue] as any;
 }
 
 // UI
