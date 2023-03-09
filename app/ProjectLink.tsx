@@ -42,7 +42,7 @@ export default function ProjectLink({ doc }: any) {
             src={doc.cover}
             fill
             alt={doc.name}
-            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 768px) 25vw, (max-width: 1200px) 50vw, 33vw"
             style={{ objectFit: "cover", zIndex: -100 }}
             className="rounded-3xl opacity-30 group-hover:opacity-80"
           />
